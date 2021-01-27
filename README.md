@@ -3,6 +3,11 @@
 A showcase of the alternatives for implementing an XAS processing and analysis workflow
 using different combinations of software and languages.
 
+The tasks of the basic workflow are shown in the image below.
+
+
+![workflow overview](https://github.com/scman1/XAS-Workflow-Demo/blob/main/images/workflow_overview.svg)
+
 Each folder contains an end-to-end example of a workflow. They are described as follows. 
 - Basic Workflow (Interactive Workflow): The data and tasks performed in the basic workflow 
 are the same as those used in the XAS-Education example from 
