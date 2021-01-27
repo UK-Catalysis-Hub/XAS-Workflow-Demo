@@ -1,0 +1,87 @@
+
+ Name            : Fit 11    (wuxlk)                                            
+ Description     : fit to FeS2.xmu                                              
+ Figure of merit : 11                                                           
+ Time of fit     : 2021-01-27T18:26:06                                          
+ Environment     : Demeter 0.9.25 with perl 5.018002 and using Ifeffit 1.2.12 on Windows 8
+ Interface       : Artemis (Wx 0.9923)                                          
+ Prepared by     :                                                              
+ Contact         :                                                              
+
+
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=
+
+
+Independent points          : 19.9160156
+Number of variables         : 7
+Chi-square                  : 8346.0172211
+Reduced chi-square          : 646.1758381                                       
+R-factor                    : 0.0166939                                         
+Number of data sets         : 1
+
+
+Happiness = 100.00/100             color = #D8E796                              
+***** Note: happiness is a semantic parameter and should *****                  
+*****    NEVER be reported in a publication -- NEVER!    *****                  
+
+guess parameters:                                                               
+  amp                =   0.67107630    # +/-   0.04025382     [1.00000]
+  enot               =   2.78754293    # +/-   0.70563789     [0]
+  ss                 =   0.00276919    # +/-   0.00062870     [0.00300]
+  alpha              =   0.00069541    # +/-   0.00210118     [0]
+  ss2                =   0.00759952    # +/-   0.00275716     [0.00300]
+  ss3                =   0.00542362    # +/-   0.00791281     [0.00300]
+  ssFe               =   0.00648449    # +/-   0.00101198     [0.00300]
+
+Correlations between variables:                                                 
+               alpha & enot               -->  0.8870
+                  ss & amp                -->  0.8196
+                 ss3 & ss2                -->  0.5879
+                ssfe & amp                -->  0.4676
+                ssfe & ss                 -->  0.4074
+                ssfe & ss3                --> -0.4039
+All other correlations below 0.4
+
+===== Data set >> FeS2.xmu << ====================================              
+
+: Athena project        = C:\harwell\XAS-Workflow-Demo\basic_workflow\FeS2_01.prj, 1
+: name                  = FeS2.xmu
+: k-range               = 3.000 - 12.956
+: dk                    = 1
+: k-window              = Hanning
+: k-weight              = 1,2,3
+: R-range               = 1 - 4.2
+: dR                    = 0.0
+: R-window              = Hanning
+: fitting space         = r
+: background function   = no
+: phase correction      = no
+: background removal    = E0: 7117, Rbkg: 1.0, range: [0:14.956], clamps: 0/24, kw: 2
+: epsilon_k by k-weight = 3.402e-004
+: epsilon_r by k-weight = 1.465e-001
+: R-factor by k-weight  = 1 -> 0.01026,  2 -> 0.01328,  3 -> 0.02654
+
+  name                     N       S02     sigma^2   e0     delr     Reff     R
+======================================================================================
+[FeS2] S.1              6.000   0.671   0.00277   2.788  0.00157  2.25660  2.25817
+[FeS2] S.2              6.000   0.671   0.00760   2.788  0.00240  3.44490  3.44730
+[FeS2] S.3              2.000   0.671   0.00542   2.788  0.00250  3.59420  3.59670
+[FeS2] S.1 S.1         12.000   0.671   0.00277   2.788  0.00264  3.78940  3.79204
+[FeS2] Fe.1            12.000   0.671   0.00648   2.788  0.00266  3.82120  3.82386
+[FeS2] S.1 S.1          6.000   0.671   0.00554   2.788  0.00314  4.51310  4.51624
+[FeS2] S.1              6.000   0.671   0.00554   2.788  0.00314  4.51310  4.51624
+[FeS2] S.1              6.000   0.671   0.01108   2.788  0.00314  4.51310  4.51624
+
+  name                     ei       third     fourth
+======================================================
+[FeS2] S.1             0.00000   0.00000   0.00000
+[FeS2] S.2             0.00000   0.00000   0.00000
+[FeS2] S.3             0.00000   0.00000   0.00000
+[FeS2] S.1 S.1         0.00000   0.00000   0.00000
+[FeS2] Fe.1            0.00000   0.00000   0.00000
+[FeS2] S.1 S.1         0.00000   0.00000   0.00000
+[FeS2] S.1             0.00000   0.00000   0.00000
+[FeS2] S.1             0.00000   0.00000   0.00000
+
+
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=
