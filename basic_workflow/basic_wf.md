@@ -14,10 +14,10 @@ used to determine if the fit is adequate.
 
 
 
-Software | Task                            | Input                                         | Output
--------  | -------------                   |-------------                                  | -----  
-Athena   | 1.1. Import data                |File: fes2_rt01_mar02.xmu                      | 
-  "      | 1.2. Normalisation              |Parameters: Pre-edge range = -117.00 to 30.000 |
+|Software | Task                            | Input                                         | Output
+|-------  | -------------                   |-------------                                  | -----  
+|Athena   | 1.1. Import data                |File: fes2_rt01_mar02.xmu                      | 
+|       | 1.2. Normalisation              |Parameters: Pre-edge range = -117.00 to 30.000 |
   "      | 1.3. Save Athena Project        |                                               |File: FeS2_01.prj
 Artemis  | 2.1. Import data                |File: FeS2_01.prj                              |
   "      | 2.2. Import Crystal data        |File: FeS2.inp                                 |
