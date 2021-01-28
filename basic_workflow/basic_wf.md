@@ -17,20 +17,20 @@ used to determine if the fit is adequate.
 |Software | Task                            | Input                                         | Output
 |-------  | -------------                   |-------------                                  | -----  
 |Athena   | 1.1. Import data                |File: fes2_rt01_mar02.xmu                      | 
-|       | 1.2. Normalisation              |Parameters: Pre-edge range = -117.00 to 30.000 |
-  "      | 1.3. Save Athena Project        |                                               |File: FeS2_01.prj
-Artemis  | 2.1. Import data                |File: FeS2_01.prj                              |
-  "      | 2.2. Import Crystal data        |File: FeS2.inp                                 |
-  " 	 | 2.3. Calculate Paths(Atoms+FEFF)||
-  "		 | 2.4. Set path parameters        | Parameters:                                   |
-  "		 |                                 |    amp  = 1                                   |
-  "		 |                                 |    enot = 0                                   |
-  "		 |                                 |    delr = 0                                   |
-  "		 |                                 |    ss   = 0.003                               |
-  "		 | 2.5. Run Fit                    |                                               |
-  "		 | 2.6. Save project               ||
-  "		 | 2.7. Verify fit results         ||
-  "		 | 2.7.1 If not OK revise parameners and refit (go to 2.4)||
-  "		 | 2.7.2 If OK Save project and outputs|                                           |File: FeS2_01.fpj
+|         | 1.2. Normalisation              |Parameters: Pre-edge range = -117.00 to 30.000 |
+|         | 1.3. Save Athena Project        |                                               |File: FeS2_01.prj
+|Artemis  | 2.1. Import data                |File: FeS2_01.prj                              |
+|         | 2.2. Import Crystal data        |File: FeS2.inp                                 |
+|   	  | 2.3. Calculate Paths(Atoms+FEFF)||
+|         | 2.4. Set path parameters        | Parameters:                                   |
+|         |                                 |    amp  = 1                                   |
+|         |                                 |    enot = 0                                   |
+|         |                                 |    delr = 0                                   |
+|         |                                 |    ss   = 0.003                               |
+|         | 2.5. Run Fit                    |                                               |
+|         | 2.6. Save project               ||
+|         | 2.7. Verify fit results         ||
+|         | 2.7.1 If not OK revise parameners and refit (go to 2.4)||
+|         | 2.7.2 If OK Save project and outputs|                                           |File: FeS2_01.fpj
 		 
 
