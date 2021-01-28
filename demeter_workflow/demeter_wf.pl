@@ -25,15 +25,23 @@ sub get_data{
 	return $data
 }
 
+sub save_athena{
+	my $file_name = shift;
+	my $data = shift;
+	# Save as athena project
+	# from https://github.com/bruceravel/demeter/blob/411cf8d2b28819bd7a21a29869c7ad0dce79a8ac/documentation/DPG/output.rst
+	$data->write_athena($file_name, $data);
+}
 
-sub start(){
+sub start{
 	my $input_file = "fes2_rt01_mar02.xmu";
 	my $group_name = "FeS2_xmu";
-
+    my $athena_file = "FeS2_dmtr.prj";
 	# if no argument passed, show warning and use defaults
 	
-	if (!@ARGV or $#ARGV < 1) {
-		print "Need two provide two argument\n - File name\n - Group name";
+	if (!@ARGV or $#ARGV < 2) {
+		print "Need two provide three argument\n - Input file name\n - Group name";
+		print "\n - Athena file name\n";
 		print "Arguments passed: $#ARGV + 1";
 	}
 	else{
@@ -47,6 +55,7 @@ sub start(){
 			print "Reading from default file: $input_file\n";
 		}
 		$group_name = $ARGV[1];
+		$athena_file = $ARGV[2];
 		print "Group Name: $group_name\n";
 	}
 	
@@ -56,9 +65,9 @@ sub start(){
 	sleep 5;
 	# Save as athena project
 	# from https://github.com/bruceravel/demeter/blob/411cf8d2b28819bd7a21a29869c7ad0dce79a8ac/documentation/DPG/output.rst
-	$input_data->write_athena("$group_name.prj", $input_data);
-	my $prj = Demeter::Data::Prj -> new(file=>"$group_name.prj");
+	save_athena($athena_file, $input_data);
+	my $prj = Demeter::Data::Prj -> new(file=>$athena_file);
 	print "*** Athena Project ***\n";
 	print $prj -> list;
 }
-start()
+start;
