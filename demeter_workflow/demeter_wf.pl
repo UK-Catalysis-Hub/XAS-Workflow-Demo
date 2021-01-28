@@ -62,7 +62,17 @@ sub start{
 	my $input_data = get_data($input_file, $group_name);
 	$input_data -> plot('E');
 	print $input_data -> data_parameter_report;
+
+	# set parameters for normalisation and background removal
+	$input_data -> set(bkg_rbkg    => 1.5,
+             bkg_spl1    => 0,    bkg_spl2    => 18,
+             bkg_nor1    => 100,  bkg_nor2    => 1800,
+			 bkg_pre1    => -117, bkg_pre2	 => -30, 
+             fft_kmax    => 3,    fft_kmin    => 17,
+            );
+	$input_data -> plot('E');
 	sleep 5;
+	print ($input_data->Athena->pre_edge_range);
 	# Save as athena project
 	# from https://github.com/bruceravel/demeter/blob/411cf8d2b28819bd7a21a29869c7ad0dce79a8ac/documentation/DPG/output.rst
 	save_athena($athena_file, $input_data);
