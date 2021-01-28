@@ -10,12 +10,23 @@
 # First example of importing a Mu(e) data file and plotting it
 
 use Demeter;
+use Class::Inspector;
 # 1.1. Import data         |File: fes2_rt01_mar02.xmu            | 
 # 1.2. Normalisation       |Parameters:                          |
 #                          |  Pre-edge range = -117.00 to 30.000 |
 # 1.3. Save Athena Project |                                     |FeS2_dmtr.prj
 
-sub start (){
+sub get_data{
+	my $file_name = shift;
+	my $group_name = shift;
+	my $data = Demeter::Data -> new(file => $file_name,
+									name => $group_name,
+								);
+	return $data
+}
+
+
+sub start(){
 	my $input_file = "fes2_rt01_mar02.xmu";
 	my $group_name = "FeS2_xmu";
 
@@ -39,12 +50,15 @@ sub start (){
 		print "Group Name: $group_name\n";
 	}
 	
-
-	my $data = Demeter::Data -> new(file => $input_file,
-									name => $group_name,
-								);
-	$data -> plot('E');
+	my $input_data = get_data($input_file, $group_name);
+	$input_data -> plot('E');
+	print $input_data -> data_parameter_report;
 	sleep 5;
+	# Save as athena project
+	# from https://github.com/bruceravel/demeter/blob/411cf8d2b28819bd7a21a29869c7ad0dce79a8ac/documentation/DPG/output.rst
+	$input_data->write_athena("$group_name.prj", $input_data);
+	my $prj = Demeter::Data::Prj -> new(file=>"$group_name.prj");
+	print "*** Athena Project ***\n";
+	print $prj -> list;
 }
-
 start()
