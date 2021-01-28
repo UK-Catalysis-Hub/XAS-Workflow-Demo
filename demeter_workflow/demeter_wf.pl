@@ -11,10 +11,6 @@
 
 use Demeter;
 use Class::Inspector;
-# 1.1. Import data         |File: fes2_rt01_mar02.xmu            | 
-# 1.2. Normalisation       |Parameters:                          |
-#                          |  Pre-edge range = -117.00 to 30.000 |
-# 1.3. Save Athena Project |                                     |FeS2_dmtr.prj
 
 sub get_data{
 	my $file_name = shift;
@@ -58,22 +54,22 @@ sub start{
 		$athena_file = $ARGV[2];
 		print "Group Name: $group_name\n";
 	}
-	
+	# 1.1. Import data         |File: fes2_rt01_mar02.xmu            | 
+
 	my $input_data = get_data($input_file, $group_name);
 	$input_data -> plot('E');
 	print $input_data -> data_parameter_report;
 
+	# 1.2. Normalisation       |Parameters:                          |
+	#                          |  Pre-edge range = -117.00 to 30.000 |
 	# set parameters for normalisation and background removal
-	$input_data -> set(bkg_rbkg    => 1.5,
-             bkg_spl1    => 0,    bkg_spl2    => 18,
-             bkg_nor1    => 100,  bkg_nor2    => 1800,
-			 bkg_pre1    => -117, bkg_pre2	 => -30, 
-             fft_kmax    => 3,    fft_kmin    => 17,
-            );
+	# get parameter names from:
+	#    https://github.com/bruceravel/demeter/blob/411cf8d2b28819bd7a21a29869c7ad0dce79a8ac/attic/doc/misc/json_project.org
+	# as with the basic workflow, only pre-edge limits are modified
+	$input_data -> set(bkg_pre1    => -117, bkg_pre2	 => -30);
 	$input_data -> plot('E');
 	sleep 5;
-	print ($input_data->Athena->pre_edge_range);
-	# Save as athena project
+    # 1.3. Save Athena Project |                                     |FeS2_dmtr.prj
 	# from https://github.com/bruceravel/demeter/blob/411cf8d2b28819bd7a21a29869c7ad0dce79a8ac/documentation/DPG/output.rst
 	save_athena($athena_file, $input_data);
 	my $prj = Demeter::Data::Prj -> new(file=>$athena_file);
