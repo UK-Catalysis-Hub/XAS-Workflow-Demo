@@ -15,17 +15,15 @@ use Class::Inspector;
 sub get_data{
 	my $file_name = shift;
 	my $group_name = shift;
-	my $data = Demeter::Data -> new(file => $file_name,
-									name => $group_name,
-								);
-	return $data
+	my $data = Demeter::Data -> new(file => $file_name, name => $group_name);
+	return $data;
 }
 
 sub save_athena{
 	my $file_name = shift;
 	my $data = shift;
 	# Save as athena project
-	# from https://github.com/bruceravel/demeter/blob/411cf8d2b28819bd7a21a29869c7ad0dce79a8ac/documentation/DPG/output.rst
+	#   from https://github.com/bruceravel/demeter/blob/411cf8d2b28819bd7a21a29869c7ad0dce79a8ac/documentation/DPG/output.rst
 	$data->write_athena($file_name, $data);
 }
 
@@ -147,9 +145,8 @@ sub set_parameters{
 			$pre1 = <STDIN>;
 			$pre1 += 0.00;
 			my $pre2 = $data -> bkg_pre2;
-			print "pre-edge range values\n";
-			print "pre-edge from: $pre2\n";
-			print "New value from:";
+			print "pre-edge to: $pre2\n";
+			print "New value to:";
 			$pre2 = <STDIN>;
 			$pre2 += 0.00;
 			$data -> set(bkg_pre1 => $pre1, bkg_pre2	 => $pre2);
@@ -163,7 +160,6 @@ sub set_parameters{
 			$nor1 = <STDIN>;
 			$nor1 += 0.00;
 			my $nor2 = $data -> bkg_nor2;
-			print "post-edge range values\n";
 			print "post-edge to: $nor2\n";
 			print "New value to:";
 			$nor2 = <STDIN>;
