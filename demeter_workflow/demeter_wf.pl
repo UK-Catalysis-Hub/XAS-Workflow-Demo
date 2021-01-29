@@ -36,11 +36,11 @@ sub clear_screen{
 sub show_graphs{
 	my $data = shift;
 	my $option = 0;
-	clear_screen;
 	print "Show graphs\n";
 	while ($option != 7){
 		clear_screen;
 		show_parameters($data);
+		print "************************************************************\n";
 		print "Options:\n";
 		print "1) Quad\n";
 		print "2) E \n";
@@ -49,7 +49,7 @@ sub show_graphs{
 		print "5) k 123\n";
 		print "6) Magnitude in R-space & R-space window\n";
 		print "7) return\n";
-		print "Your selection (1-3): ";
+		print "Your selection (1-7): ";
 		$option = <STDIN>;
 		if ($option == 1) {
 			print "Show Quad";
@@ -107,9 +107,6 @@ sub show_graphs{
 			$data -> po -> set(kweight => 2, r_pl => 'm', space => 'r', );
 			$data -> po -> start_plot;
 			$data -> plot -> plot_window;
-		}		
-		elsif ($option == 7) {
-			print "Return";
 		}
 		else {
 			print "invalid selection\n";
@@ -118,45 +115,91 @@ sub show_graphs{
 }
 
 sub show_parameters{
-	clear_screen;
 	my $data = shift;
-	print "Show parameters\n";
+	print "Data parameters\n";
 	print $data -> data_parameter_report;
 }
 
-sub set_parameters{
-	clear_screen;
-	print "Set parameters\n";
-}
+# set parameters for normalisation and background removal
+# get parameter names from:
+#    https://github.com/bruceravel/demeter/blob/411cf8d2b28819bd7a21a29869c7ad0dce79a8ac/attic/doc/misc/json_project.org
 
-sub save_and_exit{
+sub set_parameters{
+	my $data = shift;
+	my $option;
 	clear_screen;
-	print "Save Athena project and exit\n";
+	show_parameters($data);
+	while ($option != 3){
+		clear_screen;
+		show_parameters($data);
+		print "************************************************************\n";
+		print "Options:\n";
+		print "1) set pre-edge range \n";
+		print "2) set normalisation range\n";
+		print "3) return\n";
+		print "Your selection (1-3): ";
+		$option = <STDIN>;
+		if ($option == 1){
+			my $pre1 = $data -> bkg_pre1;
+			print "pre-edge range values\n";
+			print "pre-edge from: $pre1\n";
+			print "New value from:";
+			$pre1 = <STDIN>;
+			$pre1 += 0.00;
+			my $pre2 = $data -> bkg_pre2;
+			print "pre-edge range values\n";
+			print "pre-edge from: $pre2\n";
+			print "New value from:";
+			$pre2 = <STDIN>;
+			$pre2 += 0.00;
+			$data -> set(bkg_pre1 => $pre1, bkg_pre2	 => $pre2);
+		}
+		elsif ($option  == 2){
+			print "normalisation range";
+			my $nor1 = $data -> bkg_nor1;
+			print "post-edge range values\n";
+			print "post-edge from: $nor1\n";
+			print "New value from:";
+			$nor1 = <STDIN>;
+			$nor1 += 0.00;
+			my $nor2 = $data -> bkg_nor2;
+			print "post-edge range values\n";
+			print "post-edge to: $nor2\n";
+			print "New value to:";
+			$nor2 = <STDIN>;
+			$nor2 += 0.00;
+			$data -> set(bkg_nor1 => $nor1, bkg_nor2 => $nor2);
+		}
+		else {
+			print "invalid selection\n";
+		}
+	}
+	print "Set parameters\n";	
 }
 
 sub select_task{
 	my $data = shift;
+	my $athena_f = shift;
 	my $option = 0;
-	while ($option != 4){
+	while ($option != 3){
 		clear_screen;
+		show_parameters($data);
+		print "************************************************************\n";
 		print "Options:\n";
 		print "1) show graph\n";
-		print "2) show parameters\n";
-		print "3) set parameters\n";
-		print "4) save athena project and exit\n";
-		print "Your selection (1/2/3/4): ";
+		print "2) set parameters\n";
+		print "3) save athena project and exit\n";
+		print "Your selection (1-3): ";
 		$option = <STDIN>;
-		if ($option == 1) {
+		if ($option == 1){
 			show_graphs($data);
 		}
-		elsif ($option  == 2) {
-			show_parameters($data);
-		}
-		elsif ($option == 3) {
+		elsif ($option  == 2){
 			set_parameters($data);
 		}
-		elsif ($option == 4) {
-			save_and_exit;
+		elsif ($option == 3){
+			print "Saved project as $athena_f\n";
+			save_athena($athena_f, $data);
 		}
 		else {
 			print "invalid selection\n";
@@ -169,7 +212,6 @@ sub start{
 	my $group_name = "FeS2_xmu";
     my $athena_file = "FeS2_dmtr.prj";
 	# if no argument passed, show warning and use defaults
-	
 	if (!@ARGV or $#ARGV < 2) {
 		print "Need two provide three argument\n - Input file name\n - Group name";
 		print "\n - Athena file name\n";
@@ -189,26 +231,12 @@ sub start{
 		$athena_file = $ARGV[2];
 		print "Group Name: $group_name\n";
 	}
-	# 1.1. Import data         |File: fes2_rt01_mar02.xmu            | 
-
+	# open input file and get data
 	my $input_data = get_data($input_file, $group_name);
-	
-	print $input_data -> data_parameter_report;
-
-	# 1.2. Normalisation       |Parameters:                          |
-	#                          |  Pre-edge range = -117.00 to 30.000 |
-	# set parameters for normalisation and background removal
-	# get parameter names from:
-	#    https://github.com/bruceravel/demeter/blob/411cf8d2b28819bd7a21a29869c7ad0dce79a8ac/attic/doc/misc/json_project.org
-	# as with the basic workflow, only pre-edge limits are modified
-	$input_data -> set(bkg_pre1    => -117, bkg_pre2	 => -30);
-    # 1.3. Save Athena Project |                                     |FeS2_dmtr.prj
-	# from https://github.com/bruceravel/demeter/blob/411cf8d2b28819bd7a21a29869c7ad0dce79a8ac/documentation/DPG/output.rst
-	save_athena($athena_file, $input_data);
-	my $prj = Demeter::Data::Prj -> new(file=>$athena_file);
-	#print "*** Athena Project ***\n";
-	#print $prj -> list;
-	select_task($input_data);
+	# save the athena project
+    save_athena($athena_file, $input_data);
+	# print parameters and present options
+	select_task($input_data, $athena_file);
 }
 
 start;
