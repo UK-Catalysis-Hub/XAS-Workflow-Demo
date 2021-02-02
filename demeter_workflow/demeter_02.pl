@@ -145,14 +145,18 @@ sub get_data{
 
 	$data->set_mode(screen  => 0, backend => 1); #, file => ">fes2.iff", );
 	$data -> plot_with('gnuplot');    ## similar to the :plotwith pragma
+	print "****** Completed reading data *****\n";
 	return $data
 }
 sub get_feff{
 	my $crystal_name = shift;
 
 	# open crystal file and run atoms and feff to get the paths
-	my $atoms = Demeter::Atoms->new(file=>$crystal_name);
-	my $feff = Demeter::Feff -> new(atoms=>$atoms);
+	my $atoms = Demeter::Atoms -> new(file => $crystal_name);
+	my $feff = Demeter::Feff -> new(atoms => $atoms);
+	$feff   -> set(workspace=>"temp", screen=>0);
+	$feff   -> run;
+	print "****** Done with feff *****\n";
 	return $feff
 }
 
@@ -188,7 +192,7 @@ sub select_paths{
 	my $feff = shift;
     my $data = shift;
 	my @sp   = @{$feff->pathlist};
-	print $feff -> pathlist;
+	print $feff -> intrp;
 	#exit;
 	# select paths and assign parameter variables
 	my @paths = ();
@@ -259,6 +263,8 @@ sub select_paths{
 	foreach my $p (@paths) {
 	  $p->sp->cleanup(0);
 	};
+	
+	<STDIN>;
 	return @paths;
 }
 
@@ -288,11 +294,10 @@ sub select_task{
 		if ($option == 1){
 			print "Set paramenters\n" ;
 			@gds_parameters = set_parameters(\@gds_parameters);
-			print_parameters(\@gds_parameters);
 		}
 		elsif ($option  == 2){
 			print "Select paths\n";
-			@selected_paths = select_paths($data);
+			@selected_paths = select_paths($feff, $data);
 		}
 		elsif ($option == 3){
 			print "Run fit\n";
@@ -344,8 +349,9 @@ sub start{
 		$artemis_file = $ARGV[2];
 	}
 	# fit in one step process
-	#all_in_one($athena_file, $crystal_file);
+	all_in_one($athena_file, $crystal_file);
 		
+	<STDIN>;
 
 	# break out of the process
 	# 1. Import Athena data (.prj)
