@@ -41,7 +41,6 @@ sub set_parameters{
 	my (@gds) = @{$_[0]};
     # set guess parameters for amplitude, Delta E0, Delta R and sigma square to be 
 	# assigned to paths
-	print_parameters(\@gds);
 	@gds =  (Demeter::GDS -> new(gds => 'guess', name => 'alpha', mathexp => 0),
 			Demeter::GDS -> new(gds => 'guess', name => 'amp',   mathexp => 1),
 			Demeter::GDS -> new(gds => 'guess', name => 'enot',  mathexp => 0),
@@ -52,15 +51,22 @@ sub set_parameters{
 		);
 	print_parameters(\@gds);
 	<STDIN>;
+	
 	return @gds
 }
 
 sub print_parameters{
-	print "***** Print parameters ******\n";
-	my (@gds) = @{$_[0]};
-	foreach my $gds_par (@gds) {
-		print "$gds_par\n";
-	}	
+	print "***** Defined Parameters List ******\n";
+	printf "%-7s %-8s %-8s %-16s %s\n", 'N', 'Name', 'type', 'value', 'note';
+	my @gds = @{$_[0]};
+	for my $i (0 .. $#gds) {	
+		my $x = $gds[$i];
+		my $gds_name = $x -> name;
+		my $gds_type = $x -> gds;
+		my $gds_value = $x -> mathexp;
+		my $gds_note = $x -> note;
+		printf "%-7s %-8s %-8s %-16s %s\n", $i, $gds_name, $gds_type, , $gds_value, $gds_note;
+	}
 }
 
 sub select_paths{
