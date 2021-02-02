@@ -156,10 +156,117 @@ sub get_feff{
 	return $feff
 }
 
+sub set_parameters{
+	# pass a reference to the array, then dereference it in the subroutine
+	# https://www.perlmonks.org/?node_id=439926
+	my (@gds) = @{$_[0]};
+    # set guess parameters for amplitude, Delta E0, Delta R and sigma square to be 
+	# assigned to paths
+	print_parameters(\@gds);
+	@gds =  (Demeter::GDS -> new(gds => 'guess', name => 'alpha', mathexp => 0),
+			Demeter::GDS -> new(gds => 'guess', name => 'amp',   mathexp => 1),
+			Demeter::GDS -> new(gds => 'guess', name => 'enot',  mathexp => 0),
+			Demeter::GDS -> new(gds => 'guess', name => 'ss',    mathexp => 0.003),
+			Demeter::GDS -> new(gds => 'guess', name => 'ss2',   mathexp => 0.003),
+			Demeter::GDS -> new(gds => 'def',   name => 'ss3',   mathexp => 'ss2'),
+			Demeter::GDS -> new(gds => 'guess', name => 'ssfe',  mathexp => 0.003),
+		);
+	print_parameters(\@gds);
+	<STDIN>;
+	return @gds
+}
+
+sub print_parameters{
+	print "***** Print parameters ******\n";
+	my (@gds) = @{$_[0]};
+	foreach my $gds_par (@gds) {
+		print "$gds_par\n";
+	}	
+}
+
+sub select_paths{
+	my $feff = shift;
+    my $data = shift;
+	my @sp   = @{$feff->pathlist};
+	print $feff -> pathlist;
+	#exit;
+	# select paths and assign parameter variables
+	my @paths = ();
+	push(@paths, Demeter::Path -> new(sp     => $sp[0],
+					  data   => $data,
+					  s02    => 'amp',
+					  e0     => 'enot',
+					  delr   => 'alpha*reff',
+					  sigma2 => 'ss'
+					 ));
+	push(@paths, Demeter::Path -> new(sp     => $sp[1],
+					  data   => $data,
+					  s02    => 'amp',
+					  e0     => 'enot',
+					  delr   => 'alpha*reff',
+					  sigma2 => 'ss2'
+					 ));
+	push(@paths, Demeter::Path -> new(sp     => $sp[2],
+					  data   => $data,
+					  s02    => 'amp',
+					  e0     => 'enot',
+					  delr   => 'alpha*reff',
+					  sigma2 => 'ss3'
+					 ));
+	push(@paths, Demeter::Path -> new(sp     => $sp[4],
+					  data   => $data,
+					  s02    => 'amp',
+					  e0     => 'enot',
+					  delr   => 'alpha*reff',
+					  sigma2 => 'ssfe'
+					 ));
+	push(@paths, Demeter::Path -> new(sp     => $sp[6],
+					  data   => $data,
+					  s02    => 'amp',
+					  e0     => 'enot',
+					  delr   => 'alpha*reff',
+					  sigma2 => 'ss*1.5'
+					 ));
+	push(@paths, Demeter::Path -> new(sp     => $sp[7],
+					  data   => $data,
+					  s02    => 'amp',
+					  e0     => 'enot',
+					  delr   => 'alpha*reff',
+					  sigma2 => 'ss/2 + ssfe'
+					 ));
+	push(@paths, Demeter::Path -> new(sp     => $sp[13],
+					  data   => $data,
+					  s02    => 'amp',
+					  e0     => 'enot',
+					  delr   => 'alpha*reff',
+					  sigma2 => 'ss*2'
+					 ));
+	push(@paths, Demeter::Path -> new(sp     => $sp[14],
+					  data   => $data,
+					  s02    => 'amp',
+					  e0     => 'enot',
+					  delr   => 'alpha*reff',
+					  sigma2 => 'ss*2'
+					 ));
+	push(@paths, Demeter::Path -> new(sp     => $sp[15],
+					  data   => $data,
+					  s02    => 'amp',
+					  e0     => 'enot',
+					  delr   => 'alpha*reff',
+					  sigma2 => 'ss*4'
+					 ));
+	
+	foreach my $p (@paths) {
+	  $p->sp->cleanup(0);
+	};
+	return @paths;
+}
 
 sub select_task{
 	my $data = shift;
 	my $feff = shift;
+	my @gds_parameters = ();
+	my @selected_paths = ();
 	# loop on the following three subtasks
 	# 3. Select paths
 	# 4. Set parameters
@@ -168,23 +275,24 @@ sub select_task{
 	
 	my $option = 0;
 	while ($option != 4){
-		clear_screen;
+		
 		#show_parameters($data);
 		print "************************************************************\n";
 		print "Options:\n";
-		print "1) Select paths\n";
-		print "2) Set parameters\n";
+		print "1) Set parameters\n";
+		print "2) Select paths\n";
 		print "3) Run fit\n";
 		print "4) Save project and exit\n";
 		print "Your selection (1-4): ";
 		$option = <STDIN>;
 		if ($option == 1){
-			print "Select paths" ;
-			#select_paths($data);
+			print "Set paramenters\n" ;
+			@gds_parameters = set_parameters(\@gds_parameters);
+			print_parameters(\@gds_parameters);
 		}
 		elsif ($option  == 2){
-			print "set paramenters";
-			#set_parameters($data);
+			print "Select paths\n";
+			@selected_paths = select_paths($data);
 		}
 		elsif ($option == 3){
 			print "Run fit\n";
@@ -197,6 +305,7 @@ sub select_task{
 		else {
 			print "invalid selection\n";
 		}
+		clear_screen;
 	}
 }
 
@@ -235,7 +344,7 @@ sub start{
 		$artemis_file = $ARGV[2];
 	}
 	# fit in one step process
-	all_in_one($athena_file, $crystal_file);
+	#all_in_one($athena_file, $crystal_file);
 		
 
 	# break out of the process
