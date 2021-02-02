@@ -263,9 +263,37 @@ sub select_paths{
 	foreach my $p (@paths) {
 	  $p->sp->cleanup(0);
 	};
-	
 	<STDIN>;
 	return @paths;
+}
+
+sub run_fit{
+	my $data = $_[0];
+	my @paths = @{$_[1]};
+	my @gds = @{$_[2]};
+	
+	my $len = scalar @gds; 
+    print "lenth of parameters: $len\n";
+	$len = scalar @paths; 
+    print "lenth of paths: $len\n";
+	
+	# use parameters, data and paths to perform the fit
+	my $fit = Demeter::Fit -> new(name  => 'FeS2 fit',
+					  gds   => \@gds,
+					  data  => [$data],
+					  paths => \@paths
+					 );
+	print "about to fit\n";
+	$fit -> fit;
+	#show fit plot
+	$data->po->set(plot_data => 1, plot_fit  => 1, );
+	$data->plot('rmr');
+	$data->pause;
+
+	my $keypress = <STDIN>;
+
+	my ($header, $footer) = ("Fit to FeS2 data", q{});
+	$fit -> logfile("fes2.log", $header, $footer);
 }
 
 sub select_task{
@@ -301,7 +329,11 @@ sub select_task{
 		}
 		elsif ($option == 3){
 			print "Run fit\n";
-			#run_fit($athena_f, $data);
+			my $len = scalar @gds_parameters; 
+			print "lenth of parameters: $len\n";
+			$len = scalar @selected_paths; 
+			print "lenth of paths: $len\n";
+			run_fit($data, \@selected_paths, \@gds_parameters);
 		}
 		elsif ($option == 4){
 			print "Save project and exit\n";
@@ -349,9 +381,9 @@ sub start{
 		$artemis_file = $ARGV[2];
 	}
 	# fit in one step process
-	all_in_one($athena_file, $crystal_file);
+	#all_in_one($athena_file, $crystal_file);
 		
-	<STDIN>;
+	#<STDIN>;
 
 	# break out of the process
 	# 1. Import Athena data (.prj)
