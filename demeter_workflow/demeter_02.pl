@@ -90,6 +90,10 @@ sub set_parameters{
 		}
 		elsif ($option  == 3){
 			print "delete parameter";
+			print "parameter number:";
+			my $d_num = <STDIN>;
+			printf "Deleting %s: %s %s %s %s", $gds[$d_num]->name, $gds[$d_num]->gds, $gds[$d_num]->mathexp,$gds[$d_num]->note;
+			splice(@gds, $d_num, 1)
 		}
 		else {
 			print "invalid selection\n";
