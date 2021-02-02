@@ -125,8 +125,6 @@ sub show_parameters{
 sub set_parameters{
 	my $data = shift;
 	my $option;
-	clear_screen;
-	show_parameters($data);
 	while ($option != 3){
 		clear_screen;
 		show_parameters($data);

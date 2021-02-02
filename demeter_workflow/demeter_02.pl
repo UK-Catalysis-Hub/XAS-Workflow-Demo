@@ -39,6 +39,7 @@ sub set_parameters{
 	# pass a reference to the array, then dereference it in the subroutine
 	# https://www.perlmonks.org/?node_id=439926
 	my (@gds) = @{$_[0]};
+	
     # set guess parameters for amplitude, Delta E0, Delta R and sigma square to be 
 	# assigned to paths
 	@gds =  (Demeter::GDS -> new(gds => 'guess', name => 'alpha', mathexp => 0),
@@ -49,9 +50,51 @@ sub set_parameters{
 			Demeter::GDS -> new(gds => 'def',   name => 'ss3',   mathexp => 'ss2'),
 			Demeter::GDS -> new(gds => 'guess', name => 'ssfe',  mathexp => 0.003),
 		);
-	print_parameters(\@gds);
-	<STDIN>;
 	
+	my $option =0;
+	while ($option != 4){
+		print "************************************************************\n";
+		print_parameters(\@gds);
+		print "Options:\n";
+		print "1) edit parameter\n";
+		print "2) add parameter\n";
+		print "3) delete parameter\n";
+		print "4) return\n";
+		print "Your selection (1-4): ";
+		$option = <STDIN>;
+		if ($option == 1){
+			print "edit parameter";
+			print "parameter number:";
+			my $p_num = <STDIN>;
+			print "type new value or enter to keep current";
+			printf "name (current %s):", $gds[$p_num]->name;
+			my $new_name = <STDIN>;
+			chomp $new_name;
+			if (length($new_name) < 1) {$new_name = $gds[$p_num]->name}
+			printf "type (current %s) valid: [guess, def, skip]:", $gds[$p_num]->gds;
+			my $new_type = <STDIN>;
+			chomp $new_type;
+			if (length($new_type) < 1) {$new_type = $gds[$p_num]->gds}
+			printf "value (current %s) valid: [value or expression]:", $gds[$p_num]->mathexp;
+			my $new_value = <STDIN>;
+			chomp $new_value;
+			if (length($new_value) < 1) {$new_value = $gds[$p_num]->mathexp}
+			printf "note (current %s):", $gds[$p_num]->note;
+			my $new_note = <STDIN>;
+			chomp $new_note;
+			if (length($new_note) < 1) {$new_note = $gds[$p_num]->note}
+			$gds[$p_num] -> set(name => $new_name, gds	 => $new_type, mathexp => $new_value, note => $new_note);
+		}
+		elsif ($option  == 2){
+			print "add parameter";
+		}
+		elsif ($option  == 3){
+			print "delete parameter";
+		}
+		else {
+			print "invalid selection\n";
+		}
+	}
 	return @gds
 }
 
