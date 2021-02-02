@@ -271,14 +271,24 @@ sub run_fit{
 	my $data = $_[0];
 	my @paths = @{$_[1]};
 	my @gds = @{$_[2]};
+	my $fit = undef;
 	
 	my $len = scalar @gds; 
-    print "lenth of parameters: $len\n";
+    print "length of parameters: $len\n";
+	if ($len < 1) {
+		print "Parameters not set, cannot fit";
+		<STDIN>;
+		return $fit;
+	}
 	$len = scalar @paths; 
-    print "lenth of paths: $len\n";
-	
+    print "length of paths: $len\n";
+	if ($len < 1) {
+		print "Paths not selected, cannot fit";
+		<STDIN>;
+		return $fit;
+	}
 	# use parameters, data and paths to perform the fit
-	my $fit = Demeter::Fit -> new(name  => 'FeS2 fit',
+	$fit = Demeter::Fit -> new(name  => 'FeS2 fit',
 					  gds   => \@gds,
 					  data  => [$data],
 					  paths => \@paths
@@ -294,6 +304,7 @@ sub run_fit{
 
 	my ($header, $footer) = ("Fit to FeS2 data", q{});
 	$fit -> logfile("fes2.log", $header, $footer);
+	return $fit;
 }
 
 sub select_task{
@@ -301,6 +312,7 @@ sub select_task{
 	my $feff = shift;
 	my @gds_parameters = ();
 	my @selected_paths = ();
+	my $curve_fit = undef;
 	# loop on the following three subtasks
 	# 3. Select paths
 	# 4. Set parameters
@@ -333,7 +345,7 @@ sub select_task{
 			print "lenth of parameters: $len\n";
 			$len = scalar @selected_paths; 
 			print "lenth of paths: $len\n";
-			run_fit($data, \@selected_paths, \@gds_parameters);
+			$curve_fit = run_fit($data, \@selected_paths, \@gds_parameters);
 		}
 		elsif ($option == 4){
 			print "Save project and exit\n";

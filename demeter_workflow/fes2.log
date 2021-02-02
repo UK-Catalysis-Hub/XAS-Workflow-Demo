@@ -1,8 +1,8 @@
 Fit to FeS2 data
- Name            : FeS2 fit    (vwhnj)
+ Name            : FeS2 fit    (zvbja)
  Description     : fit to fes2_xmu
  Figure of merit : 0
- Time of fit     : 2021-02-02T16:22:40
+ Time of fit     : 2021-02-02T16:47:24
  Environment     : Demeter 0.9.25 with perl 5.018002 and using Ifeffit 1.2.12 on Windows 8
  Interface       : Demeter-based perl script
  Prepared by     : 
@@ -57,7 +57,7 @@ All other correlations below 0.4
 : fitting space         = r
 : background function   = no
 : phase correction      = no
-: background removal    = E0: 7117, Rbkg: 1.0, range: [0:14.956], clamps: 0/24, kw: 2
+: background removal    = E0: 7117, Rbkg: 1.0, range: [0.000:14.956], clamps: 0/24, kw: 2
 : epsilon_k by k-weight = 3.402e-004
 : epsilon_r by k-weight = 1.465e-001
 : R-factor by k-weight  = 1 -> 0.00641,  2 -> 0.00557,  3 -> 0.00619
