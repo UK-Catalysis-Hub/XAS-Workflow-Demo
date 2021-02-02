@@ -1,8 +1,8 @@
 Fit to FeS2 data
- Name            : FeS2 fit    (ohnde)
+ Name            : FeS2 fit    (wmdlx)
  Description     : fit to fes2_xmu
  Figure of merit : 0
- Time of fit     : 2021-02-02T20:22:22
+ Time of fit     : 2021-02-02T20:52:25
  Environment     : Demeter 0.9.25 with perl 5.018002 and using Ifeffit 1.2.12 on Windows 8
  Interface       : Demeter-based perl script
  Prepared by     : 
@@ -25,18 +25,18 @@ Happiness = 100.00/100             color = #D8E796
 *****    NEVER be reported in a publication -- NEVER!    *****
 
 guess parameters:
-  alpha              =   0.00100962    # +/-   0.00149851     [0]
   amp                =   0.69065100    # +/-   0.03175212     [1]
   enot               =   2.83623689    # +/-   0.50758522     [0]
   ss                 =   0.00302328    # +/-   0.00049607     [0.003]
   ss2                =   0.00395650    # +/-   0.00130316     [0.003]
   ssfe               =   0.00496836    # +/-   0.00061756     [0.003]
+  alpha              =   0.00100962    # +/-   0.00149851     [0]
 
 def parameters:
   ss3                =   0.00395650    # [ss2]
 
 Correlations between variables:
-                enot & alpha              -->  0.8715
+               alpha & enot               -->  0.8715
                   ss & amp                -->  0.8096
                 ssfe & amp                -->  0.5757
                 ssfe & ss                 -->  0.4793
@@ -57,7 +57,7 @@ All other correlations below 0.4
 : fitting space         = r
 : background function   = no
 : phase correction      = no
-: background removal    = E0: 7117, Rbkg: 1.0, range: [0:14.956], clamps: 0/24, kw: 2
+: background removal    = E0: 7117, Rbkg: 1.0, range: [0.000:14.956], clamps: 0/24, kw: 2
 : epsilon_k by k-weight = 3.402e-004
 : epsilon_r by k-weight = 1.465e-001
 : R-factor by k-weight  = 1 -> 0.00641,  2 -> 0.00557,  3 -> 0.00619

@@ -87,6 +87,29 @@ sub set_parameters{
 		}
 		elsif ($option  == 2){
 			print "add parameter";
+			print "type values for new parameter";
+			my $add_name = "";
+			while (length($add_name) < 1){
+				print "name:"; 
+				$add_name = <STDIN>;
+				chomp $add_name;
+			}
+			my $new_type = "";
+			while (length($new_type) < 1){
+				print "type valid: [guess, def, skip]:";
+			    $new_type = <STDIN>;
+			    chomp $new_type;
+			}
+			my $new_value = "";
+			while (length($new_value) < 1){
+				print "value (valid: [value or math expression]):";
+				$new_value = <STDIN>;
+			    chomp $new_value;
+			}
+			print "note";
+			my $new_note = <STDIN>;
+			chomp $new_note;
+			push(@gds, (Demeter::GDS -> new(name => $add_name, gds	 => $new_type, mathexp => $new_value, note => $new_note)));
 		}
 		elsif ($option  == 3){
 			print "delete parameter";
