@@ -14,13 +14,16 @@ Each folder contains an end-to-end example of a workflow. They are described as 
 are the same as those used in the XAS-Education example from 
 [Bruce Ravel](https://github.com/bruceravel/XAS-Education/tree/master/Examples/FeS2). 
 The folder also contains a mark-down file describing the workflow tasks (see 
-[basic_wf.md](https://github.com/scman1/XAS-Workflow-Demo/blob/main/basic_workflow/basic_wf.md)).
-- [Demeter Workflow](https://github.com/scman1/XAS-Workflow-Demo/blob/main/basic_workflow) 
+[README.md](https://github.com/scman1/XAS-Workflow-Demo/blob/main/basic_workflow/README.md)).
+- [Demeter Workflow](https://github.com/scman1/XAS-Workflow-Demo/blob/main/demeter_workflow) 
 (Scripted Workflow): is derived from the 
 [FeS2 worked example](https://github.com/bruceravel/demeter/tree/master/examples/recipes/FeS2). 
 The first part this workflow was developed following examples from the Demeter 
 [Programing guide](https://bruceravel.github.io/demeter/documents/DPG/index.html), 
 while the second part is a modified version of the [FeS2 worked example](https://github.com/bruceravel/demeter/tree/master/examples/recipes/FeS2). 
+A mark-down file describing the workflow tasks is located at  
+[README.md](https://github.com/scman1/XAS-Workflow-Demo/blob/main/basic_workflow/README.md).
+
 
 ## Acknowledgements and Funding
 For more details about the of the motivation for the development of the resources
