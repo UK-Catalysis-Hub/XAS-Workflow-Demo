@@ -214,8 +214,9 @@ sub select_paths{
 	my $option =0;
 	while ($option != 4){
 		print "************************************************************\n";
-		print_paths($feff, \@sp, 0, 9 );
+		print_paths($feff, \@sp, 0, 9);
 		# need to print selected paths
+		print_selected_paths(\@paths, 0, 9);
 		print "Options:\n";
 		print "1) edit parameter\n";
 		print "2) add parameter\n";
@@ -240,22 +241,19 @@ sub print_paths{
 	foreach my $sp (@paths_list[$from_p..$to_p]){
 		my $this = Demeter::Path->new(parent => $feff_data,
 				sp     => $sp);
-		printf "%-3s %-6s %-7s %-30s %-3s %-4s %-18s\n", $indx, $sp -> n, $sp -> fuzzy, $this->label,$sp -> weight, $sp -> nleg, $sp -> Type;
+		printf "%-3s %-6s %-7s %-30s %-3s %-4s %-18s\n", $indx, $sp -> n, $sp -> fuzzy, $this->name,$sp -> weight, $sp -> nleg, $sp -> Type;
 		$indx += 1;
 	}
 }
 
 sub print_selected_paths{
-	my $feff_data = $_[0];
-	my @paths_list = @{$_[1]};
-	my $from_p = $_[2];
-	my $to_p = $_[3];
-	printf "%-3s %-6s %-7s %-30s %-3s %-4s %-18s\n", '#', 'degen', 'Reff', 'Sc. Path', 'I', 'Legs','type'; 
+	my @paths_list = @{$_[0]};
+	my $from_p = $_[1];
+	my $to_p = $_[2];
+	printf "%-3s %-27s %-10s %-10s %-10s %-10s %-10s\n", '#', 'Sc. Path', 's0^2', 'Delta e0', 'Delta R', 'sigma^2', 'sp_label'; 
 	my $indx = 0;
-	foreach my $sp (@paths_list[$from_p..$to_p]){
-		my $this = Demeter::Path->new(parent => $feff_data,
-				sp     => $sp);
-		printf "%-3s %-6s %-7s %-30s %-3s %-4s %-18s\n", $indx, $sp -> n, $sp -> fuzzy, $this->label,$sp -> weight, $sp -> nleg, $sp -> Type;
+	foreach my $s_path (@paths_list){#[$from_p..$to_p]){
+		printf "%-3s %-27s %-10s %-10s %-10s %-10s\n", $indx, $s_path -> label, $s_path -> s02, $s_path -> e0 ,$s_path -> delr, $s_path -> sigma2, $s_path -> sp ;
 		$indx += 1;
 	}
 }

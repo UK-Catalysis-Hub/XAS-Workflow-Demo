@@ -149,12 +149,12 @@
 # };
 
 @list_of_paths = @{ $feff-> pathlist };
-# my $indx = 0;
-# foreach my $sp (@list_of_paths[0..1]){
-	# #my @sp_keys = keys {%$sp}; 
-	# # for my $a_k (@sp_keys ){
-		# # printf "printf \"%s: Xs\\n\", \$sp -> %s;\n", $a_k, $a_k;
-	# # }
+my $indx = 0;
+foreach my $sp (@list_of_paths[0..87]){
+	#my @sp_keys = keys {%$sp}; 
+	# for my $a_k (@sp_keys ){
+		# printf "printf \"%s: Xs\\n\", \$sp -> %s;\n", $a_k, $a_k;
+	# }
 	# printf " : %s \n", $indx;
 	# printf "name: %s\n", $sp -> name;
 	# printf "rleg: %s\n", $sp -> rleg;
@@ -172,7 +172,7 @@
 	# printf "nleg: %s\n", $sp -> nleg;
 	# printf "randstring: %s\n", $sp -> randstring;
 	# printf "rank_rmin: %s\n", $sp -> rank_rmin;
-	# printf "string: %s\n", $sp -> string;
+	printf " %s | %s\n",$indx, $sp -> string;
 	# printf "site_fraction: %s\n", $sp -> site_fraction;
 	# printf "rankdata: %s\n", $sp -> rankdata;
 	# printf "n: %s\n", $sp -> n;
@@ -213,12 +213,12 @@
 	# printf "rank_kmax: %s\n", $sp -> rank_kmax;
 	# printf "pathtype: %s\n", $sp -> pathtype;
 	# printf "data: %s\n", $sp -> data;
-	# # my $j=1000;
-	# # foreach my $s ($sp->all_strings) {
-		# # print $sp -> pathsdat(index=>++$j, string=>$s, angles=>1);
-	# # };
-	# $indx += 1;
-# };
+	# my $j=1000;
+	# foreach my $s ($sp->all_strings) {
+		# print $sp -> pathsdat(index=>++$j, string=>$s, angles=>1);
+	# };
+	$indx += 1;
+};
 
 printf "%-4s %-8s %-8s %-20s %-5s %-5s %-18s\n", '#', 'degen', 'Reff', 'Sc. Path', 'I', 'Legs','type'; 
 $indx = 0;
