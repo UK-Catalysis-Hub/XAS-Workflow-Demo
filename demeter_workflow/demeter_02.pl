@@ -31,17 +31,20 @@ sub get_feff{
 	my $feff = Demeter::Feff -> new(atoms => $atoms);
 	$feff   -> set(workspace=>"temp", screen=>0);
 	$feff   -> run;
+	$feff -> make_feffinp("full");
 	print "****** Done with feff *****\n";
 	return $feff
 }
+
+# set guess parameters for amplitude, Delta E0, Delta R and sigma square to be 
+# assigned to paths
 
 sub set_parameters{
 	# pass a reference to the array, then dereference it in the subroutine
 	# https://www.perlmonks.org/?node_id=439926
 	my (@gds) = @{$_[0]};
 	
-    # set guess parameters for amplitude, Delta E0, Delta R and sigma square to be 
-	# assigned to paths
+	# The default parameters to be set according to the textbook example
 	@gds =  (Demeter::GDS -> new(gds => 'guess', name => 'alpha', mathexp => 0),
 			Demeter::GDS -> new(gds => 'guess', name => 'amp',   mathexp => 1),
 			Demeter::GDS -> new(gds => 'guess', name => 'enot',  mathexp => 0),
@@ -143,9 +146,8 @@ sub select_paths{
 	my $feff = shift;
     my $data = shift;
 	my @sp   = @{$feff->pathlist};
-	print $feff -> intrp;
-	#exit;
-	# select paths and assign parameter variables
+	print_paths($feff, \@sp, 0, 9 );
+    # select paths and assign parameter variables
 	my @paths = ();
 	push(@paths, Demeter::Path -> new(sp     => $sp[0],
 					  data   => $data,
@@ -216,6 +218,21 @@ sub select_paths{
 	};
 	<STDIN>;
 	return @paths;
+}
+
+sub print_paths{
+	my $feff_data = $_[0];
+	my @paths_list = @{$_[1]};
+	my $from_p = $_[2];
+	my $to_p = $_[3];
+	printf "%-3s %-6s %-7s %-30s %-3s %-4s %-18s\n", '#', 'degen', 'Reff', 'Sc. Path', 'I', 'Legs','type'; 
+	my $indx = 0;
+	foreach my $sp (@paths_list[$from_p..$to_p]){
+		my $this = Demeter::Path->new(parent => $feff_data,
+				sp     => $sp);
+		printf "%-3s %-6s %-7s %-30s %-3s %-4s %-18s\n", $indx, $sp -> n, $sp -> fuzzy, $this->label,$sp -> weight, $sp -> nleg, $sp -> Type;
+		$indx += 1;
+	}
 }
 
 sub run_fit{
