@@ -233,6 +233,9 @@ foreach my $sp (@list_of_paths){
 	$indx += 1;
 }
 
+
+print_paths($feff,\@list_of_paths,0,9);
+
 # foreach my $sp (@list_of_paths[0..1]){
 	# printf "\n%-4s %-8s %-8s %-16s %-5s\n", $indx, $sp -> beta, $sp -> degeneracies,$sp -> heapvalue, $sp -> eta;	
 	# my @beta = $sp -> eta;
@@ -245,20 +248,16 @@ foreach my $sp (@list_of_paths){
 	# }
 # }
 sub print_paths{
-	print "***** Defined Parameters List ******\n";
-	printf "%-7s %-8s %-8s %-16s %s\n", '#', 'degen', 'Reff', 'Sc. Path', 'Rank', 'Legs','type';
-	my @gds = @{$_[0]};
-	for my $i (0 .. $#gds) {	
-		my $x = $gds[$i];
-		my $gds_name = $x -> name;
-		my $gds_type = $x -> gds;
-		my $gds_value = $x -> mathexp;
-		my $gds_note = $x -> note;
-		printf "%-7s %-8s %-8s %-16s %s\n", $i, $gds_name, $gds_type, , $gds_value, $gds_note;
-	}
+	my $feff_data = $_[0];
+	my @paths_list = @{$_[1]};
+	my $from_p = $_[2];
+	my $to_p = $_[3];
+	printf "%-4s %-8s %-8s %-20s %-5s %-5s %-18s\n", '#', 'degen', 'Reff', 'Sc. Path', 'I', 'Legs','type'; 
 	$indx = 0;
-	foreach my $sp (@list_of_paths[0..17]){
-		printf " %-4s  %-8s %-8s %-16s %s \t %s \t %s \n", $indx, $sp -> n, $sp -> fuzzy,$sp -> weight, $sp -> nleg, $sp -> Type;
+	foreach my $sp (@paths_list[$from_p..$to_p]){
+		my $this = Demeter::Path->new(parent => $feff,
+				sp     => $sp);
+		printf "%-4s %-8s %-8s %-20s %-5s %-5s %-18s\n", $indx, $sp -> n, $sp -> fuzzy, $this->label,$sp -> weight, $sp -> nleg, $sp -> Type;
 		$indx += 1;
 	}
 }
