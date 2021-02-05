@@ -215,20 +215,44 @@ sub select_paths{
 	my $option =0;
 	while ($option != 4){
 		print "************************************************************\n";
-		print_paths($feff, \@sp, \@sel_ids, 0, 9);
 		# need to print selected paths
 		print_selected_paths(\@paths, 0, 9);
 		print "Options:\n";
-		print "1) edit parameter\n";
-		print "2) add parameter\n";
-		print "3) delete parameter\n";
+		print "1) edit selected paths\n";
+		print "2) add path\n";
+		print "3) delete path\n";
 		print "4) return\n";
 		print "Your selection (1-4): ";
 		$option = <STDIN>;
+		if ($option == 1){
+			print "edit selected paths\n";
+			print "path number:";
+			
+			
+		}
+		elsif ($option == 2){
+			print "add paths\n";
+			print " ******* FEFF Paths ********* ";
+			print_paths($feff, \@sp, \@sel_ids, 0, 9);
+			print "path number:";
+			
+		}
+		elsif ($option == 3){
+			print "delete selected path\n";
+			print "path number:";
+			
+		}
+		elsif ($option == 4){
+			print "Return\n";
+			foreach my $p (@paths) {
+				$p->sp->cleanup(0);
+			};
+		}
+		else{
+			print "invalid option";
+		}
+
 	}
-	foreach my $p (@paths) {
-	  $p->sp->cleanup(0);
-	};
 	return @paths;
 }
 
