@@ -211,10 +211,11 @@ sub select_paths{
 					  delr   => 'alpha*reff',
 					  sigma2 => 'ss*4'
 					 ));
+	my @sel_ids = get_selected_paths_ids(\@paths);
 	my $option =0;
 	while ($option != 4){
 		print "************************************************************\n";
-		print_paths($feff, \@sp, 0, 9);
+		print_paths($feff, \@sp, \@sel_ids, 0, 9);
 		# need to print selected paths
 		print_selected_paths(\@paths, 0, 9);
 		print "Options:\n";
@@ -231,17 +232,28 @@ sub select_paths{
 	return @paths;
 }
 
+# print feff paths 
+#  - needs feff data, paths list, from and to.
+#  - an array of ids for previously selected paths
+#  - the ids are nkey (alternatively could use string) 
 sub print_paths{
 	my $feff_data = $_[0];
 	my @paths_list = @{$_[1]};
-	my $from_p = $_[2];
-	my $to_p = $_[3];
-	printf "%-3s %-6s %-7s %-30s %-3s %-4s %-18s\n", '#', 'degen', 'Reff', 'Sc. Path', 'I', 'Legs','type'; 
+	my @sel_path_ids = @{$_[2]};
+	my $from_p = $_[3];
+	my $to_p = $_[4];
+	printf "%-3s %-5s %-6s %-7s %-30s %-3s %-4s %-18s\n", '#','Selct.', 'degen', 'Reff', 'Sc. Path', 'I', 'Legs','type'; 
 	my $indx = 0;
 	foreach my $sp (@paths_list[$from_p..$to_p]){
 		my $this = Demeter::Path->new(parent => $feff_data,
 				sp     => $sp);
-		printf "%-3s %-6s %-7s %-30s %-3s %-4s %-18s\n", $indx, $sp -> n, $sp -> fuzzy, $this->name,$sp -> weight, $sp -> nleg, $sp -> Type;
+		my $p_id = $sp -> nkey;
+		my $selected = "";
+		if ($p_id ~~ @sel_path_ids){
+			$selected = "true";
+		}
+		
+		printf "%-3s %-5s %-6s %-7s %-30s %-3s %-4s %-18s\n", $indx, $selected, $sp -> n, $sp -> fuzzy, $this->name,$sp -> weight, $sp -> nleg, $sp -> Type;
 		$indx += 1;
 	}
 }
@@ -256,6 +268,16 @@ sub print_selected_paths{
 		printf "%-3s %-27s %-10s %-10s %-10s %-10s\n", $indx, $s_path -> label, $s_path -> s02, $s_path -> e0 ,$s_path -> delr, $s_path -> sigma2, $s_path -> sp ;
 		$indx += 1;
 	}
+}
+
+sub get_selected_paths_ids{
+	my @paths_list = @{$_[0]};
+	my @path_ids = ();
+	foreach my $s_path (@paths_list){#[$from_p..$to_p]){
+		my $sp = $s_path -> sp;
+		push @path_ids, $sp-> nkey;
+	}
+	return @path_ids
 }
 
 sub run_fit{
