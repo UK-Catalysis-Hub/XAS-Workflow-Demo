@@ -215,8 +215,9 @@ sub select_paths{
 	my $option =0;
 	while ($option != 4){
 		print "************************************************************\n";
+		print_selected_paths(\@paths);
 		# need to print selected paths
-		print_selected_paths(\@paths, 0, 9);
+		print "Select paths\n";
 		print "Options:\n";
 		print "1) edit selected paths\n";
 		print "2) add path\n";
@@ -227,8 +228,28 @@ sub select_paths{
 		if ($option == 1){
 			print "edit selected paths\n";
 			print "path number:";
-			
-			
+			my $p_num = <STDIN>;
+			print "type new value or enter to keep current";
+			printf "Amplitude factor S0^2(current %s):", $paths[$p_num] -> s02;
+			my $new_s02 = <STDIN>;
+			chomp $new_s02;
+			if (length($new_s02) < 1) {$new_s02 = $paths[$p_num] -> s02;};
+			printf "Energy shift Delta E0 (current %s):", $paths[$p_num] -> e0;
+			my $new_E0 = <STDIN>;
+			chomp $new_E0;
+			if (length($new_E0) < 1) {$new_E0 = $paths[$p_num]-> e0;};
+			printf "Half path length adjustment Delta R (current %s):", $paths[$p_num]-> delr;
+			my $new_dR = <STDIN>;
+			chomp $new_dR;
+			if (length($new_dR) < 1) {$new_dR = $paths[$p_num]-> delr;};
+			printf "Mean square displacement Sigma^2 (current %s):", $paths[$p_num]-> sigma2;
+			my $new_sig2 = <STDIN>;
+			chomp $new_sig2;
+			printf "Include in fit (current %s) valid [1,0]:", $paths[$p_num]-> include;
+			my $new_include = <STDIN>;
+			chomp $new_include;
+			if (length($new_include) < 1) {$new_include = $paths[$p_num]-> include;};
+			$paths[$p_num] -> set(s02 => $new_s02, e0	 => $new_E0, delr => $new_dR, sigma2 => $new_sig2, include => $new_include);
 		}
 		elsif ($option == 2){
 			print "add paths\n";
@@ -284,12 +305,10 @@ sub print_paths{
 
 sub print_selected_paths{
 	my @paths_list = @{$_[0]};
-	my $from_p = $_[1];
-	my $to_p = $_[2];
-	printf "%-3s %-27s %-10s %-10s %-10s %-10s %-10s\n", '#', 'Sc. Path', 's0^2', 'Delta e0', 'Delta R', 'sigma^2', 'sp_label'; 
+	printf "%-3s %-27s %-10s %-10s %-10s %-10s %-10s\n", '#', 'Sc. Path', 's0^2', 'Delta e0', 'Delta R', 'sigma^2', 'include'; 
 	my $indx = 0;
-	foreach my $s_path (@paths_list){#[$from_p..$to_p]){
-		printf "%-3s %-27s %-10s %-10s %-10s %-10s\n", $indx, $s_path -> label, $s_path -> s02, $s_path -> e0 ,$s_path -> delr, $s_path -> sigma2, $s_path -> sp ;
+	foreach my $s_path (@paths_list){
+		printf "%-3s %-27s %-10s %-10s %-10s %-10s %-10s\n", $indx, $s_path -> label, $s_path -> s02, $s_path -> e0 ,$s_path -> delr, $s_path -> sigma2, $s_path -> include ;
 		$indx += 1;
 	}
 }
