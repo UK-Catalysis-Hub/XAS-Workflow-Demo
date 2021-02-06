@@ -285,6 +285,8 @@ sub select_paths{
 		elsif ($option == 3){
 			print "delete selected path\n";
 			print "path number:";
+			my $d_num = <STDIN>;
+			splice(@paths, $d_num, 1)
 		}
 		elsif ($option == 4){
 			print "Return\n";
