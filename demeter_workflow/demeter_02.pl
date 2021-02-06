@@ -256,12 +256,35 @@ sub select_paths{
 			print " ******* FEFF Paths ********* ";
 			print_paths($feff, \@sp, \@sel_ids, 0, 9);
 			print "path number:";
-			
+			my $p_num = <STDIN>;
+			print "values for path variables";
+			printf "Amplitude factor S0^2:";
+			my $new_s02 = <STDIN>;
+			chomp $new_s02;
+			if (length($new_s02) < 1) {$new_s02 = $paths[$p_num] -> s02;};
+			printf "Energy shift Delta E0:";
+			my $new_E0 = <STDIN>;
+			chomp $new_E0;
+			if (length($new_E0) < 1) {$new_E0 = $paths[$p_num]-> e0;};
+			printf "Half path length adjustment Delta R:";
+			my $new_dR = <STDIN>;
+			chomp $new_dR;
+			if (length($new_dR) < 1) {$new_dR = $paths[$p_num]-> delr;};
+			printf "Mean square displacement Sigma^2:";
+			my $new_sig2 = <STDIN>;
+			chomp $new_sig2;
+			push(@paths, Demeter::Path -> new(sp     => $sp[$p_num],
+				  data   => $data,
+				  s02    => $new_s02,
+				  e0     => $new_E0,
+				  delr   => $new_dR,
+				  sigma2 => $new_sig2
+				 ));
+
 		}
 		elsif ($option == 3){
 			print "delete selected path\n";
 			print "path number:";
-			
 		}
 		elsif ($option == 4){
 			print "Return\n";
