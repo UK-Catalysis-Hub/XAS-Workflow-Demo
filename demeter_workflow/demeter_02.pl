@@ -6,6 +6,14 @@ sub clear_screen{
 	system $^O eq 'MSWin32' ? 'cls' : 'clear';
 }
 
+sub save_artemis{
+	my $file_name = shift;
+	my $fit_data = shift;
+	# Save as athena project
+	#   from https://github.com/bruceravel/demeter/blob/411cf8d2b28819bd7a21a29869c7ad0dce79a8ac/documentation/DPG/output.rst
+	#$fit_data->write($file_name, $fit_data);
+}
+	
 sub get_data{
 	my $athena_name =  shift;
 	#open athena project and get data
@@ -36,33 +44,43 @@ sub get_feff{
 	return $feff
 }
 
+sub read_parameters{
+	print "***** Reading parameters ******\n";
+	my @gds = @{$_[0]};
+	my $filename = $_[1];
+    print "***** from $filename ******\n";
+	open(FH, '<', $filename) or die $!;
+
+	while(<FH>){
+		my $gds_str = $_;
+		print $gds_str;
+		
+		push (@gds, Demeter::GDS -> simpleGDS( $gds_str ));
+	};
+	close(FH);
+	return @gds;
+}
+
 # set guess parameters for amplitude, Delta E0, Delta R and sigma square to be 
 # assigned to paths
-
 sub set_parameters{
 	# pass a reference to the array, then dereference it in the subroutine
 	# https://www.perlmonks.org/?node_id=439926
 	my (@gds) = @{$_[0]};
 	
-	# The default parameters to be set according to the textbook example
-	@gds =  (Demeter::GDS -> new(gds => 'guess', name => 'alpha', mathexp => 0),
-			Demeter::GDS -> new(gds => 'guess', name => 'amp',   mathexp => 1),
-			Demeter::GDS -> new(gds => 'guess', name => 'enot',  mathexp => 0),
-			Demeter::GDS -> new(gds => 'guess', name => 'ss',    mathexp => 0.003),
-			Demeter::GDS -> new(gds => 'guess', name => 'ss2',   mathexp => 0.003),
-			Demeter::GDS -> new(gds => 'def',   name => 'ss3',   mathexp => 'ss2'),
-			Demeter::GDS -> new(gds => 'guess', name => 'ssfe',  mathexp => 0.003),
-		);
+	# The parameters to be set
+	@gds = ();
 	
 	my $option =0;
-	while ($option != 4){
+	while ($option != 5){
 		print "************************************************************\n";
 		print_parameters(\@gds);
 		print "Options:\n";
 		print "1) edit parameter\n";
 		print "2) add parameter\n";
 		print "3) delete parameter\n";
-		print "4) return\n";
+		print "4) read parameters from file\n";
+		print "5) return\n";
 		print "Your selection (1-4): ";
 		$option = <STDIN>;
 		if ($option == 1){
@@ -120,6 +138,13 @@ sub set_parameters{
 			my $d_num = <STDIN>;
 			printf "Deleting %s: %s %s %s %s", $gds[$d_num]->name, $gds[$d_num]->gds, $gds[$d_num]->mathexp,$gds[$d_num]->note;
 			splice(@gds, $d_num, 1)
+		}
+		elsif ($option  == 4){
+			print "read from file";
+			print "file name:";
+			my $parameters_file = <STDIN>;
+			chomp $parameters_file;
+			@gds = read_parameters(\@gds, $parameters_file);
 		}
 		else {
 			print "invalid selection\n";
@@ -391,6 +416,7 @@ sub run_fit{
 sub select_task{
 	my $data = shift;
 	my $feff = shift;
+	my $artemis_f = shift;
 	my @gds_parameters = ();
 	my @selected_paths = ();
 	my $curve_fit = undef;
@@ -430,7 +456,7 @@ sub select_task{
 		}
 		elsif ($option == 4){
 			print "Save project and exit\n";
-			#save_artemis($athena_f, $data);
+			save_artemis($artemis_f, $curve_fit);
 		}
 		else {
 			print "invalid selection\n";
@@ -482,7 +508,7 @@ sub start{
 	my $feff_data = get_feff($crystal_file);
 	
 	# loop on the select path, set parameters, and run fit
-	select_task($athena_data, $feff_data);
+	select_task($athena_data, $feff_data, $artemis_file);
 	
 	exit;
 }
