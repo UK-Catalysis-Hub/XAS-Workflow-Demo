@@ -1,0 +1,9 @@
+1, 'amp', 'enot', 'alpha*reff', 'ss', 1
+7, 'amp', 'enot', 'alpha*reff', 'ss2', 1
+13, 'amp', 'enot', 'alpha*reff', 'ss3', 1
+15, 'amp', 'enot', 'alpha*reff', 'ssfe', 1
+1010, 'amp', 'enot', 'alpha*reff', 'ss * 1.5', 1
+1015, 'amp', 'enot', 'alpha*reff', 'ss/2 + ssfe', 1
+1005, 'amp', 'enot', 'alpha*reff', 'ss*2', 1
+1000005, 'amp', 'enot', 'alpha*reff', 'ss*2', 1
+1000001, 'amp', 'enot', 'alpha*reff', 'ss*4', 1

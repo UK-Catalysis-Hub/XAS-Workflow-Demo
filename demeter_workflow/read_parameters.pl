@@ -33,5 +33,5 @@ sub print_parameters{
 }
 
 my @gds = ();
-@gds = set_parameters(\@gds, 'FeS2_gds.gds');
-print_parameters(\@gds)
+@gds = set_parameters(\@gds, 'FeS2.gds');
+print_parameters(\@gds);

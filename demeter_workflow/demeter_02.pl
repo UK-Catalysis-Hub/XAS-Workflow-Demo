@@ -337,7 +337,7 @@ sub print_paths{
 	my @sel_path_ids = @{$_[2]};
 	my $from_p = $_[3];
 	my $to_p = $_[4];
-	printf "%-3s %-5s %-6s %-7s %-30s %-3s %-4s %-18s\n", '#','Selct.', 'degen', 'Reff', 'Sc. Path', 'I', 'Legs','type'; 
+	printf "%-2s%-5s %-6s %-7s %-30s %-3s %-4s %-18s\n", '#','Selct.', 'degen', 'Reff', 'Sc. Path', 'I', 'Legs','type', ''; 
 	my $indx = 0;
 	foreach my $sp (@paths_list[$from_p..$to_p]){
 		my $this = Demeter::Path->new(parent => $feff_data,
@@ -347,18 +347,17 @@ sub print_paths{
 		if ($p_id ~~ @sel_path_ids){
 			$selected = "true";
 		}
-		
-		printf "%-3s %-5s %-6s %-7s %-30s %-3s %-4s %-18s\n", $indx, $selected, $sp -> n, $sp -> fuzzy, $this->name,$sp -> weight, $sp -> nleg, $sp -> Type;
+		printf "%-2s%-5s %-6s %-7s %-30s %-3s %-4s %-18s\n", $indx, $selected, $sp -> n, $sp -> fuzzy, $this->name,$sp -> weight, $sp -> nleg, $sp -> Type;
 		$indx += 1;
 	}
 }
 
 sub print_selected_paths{
 	my @paths_list = @{$_[0]};
-	printf "%-3s %-27s %-10s %-10s %-10s %-10s %-10s\n", '#', 'Sc. Path', 's0^2', 'Delta e0', 'Delta R', 'sigma^2', 'include'; 
+	printf "%-2s%-27s %-10s %-10s %-10s %-10s %-10s %-10s\n", '#', 'Sc. Path', 's0^2', 'Delta e0', 'Delta R', 'sigma^2', 'include', 'sp index'; 
 	my $indx = 0;
 	foreach my $s_path (@paths_list){
-		printf "%-3s %-27s %-10s %-10s %-10s %-10s %-10s\n", $indx, $s_path -> label, $s_path -> s02, $s_path -> e0 ,$s_path -> delr, $s_path -> sigma2, $s_path -> include ;
+		printf "%-2s%-27s %-10s %-10s %-10s %-10s %-10s %-10s\n", $indx, $s_path -> label, $s_path -> s02, $s_path -> e0 ,$s_path -> delr, $s_path -> sigma2, $s_path -> include, $s_path -> sp ->nkey;
 		$indx += 1;
 	}
 }
