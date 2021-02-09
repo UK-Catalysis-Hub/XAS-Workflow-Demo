@@ -36,6 +36,10 @@ sub read_selected{
 		#print @fields;
 		my @list_of_paths = @{$feff->pathlist};
 		foreach my $sp (@list_of_paths){
+			my @a = (1..4);
+			for my $i (@a){
+				$fields[$i] =~ s/[\p{Pi}\p{Pf}'"]//g
+			}
 			if ($fields[0] == $sp -> nkey){
 				my $this = Demeter::Path -> new(sp => $sp,
 				  data   => $data,

@@ -167,78 +167,54 @@ sub print_parameters{
 	}
 }
 
+sub read_selected{
+	print "***** Reading selected paths ******\n";
+	my $data = $_[0];
+	my $feff = $_[1];
+	my @sel_paths = @{$_[2]};
+	my $filename = $_[3];
+	print "***** From file $filename ******\n";
+	open(FH, '<', $filename) or die $!;
+	my @fields = ();
+	while(<FH>){
+		my $gds_str = $_;
+		@fields = split "," , $gds_str;
+		my @a = (1..4);
+		for my $i (@a){
+			$fields[$i] =~ s/[\p{Pi}\p{Pf}'"]//g
+		}
+		my @list_of_paths = @{$feff->pathlist};
+		foreach my $sp (@list_of_paths){
+			if ($fields[0] == $sp -> nkey){
+				my $this = Demeter::Path -> new(sp => $sp,
+				  data   => $data,
+				  s02    => $fields[1],
+				  e0     => $fields[2],
+				  delr   => $fields[3],
+				  sigma2 => $fields[4],
+				  include=> ($fields[5]==1),
+				 );
+				push (@sel_paths, $this);
+			};
+		}
+	}
+	my $pars = scalar @sel_paths;
+	print "***** Read $pars paths ******\n";
+	
+	close(FH);
+	return @sel_paths;
+}
+
 sub select_paths{
-	my $feff = shift;
-    my $data = shift;
+	my $feff = $_[0];
+    my $data = $_[1];
+	my @paths = @{$_[2]};
 	my @sp   = @{$feff->pathlist};
     # select paths and assign parameter variables
-	my @paths = ();
-	push(@paths, Demeter::Path -> new(sp     => $sp[0],
-					  data   => $data,
-					  s02    => 'amp',
-					  e0     => 'enot',
-					  delr   => 'alpha*reff',
-					  sigma2 => 'ss'
-					 ));
-	push(@paths, Demeter::Path -> new(sp     => $sp[1],
-					  data   => $data,
-					  s02    => 'amp',
-					  e0     => 'enot',
-					  delr   => 'alpha*reff',
-					  sigma2 => 'ss2'
-					 ));
-	push(@paths, Demeter::Path -> new(sp     => $sp[2],
-					  data   => $data,
-					  s02    => 'amp',
-					  e0     => 'enot',
-					  delr   => 'alpha*reff',
-					  sigma2 => 'ss3'
-					 ));
-	push(@paths, Demeter::Path -> new(sp     => $sp[4],
-					  data   => $data,
-					  s02    => 'amp',
-					  e0     => 'enot',
-					  delr   => 'alpha*reff',
-					  sigma2 => 'ssfe'
-					 ));
-	push(@paths, Demeter::Path -> new(sp     => $sp[6],
-					  data   => $data,
-					  s02    => 'amp',
-					  e0     => 'enot',
-					  delr   => 'alpha*reff',
-					  sigma2 => 'ss*1.5'
-					 ));
-	push(@paths, Demeter::Path -> new(sp     => $sp[7],
-					  data   => $data,
-					  s02    => 'amp',
-					  e0     => 'enot',
-					  delr   => 'alpha*reff',
-					  sigma2 => 'ss/2 + ssfe'
-					 ));
-	push(@paths, Demeter::Path -> new(sp     => $sp[13],
-					  data   => $data,
-					  s02    => 'amp',
-					  e0     => 'enot',
-					  delr   => 'alpha*reff',
-					  sigma2 => 'ss*2'
-					 ));
-	push(@paths, Demeter::Path -> new(sp     => $sp[14],
-					  data   => $data,
-					  s02    => 'amp',
-					  e0     => 'enot',
-					  delr   => 'alpha*reff',
-					  sigma2 => 'ss*2'
-					 ));
-	push(@paths, Demeter::Path -> new(sp     => $sp[15],
-					  data   => $data,
-					  s02    => 'amp',
-					  e0     => 'enot',
-					  delr   => 'alpha*reff',
-					  sigma2 => 'ss*4'
-					 ));
+	
 	my @sel_ids = get_selected_paths_ids(\@paths);
 	my $option =0;
-	while ($option != 4){
+	while ($option != 5){
 		print "************************************************************\n";
 		print_selected_paths(\@paths);
 		# need to print selected paths
@@ -247,7 +223,8 @@ sub select_paths{
 		print "1) edit selected paths\n";
 		print "2) add path\n";
 		print "3) delete path\n";
-		print "4) return\n";
+		print "4) read selected parameters from file\n";
+		print "5) return\n";
 		print "Your selection (1-4): ";
 		$option = <STDIN>;
 		if ($option == 1){
@@ -314,6 +291,13 @@ sub select_paths{
 			splice(@paths, $d_num, 1)
 		}
 		elsif ($option == 4){
+			print "read selected paths from file";
+			print "file name:";
+			my $parameters_file = <STDIN>;
+			chomp $parameters_file;
+			@paths = read_selected($data, $feff, \@paths, $parameters_file);
+		}
+		elsif ($option == 5){
 			print "Return\n";
 			foreach my $p (@paths) {
 				$p->sp->cleanup(0);
@@ -443,7 +427,7 @@ sub select_task{
 		}
 		elsif ($option  == 2){
 			print "Select paths\n";
-			@selected_paths = select_paths($feff, $data);
+			@selected_paths = select_paths($feff, $data, \@selected_paths);
 		}
 		elsif ($option == 3){
 			print "Run fit\n";
