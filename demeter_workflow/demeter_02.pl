@@ -61,16 +61,65 @@ sub read_parameters{
 	return @gds;
 }
 
+sub add_parameter{
+	my (@gds) = @{$_[0]};
+	print "add parameter";
+	print "type values for new parameter\n";
+	my $add_name = "";
+	while (length($add_name) < 1){	
+		print "name:"; 
+		$add_name = <STDIN>;
+		chomp $add_name;
+	}
+	my $new_type = "";
+	while (length($new_type) < 1 ){
+		print "type valid: [guess, def, skip]:";
+		$new_type = <STDIN>;
+		chomp $new_type;
+	}
+	my $new_value = "";
+	while (length($new_value) < 1){
+		print "value (valid: [value or math expression]):";
+		$new_value = <STDIN>;
+		chomp $new_value;
+	}
+	print "note";
+	my $new_note = <STDIN>;
+	chomp $new_note;
+	push(@gds, (Demeter::GDS -> new(name => $add_name, gds	 => $new_type, mathexp => $new_value, note => $new_note)));
+	return @gds;
+}
+
+sub edit_parameter{
+	my $par = $_[0];
+	print "type new value or enter to keep current";
+	printf "name (current %s):", $par->name;
+	my $new_name = <STDIN>;
+	chomp $new_name;
+	if (length($new_name) < 1) {$new_name = $par->name}
+	printf "type (current %s) valid: [guess, def, skip]:", $par->gds;
+	my $new_type = <STDIN>;
+	chomp $new_type;
+	if (length($new_type) < 1) {$new_type = $par->gds}
+	printf "value (current %s) valid: [value or expression]:", $par->mathexp;
+	my $new_value = <STDIN>;
+	chomp $new_value;
+	if (length($new_value) < 1) {$new_value = $par->mathexp}
+	printf "note (current %s):", $par->note;
+	my $new_note = <STDIN>;
+	chomp $new_note;
+	if (length($new_note) < 1) {$new_note = $par->note}
+	$par -> set(name => $new_name, gds	 => $new_type, mathexp => $new_value, note => $new_note);
+}
+
 # set guess parameters for amplitude, Delta E0, Delta R and sigma square to be 
 # assigned to paths
 sub set_parameters{
 	# pass a reference to the array, then dereference it in the subroutine
 	# https://www.perlmonks.org/?node_id=439926
 	my (@gds) = @{$_[0]};
-	
 	# The parameters to be set
 	@gds = ();
-	
 	my $option =0;
 	while ($option != 5){
 		print "************************************************************\n";
@@ -81,56 +130,17 @@ sub set_parameters{
 		print "3) delete parameter\n";
 		print "4) read parameters from file\n";
 		print "5) return\n";
-		print "Your selection (1-4): ";
+		print "Your selection (1-5): ";
 		$option = <STDIN>;
 		if ($option == 1){
 			print "edit parameter";
 			print "parameter number:";
 			my $p_num = <STDIN>;
-			print "type new value or enter to keep current";
-			printf "name (current %s):", $gds[$p_num]->name;
-			my $new_name = <STDIN>;
-			chomp $new_name;
-			if (length($new_name) < 1) {$new_name = $gds[$p_num]->name}
-			printf "type (current %s) valid: [guess, def, skip]:", $gds[$p_num]->gds;
-			my $new_type = <STDIN>;
-			chomp $new_type;
-			if (length($new_type) < 1) {$new_type = $gds[$p_num]->gds}
-			printf "value (current %s) valid: [value or expression]:", $gds[$p_num]->mathexp;
-			my $new_value = <STDIN>;
-			chomp $new_value;
-			if (length($new_value) < 1) {$new_value = $gds[$p_num]->mathexp}
-			printf "note (current %s):", $gds[$p_num]->note;
-			my $new_note = <STDIN>;
-			chomp $new_note;
-			if (length($new_note) < 1) {$new_note = $gds[$p_num]->note}
-			$gds[$p_num] -> set(name => $new_name, gds	 => $new_type, mathexp => $new_value, note => $new_note);
+			my $par = $gds[$p_num];
+			edit_parameter($par);
 		}
 		elsif ($option  == 2){
-			print "add parameter";
-			print "type values for new parameter";
-			my $add_name = "";
-			while (length($add_name) < 1){
-				print "name:"; 
-				$add_name = <STDIN>;
-				chomp $add_name;
-			}
-			my $new_type = "";
-			while (length($new_type) < 1){
-				print "type valid: [guess, def, skip]:";
-			    $new_type = <STDIN>;
-			    chomp $new_type;
-			}
-			my $new_value = "";
-			while (length($new_value) < 1){
-				print "value (valid: [value or math expression]):";
-				$new_value = <STDIN>;
-			    chomp $new_value;
-			}
-			print "note";
-			my $new_note = <STDIN>;
-			chomp $new_note;
-			push(@gds, (Demeter::GDS -> new(name => $add_name, gds	 => $new_type, mathexp => $new_value, note => $new_note)));
+			@gds = add_parameter(\@gds);
 		}
 		elsif ($option  == 3){
 			print "delete parameter";
@@ -255,7 +265,7 @@ sub select_paths{
 		}
 		elsif ($option == 2){
 			print "add paths\n";
-			print " ******* FEFF Paths ********* ";
+			print "******* FEFF Paths *********\n";
 			print_paths($feff, \@sp, \@sel_ids, 0, 9);
 			print "path number:";
 			my $p_num = <STDIN>;
