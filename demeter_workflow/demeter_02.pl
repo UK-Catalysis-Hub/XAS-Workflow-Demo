@@ -117,9 +117,7 @@ sub edit_parameter{
 sub set_parameters{
 	# pass a reference to the array, then dereference it in the subroutine
 	# https://www.perlmonks.org/?node_id=439926
-	my (@gds) = @{$_[0]};
-	# The parameters to be set
-	@gds = ();
+	my @gds = @{$_[0]};
 	my $option =0;
 	while ($option != 5){
 		print "************************************************************\n";
@@ -210,7 +208,7 @@ sub read_selected{
 	}
 	my $pars = scalar @sel_paths;
 	print "***** Read $pars paths ******\n";
-	
+	print_selected_paths(\@sel_paths);
 	close(FH);
 	return @sel_paths;
 }
@@ -235,7 +233,7 @@ sub select_paths{
 		print "3) delete path\n";
 		print "4) read selected parameters from file\n";
 		print "5) return\n";
-		print "Your selection (1-4): ";
+		print "Your selection (1-5): ";
 		$option = <STDIN>;
 		if ($option == 1){
 			print "edit selected paths\n";
@@ -316,7 +314,6 @@ sub select_paths{
 		else{
 			print "invalid option";
 		}
-
 	}
 	return @paths;
 }
@@ -406,12 +403,60 @@ sub run_fit{
 	return $fit;
 }
 
+# Attempt to retrieve vatiables and selected paths from
+# artemis files
+# $artemis_f.gds : parameters file
+# $artemis_f.csv : selected paths file
+sub get_artemis_parameters{
+	my @gds = @{$_[0]};
+	my @s_paths = @{$_[1]};
+	my $data = $_[2];
+	my $feff = $_[3];
+	my $artemis_file = $_[4];
+	my $gds_file = "$artemis_file.gds";
+	if (-e $gds_file) {
+		print "reading parameters from $gds_file";
+		@gds = read_parameters(\@gds, $gds_file);
+	}
+	else {
+		print "could not find parameters file $gds_file \n";
+	}
+	return @gds;
+}
+# Attempt to retrieve vatiables and selected paths from
+# artemis files
+# $artemis_f.gds : parameters file
+# $artemis_f.csv : selected paths file
+sub get_artemis_sel_sp{
+	my @gds = @{$_[0]};
+	my @s_paths = @{$_[1]};
+	my $data = $_[2];
+	my $feff = $_[3];
+	my $artemis_file = $_[4];
+	my $ssp_file = "$artemis_file.csv";
+	if (-e $ssp_file) {
+		print "reading paths from $ssp_file";
+		@s_paths = read_selected($data, $feff, \@s_paths, $ssp_file);
+	}
+	else {
+		print "could not find paths file $ssp_file \n";
+	}
+	return @s_paths;
+}
+
 sub select_task{
 	my $data = shift;
 	my $feff = shift;
 	my $artemis_f = shift;
+	
 	my @gds_parameters = ();
 	my @selected_paths = ();
+	# If artemis file(s) exist retrieve them to set vatiables and selected paths
+	# $artemis_f.gds : parameters file
+	# $artemis_f.csv : selected paths file
+	@gds_parameters = get_artemis_parameters(\@gds_parameters, \@selected_paths, $data, $feff, $artemis_f);
+	@selected_paths = get_artemis_sel_sp(\@gds_parameters, \@selected_paths, $data, $feff, $artemis_f);
+	
 	my $curve_fit = undef;
 	# loop on the following three subtasks
 	# 3. Select paths
@@ -462,7 +507,7 @@ sub start{
 	print "Fit to FeS2 data using Demeter ", $Demeter::VERSION, $/;
 	my $athena_file = "FeS2_dmtr.prj";
 	my $crystal_file = "FeS2.inp";
-    my $artemis_file = "FeS2_dmtr.fpj";
+    my $artemis_file = "FeS2_dmtr";
 
 	# if no argument passed, show warning and use defaults
 	if (!@ARGV or $#ARGV < 2) {
