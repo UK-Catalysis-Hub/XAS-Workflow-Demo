@@ -16,7 +16,7 @@ sub save_artemis{
 	print_parameters(@gds);
 	write_parameters(@gds, $file_name);
 	my @ssp = $fit_data -> paths;
-	print_selected_paths(@ssp);
+	write_selected_paths(@ssp, $file_name);
 	<STDIN>;
 }
 	
@@ -446,9 +446,8 @@ sub get_artemis_sel_sp{
 	return @s_paths;
 }
 
+# write parameters to file
 sub write_parameters{
-	print "***** Defined Parameters List ******\n";
-	printf "%-7s %-8s %-8s %-16s %s\n", 'N', 'Name', 'type', 'value', 'note';
 	my (@gds) = @{$_[0]};
 	my $artemis_file = $_[1];
 	my $gds_file = "$artemis_file-01.gds";
@@ -460,6 +459,24 @@ sub write_parameters{
 		my $gds_value = $x -> mathexp;
 		my $gds_note = $x -> note;
 		print {$out} "$gds_type $gds_name = $gds_value\n";
+	}
+	close $out;
+}
+
+sub write_selected_paths{	
+	my @paths_list = @{$_[0]};
+	my $artemis_file = $_[1];
+	my $ssp_file = "$artemis_file-01.csv";
+	open my $out, '>:encoding(UTF-8)', $ssp_file;	
+	foreach my $s_path (@paths_list){
+		my $sp_id = $s_path ->sp->nkey;
+		my $sp_s02 = $s_path -> s02;
+		chomp $sp_s02;
+		my $sp_e0 = $s_path -> e0;
+		my $sp_delr = $s_path -> delr;
+		my $sp_sigma2 = $s_path -> sigma2;
+		my $sp_include = $s_path -> include;
+		print {$out} "$sp_id,'$sp_s02','$sp_e0','$sp_delr','$sp_sigma2',$sp_include\n";
 	}
 	close $out;
 }
@@ -570,5 +587,6 @@ sub start{
 	
 	exit;
 }
-
+# run from command line with:
+# perl demeter_02.pl FeS2_dmtr.prj FeS2.inp FeS2_dmtr
 start();
