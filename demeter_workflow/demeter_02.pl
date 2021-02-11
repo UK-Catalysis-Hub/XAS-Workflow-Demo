@@ -12,6 +12,12 @@ sub save_artemis{
 	# Save as athena project
 	#   from https://github.com/bruceravel/demeter/blob/411cf8d2b28819bd7a21a29869c7ad0dce79a8ac/documentation/DPG/output.rst
 	#$fit_data->write($file_name, $fit_data);
+	my @gds = $fit_data -> gds;
+	print_parameters(@gds);
+	write_parameters(@gds, $file_name);
+	my @ssp = $fit_data -> paths;
+	print_selected_paths(@ssp);
+	<STDIN>;
 }
 	
 sub get_data{
@@ -368,7 +374,7 @@ sub run_fit{
 	my @paths = @{$_[1]};
 	my @gds = @{$_[2]};
 	my $fit = undef;
-	
+
 	my $len = scalar @gds; 
     print "length of parameters: $len\n";
 	if ($len < 1) {
@@ -409,10 +415,7 @@ sub run_fit{
 # $artemis_f.csv : selected paths file
 sub get_artemis_parameters{
 	my @gds = @{$_[0]};
-	my @s_paths = @{$_[1]};
-	my $data = $_[2];
-	my $feff = $_[3];
-	my $artemis_file = $_[4];
+	my $artemis_file = $_[1];
 	my $gds_file = "$artemis_file.gds";
 	if (-e $gds_file) {
 		print "reading parameters from $gds_file";
@@ -428,11 +431,10 @@ sub get_artemis_parameters{
 # $artemis_f.gds : parameters file
 # $artemis_f.csv : selected paths file
 sub get_artemis_sel_sp{
-	my @gds = @{$_[0]};
-	my @s_paths = @{$_[1]};
-	my $data = $_[2];
-	my $feff = $_[3];
-	my $artemis_file = $_[4];
+	my @s_paths = @{$_[0]};
+	my $data = $_[1];
+	my $feff = $_[2];
+	my $artemis_file = $_[3];
 	my $ssp_file = "$artemis_file.csv";
 	if (-e $ssp_file) {
 		print "reading paths from $ssp_file";
@@ -442,6 +444,24 @@ sub get_artemis_sel_sp{
 		print "could not find paths file $ssp_file \n";
 	}
 	return @s_paths;
+}
+
+sub write_parameters{
+	print "***** Defined Parameters List ******\n";
+	printf "%-7s %-8s %-8s %-16s %s\n", 'N', 'Name', 'type', 'value', 'note';
+	my (@gds) = @{$_[0]};
+	my $artemis_file = $_[1];
+	my $gds_file = "$artemis_file-01.gds";
+	open my $out, '>:encoding(UTF-8)', $gds_file;
+	for my $i (0 .. $#gds) {	
+		my $x = $gds[$i];
+		my $gds_name = $x -> name;
+		my $gds_type = $x -> gds;
+		my $gds_value = $x -> mathexp;
+		my $gds_note = $x -> note;
+		print {$out} "$gds_type $gds_name = $gds_value\n";
+	}
+	close $out;
 }
 
 sub select_task{
@@ -454,8 +474,8 @@ sub select_task{
 	# If artemis file(s) exist retrieve them to set vatiables and selected paths
 	# $artemis_f.gds : parameters file
 	# $artemis_f.csv : selected paths file
-	@gds_parameters = get_artemis_parameters(\@gds_parameters, \@selected_paths, $data, $feff, $artemis_f);
-	@selected_paths = get_artemis_sel_sp(\@gds_parameters, \@selected_paths, $data, $feff, $artemis_f);
+	@gds_parameters = get_artemis_parameters(\@gds_parameters, $artemis_f);
+	@selected_paths = get_artemis_sel_sp(\@selected_paths, $data, $feff, $artemis_f);
 	
 	my $curve_fit = undef;
 	# loop on the following three subtasks
