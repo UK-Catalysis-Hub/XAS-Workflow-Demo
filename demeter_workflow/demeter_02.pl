@@ -472,11 +472,16 @@ sub write_selected_paths{
 		my $sp_id = $s_path ->sp->nkey;
 		my $sp_s02 = $s_path -> s02;
 		chomp $sp_s02;
+		# trim from https://perlmaven.com/trim
+		$sp_s02 =~ s/^\s+|\s+$//g;
 		my $sp_e0 = $s_path -> e0;
+		$sp_e0 =~ s/^\s+|\s+$//g;
 		my $sp_delr = $s_path -> delr;
+		$sp_delr =~ s/^\s+|\s+$//g;
 		my $sp_sigma2 = $s_path -> sigma2;
+		$sp_sigma2 =~ s/^\s+|\s+$//g;
 		my $sp_include = $s_path -> include;
-		print {$out} "$sp_id,'$sp_s02','$sp_e0','$sp_delr','$sp_sigma2',$sp_include\n";
+		print {$out} "${sp_id},'${sp_s02}','$sp_e0','$sp_delr','$sp_sigma2',$sp_include\n";
 	}
 	close $out;
 }
