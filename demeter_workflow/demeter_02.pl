@@ -218,17 +218,66 @@ sub read_selected{
 	return @sel_paths;
 }
 
+sub add_path{
+	my $feff = $_[0];
+	my $data = $_[1];
+	my @paths = @{$_[2]};
+	
+	my @sp = @{$feff -> pathlist};
+	my @sel_ids = get_selected_paths_ids(\@paths);
+	my $all_paths = scalar @sp;
+	my $p_num = "";
+	while (not $p_num =~ /[0-9]+|c|C/){
+		clear_screen;
+		print "Adding paths\n";
+		print "******* FEFF Paths *********\n";
+		print_paths($feff, \@sp, \@sel_ids);
+		print "${all_paths} FEFF Calculated paths\n";
+		print "Path number to add ('c' to cancel):";
+		$p_num = <STDIN>;
+	}
+	if ($p_num =~ /[0-9]+/){
+		my $p_id = $sp[$p_num] -> nkey;
+		if (not ($p_id ~~ @sel_ids)){
+			print "values for path variables";
+			printf "Amplitude factor S0^2:";
+			my $new_s02 = <STDIN>;
+			chomp $new_s02;
+			if (length($new_s02) < 1) {$new_s02 = $paths[$p_num] -> s02;};
+			printf "Energy shift Delta E0:";
+			my $new_E0 = <STDIN>;
+			chomp $new_E0;
+			if (length($new_E0) < 1) {$new_E0 = $paths[$p_num]-> e0;};
+			printf "Half path length adjustment Delta R:";
+			my $new_dR = <STDIN>;
+			chomp $new_dR;
+			if (length($new_dR) < 1) {$new_dR = $paths[$p_num]-> delr;};
+			printf "Mean square displacement Sigma^2:";
+			my $new_sig2 = <STDIN>;
+			chomp $new_sig2;
+			push(@paths, Demeter::Path -> new(sp     => $sp[$p_num],
+				  data   => $data,
+				  s02    => $new_s02,
+				  e0     => $new_E0,
+				  delr   => $new_dR,
+				  sigma2 => $new_sig2
+				 ));
+		}
+	}
+	return @paths;
+}
+
 sub select_paths{
 	my $feff = $_[0];
     my $data = $_[1];
 	my @paths = @{$_[2]};
 	my @sp   = @{$feff->pathlist};
     # select paths and assign parameter variables
-	
 	my @sel_ids = get_selected_paths_ids(\@paths);
 	my $option =0;
 	while ($option != 5){
 		print "************************************************************\n";
+		@sel_ids = get_selected_paths_ids(\@paths);
 		print_selected_paths(\@paths);
 		# need to print selected paths
 		print "Select paths\n";
@@ -267,35 +316,47 @@ sub select_paths{
 			$paths[$p_num] -> set(s02 => $new_s02, e0	 => $new_E0, delr => $new_dR, sigma2 => $new_sig2, include => $new_include);
 		}
 		elsif ($option == 2){
-			print "add paths\n";
-			print "******* FEFF Paths *********\n";
-			print_paths($feff, \@sp, \@sel_ids, 0, 9);
-			print "path number:";
-			my $p_num = <STDIN>;
-			print "values for path variables";
-			printf "Amplitude factor S0^2:";
-			my $new_s02 = <STDIN>;
-			chomp $new_s02;
-			if (length($new_s02) < 1) {$new_s02 = $paths[$p_num] -> s02;};
-			printf "Energy shift Delta E0:";
-			my $new_E0 = <STDIN>;
-			chomp $new_E0;
-			if (length($new_E0) < 1) {$new_E0 = $paths[$p_num]-> e0;};
-			printf "Half path length adjustment Delta R:";
-			my $new_dR = <STDIN>;
-			chomp $new_dR;
-			if (length($new_dR) < 1) {$new_dR = $paths[$p_num]-> delr;};
-			printf "Mean square displacement Sigma^2:";
-			my $new_sig2 = <STDIN>;
-			chomp $new_sig2;
-			push(@paths, Demeter::Path -> new(sp     => $sp[$p_num],
-				  data   => $data,
-				  s02    => $new_s02,
-				  e0     => $new_E0,
-				  delr   => $new_dR,
-				  sigma2 => $new_sig2
-				 ));
-
+			@paths = add_path($feff, $data, \@paths);
+			# my $all_paths = scalar @sp;
+			# my $p_num = "";
+			# while (not $p_num =~ /[0-9]+|c|C/){
+				# clear_screen;
+				# printf ("Selection %d\n", $p_num);
+				# print "Adding paths\n";
+				# print "******* FEFF Paths *********\n";
+				# print_paths($feff, \@sp, \@sel_ids);
+				# print "${all_paths} FEFF Calculated paths\n";
+				# print "Path number to add ('c' to cancel):";
+				# $p_num = <STDIN>;
+			# }
+			# if ($p_num =~ /[0-9]+/){
+				# my $p_id = $sp[$p_num] -> nkey;
+				# if (not ($p_id ~~ @sel_ids)){
+					# print "values for path variables";
+					# printf "Amplitude factor S0^2:";
+					# my $new_s02 = <STDIN>;
+					# chomp $new_s02;
+					# if (length($new_s02) < 1) {$new_s02 = $paths[$p_num] -> s02;};
+					# printf "Energy shift Delta E0:";
+					# my $new_E0 = <STDIN>;
+					# chomp $new_E0;
+					# if (length($new_E0) < 1) {$new_E0 = $paths[$p_num]-> e0;};
+					# printf "Half path length adjustment Delta R:";
+					# my $new_dR = <STDIN>;
+					# chomp $new_dR;
+					# if (length($new_dR) < 1) {$new_dR = $paths[$p_num]-> delr;};
+					# printf "Mean square displacement Sigma^2:";
+					# my $new_sig2 = <STDIN>;
+					# chomp $new_sig2;
+					# push(@paths, Demeter::Path -> new(sp     => $sp[$p_num],
+						  # data   => $data,
+						  # s02    => $new_s02,
+						  # e0     => $new_E0,
+						  # delr   => $new_dR,
+						  # sigma2 => $new_sig2
+						 # ));
+				# }
+			# }
 		}
 		elsif ($option == 3){
 			print "delete selected path\n";
@@ -331,11 +392,9 @@ sub print_paths{
 	my $feff_data = $_[0];
 	my @paths_list = @{$_[1]};
 	my @sel_path_ids = @{$_[2]};
-	my $from_p = $_[3];
-	my $to_p = $_[4];
 	printf "%-2s%-5s %-6s %-7s %-30s %-3s %-4s %-18s\n", '#','Selct.', 'degen', 'Reff', 'Sc. Path', 'I', 'Legs','type', ''; 
 	my $indx = 0;
-	foreach my $sp (@paths_list[$from_p..$to_p]){
+	foreach my $sp (@paths_list){
 		my $this = Demeter::Path->new(parent => $feff_data,
 				sp     => $sp);
 		my $p_id = $sp -> nkey;
@@ -343,7 +402,7 @@ sub print_paths{
 		if ($p_id ~~ @sel_path_ids){
 			$selected = "true";
 		}
-		printf "%-2s%-5s %-6s %-7s %-30s %-3s %-4s %-18s\n", $indx, $selected, $sp -> n, $sp -> fuzzy, $this->name,$sp -> weight, $sp -> nleg, $sp -> Type;
+		printf "%-2s%-5s %-6s %-7s %-30s %-3s %-4s %-18s\n", $indx, $selected, $sp -> n, $sp -> fuzzy, $this->name, $sp -> weight, $sp -> nleg, $sp -> Type;
 		$indx += 1;
 	}
 }
@@ -509,7 +568,6 @@ sub select_task{
 	
 	my $option = 0;
 	while ($option != 4){
-		
 		#show_parameters($data);
 		print "************************************************************\n";
 		print "Options:\n";
