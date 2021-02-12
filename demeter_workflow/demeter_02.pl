@@ -13,7 +13,6 @@ sub save_artemis{
 	#   from https://github.com/bruceravel/demeter/blob/411cf8d2b28819bd7a21a29869c7ad0dce79a8ac/documentation/DPG/output.rst
 	#$fit_data->write($file_name, $fit_data);
 	my @gds = $fit_data -> gds;
-	print_parameters(@gds);
 	write_parameters(@gds, $file_name);
 	my @ssp = $fit_data -> paths;
 	write_selected_paths(@ssp, $file_name);
@@ -373,6 +372,8 @@ sub run_fit{
 	my $data = $_[0];
 	my @paths = @{$_[1]};
 	my @gds = @{$_[2]};
+	my $f_out = $_[3];
+	
 	my $fit = undef;
 
 	my $len = scalar @gds; 
@@ -405,7 +406,7 @@ sub run_fit{
 	my $keypress = <STDIN>;
 
 	my ($header, $footer) = ("Fit to FeS2 data", q{});
-	$fit -> logfile("fes2.log", $header, $footer);
+	$fit -> logfile("${f_out}.log", $header, $footer);
 	return $fit;
 }
 
@@ -450,7 +451,7 @@ sub get_artemis_sel_sp{
 sub write_parameters{
 	my (@gds) = @{$_[0]};
 	my $artemis_file = $_[1];
-	my $gds_file = "$artemis_file-01.gds";
+	my $gds_file = "${artemis_file}.gds";
 	open my $out, '>:encoding(UTF-8)', $gds_file;
 	for my $i (0 .. $#gds) {	
 		my $x = $gds[$i];
@@ -466,7 +467,7 @@ sub write_parameters{
 sub write_selected_paths{	
 	my @paths_list = @{$_[0]};
 	my $artemis_file = $_[1];
-	my $ssp_file = "$artemis_file-01.csv";
+my $ssp_file = "${artemis_file}.csv";
 	open my $out, '>:encoding(UTF-8)', $ssp_file;	
 	foreach my $s_path (@paths_list){
 		my $sp_id = $s_path ->sp->nkey;
@@ -481,7 +482,7 @@ sub write_selected_paths{
 		my $sp_sigma2 = $s_path -> sigma2;
 		$sp_sigma2 =~ s/^\s+|\s+$//g;
 		my $sp_include = $s_path -> include;
-		print {$out} "${sp_id},'${sp_s02}','$sp_e0','$sp_delr','$sp_sigma2',$sp_include\n";
+		print {$out} "${sp_id},'${sp_s02}','${sp_e0}','${sp_delr}','${sp_sigma2}',${sp_include}\n";
 	}
 	close $out;
 }
@@ -528,11 +529,7 @@ sub select_task{
 		}
 		elsif ($option == 3){
 			print "Run fit\n";
-			my $len = scalar @gds_parameters; 
-			print "lenth of parameters: $len\n";
-			$len = scalar @selected_paths; 
-			print "lenth of paths: $len\n";
-			$curve_fit = run_fit($data, \@selected_paths, \@gds_parameters);
+			$curve_fit = run_fit($data, \@selected_paths, \@gds_parameters, $artemis_f);
 		}
 		elsif ($option == 4){
 			print "Save project and exit\n";
@@ -580,7 +577,7 @@ sub start{
 		$artemis_file = $ARGV[2];
 	}
 
-	# break out of the process
+	# process break out
 	# 1. Import Athena data (.prj)
 	my $athena_data= get_data($athena_file);
 	
