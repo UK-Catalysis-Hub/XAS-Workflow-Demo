@@ -1,0 +1,5 @@
+guess amp = 1
+guess enot = 0
+skip delr = 0
+guess ss = 0.003
+guess alpha = 0.000

@@ -16,7 +16,6 @@ sub save_artemis{
 	write_parameters(@gds, $file_name);
 	my @ssp = $fit_data -> paths;
 	write_selected_paths(@ssp, $file_name);
-	<STDIN>;
 }
 	
 sub get_data{
@@ -309,6 +308,7 @@ sub select_paths{
 			printf "Mean square displacement Sigma^2 (current %s):", $paths[$p_num]-> sigma2;
 			my $new_sig2 = <STDIN>;
 			chomp $new_sig2;
+			if (length($new_sig2) < 1) {$new_sig2 = $paths[$p_num]-> sigma2;};
 			printf "Include in fit (current %s) valid [1,0]:", $paths[$p_num]-> include;
 			my $new_include = <STDIN>;
 			chomp $new_include;

@@ -1,0 +1,76 @@
+Fit to FeS2 data
+ Name            : FeS2 fit    (wsosx)
+ Description     : fit to fes2_xmu
+ Figure of merit : 0
+ Time of fit     : 2021-02-12T21:11:49
+ Environment     : Demeter 0.9.25 with perl 5.018002 and using Ifeffit 1.2.12 on Windows 8
+ Interface       : Demeter-based perl script
+ Prepared by     : 
+ Contact         :
+
+
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=
+
+
+Independent points          : 16.2568359
+Number of variables         : 4
+Chi-square                  : 30175.9763855
+Reduced chi-square          : 2461.9711432
+R-factor                    : 0.0476283
+Number of data sets         : 1
+
+
+Happiness = 72.37/100             color = #FEB780
+   An R-factor of 0.04763 gives a penalty of 27.62830.
+***** Note: happiness is a semantic parameter and should *****
+*****    NEVER be reported in a publication -- NEVER!    *****
+
+guess parameters:
+  amp                =   0.69982788    # +/-   0.08130624     [1]
+  enot               =   2.33291144    # +/-   1.24682005     [0]
+  ss                 =   0.00450327    # +/-   0.00122413     [0.003]
+  alpha              =   0.00065206    # +/-   0.00358578     [0.000]
+
+Correlations between variables:
+               alpha & enot               -->  0.8953
+                  ss & amp                -->  0.8600
+All other correlations below 0.4
+
+===== Data set >> fes2_xmu << ====================================
+
+: Athena project        = FeS2_dmtr.prj, 1
+: name                  = fes2_xmu
+: k-range               = 3 - 12
+: dk                    = 1
+: k-window              = hanning
+: k-weight              = 1,2,3
+: R-range               = 1.2 - 4.1
+: dR                    = 0.0
+: R-window              = hanning
+: fitting space         = r
+: background function   = no
+: phase correction      = no
+: background removal    = E0: 7117, Rbkg: 1.0, range: [0:14.956], clamps: 0/24, kw: 2
+: epsilon_k by k-weight = 3.402e-004
+: epsilon_r by k-weight = 1.465e-001
+: R-factor by k-weight  = 1 -> 0.03551,  2 -> 0.04743,  3 -> 0.05995
+
+  name        N       S02     sigma^2   e0     delr     Reff     R
+=========================================================================
+ S.1       6.000   0.700   0.00450   2.333  0.00147  2.25660  2.25807
+ S.2       6.000   0.700   0.00450   2.333  0.00225  3.44490  3.44715
+ S.3       2.000   0.700   0.00450   2.333  0.00234  3.59420  3.59654
+ Fe.1     12.000   0.700   0.00450   2.333  0.00249  3.82120  3.82369
+
+  name        ei       third     fourth
+=========================================
+ S.1      0.00000   0.00000   0.00000
+ S.2      0.00000   0.00000   0.00000
+ S.3      0.00000   0.00000   0.00000
+ Fe.1     0.00000   0.00000   0.00000
+
+
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=
+
+
+
