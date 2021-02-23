@@ -18,12 +18,14 @@ The folder also contains a mark-down file describing the workflow tasks (see
 - [Demeter Workflow](https://github.com/scman1/XAS-Workflow-Demo/blob/main/demeter_workflow) 
 (Scripted Workflow): is derived from the 
 [FeS2 worked example](https://github.com/bruceravel/demeter/tree/master/examples/recipes/FeS2). 
-The first part this workflow was developed following examples from the Demeter 
+The first part of this workflow was developed following examples from the Demeter 
 [Programing guide](https://bruceravel.github.io/demeter/documents/DPG/index.html), 
-while the second part is a modified version of the [FeS2 worked example](https://github.com/bruceravel/demeter/tree/master/examples/recipes/FeS2). 
-A mark-down file describing the workflow tasks is located at  
-[README.md](https://github.com/scman1/XAS-Workflow-Demo/blob/main/basic_workflow/README.md).
-
+while the second part is a modified version of the [FeS2 worked example](https://github.com/bruceravel/demeter/tree/master/examples/recipes/FeS2).
+- [Larch Workflow](https://github.com/scman1/XAS-Workflow-Demo/blob/main/larch_workflow) 
+(Scripted Workflow): this workflow is also derived from the 
+[FeS2 worked example](https://github.com/bruceravel/demeter/tree/master/examples/recipes/FeS2). 
+The first part of this workflow was is equivalent to the one created for Demeter above, 
+while the second part is a modified version of the [Larch FeS2 worked example](https://github.com/bruceravel/demeter/tree/master/examples/recipes/FeS2). 
 
 ## Acknowledgements and Funding
 For more details about the of the motivation for the development of the resources

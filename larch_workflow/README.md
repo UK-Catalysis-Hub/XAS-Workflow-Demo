@@ -1,9 +1,9 @@
-# Demeter XAS Workflow
-This folder contains the Demeter (perl) and input files needed to reproduce the
-basic 
+# Larch XAS Workflow
+This folder contains the Larch workflow, consisting of two jupyter notebooks
+(Python 3.6) and input files needed to reproduce the basic 
 [XAS fitting example](https://github.com/bruceravel/XAS-Education/tree/master/Examples/FeS2).
 from Bruce Ravel. The aim of this workflow is to demonstrate that the tasks of 
-the basic workflow can be scripted (automated) producing equivalent results.
+the basic workflow can be scripted using Larch producing equivalent results.
 
 In addition to the documentation, the presentations from Bruce Ravel on XAS 
 processing at Diamond Light Source were also used as reference 
@@ -13,18 +13,16 @@ The first part this workflow was developed following examples from the Demeter
 [Programing guide](https://bruceravel.github.io/demeter/documents/DPG/index.html), 
 while the second part is a modified version of the [FeS2 worked example](https://github.com/bruceravel/demeter/tree/master/examples/recipes/FeS2). 
 
-
-The table below outlines the scripts, tasks, inputs and outputs of the workflow.
-The fists script (demeter_01.pl) perfoms the create athena project and normalise
+The table below outlines the notebooks, tasks, inputs and outputs of the workflow.
+The fists notebook (larch_task01.ipynb.pl) perfoms the create athena project and normalise
 data task. This task  has three subtasks which are implemented in a text 
 inteface.
-The second script (demeter_02.pl) performs the curve fitting. This task consists 
+The second notebook (larch_task01.ipynb.pl) performs the curve fitting. This task consists 
 of eight sub-tasks. Curve fitting is an iterative task in which the researcher 
 needs to look at the results of the initial fit and then adjust the parameters. 
-This is implemented as a loop encompassing tasks  2.4 to 2.8 . A text interface 
-is used for presenting visual feedback in the form of data and diagrams which 
-are intended to help the research in fine tunning the fitting.
-
+This is implemented as a loop encompassing tasks  2.4 to 2.7. 
+The use of notebooks allows presenting visual feedback in the form of data and
+diagrams which can help the research in fine tunning the fitting.
 
 |Script| Task                            | Input                                         | Output
 |------| -------------                   |-------------                                  | -----  
@@ -47,5 +45,3 @@ are intended to help the research in fine tunning the fitting.
 || 2.8. Verify fit results         ||
 || 2.8.1 If not OK revise parameners and refit (go to 2.4)||
 || 2.8.2 If OK Save project and outputs|                                           |File: FeS2_01.fpj
- 
-
