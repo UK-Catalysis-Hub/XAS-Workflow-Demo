@@ -9,7 +9,7 @@ November 2011).
 
 The following table outlines the software, tasks, inputs and outputs. Curve fitting is an iterative process,
 the researcher looks at the results of the initial fit and then adjusts the parameters. This loop happens
-between steps 2.4 and 2.7 and requires presenting visual feedback in the form of data and diagrams which are 
+between steps 2.4 and 2.8 and requires presenting visual feedback in the form of data and diagrams which are 
 used to determine if the fit is adequate.
 
 
@@ -27,10 +27,11 @@ used to determine if the fit is adequate.
 |         |                                 |    enot = 0                                   |
 |         |                                 |    delr = 0                                   |
 |         |                                 |    ss   = 0.003                               |
-|         | 2.5. Run Fit                    |                                               |
-|         | 2.6. Save project               ||
-|         | 2.7. Verify fit results         ||
-|         | 2.7.1 If not OK revise parameners and refit (go to 2.4)||
-|         | 2.7.2 If OK Save project and outputs|                                           |File: FeS2_01.fpj
+|         | 2.5. Select Paths               |                                               |
+|         | 2.6. Run Fit                    |                                               |
+|         | 2.7. Save project               ||
+|         | 2.8. Verify fit results         ||
+|         | 2.8.1 If not OK revise parameners and refit (go to 2.4)||
+|         | 2.8.2 If OK Save project and outputs|                                           |File: FeS2_01.fpj
 		 
 

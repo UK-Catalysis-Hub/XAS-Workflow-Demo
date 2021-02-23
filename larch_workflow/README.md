@@ -20,7 +20,7 @@ inteface.
 The second notebook (larch_task01.ipynb.pl) performs the curve fitting. This task consists 
 of eight sub-tasks. Curve fitting is an iterative task in which the researcher 
 needs to look at the results of the initial fit and then adjust the parameters. 
-This is implemented as a loop encompassing tasks  2.4 to 2.7. 
+This is implemented as a loop encompassing tasks  2.4 to 2.8. 
 The use of notebooks allows presenting visual feedback in the form of data and
 diagrams which can help the research in fine tunning the fitting.
 
