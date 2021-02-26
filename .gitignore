@@ -2,6 +2,6 @@ FeS2_complete/*
 demeter_workflow/temp/*
 demeter_workflow/feff/*
 larch_workflow/fes2_feff/*
-larch/fes2_feff/*
+larch_workflow/larch/fes2_feff/*
 larch_workflow/.ipynb_checkpoints/*
 xafsdata/*
