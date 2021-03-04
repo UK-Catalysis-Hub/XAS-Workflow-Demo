@@ -39,7 +39,15 @@ sub get_feff{
 	my $crystal_name = shift;
 
 	# open crystal file and run atoms and feff to get the paths
-	my $atoms = Demeter::Atoms -> new(file => $crystal_name);
+	
+	my $atoms = Demeter::Atoms -> new();
+	if (substr($crystal_name, -3,3 ) eq "cif"){
+		$atoms->cif($crystal_name);
+	}
+	else
+	{
+		$atoms->file($crystal_name);
+	}
 	my $feff = Demeter::Feff -> new(atoms => $atoms);
 	$feff   -> set(workspace=>"temp", screen=>0);
 	$feff   -> run;
@@ -54,11 +62,9 @@ sub read_parameters{
 	my $filename = $_[1];
     print "***** from $filename ******\n";
 	open(FH, '<', $filename) or die $!;
-
 	while(<FH>){
 		my $gds_str = $_;
 		print $gds_str;
-		
 		push (@gds, Demeter::GDS -> simpleGDS( $gds_str ));
 	};
 	close(FH);
