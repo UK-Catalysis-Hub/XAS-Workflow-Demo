@@ -6,3 +6,4 @@ larch_workflow/larch/fes2_feff/*
 larch_workflow/.ipynb_checkpoints/*
 xafsdata/*
 nexusdata/*
+cif_files/*
