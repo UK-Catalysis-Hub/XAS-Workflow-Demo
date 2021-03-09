@@ -205,6 +205,7 @@ sub start{
 	my $input_file = "fes2_rt01_mar02.xmu";
 	my $group_name = "FeS2_xmu";
     my $athena_file = "FeS2_dmtr.prj";
+	my $run_auto = "N";
 	# if no argument passed, show warning and use defaults
 	if (!@ARGV or $#ARGV < 2) {
 		print "Need two provide three argument\n - Input file name\n - Group name";
@@ -225,12 +226,22 @@ sub start{
 		$athena_file = $ARGV[2];
 		print "Group Name: $group_name\n";
 	}
+	if (@ARGV and $#ARGV > 2)
+	{
+		$run_auto = $ARGV[3];
+	}
 	# open input file and get data
 	my $input_data = get_data($input_file, $group_name);
 	# save the athena project
     save_athena($athena_file, $input_data);
 	# print parameters and present options
-	select_task($input_data, $athena_file);
+	if ($run_auto eq "N"){
+	  select_task($input_data, $athena_file);
+	}
 }
 
+# run from command line with:
+#   perl demeter_task01.pl data_file(.dat,.txt) group_name demeter_project(.prj) auto_flag(Y/N)
+# for instance:
+#   perl demeter_task01.pl fes2_rt01_mar02.xmu FeS2_xmu FeS2_dmtr.prj N
 start;
