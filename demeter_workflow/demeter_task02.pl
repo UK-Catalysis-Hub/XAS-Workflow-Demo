@@ -9,6 +9,7 @@ sub clear_screen{
 sub save_artemis{
 	my $file_name = shift;
 	my $fit_data = shift;
+	<STDIN>;
 	# Save as athena project
 	#   from https://github.com/bruceravel/demeter/blob/411cf8d2b28819bd7a21a29869c7ad0dce79a8ac/documentation/DPG/output.rst
 	#$fit_data->write($file_name, $fit_data);
@@ -25,6 +26,8 @@ sub get_data{
 	print "Import data from an Athena project file\n";
 	my $prj = Demeter::Data::Prj -> new(file=>$athena_name);
 	my $data = $prj -> record(1);
+	#get the group name (for batch is the same as the file name)
+	print ($data->name);
 	# set fit parameters ****This may need to be extracted to other process****
 	$data ->set(fft_kmin   => 3,	       fft_kmax   => 12,
 			bft_rmin   => 1.2,         bft_rmax   => 4.1,
@@ -397,11 +400,13 @@ sub run_fit{
 	my $data = $_[0];
 	my @paths = @{$_[1]};
 	my @gds = @{$_[2]};
-	my $f_out = $_[3];
+	my $artemis_f = $_[3];
+	my $f_out = $data->name;
 	
 	my $fit = undef;
 
 	my $len = scalar @gds; 
+	print ($data->name);
     print "length of parameters: $len\n";
 	if ($len < 1) {
 		print "Parameters not set, cannot fit";
@@ -416,7 +421,7 @@ sub run_fit{
 		return $fit;
 	}
 	# use parameters, data and paths to perform the fit
-	$fit = Demeter::Fit -> new(name  => 'FeS2 fit',
+	$fit = Demeter::Fit -> new(name  => "${f_out}_fit",
 					  gds   => \@gds,
 					  data  => [$data],
 					  paths => \@paths
@@ -431,7 +436,7 @@ sub run_fit{
 	my $keypress = <STDIN>;
 
 	my ($header, $footer) = ("Fit to FeS2 data", q{});
-	$fit -> logfile("${f_out}.log", $header, $footer);
+	$fit -> logfile(".\\${artemis_f}_fit\\${f_out}_fit.log", $header, $footer);
 	return $fit;
 }
 
@@ -442,7 +447,7 @@ sub run_fit{
 sub get_artemis_parameters{
 	my @gds = @{$_[0]};
 	my $artemis_file = $_[1];
-	my $gds_file = "$artemis_file.gds";
+	my $gds_file = ".\\${artemis_file}_fit\\${artemis_file}.gds";
 	if (-e $gds_file) {
 		print "reading parameters from $gds_file";
 		@gds = read_parameters(\@gds, $gds_file);
@@ -461,7 +466,7 @@ sub get_artemis_sel_sp{
 	my $data = $_[1];
 	my $feff = $_[2];
 	my $artemis_file = $_[3];
-	my $ssp_file = "$artemis_file.csv";
+	my $ssp_file = ".\\${artemis_file}_fit\\${artemis_file}.csv";
 	if (-e $ssp_file) {
 		print "reading paths from $ssp_file";
 		@s_paths = read_selected($data, $feff, \@s_paths, $ssp_file);
@@ -492,7 +497,8 @@ sub write_parameters{
 sub write_selected_paths{	
 	my @paths_list = @{$_[0]};
 	my $artemis_file = $_[1];
-my $ssp_file = "${artemis_file}.csv";
+	my $ssp_file = "${artemis_file}.csv";
+	
 	open my $out, '>:encoding(UTF-8)', $ssp_file;	
 	foreach my $s_path (@paths_list){
 		my $sp_id = $s_path ->sp->nkey;
@@ -512,6 +518,7 @@ my $ssp_file = "${artemis_file}.csv";
 	close $out;
 }
 
+# interactive run for setting parameters, selecting paths and 
 sub select_task{
 	my $data = shift;
 	my $feff = shift;
@@ -566,17 +573,35 @@ sub select_task{
 	}
 }
 
+sub run_batch{
+	my $data = shift;
+	my $feff = shift;
+	my $artemis_f = shift;
+	
+	my @gds_parameters = ();
+	my @selected_paths = ();
+	# If artemis file(s) exist retrieve them to set vatiables and selected paths
+	# $artemis_f.gds : parameters file
+	# $artemis_f.csv : selected paths file
+	@gds_parameters = get_artemis_parameters(\@gds_parameters, $artemis_f);
+	@selected_paths = get_artemis_sel_sp(\@selected_paths, $data, $feff, $artemis_f);
+	my $curve_fit = undef;
+    print "Run fit\n";
+	$curve_fit = run_fit($data, \@selected_paths, \@gds_parameters, $artemis_f);
+}
+
 sub start{
 	print "Fit to FeS2 data using Demeter ", $Demeter::VERSION, $/;
 	my $athena_file = "FeS2_dmtr.prj";
 	my $crystal_file = "FeS2.inp";
     my $artemis_file = "FeS2_dmtr";
+	my $run_auto = "N";
 
 	# if no argument passed, show warning and use defaults
 	if (!@ARGV or $#ARGV < 2) {
 		print "Need two provide three argument\n - Athena file name";
 		print "\n - Crystal information file";
-		print "\n - Artemis file name\n";
+		print "\n - Artemis file(s) base\n";
 		print "Arguments passed: $#ARGV + 1";
 	}
 	else{
@@ -600,6 +625,10 @@ sub start{
 		}
 		$artemis_file = $ARGV[2];
 	}
+	if (@ARGV and $#ARGV > 2)
+	{
+		$run_auto = $ARGV[3];
+	}
 
 	# process break out
 	# 1. Import Athena data (.prj)
@@ -609,10 +638,18 @@ sub start{
 	my $feff_data = get_feff($crystal_file);
 	
 	# loop on the select path, set parameters, and run fit
-	select_task($athena_data, $feff_data, $artemis_file);
-	
+	if ($run_auto eq "N"){
+	  select_task($athena_data, $feff_data, $artemis_file);
+	}
+	else{
+		# run in batch mode (needs artemis files to exist)
+		run_batch($athena_data, $feff_data, $artemis_file);
+	}
 	exit;
 }
 # run from command line with:
-# perl demeter_02.pl FeS2_dmtr.prj FeS2.inp FeS2_dmtr
+#   perl demeter_task02.pl athena_file(.prj) crystal_file(.inp/.cif) artemis_file(.fpj)
+# for instance:
+#   perl demeter_task02.pl FeS2_dmtr.prj FeS2.inp FeS2_dmtr
+#   perl demeter_task02.pl .\rh4co\rh4co000001.prj ..\cif_files\C12O12Rh4.cif rh4co_ox
 start();

@@ -1,0 +1,94 @@
+Fit to FeS2 data
+ Name            : rh4co000001_fit    (snzxb)
+ Description     : fit to rh4co000001
+ Figure of merit : 0
+ Time of fit     : 2021-03-09T19:05:18
+ Environment     : Demeter 0.9.25 with perl 5.018002 and using Ifeffit 1.2.12 on Windows 8
+ Interface       : Demeter-based perl script
+ Prepared by     : 
+ Contact         :
+
+
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=
+
+
+Independent points          : 16.2568359
+Number of variables         : 8
+Chi-square                  : 9228.6514804
+Reduced chi-square          : 1117.6982987
+R-factor                    : 0.1305183
+Number of data sets         : 1
+
+
+Happiness = 51.00/100             color = #FD7E6F
+   An R-factor of 0.13052 gives a penalty of 40.00000.
+   Penalty of 2 : sigma2 for " C5.1 " is suspiciously large.
+   Penalty of 2 : sigma2 for " C7.1 " is suspiciously large.
+   Penalty of 2 : sigma2 for " C6.1 " is suspiciously large.
+   1 correlation above 0.950 for a penalty of 3.000
+***** Note: happiness is a semantic parameter and should *****
+*****    NEVER be reported in a publication -- NEVER!    *****
+
+guess parameters:
+  amp                =   2.82525971    # +/-   1.06738235     [1.000]
+  enot               =   4.59097294    # +/-   3.26809184     [0.0]
+  alpha              =  -0.01284072    # +/-   0.00554590     [0.0]
+  ssC51              =   0.57192634    # +/- 14140568.13855365     [0.003]
+  ssC71              =   0.34309579    # +/- 154143.70860002     [0.003]
+  ssC61              =   0.51326268    # +/- 26503323.47080415     [0.003]
+  ssC91              =   0.00376058    # +/-   0.00789620     [0.003]
+  ssR11              =   0.00371451    # +/-   0.00207726     [0.003]
+
+Correlations between variables:
+               ssc61 & ssc71              --> -0.9971
+               ssr11 & amp                -->  0.9211
+               alpha & enot               -->  0.8298
+               ssc61 & enot               --> -0.5978
+               ssc71 & enot               -->  0.5819
+               ssc71 & ssc51              -->  0.5667
+               ssc61 & ssc51              --> -0.5062
+               ssc61 & alpha              --> -0.4256
+               ssc91 & amp                -->  0.4135
+               ssc71 & alpha              -->  0.4104
+All other correlations below 0.4
+
+===== Data set >> rh4co000001 << ====================================
+
+: Athena project        = .\rh4co\rh4co000001.prj, 1
+: name                  = rh4co000001
+: k-range               = 3 - 12
+: dk                    = 1
+: k-window              = hanning
+: k-weight              = 1,2,3
+: R-range               = 1.2 - 4.1
+: dR                    = 0.0
+: R-window              = hanning
+: fitting space         = r
+: background function   = no
+: phase correction      = no
+: background removal    = E0: 23227.109, Rbkg: 1.0, range: [0.000:17.538], clamps: 0/24, kw: 2
+: epsilon_k by k-weight = 1.461e-003
+: epsilon_r by k-weight = 1.093e+000
+: R-factor by k-weight  = 1 -> 0.16805,  2 -> 0.12360,  3 -> 0.09990
+
+  name         N       S02     sigma^2   e0     delr     Reff     R
+==========================================================================
+ C5.1       1.000   2.825   0.57193   4.591 -0.02459  1.91490  1.89031
+ C7.1       1.000   2.825   0.34310   4.591 -0.02549  1.98540  1.95991
+ C6.1       1.000   2.825   0.51326   4.591 -0.02639  2.05500  2.02861
+ C9.1       1.000   2.825   0.00376   4.591 -0.02686  2.09170  2.06484
+ Rh1.1      2.000   2.825   0.00372   4.591 -0.03492  2.71940  2.68448
+
+  name         ei       third     fourth
+==========================================
+ C5.1      0.00000   0.00000   0.00000
+ C7.1      0.00000   0.00000   0.00000
+ C6.1      0.00000   0.00000   0.00000
+ C9.1      0.00000   0.00000   0.00000
+ Rh1.1     0.00000   0.00000   0.00000
+
+
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=
+
+
+
