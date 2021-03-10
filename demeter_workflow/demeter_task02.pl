@@ -449,13 +449,24 @@ sub run_fit{
 	$fit -> fit;
 	if ($w_print eq "Y"){
 		#show fit plot
-		$data->po->set(plot_data => 1, plot_fit  => 1, );
+		$data->po->set(plot_data => 1, plot_fit  => 1);
 		$data->plot('rmr');
 		$data->pause;
+		#$fit -> interview;
 		my $keypress = <STDIN>;
 	}
+	
+	# Write log file is written. 
+	# The first argument of the logfile method is the name of the output log
+	# file. The other two arguments, contain user-specified text that is 
+	# written to the beginning and end of log file.
 	my ($header, $footer) = ("Fit to $f_out data", q{});
 	$fit -> logfile(".\\${artemis_f}_fit\\${f_out}_fit.log", $header, $footer);
+	# This serialization file is simply a normal zip file containing the 
+	# serializations of all the objects used in the fit along with a log file
+	# and a few other results of the fit. 
+	$fit -> freeze(file=>".\\${artemis_f}_fit\\${f_out}_fit.dpj");
+	$data->save("fit", ".\\${artemis_f}_fit\\${f_out}.fit");
 	return $fit;
 }
 
@@ -508,7 +519,7 @@ sub get_artemis_sel_sp{
 sub write_parameters{
 	my (@gds) = @{$_[0]};
 	my $artemis_file = $_[1];
-	my $gds_file = "${artemis_file}.gds";
+	my $gds_file = ".\\${artemis_file}_fit\\${artemis_file}.gds";
 	open my $out, '>:encoding(UTF-8)', $gds_file;
 	for my $i (0 .. $#gds) {	
 		my $x = $gds[$i];
@@ -524,7 +535,7 @@ sub write_parameters{
 sub write_selected_paths{	
 	my @paths_list = @{$_[0]};
 	my $artemis_file = $_[1];
-	my $ssp_file = "${artemis_file}.csv";
+	my $ssp_file = ".\\${artemis_file}_fit\\${artemis_file}.csv";
 	
 	open my $out, '>:encoding(UTF-8)', $ssp_file;	
 	foreach my $s_path (@paths_list){
@@ -618,7 +629,7 @@ sub run_batch{
 
 sub start{
 	
-	my $athena_file = "FeS2_dmtr.prj";
+	my $athena_file = "FeS2.prj";
 	my $crystal_file = "FeS2.inp";
     my $artemis_file = "FeS2_dmtr";
 	my $run_auto = "N";
