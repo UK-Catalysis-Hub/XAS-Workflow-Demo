@@ -34,7 +34,9 @@ for %%f in (.\%baseName%\*.prj) do (
   echo processed !count! of %top_count% files >> %fit_log%
   if "!count!"=="%top_count%" goto :next
 )
-@echo Completed: %date% %time%  >> %fit_log%
+
 endlocal
 :next
-echo finished processing
+
+@echo Completed: %date% %time%  >> %fit_log%
+@echo finished processing
