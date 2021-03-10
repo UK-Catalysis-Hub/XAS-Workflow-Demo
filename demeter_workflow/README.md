@@ -25,6 +25,7 @@ This is implemented as a loop encompassing tasks  2.4 to 2.8 . A text interface
 is used for presenting visual feedback in the form of data and diagrams which 
 are intended to help the research in fine tunning the fitting.
 
+## Tasks
 
 |Script| Task                            | Input                                         | Output
 |------| -------------                   |-------------                                  | -----  
@@ -45,7 +46,27 @@ are intended to help the research in fine tunning the fitting.
 || 2.6. Run Fit                    |                                               |
 || 2.7. Save project               ||
 || 2.8. Verify fit results         ||
-|| 2.8.1 If not OK revise parameners and refit (go to 2.4)||
-|| 2.8.2 If OK Save project and outputs|                                           |File: FeS2_01.fpj
- 
+|| 2.8.1. If not OK revise parameners and refit (go to 2.4)||
+|| 2.8.2. If OK Save project and outputs|                                           |Files: FeS2_01_fit.dpj
+|| | | FeS2_01.fit
+|| | | FeS2_01_fit.log
+
+## Automation
+The batch files included in this repository allow automated processing of large
+sets of files. Task_01.bat runs task one of the workflow on a set of files, 
+producing a directory with the same number of Athena project files. Task_02.bat 
+runs task 2 of the workflow (curve fitting) of the workflow over a set of Athena 
+project files. 
+Running Task_01.bat requires providing three arguments: (1) the common prefix
+for the group of files, (2) the directory where the input files are located, and
+(3) the number of files to process. 
+'''
+C:\> task_01.bat rh4co ..\nexusdata\rh4co_ox_53\37123_Rh_4_CO_Oxidation_45_7_ascii\*.dat 5
+'''
+Running Task_02.bat requires providing three arguments: (1) the common prefix
+for the group of files, (2) the path to the crystal file to be used, and
+(3) the number of files to process. 
+'''
+C:\>task_02.bat rh4co ..\cif_files\C12O12Rh4.cif 5
+'''
 
