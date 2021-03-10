@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 
 use Demeter qw(:fit);
+use File::Path qw( make_path );
 
 sub clear_screen{
 	system $^O eq 'MSWin32' ? 'cls' : 'clear';
@@ -591,10 +592,12 @@ sub select_task{
 		if ($option == 1){
 			print "Set paramenters\n" ;
 			@gds_parameters = set_parameters(\@gds_parameters);
+			write_parameters(\@gds_parameters, $artemis_f);
 		}
 		elsif ($option  == 2){
 			print "Select paths\n";
 			@selected_paths = select_paths($feff, $data, \@selected_paths);
+			write_selected_paths(\@selected_paths, $artemis_f);
 		}
 		elsif ($option == 3){
 			print "Run fit\n";
@@ -670,14 +673,19 @@ sub start{
 	if ($run_auto eq "N") {
 		print "Fit using Demeter ", $Demeter::VERSION, $/;
 	}
-	# process break out
+	
+	if ( !-d ".\\${artemis_file}_fit" ) {
+		make_path ".\\${artemis_file}_fit" or die "Failed to create path: .\$artemis_file";
+	}
+	
+	# artemis task broken down
 	# 1. Import Athena data (.prj)
 	my $athena_data= get_data($athena_file, $run_auto);
 	
 	# 2. Import crystal data (.cif) and calcultate paths (run atoms and feff)
 	my $feff_data = get_feff($crystal_file, $run_auto);
 	
-	# loop on the select path, set parameters, and run fit
+	# 3. loop on the select path, set parameters, and run fit
 	if ($run_auto eq "N"){
 	  select_task($athena_data, $feff_data, $artemis_file);
 	}
