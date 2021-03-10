@@ -9,7 +9,6 @@ sub clear_screen{
 sub save_artemis{
 	my $file_name = shift;
 	my $fit_data = shift;
-	<STDIN>;
 	# Save as athena project
 	#   from https://github.com/bruceravel/demeter/blob/411cf8d2b28819bd7a21a29869c7ad0dce79a8ac/documentation/DPG/output.rst
 	#$fit_data->write($file_name, $fit_data);
@@ -21,26 +20,28 @@ sub save_artemis{
 	
 sub get_data{
 	my $athena_name =  shift;
+	my $run_auto = shift;
 	#open athena project and get data
 	unlink "fes2.iff" if (-e "fes2.iff");
-	print "Import data from an Athena project file\n";
+	if ($run_auto eq "N"){ print "Import data from an Athena project file\n";}
 	my $prj = Demeter::Data::Prj -> new(file=>$athena_name);
 	my $data = $prj -> record(1);
 	#get the group name (for batch is the same as the file name)
-	print ($data->name);
+	if ($run_auto eq "N"){ print ($data->name);}
 	# set fit parameters ****This may need to be extracted to other process****
 	$data ->set(fft_kmin   => 3,	       fft_kmax   => 12,
 			bft_rmin   => 1.2,         bft_rmax   => 4.1,
 		);
-
 	$data->set_mode(screen  => 0, backend => 1); #, file => ">fes2.iff", );
 	$data -> plot_with('gnuplot');    ## similar to the :plotwith pragma
-	print "****** Completed reading data *****\n";
+	if ($run_auto eq "N"){ print "****** Completed reading data *****\n";}
 	return $data
 }
+
 sub get_feff{
 	my $crystal_name = shift;
-
+	my $run_auto = shift;
+	
 	# open crystal file and run atoms and feff to get the paths
 	
 	my $atoms = Demeter::Atoms -> new();
@@ -55,19 +56,25 @@ sub get_feff{
 	$feff   -> set(workspace=>"temp", screen=>0);
 	$feff   -> run;
 	$feff -> make_feffinp("full");
-	print "****** Done with feff *****\n";
+	if ($run_auto eq "N"){print "****** Done with feff *****\n";}
 	return $feff
 }
 
 sub read_parameters{
-	print "***** Reading parameters ******\n";
 	my @gds = @{$_[0]};
 	my $filename = $_[1];
-    print "***** from $filename ******\n";
+	my $w_print = "Y";
+	if ($_[2]){
+		$w_print = $_[2];
+	}
+	if ($w_print eq "Y"){
+		print "***** Reading parameters ******\n";
+		print "***** from $filename ******\n";
+	}
 	open(FH, '<', $filename) or die $!;
 	while(<FH>){
 		my $gds_str = $_;
-		print $gds_str;
+		if ($w_print eq "Y") {print $gds_str;};
 		push (@gds, Demeter::GDS -> simpleGDS( $gds_str ));
 	};
 	close(FH);
@@ -189,12 +196,18 @@ sub print_parameters{
 }
 
 sub read_selected{
-	print "***** Reading selected paths ******\n";
 	my $data = $_[0];
 	my $feff = $_[1];
 	my @sel_paths = @{$_[2]};
 	my $filename = $_[3];
-	print "***** From file $filename ******\n";
+	my $w_print = "Y";
+	if ($_[4]){
+		$w_print = $_[4];
+	}
+	if ($w_print eq "Y"){
+		print "***** Reading selected paths ******\n";
+		print "***** From file $filename ******\n";
+	}
 	open(FH, '<', $filename) or die $!;
 	my @fields = ();
 	while(<FH>){
@@ -220,8 +233,10 @@ sub read_selected{
 		}
 	}
 	my $pars = scalar @sel_paths;
-	print "***** Read $pars paths ******\n";
-	print_selected_paths(\@sel_paths);
+	if ($w_print eq "Y"){
+		print "***** Read $pars paths ******\n";
+		print_selected_paths(\@sel_paths);
+	}
 	close(FH);
 	return @sel_paths;
 }
@@ -401,20 +416,24 @@ sub run_fit{
 	my @paths = @{$_[1]};
 	my @gds = @{$_[2]};
 	my $artemis_f = $_[3];
+	my $w_print = "Y";
+	if ($_[4]){
+		$w_print = $_[4];
+	}
+	
 	my $f_out = $data->name;
 	
 	my $fit = undef;
 
 	my $len = scalar @gds; 
-	print ($data->name);
-    print "length of parameters: $len\n";
+    print "parameters: $len\n";
 	if ($len < 1) {
 		print "Parameters not set, cannot fit";
 		<STDIN>;
 		return $fit;
 	}
 	$len = scalar @paths; 
-    print "length of paths: $len\n";
+    print "paths: $len\n";
 	if ($len < 1) {
 		print "Paths not selected, cannot fit";
 		<STDIN>;
@@ -426,16 +445,16 @@ sub run_fit{
 					  data  => [$data],
 					  paths => \@paths
 					 );
-	print "about to fit\n";
+	print "about to fit $f_out\n";
 	$fit -> fit;
-	#show fit plot
-	$data->po->set(plot_data => 1, plot_fit  => 1, );
-	$data->plot('rmr');
-	$data->pause;
-
-	my $keypress = <STDIN>;
-
-	my ($header, $footer) = ("Fit to FeS2 data", q{});
+	if ($w_print eq "Y"){
+		#show fit plot
+		$data->po->set(plot_data => 1, plot_fit  => 1, );
+		$data->plot('rmr');
+		$data->pause;
+		my $keypress = <STDIN>;
+	}
+	my ($header, $footer) = ("Fit to $f_out data", q{});
 	$fit -> logfile(".\\${artemis_f}_fit\\${f_out}_fit.log", $header, $footer);
 	return $fit;
 }
@@ -447,10 +466,14 @@ sub run_fit{
 sub get_artemis_parameters{
 	my @gds = @{$_[0]};
 	my $artemis_file = $_[1];
+	my $w_print = "Y";
+	if ($_[2]){
+		$w_print = $_[2];
+	}
 	my $gds_file = ".\\${artemis_file}_fit\\${artemis_file}.gds";
 	if (-e $gds_file) {
-		print "reading parameters from $gds_file";
-		@gds = read_parameters(\@gds, $gds_file);
+		if ($w_print eq "Y") {print "reading parameters from $gds_file";}
+		@gds = read_parameters(\@gds, $gds_file, $w_print);
 	}
 	else {
 		print "could not find parameters file $gds_file \n";
@@ -466,10 +489,14 @@ sub get_artemis_sel_sp{
 	my $data = $_[1];
 	my $feff = $_[2];
 	my $artemis_file = $_[3];
+	my $w_print = "Y";
+	if ($_[4]){
+		$w_print = $_[4];
+	}
 	my $ssp_file = ".\\${artemis_file}_fit\\${artemis_file}.csv";
 	if (-e $ssp_file) {
-		print "reading paths from $ssp_file";
-		@s_paths = read_selected($data, $feff, \@s_paths, $ssp_file);
+		if ($w_print eq "Y") {print "reading paths from $ssp_file";}
+		@s_paths = read_selected($data, $feff, \@s_paths, $ssp_file, $w_print);
 	}
 	else {
 		print "could not find paths file $ssp_file \n";
@@ -583,15 +610,14 @@ sub run_batch{
 	# If artemis file(s) exist retrieve them to set vatiables and selected paths
 	# $artemis_f.gds : parameters file
 	# $artemis_f.csv : selected paths file
-	@gds_parameters = get_artemis_parameters(\@gds_parameters, $artemis_f);
-	@selected_paths = get_artemis_sel_sp(\@selected_paths, $data, $feff, $artemis_f);
+	@gds_parameters = get_artemis_parameters(\@gds_parameters, $artemis_f, "N");
+	@selected_paths = get_artemis_sel_sp(\@selected_paths, $data, $feff, $artemis_f, "N");
 	my $curve_fit = undef;
-    print "Run fit\n";
-	$curve_fit = run_fit($data, \@selected_paths, \@gds_parameters, $artemis_f);
+	$curve_fit = run_fit($data, \@selected_paths, \@gds_parameters, $artemis_f, "N");
 }
 
 sub start{
-	print "Fit to FeS2 data using Demeter ", $Demeter::VERSION, $/;
+	
 	my $athena_file = "FeS2_dmtr.prj";
 	my $crystal_file = "FeS2.inp";
     my $artemis_file = "FeS2_dmtr";
@@ -607,7 +633,7 @@ sub start{
 	else{
 		my $test_argument = $ARGV[0];
 		if (-e $test_argument) {
-			print "Reading from file: $test_argument\n";
+			if ($run_auto ne "N"){print "Reading from file: $test_argument\n";}
 			$athena_file = $test_argument;
 			}
 		else{
@@ -616,7 +642,7 @@ sub start{
 		}
 		$test_argument = $ARGV[1];
 		if (-e $test_argument) {
-			print "Reading from file: $test_argument\n";
+			if ($run_auto ne "N"){print "Reading from file: $test_argument\n";}
 			$crystal_file = $test_argument;
 		}
 		else{
@@ -629,13 +655,16 @@ sub start{
 	{
 		$run_auto = $ARGV[3];
 	}
-
+	
+	if ($run_auto eq "N") {
+		print "Fit using Demeter ", $Demeter::VERSION, $/;
+	}
 	# process break out
 	# 1. Import Athena data (.prj)
-	my $athena_data= get_data($athena_file);
+	my $athena_data= get_data($athena_file, $run_auto);
 	
 	# 2. Import crystal data (.cif) and calcultate paths (run atoms and feff)
-	my $feff_data = get_feff($crystal_file);
+	my $feff_data = get_feff($crystal_file, $run_auto);
 	
 	# loop on the select path, set parameters, and run fit
 	if ($run_auto eq "N"){
@@ -652,4 +681,5 @@ sub start{
 # for instance:
 #   perl demeter_task02.pl FeS2_dmtr.prj FeS2.inp FeS2_dmtr
 #   perl demeter_task02.pl .\rh4co\rh4co000001.prj ..\cif_files\C12O12Rh4.cif rh4co_ox
+#   perl demeter_task02.pl .\rh4co\rh4co000499.prj ..\cif_files\C12O12Rh4.cif rh4co_ox N
 start();
