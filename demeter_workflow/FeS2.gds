@@ -1,7 +1,0 @@
-guess alpha = 0
-guess amp = 1.00000
-guess enot = 0
-guess ss = 0.00300
-guess ss2 = 0.00300
-def ss3 = ss2
-guess ssfe = 0.00300
