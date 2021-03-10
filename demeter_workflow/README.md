@@ -60,12 +60,15 @@ project files.
 Running Task_01.bat requires providing three arguments: (1) the common prefix
 for the group of files, (2) the directory where the input files are located, and
 (3) the number of files to process. 
+
 '''
 C:\> task_01.bat rh4co ..\nexusdata\rh4co_ox_53\37123_Rh_4_CO_Oxidation_45_7_ascii\*.dat 5
 '''
+
 Running Task_02.bat requires providing three arguments: (1) the common prefix
 for the group of files, (2) the path to the crystal file to be used, and
 (3) the number of files to process. 
+
 '''
 C:\>task_02.bat rh4co ..\cif_files\C12O12Rh4.cif 5
 '''
