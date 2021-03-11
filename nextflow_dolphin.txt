@@ -1,0 +1,6 @@
+On a separate note, for pair read data (Illumina sequencing) you can use channel.fromFilePairs(). It uses a glob pattern.
+Uni VPN needed https://dolphinnext.arcca.cf.ac.uk/dolphinnext/
+ 
+##### Bioinformatics and Statistics support for CU postgraduates and staff #####
+There is a forum for data queries on Slack. To access: (1) Search for data-clinic.slack.com (open to all Cardiff University users). (2) Install Slack. (3) Click on the #general channel, and click on the pin (top left) to access key information including a readme document (which provides general information about the data clinic, how to use it, expectations), some user tips for Slack, and links/times for the Zoom drop-in clinics.  
+https://join.slack.com/t/data-clinic/shared_invite/zt-m3628v3b-AnGsfmmNkDPGzOUKorLduA
