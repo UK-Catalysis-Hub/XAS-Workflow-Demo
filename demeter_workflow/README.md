@@ -57,12 +57,13 @@ sets of files. Task_01.bat runs task one of the workflow on a set of files,
 producing a directory with the same number of Athena project files. Task_02.bat 
 runs task 2 of the workflow (curve fitting) of the workflow over a set of Athena 
 project files. 
+
 Running Task_01.bat requires providing three arguments: (1) the common prefix
 for the group of files, (2) the directory where the input files are located, and
 (3) the number of files to process. 
 
 ```
-C:\> task_01.bat rh4co ..\nexusdata\rh4co_ox_53\37123_Rh_4_CO_Oxidation_45_7_ascii\*.dat 5
+C:\>task_01.bat rh4co ..\nexusdata\rh4co_ox_53\37123_Rh_4_CO_Oxidation_45_7_ascii\*.dat 5
 ```
 
 Running Task_02.bat requires providing three arguments: (1) the common prefix
