@@ -11,5 +11,5 @@ demeter_workflow/rh4co/*
 demeter_workflow/*_fit/*
 demeter_workflow/singleruns/*
 *.stderr.log
-larch_workflow/rh4co/*
+larch_workflow/rh4co*/*
 larch_workflow/*_fit/*
