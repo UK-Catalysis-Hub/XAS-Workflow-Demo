@@ -14,3 +14,4 @@ demeter_workflow/singleruns/*
 larch_workflow/rh4co*/*
 larch_workflow/*_fit/*
 larch_workflow/*_feff/*
+larch_workflow/lib/__pycache__/
