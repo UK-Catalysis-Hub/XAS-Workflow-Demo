@@ -1,6 +1,13 @@
 # managing athena files
 from larch.io import create_athena, read_athena, extract_athenagroup
 
+# calculate pre-edge and post edge for normalisation
+from larch.xafs import pre_edge
+# perform background removal
+from larch.xafs import autobk
+# calculate fourier transform
+from larch.xafs import xftf
+
 # plotting library
 import matplotlib.pyplot as plt
 
