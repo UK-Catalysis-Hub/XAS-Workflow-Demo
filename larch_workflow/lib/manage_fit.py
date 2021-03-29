@@ -183,15 +183,14 @@ def show_selected_paths(pats_sheet):
     files = []
     for f_name, selected in zip(df_sheet["A"], df_sheet["G"]):
         if selected == '1':
-            files.append(f_name)    
-
-    sel_paths_data = [[0 for col in range(6)] for row in range(4)]
+            files.append(f_name)   
+    new_row_count = len(files)
+    sel_paths_data = [[0 for col in range(6)] for row in range(new_row_count)]
     sel_paths_data[:0]=[['file','label','s02','e0','sigma2','deltar']]
     ps_row = 1
     for a_name in files:
         sel_paths_data[ps_row][0] = a_name
         ps_row += 1
-
     sp_sheet = ipysheet.sheet(rows=len(files)+1, columns=6)
     ipysheet.cell_range(sel_paths_data)
     display(sp_sheet)
