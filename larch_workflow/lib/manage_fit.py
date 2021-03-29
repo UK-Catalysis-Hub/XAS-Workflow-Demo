@@ -138,6 +138,7 @@ def show_feff_paths(var = "FeS2.inp"):
     feff_inp = crystal_f.name[:-4]+"_feff.inp"
     feff_files = "files.dat"
     input_file = Path(feff_dir, feff_files)
+    
     #check if feff dir exists
     if input_file.parent.exists() and input_file.exists():
         logging.info(str(input_file.parent) + " path and "+ str(input_file)+ " found")
@@ -151,6 +152,8 @@ def show_feff_paths(var = "FeS2.inp"):
     data_headers = []
     path_count = 0
     paths_data = []
+    # get the list of paths info to assing labels to paths
+    paths_info = get_path_labels(Path(feff_dir, 'paths.dat'))
     logging.info("Reading from: "+ str(input_file))
     with open(input_file) as datfile:
         dat_lines = datfile.readlines()
@@ -164,32 +167,68 @@ def show_feff_paths(var = "FeS2.inp"):
             elif data_headers == []:
                 data_headers = [a_line[s:e].strip().replace(' ','_') for s,e in field_widths]
                 logging.info("headers:"+ str(data_headers))
+                data_headers.append('label')
                 data_headers.append('select')
                 paths_data.append(data_headers)
             else:
                 path_count += 1
                 data_values = [a_line[s:e].strip() for s,e in field_widths]
+                path_id = str(int(data_values[0][-8:-4]))
+                data_values.append(paths_info[path_id]['label']+'.'+path_id)                    
                 data_values.append(0)
                 data_values[0] = feff_dir+"/"+data_values[0]
                 paths_data.append(data_values)
     # use data to populate spreadsheet
     
-    path_sheet = ipysheet.sheet(rows=path_count+1, columns=7)
+    path_sheet = ipysheet.sheet(rows=path_count+1, columns=8)
     ipysheet.cell_range(paths_data)
     return path_sheet
+
+# get labels from the feff/paths.dat file
+def get_path_labels(paths_file):
+    is_meta = True
+    count = 0
+    a_path = {}
+    all_paths={}           
+    with open(paths_file) as datfile:
+        dat_lines = datfile.readlines()
+        for a_line in dat_lines:
+            count += 1
+            if re.match('-{15}', a_line.strip())!= None:
+                is_meta = False
+                #print("{}: {}".format(count, a_line.strip()))
+            elif not is_meta:
+                if re.match("\s*\d*\s{4}\d*\s{3}", a_line) != None:
+                    if a_path != {}:
+                        all_paths[a_path['index']] = a_path
+                    line_data = a_line.split()
+                    a_path ={'index':line_data[0],'nleg':line_data[1],'degeneracy':line_data[2]}
+                elif re.match("\s{6}x\s{11}y\s{5}", a_line) == None: # ignore the intermediate headings
+                    line_data = a_line.split()
+                    if not 'label' in a_path:
+                        a_path['label'] = line_data[4].replace("'","")
+                    else:
+                        a_path['label'] += '.'+line_data[4].replace("'","")
+                #print(a_line.split())
+    if a_path != {} and 'index' in a_path:
+        all_paths[a_path['index']] = a_path
+    return all_paths
+
+
 
 def show_selected_paths(pats_sheet):
     df_sheet = ipysheet.to_dataframe(pats_sheet)
     files = []
-    for f_name, selected in zip(df_sheet["A"], df_sheet["G"]):
+    for f_name, p_label, selected in zip(df_sheet["A"], df_sheet["G"], df_sheet["H"]):
         if selected == '1':
-            files.append(f_name)   
+            files.append([f_name, p_label])   
     new_row_count = len(files)
-    sel_paths_data = [[0 for col in range(6)] for row in range(new_row_count)]
+    sel_paths_data = [['' for col in range(6)] for row in range(new_row_count)]
     sel_paths_data[:0]=[['file','label','s02','e0','sigma2','deltar']]
     ps_row = 1
     for a_name in files:
-        sel_paths_data[ps_row][0] = a_name
+        sel_paths_data[ps_row][0] = a_name[0]
+        sel_paths_data[ps_row][1] = a_name[1]
         ps_row += 1
     sp_sheet = ipysheet.sheet(rows=len(files)+1, columns=6)
     ipysheet.cell_range(sel_paths_data)
