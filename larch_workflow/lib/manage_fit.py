@@ -13,6 +13,9 @@ from pathlib import Path
 #library for writing to log
 import logging
 
+# plotting library
+import matplotlib.pyplot as plt
+
 # read parameters from csv file
 # each line contains a parameter defined as follows
 ##############################
@@ -246,3 +249,51 @@ def run_fit(data_group, gds, selected_paths, fv, session):
 
     out = lp.xafs.feffit(gds, dset, _larch=session)
     return trans, dset, out
+
+#Overlap plot k-weighted χ(k) and χ(R) for fit to feffit dataset
+
+def plot_rmr(data_set,rmin,rmax):
+    fig = plt.figure()
+    plt.plot(data_set.data.r, data_set.data.chir_mag, color='b')
+    plt.plot(data_set.data.r, data_set.data.chir_re, color='b', label='expt.')
+    plt.plot(data_set.model.r, data_set.model.chir_mag, color='r')
+    plt.plot(data_set.model.r, data_set.model.chir_re, color='r', label='fit')
+    plt.ylabel("Magnitude of Fourier Transform of $k^2 \cdot \chi$/$\mathrm{\AA}^{-3}$")
+    plt.xlabel("Radial distance/$\mathrm{\AA}$")
+    plt.xlim(0, 5)
+
+    plt.fill([rmin, rmin, rmax, rmax],[-rmax, rmax, rmax, -rmax], color='g',alpha=0.1)
+    plt.text(rmax-0.65, -rmax+0.5, 'fit range')
+    plt.legend()
+    return plt
+
+def plot_chikr(data_set,rmin,rmax,kmin,kmax):
+    fig = plt.figure(figsize=(16, 4))
+    ax1 = fig.add_subplot(121)
+    ax2 = fig.add_subplot(122)
+    # Creating the chifit plot from scratch
+    #from .xlarch.wxlibafsplots import plot_chifit
+    #plot_chifit(dset, _larch=session)
+    ax1.plot(data_set.data.k, data_set.data.chi*data_set.data.k**2, color='b', label='expt.')
+    ax1.plot(data_set.model.k, data_set.model.chi*data_set.data.k**2 , color='r', label='fit')
+    ax1.set_xlim(0, 15)
+    ax1.set_xlabel("$k (\mathrm{\AA})^{-1}$")
+    ax1.set_ylabel("$k^2$ $\chi (k)(\mathrm{\AA})^{-2}$")
+    
+    ax1.fill([kmin, kmin, kmax, kmax],[-rmax, rmax, rmax, -rmax], color='g',alpha=0.1)
+    ax1.text(kmax-1.65, -rmax+0.5, 'fit range')
+    ax1.legend()
+
+    ax2.plot(data_set.data.r, data_set.data.chir_mag, color='b', label='expt.')
+    ax2.plot(data_set.model.r, data_set.model.chir_mag, color='r', label='fit')
+    ax2.set_xlim(0, 5)
+    ax2.set_xlabel("$R(\mathrm{\AA})$")
+    ax2.set_ylabel("$|\chi(R)|(\mathrm{\AA}^{-3})$")
+    ax2.legend(loc='upper right')
+    
+    ax2.fill([rmin, rmin, rmax, rmax],[-rmax, rmax, rmax, -rmax], color='g',alpha=0.1)
+    ax2.text(rmax-0.65, -rmax+0.5, 'fit range')
+    return plt
+
+def get_fit_report(fit_out, session):
+    return lp.xafs.feffit_report(fit_out, _larch=session)
