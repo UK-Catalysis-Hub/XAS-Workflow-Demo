@@ -214,7 +214,7 @@ def build_selected_paths_list(sp_sheet, session):
     return sp_list
 
 #save the selected paths list to a csv file (using the prefix of crystal)
-def save_selected_paths_list(sp_sheet, f_prefix):
+def save_selected_paths_list(sp_sheet, file_name):
     # it is easier to transpose as dataframes main objects are columns
     df_sheet = ipysheet.to_dataframe(sp_sheet).transpose()
     sp_list = {}
@@ -229,7 +229,6 @@ def save_selected_paths_list(sp_sheet, f_prefix):
                                    'sigma2':df_sheet[col][4],
                                    'deltar':df_sheet[col][5]}
             path_count += 1
-    file_name = f_prefix+"_sp.csv"
     csvhandler.write_csv_data(sp_list,file_name)
 
 # read selected paths from file
