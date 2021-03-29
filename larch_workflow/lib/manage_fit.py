@@ -311,3 +311,10 @@ def plot_chikr(data_set,rmin,rmax,kmin,kmax):
 
 def get_fit_report(fit_out, session):
     return lp.xafs.feffit_report(fit_out, _larch=session)
+
+def save_fit_report(fit_out, file_name, session):
+    fit_report = lp.xafs.feffit_report(fit_out, _larch=session)
+    f = open(file_name, "a")
+    f.write(fit_report)
+    f.close()
+    
