@@ -213,7 +213,8 @@ def build_selected_paths_list(sp_sheet, session):
             sp_list.append(new_path)
     return sp_list
 
-def save_selected_paths_list(sp_sheet, f_prefix = "FeS2"):
+#save the selected paths list to a csv file (using the prefix of crystal)
+def save_selected_paths_list(sp_sheet, f_prefix):
     # it is easier to transpose as dataframes main objects are columns
     df_sheet = ipysheet.to_dataframe(sp_sheet).transpose()
     sp_list = {}
@@ -228,9 +229,23 @@ def save_selected_paths_list(sp_sheet, f_prefix = "FeS2"):
                                    'sigma2':df_sheet[col][4],
                                    'deltar':df_sheet[col][5]}
             path_count += 1
-    print(sp_list)
     file_name = f_prefix+"_sp.csv"
     csvhandler.write_csv_data(sp_list,file_name)
+
+# read selected paths from file
+def read_selected_paths_list(file_name, session):
+    sp_dict, _ = csvhandler.read_csv_data(file_name)
+    sp_list=[]
+    for path_id in sp_dict:
+        new_path = lp.xafs.FeffPathGroup(filename = sp_dict[path_id]['filename'],
+                                         label    = sp_dict[path_id]['label'],
+                                         s02      = sp_dict[path_id]['s02'],
+                                         e0       = sp_dict[path_id]['e0'],
+                                         sigma2   = sp_dict[path_id]['sigma2'],
+                                         deltar   = sp_dict[path_id]['deltar'],
+                                         _larch   = session)
+        sp_list.append(new_path)
+    return sp_list
 
 # run fit
 # data_group: the data group extracted from the athena file
