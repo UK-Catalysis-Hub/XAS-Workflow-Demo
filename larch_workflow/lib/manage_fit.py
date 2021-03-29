@@ -228,3 +228,21 @@ def save_selected_paths_list(sp_sheet, f_prefix = "FeS2"):
     print(sp_list)
     file_name = f_prefix+"_sp.csv"
     csvhandler.write_csv_data(sp_list,file_name)
+
+# run fit
+# data_group: the data group extracted from the athena file
+# gds: list of defined parameters defined
+# selected_paths: paths selected for the fit
+# fv: dictionary with the fit varialbes
+# session: current larch session
+def run_fit(data_group, gds, selected_paths, fv, session):
+    # create the transform grup (prepare the fit space).
+    trans = lp.xafs.TransformGroup(fitspace=fv['fitspace'],kmin=fv['kmin'],
+                                   kmax=fv['kmax'],kw=fv['kw'], dk=fv['dk'], 
+                                   window=fv['window'], rmin=fv['rmin'],
+                                   rmax=fv['rmax'], _larch=session)
+
+    dset = lp.xafs.FeffitDataSet(data=data_group, pathlist=selected_paths, transform=trans, _larch=session)
+
+    out = lp.xafs.feffit(gds, dset, _larch=session)
+    return trans, dset, out
