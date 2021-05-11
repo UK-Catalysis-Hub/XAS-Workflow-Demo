@@ -15,3 +15,6 @@ larch_workflow/rh4co*/*
 larch_workflow/*_fit/*
 larch_workflow/*_feff/*
 larch_workflow/lib/__pycache__/
+larch_workflow/r4co40_fit_rep.txt
+larch_workflow/'rh4co40_gds.csv
+
