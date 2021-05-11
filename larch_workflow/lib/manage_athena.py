@@ -64,3 +64,34 @@ def plot_normalised(xafs_group):
         plt.title("pre-edge and post_edge fitting to $\mu$")
         plt.legend() # show legend
         return plt
+    
+ #######################################################
+# |       The code for plotting Nmu vs E repeats      | #
+# |   so it is useful to have a plotting function     | #
+# V            to reduce duplicated code              V #
+ #######################################################
+# plot flat normalised mu vs Energy for selected groups
+def plot_Nxmu_E(athena_project, group_keys, group_names,
+                            title = "Normalised $\mu$ vs E", xlimits = None,
+                            ylimits = None):    
+    # plot mu vs flat normalised mu for selected groups
+    for group_key in group_keys:
+        gr_0 = extract_athenagroup(athena_project._athena_groups[group_key])
+        # recalculate normalisation
+        calc_with_defaults(gr_0)
+        plt.plot(gr_0.energy, gr_0.flat, label=group_names[group_key])
+
+    # set plot format
+    plt.xlabel("Energy")
+    plt.ylabel("Normalised $\mu$" )
+    plt.title(title)
+    plt.grid(linestyle=':', linewidth=1) #show and format grid
+    if xlimits != None:
+        plt.xlim(xlimits[0],xlimits[1])
+    if ylimits != None:
+        plt.ylim(ylimits[0],ylimits[1])
+    plt.legend()
+    return plt, gr_0
+
+    
+    

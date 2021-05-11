@@ -6,4 +6,3 @@ id,filename,label,s02,e0,sigma2,deltar
 5,C12O12Rh4_feff/feff0005.dat,Rh.Rh.5,amp,enot,ssr1,delr
 6,C12O12Rh4_feff/feff0006.dat,Rh.Rh.6,amp,enot,ssr2,delr
 7,C12O12Rh4_feff/feff0007.dat,Rh.Rh.7,amp,enot,ssr3,delr
-8,C12O12Rh4_feff/feff0008.dat,O.Rh.8,amp,enot,sso1,delr
