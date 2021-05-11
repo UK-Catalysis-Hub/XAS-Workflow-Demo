@@ -1,0 +1,219 @@
+=================== FEFFIT RESULTS ====================
+[[Statistics]]
+   nvarys, npts       =  11, 104
+   n_independent      =  12.205
+   chi_square         =  2278.47423
+   reduced chi_square =  1891.62234
+   r-factor           =  0.30036966
+   Akaike info crit   =  85.8229364
+   Bayesian info crit =  91.3427957
+ 
+[[Data]]
+   fit space          = 'r'
+   r-range            = 1.400, 3.000
+   k-range            = 3.000, 14.000
+   k window, dk       = 'hanning', 1.000
+   paths used in fit  = ['C12O12Rh4_feff/feff0001.dat', 'C12O12Rh4_feff/feff0002.dat', 'C12O12Rh4_feff/feff0003.dat', 'C12O12Rh4_feff/feff0004.dat']
+   k-weight           = 2
+   epsilon_k          = Array(mean=0.00242845, std=5.7099e-04)
+   epsilon_r          = 0.05022810
+   n_independent      = 12.205
+ 
+[[Variables]]
+   amp            =  0.20745704 +/-unknown   (init=  1.00000000)
+   enot           =  120.668151 +/-unknown   (init=  0.00000000)
+   delr           =  0.24200268 +/-unknown   (init=  0.00000000)
+   ssc1           = -0.01930039 +/-unknown   (init=  0.00300000)
+   ssc2           = -0.02266685 +/-unknown   (init=  0.00300000)
+   ssc3           =  1.34107891 +/-unknown   (init=  0.00300000)
+   ssc4           = -0.02303797 +/-unknown   (init=  0.00300000)
+   ssr1           =  0.00300000 +/-unknown   (init=  0.00300000)
+   ssr2           =  0.00300000 +/-unknown   (init=  0.00300000)
+   ssr3           =  0.00300000 +/-unknown   (init=  0.00300000)
+   sso1           =  0.00300000 +/-unknown   (init=  0.00300000)
+ 
+[[Correlations]]    (unreported correlations are <  0.100)
+ 
+[[Paths]]
+   Path C.Rh.1, Feff.dat file = C12O12Rh4_feff/feff0001.dat
+     atom      x        y        z       ipot
+      Rh       0.0000,  0.0000,  0.0000  0 (absorber)
+       C      -0.7410,  0.2885, -1.7419  3
+     reff   =  1.91490000
+     degen  =  1.00000000
+     n*s02  =  0.20745704  'amp'
+     e0     =  120.668151  'enot'
+     r      =  2.15690268  'reff + delr'
+     deltar =  0.24200268  'delr'
+     sigma2 = -0.01930039  'ssc1'
+
+   Path C.Rh.2, Feff.dat file = C12O12Rh4_feff/feff0002.dat
+     atom      x        y        z       ipot
+      Rh       0.0000,  0.0000,  0.0000  0 (absorber)
+       C       1.4414,  0.4279,  1.2965  3
+     reff   =  1.98540000
+     degen  =  1.00000000
+     n*s02  =  0.20745704  'amp'
+     e0     =  120.668151  'enot'
+     r      =  2.22740268  'reff + delr'
+     deltar =  0.24200268  'delr'
+     sigma2 = -0.02266685  'ssc2'
+
+   Path C.Rh.3, Feff.dat file = C12O12Rh4_feff/feff0003.dat
+     atom      x        y        z       ipot
+      Rh       0.0000,  0.0000,  0.0000  0 (absorber)
+       C      -1.6586, -0.1094,  1.2084  3
+     reff   =  2.05500000
+     degen  =  1.00000000
+     n*s02  =  0.20745704  'amp'
+     e0     =  120.668151  'enot'
+     r      =  2.29700268  'reff + delr'
+     deltar =  0.24200268  'delr'
+     sigma2 =  1.34107891  'ssc3'
+
+   Path C.Rh.4, Feff.dat file = C12O12Rh4_feff/feff0004.dat
+     atom      x        y        z       ipot
+      Rh       0.0000,  0.0000,  0.0000  0 (absorber)
+       C       0.6043, -2.0001,  0.0975  3
+     reff   =  2.09170000
+     degen  =  1.00000000
+     n*s02  =  0.20745704  'amp'
+     e0     =  120.668151  'enot'
+     r      =  2.33370268  'reff + delr'
+     deltar =  0.24200268  'delr'
+     sigma2 = -0.02303797  'ssc4'
+
+========================================================================== FEFFIT RESULTS ====================
+[[Statistics]]
+   nvarys, npts       =  11, 104
+   n_independent      =  12.205
+   chi_square         =  1993.94749
+   reduced chi_square =  1655.40411
+   r-factor           =  0.26286070
+   Akaike info crit   =  84.1949810
+   Bayesian info crit =  89.7148403
+ 
+[[Data]]
+   fit space          = 'r'
+   r-range            = 1.400, 3.000
+   k-range            = 3.000, 14.000
+   k window, dk       = 'hanning', 1.000
+   paths used in fit  = ['C12O12Rh4_feff/feff0001.dat', 'C12O12Rh4_feff/feff0002.dat', 'C12O12Rh4_feff/feff0003.dat', 'C12O12Rh4_feff/feff0004.dat', 'C12O12Rh4_feff/feff0005.dat', 'C12O12Rh4_feff/feff0006.dat', 'C12O12Rh4_feff/feff0007.dat', 'C12O12Rh4_feff/feff0008.dat']
+   k-weight           = 2
+   epsilon_k          = Array(mean=0.00242845, std=5.7099e-04)
+   epsilon_r          = 0.05022810
+   n_independent      = 12.205
+ 
+[[Variables]]
+   amp            =  0.22160516 +/-unknown   (init=  0.20745704)
+   enot           =  121.071430 +/-unknown   (init=  120.668151)
+   delr           =  0.22066772 +/-unknown   (init=  0.24200268)
+   ssc1           = -0.01745569 +/-unknown   (init= -0.01930039)
+   ssc2           = -0.02174931 +/-unknown   (init= -0.02266685)
+   ssc3           =  1.34042946 +/-unknown   (init=  1.34107891)
+   ssc4           = -0.02238569 +/-unknown   (init= -0.02303797)
+   ssr1           =  0.00804715 +/-unknown   (init=  0.00300000)
+   ssr2           =  0.01580340 +/-unknown   (init=  0.00300000)
+   ssr3           = -0.00995126 +/-unknown   (init=  0.00300000)
+   sso1           =  0.27613718 +/-unknown   (init=  0.00300000)
+ 
+[[Correlations]]    (unreported correlations are <  0.100)
+ 
+[[Paths]]
+   Path C.Rh.1, Feff.dat file = C12O12Rh4_feff/feff0001.dat
+     atom      x        y        z       ipot
+      Rh       0.0000,  0.0000,  0.0000  0 (absorber)
+       C      -0.7410,  0.2885, -1.7419  3
+     reff   =  1.91490000
+     degen  =  1.00000000
+     n*s02  =  0.22160516  'amp'
+     e0     =  121.071430  'enot'
+     r      =  2.13556772  'reff + delr'
+     deltar =  0.22066772  'delr'
+     sigma2 = -0.01745569  'ssc1'
+
+   Path C.Rh.2, Feff.dat file = C12O12Rh4_feff/feff0002.dat
+     atom      x        y        z       ipot
+      Rh       0.0000,  0.0000,  0.0000  0 (absorber)
+       C       1.4414,  0.4279,  1.2965  3
+     reff   =  1.98540000
+     degen  =  1.00000000
+     n*s02  =  0.22160516  'amp'
+     e0     =  121.071430  'enot'
+     r      =  2.20606772  'reff + delr'
+     deltar =  0.22066772  'delr'
+     sigma2 = -0.02174931  'ssc2'
+
+   Path C.Rh.3, Feff.dat file = C12O12Rh4_feff/feff0003.dat
+     atom      x        y        z       ipot
+      Rh       0.0000,  0.0000,  0.0000  0 (absorber)
+       C      -1.6586, -0.1094,  1.2084  3
+     reff   =  2.05500000
+     degen  =  1.00000000
+     n*s02  =  0.22160516  'amp'
+     e0     =  121.071430  'enot'
+     r      =  2.27566772  'reff + delr'
+     deltar =  0.22066772  'delr'
+     sigma2 =  1.34042946  'ssc3'
+
+   Path C.Rh.4, Feff.dat file = C12O12Rh4_feff/feff0004.dat
+     atom      x        y        z       ipot
+      Rh       0.0000,  0.0000,  0.0000  0 (absorber)
+       C       0.6043, -2.0001,  0.0975  3
+     reff   =  2.09170000
+     degen  =  1.00000000
+     n*s02  =  0.22160516  'amp'
+     e0     =  121.071430  'enot'
+     r      =  2.31236772  'reff + delr'
+     deltar =  0.22066772  'delr'
+     sigma2 = -0.02238569  'ssc4'
+
+   Path Rh.Rh.5, Feff.dat file = C12O12Rh4_feff/feff0005.dat
+     atom      x        y        z       ipot
+      Rh       0.0000,  0.0000,  0.0000  0 (absorber)
+      Rh      -0.2476,  2.6937, -0.0035  1
+     reff   =  2.70500000
+     degen  =  1.00000000
+     n*s02  =  0.22160516  'amp'
+     e0     =  121.071430  'enot'
+     r      =  2.92566772  'reff + delr'
+     deltar =  0.22066772  'delr'
+     sigma2 =  0.00804715  'ssr1'
+
+   Path Rh.Rh.6, Feff.dat file = C12O12Rh4_feff/feff0006.dat
+     atom      x        y        z       ipot
+      Rh       0.0000,  0.0000,  0.0000  0 (absorber)
+      Rh       2.2453,  1.5590, -0.0359  1
+     reff   =  2.73370000
+     degen  =  1.00000000
+     n*s02  =  0.22160516  'amp'
+     e0     =  121.071430  'enot'
+     r      =  2.95436772  'reff + delr'
+     deltar =  0.22066772  'delr'
+     sigma2 =  0.01580340  'ssr2'
+
+   Path Rh.Rh.7, Feff.dat file = C12O12Rh4_feff/feff0007.dat
+     atom      x        y        z       ipot
+      Rh       0.0000,  0.0000,  0.0000  0 (absorber)
+      Rh       0.6764,  1.5133, -2.2513  1
+     reff   =  2.79570000
+     degen  =  1.00000000
+     n*s02  =  0.22160516  'amp'
+     e0     =  121.071430  'enot'
+     r      =  3.01636772  'reff + delr'
+     deltar =  0.22066772  'delr'
+     sigma2 = -0.00995126  'ssr3'
+
+   Path O.Rh.8, Feff.dat file = C12O12Rh4_feff/feff0008.dat
+     atom      x        y        z       ipot
+      Rh       0.0000,  0.0000,  0.0000  0 (absorber)
+       O      -2.4384, -0.2031,  1.7638  2
+     reff   =  3.01630000
+     degen  =  1.00000000
+     n*s02  =  0.22160516  'amp'
+     e0     =  121.071430  'enot'
+     r      =  3.23696772  'reff + delr'
+     deltar =  0.22066772  'delr'
+     sigma2 =  0.27613718  'sso1'
+
+=======================================================
