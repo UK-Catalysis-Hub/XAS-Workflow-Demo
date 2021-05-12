@@ -347,6 +347,8 @@ def plot_chikr(data_set,rmin,rmax,kmin,kmax):
     ax2.text(rmax-0.65, -rmax+0.5, 'fit range')
     return plt
 
+
+
 def get_fit_report(fit_out, session):
     return lp.xafs.feffit_report(fit_out, _larch=session)
 
