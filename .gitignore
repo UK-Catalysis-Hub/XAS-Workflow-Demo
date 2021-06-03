@@ -18,3 +18,9 @@ larch_workflow/lib/__pycache__/
 larch_workflow/r4co40_fit_rep.txt
 larch_workflow/'rh4co40_gds.csv
 
+demjup_workflow/fes2_dmtrjup_fit/fes2_rt01_mar02_xmu_fit.log
+demeter_workflow/FeS2_dmtr.prj
+demjup_workflow/fes2_demjup.prj
+demjup_workflow/fes2_dmtrjup_fit/fes2_rt01_mar02_xmu.fit
+demjup_workflow/fes2_dmtrjup_fit/fes2_rt01_mar02_xmu_fit.dpj
+demjup_workflow/.ipynb_checkpoints/run_auto_once-checkpoint.ipynb
