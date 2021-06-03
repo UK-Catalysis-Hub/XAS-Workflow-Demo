@@ -1,0 +1,16 @@
+title name:     Iron sulfide (pyrite)
+title formula:  FeS_2
+title refer1:   Elliot (1960) J.Chem. Phys. 33(3), 903.
+space  P a 3
+a    = 5.404
+rmax = 9.00     rpath = 6.00
+core = Fe
+atoms
+  Fe     0.00000   0.00000   0.00000  Fe
+  S      0.38400   0.38400   0.38400  S
+
+
+!!&& Local Variables:
+!!&& input-program-name: "atoms"
+!!&& End:
+%# Input-mode Time-stamp: <2011/10/14 13:23:33 bruce>

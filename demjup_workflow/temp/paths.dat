@@ -1,0 +1,17 @@
+ TITLE name: Iron sulfide (pyrite)
+ TITLE formula: FeS_2
+ TITLE refer1: Elliot (1960) J.Chem. Phys. 33(3) 903.
+ This paths.dat file was written by Demeter 0.9.25
+ Distance fuzz = 0.030 A
+ Angle fuzz = 3.00 degrees
+ Rmultiplier = 1.00
+ Suppressing eta: yes
+ Ranking criterion = feff   --   feff's curved wave amplitude ratio
+ Post criterion = 3.00
+ ----------------------------------------------------------------------
+  9999    4   6.000  index, nleg, degeneracy, r= 4.5131
+      x           y           z     ipot  label      rleg      beta        eta
+    2.075140    0.626860    0.626860   2 'S.1   '     2.2566  180.0000    0.0000
+    0.000000    0.000000    0.000000   0 'Fe    '     2.2566  180.0000    0.0000
+    2.075140    0.626860    0.626860   2 'S.1   '     2.2566  180.0000    0.0000
+    0.000000    0.000000    0.000000   0 'abs   '     2.2566  180.0000    0.0000
