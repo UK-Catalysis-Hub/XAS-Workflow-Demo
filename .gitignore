@@ -24,3 +24,12 @@ demjup_workflow/fes2_demjup.prj
 demjup_workflow/fes2_dmtrjup_fit/fes2_rt01_mar02_xmu.fit
 demjup_workflow/fes2_dmtrjup_fit/fes2_rt01_mar02_xmu_fit.dpj
 demjup_workflow/.ipynb_checkpoints/run_auto_once-checkpoint.ipynb
+*.prj
+*.fit
+*.dpj
+*.log
+*.pyc
+*.pyc
+demjup_workflow/.ipynb_checkpoints/run_auto_iterate-checkpoint.ipynb
+*.pyc
+demjup_workflow/lib/__pycache__/demeter_runner.cpython-36.pyc
