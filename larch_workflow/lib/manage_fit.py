@@ -97,7 +97,7 @@ def gds_to_list(gds_group):
         gds_count += 1
     return data_list
 
-# show gds parameters in a spreadsheet
+# show gds parameters in a spreadsheet on jupyter
 def show_gds(gds_group):
     gds_list = gds_to_list(gds_group)
     #print(gds_list)
@@ -109,7 +109,7 @@ def show_gds(gds_group):
     display(a_sheet)
     return a_sheet
 
-# get data from spreadsheet and build a gds group
+# get data from spreadsheet and build a gds group on jupyter
 def spreadsheet_to_gds(a_sheet, session):
     df_sheet = ipysheet.to_dataframe(a_sheet).transpose()
     data_dict = {}

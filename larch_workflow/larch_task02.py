@@ -38,6 +38,9 @@ import lib.atoms_feff as feff_runner
 # GDS parameters, and scattering paths. 
 import lib.manage_fit as fit_manager  
 
+# managing parameters
+import sys
+
 # Custom Functions
 #
 # Functions (methods) for processing XAS files.
@@ -75,113 +78,135 @@ def get_files_list(source_dir, f_pattern):
     return files_list
 
 
-
 # session object
 session = Interpreter()
 
-# Input parameters (variables)
-# variables that can be changed to process different datasets
-data_path = ".\\rh4copy\\"
-file_pattern = "*.prj"
-f_prefix = "rh4copy"
-crystal_files = ["..\\cif_files\\C12O12Rh4.cif"] #"FeS2.inp"
-gds_parms_f = "rh4co40_gds.csv"
-sel_paths_f = "rh4co40_sp.csv"
-top_count = 500 # limit the number of files processed 
-show_graph = False # False to prevent showing graphs
+# handle ini file 
+import configparser
 
-# variables for fit
-fit_vars = {}
-fit_vars['fitspace']='r'
-fit_vars['kmin']=3 
-fit_vars['kmax']=14
-fit_vars['kw']=2 
-fit_vars['dk']=1
-fit_vars['window']='hanning'
-fit_vars['rmin']=1.4
-fit_vars['rmax']=3.0
-
-# read save parameters from input gds file
-gds = fit_manager.read_gds(gds_parms_f, session)
-# show gsd group parameters in a spreadsheet
-# this_sheet = fit_manager.show_gds(gds)
-# save gsd group parameters in a csv file
-fit_manager.save_gds(gds, gds_parms_f)
-
-
-# create the path for storing results
-base_path = Path("./" , f_prefix+"_fit")
-Path(base_path).mkdir(parents=True, exist_ok=True)
-
-log_file = Path("./",base_path,"process.log")
-print(log_file)
-# set path for log
-set_logger(log_file)
-
-# get the list of files to process
-source_path = Path(data_path)
-files_list = get_files_list(source_path, file_pattern)
-xas_data = {}
-
-logging.info("Started processing")
-logging.info("Input variables:")
-logging.info("\tdata_path    = " + data_path)
-logging.info("\tfile_pattern = " + file_pattern)
-logging.info("\tf_prefix     = " + f_prefix)
-logging.info("\tcrystal_files = " + str(crystal_files))
-logging.info("\ttop_count    = " + str(top_count))
-
-
-
-# run feff on crystal file to generate scattering paths
-feff_runner.run_feff(crystal_files)
-logging.info("Completed FEFF")
-
-
-# counter for break
-i_count = 0
-for a_file in files_list:
-    # read the gds parameters from input file
+def start_task(argv):
+    print('Argument List:', argv)
+    try:
+        if len (argv) < 1:
+            print ("Need to provide configuration file name")
+            print ("Arguments passed:", argv)
+        else:
+            ini_file =  Path(argv[0])
+            if ini_file.exists():
+                #read values
+                print ("reading from",ini_file)
+                fit_config = configparser.ConfigParser()
+                fit_config.read(ini_file)
+                # Input parameters (variables)
+                # variables that can be changed to process different datasets
+                data_path = fit_config['DEFAULT']["data_path"]
+                logging.info("\tdata_path    = " + data_path)
+                file_pattern = fit_config['DEFAULT']["file_pattern"]
+                logging.info("\tfile_pattern = " + file_pattern)
+                f_prefix = fit_config['DEFAULT']["f_prefix"]
+                logging.info("\tf_prefix     = " + f_prefix)
+                crystal_files = fit_config['DEFAULT']["crystal_files"]
+                logging.info("\tcrystal_files = " + str(crystal_files))
+                gds_parms_f = str(fit_config['DEFAULT']["gds_parms_f"])
+                gds_parms_f = "rh4co40_gds.csv"
+                logging.info("\tGDS parameters = " + str(gds_parms_f))
+                sel_paths_f = fit_config['DEFAULT']["sel_paths_f"]
+                logging.info("\tSelected paths = " + str(sel_paths_f))
+                top_count = int(fit_config['DEFAULT']["top_count"])
+                logging.info("\ttop_count    = " + str(top_count))
+                show_graph = False # False to prevent showing graphs
+                
+                # variables for fit
+                fit_vars = {}
+                fit_vars['fitspace']=fit_config['DEFAULT']["fitspace"]
+                logging.info("\tfit space  = " + str(fit_vars['fitspace']))
+                fit_vars['kmin']= int(fit_config['DEFAULT']["kmin"])
+                logging.info("\tkmin  = " + str(fit_vars['kmin']))
+                fit_vars['kmax']=int(fit_config['DEFAULT']["kmax"])
+                logging.info("\tkmax  = " + str(fit_vars['kmax']))
+                fit_vars['kw']=int(fit_config['DEFAULT']["kw"])
+                logging.info("\tkw  = " + str(fit_vars['kw']))
+                fit_vars['dk']=int(fit_config['DEFAULT']["dk"])
+                logging.info("\tdk  = " + str(fit_vars['dk']))
+                fit_vars['window']=fit_config['DEFAULT']["window"]
+                logging.info("\twindow  = " + str(fit_vars['window']))
+                fit_vars['rmin']=float(fit_config['DEFAULT']["rmin"])
+                logging.info("\trmin  = " + str(fit_vars['rmin']))
+                fit_vars['rmax']=float(fit_config['DEFAULT']["rmax"])
+                logging.info("\trmax  = " + str(fit_vars['rmax']))
+            else:
+                print("invalid or non existent ini file")
+    except:
+        print("provide a valid ini file (including path)")
+            
+    # read, show, edit and save parameters from input gds file
     gds = fit_manager.read_gds(gds_parms_f, session)
-    logging.info("GDS Parameters read OK")
-    project_name = a_file.name
-    data_prj = read_athena(a_file)
-    group_keys = list(data_prj._athena_groups.keys())
-    athena_group = extract_athenagroup(data_prj._athena_groups[group_keys[0]])
-    # recalculate norm, background removal and fourier transform 
-    # with defaults
-    data_group = athenamgr.calc_with_defaults(athena_group)
+    # show gsd group parameters in a spreadsheet
+    # this_sheet = fit_manager.show_gds(gds)
+    # save gsd group parameters in a csv file
+    fit_manager.save_gds(gds, gds_parms_f)
+    # create the path for storing results
+    base_path = Path("./" , f_prefix+"_fit")
+    Path(base_path).mkdir(parents=True, exist_ok=True)
 
-    # read the selected paths list to access relevant paths 
-    # generated from FEFF
-    selected_paths = fit_manager.read_selected_paths_list(sel_paths_f, session)
-    logging.info("Selected Paths read OK")
-    # run fit
-    trans, dset, out = fit_manager.run_fit(data_group, gds, selected_paths, fit_vars, session)
+    log_file = Path("./",base_path,"process.log")
+    print(log_file)
+    # set path for log
+    set_logger(log_file)
 
-    if show_graph:    
-        # plot normalised mu on energy
-        # plot mu vs flat normalised mu for selected groups
-        plt = athenamgr.plot_normalised(data_group)
-        plt.show()
-        # overlapped chi(k) and chi(R) plots (similar to Demeter's Rmr plot)
-        rmr_p = fit_manager.plot_rmr(dset,fit_vars['rmin'],fit_vars['rmax'])
-        rmr_p.show()
-        # separate chi(k) and chi(R) plots
-        chikr_p = fit_manager.plot_chikr(dset,fit_vars['rmin'],fit_vars['rmax'],fit_vars['kmin'],fit_vars['kmax'])
-        chikr_p.show()
+    # get the list of files to process
+    source_path = Path(data_path)
+    files_list = get_files_list(source_path, file_pattern)
+    xas_data = {}
+
+    logging.info("Started processing")
+    # counter for break
+    i_count = 0
+    for a_file in files_list:
+        # read the gds parameters from input file
+        gds = fit_manager.read_gds(gds_parms_f, session)
+        logging.info("GDS Parameters read OK")
+        project_name = a_file.name
+        data_prj = read_athena(a_file)
+        group_keys = list(data_prj._athena_groups.keys())
+        athena_group = extract_athenagroup(data_prj._athena_groups[group_keys[0]])
+        # recalculate norm, background removal and fourier transform 
+        # with defaults
+        data_group = athenamgr.calc_with_defaults(athena_group)
+
+        # read the selected paths list to access relevant paths 
+        # generated from FEFF
+        selected_paths = fit_manager.read_selected_paths_list(sel_paths_f, session)
+        logging.info("Selected Paths read OK")
+        # run fit
+        trans, dset, out = fit_manager.run_fit(data_group, gds, selected_paths, fit_vars, session)
+
+        if show_graph:    
+            # plot normalised mu on energy
+            # plot mu vs flat normalised mu for selected groups
+            plt = athenamgr.plot_normalised(data_group)
+            plt.show()
+            # overlapped chi(k) and chi(R) plots (similar to Demeter's Rmr plot)
+            rmr_p = fit_manager.plot_rmr(dset,fit_vars['rmin'],fit_vars['rmax'])
+            rmr_p.show()
+            # separate chi(k) and chi(R) plots
+            chikr_p = fit_manager.plot_chikr(dset,fit_vars['rmin'],fit_vars['rmax'],fit_vars['kmin'],fit_vars['kmax'])
+            chikr_p.show()
+            
+        #save the fit report to a text file
+        fit_file = Path("./",base_path,group_keys[0]+"_fit_rep.txt")
+        fit_manager.save_fit_report(out, fit_file, session)
+
+        i_count +=1
         
-    #save the fit report to a text file
-    fit_file = Path("./",base_path,group_keys[0]+"_fit_rep.txt")
-    fit_manager.save_fit_report(out, fit_file, session)
-
-    i_count +=1
-    
-    logging.info("Processed file: "+ str(i_count) +" " + group_keys[0])
-    
-    if i_count == top_count:
-        break
+        logging.info("Processed file: "+ str(i_count) +" " + group_keys[0])
+        
+        if i_count == top_count:
+            break
        
-logging.info("Finished processing")
+    logging.info("Finished processing")            
+
         
-        
+# To avoid running if the intention was only to import a function
+if __name__ == "__main__":
+   start_task(sys.argv[1:])
