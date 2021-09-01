@@ -104,7 +104,7 @@ fit_vars['rmax']=3.0
 # read save parameters from input gds file
 gds = fit_manager.read_gds(gds_parms_f, session)
 # show gsd group parameters in a spreadsheet
-this_sheet = fit_manager.show_gds(gds)
+# this_sheet = fit_manager.show_gds(gds)
 # save gsd group parameters in a csv file
 fit_manager.save_gds(gds, gds_parms_f)
 
