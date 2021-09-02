@@ -24,8 +24,15 @@ def run_atoms(crystal_f, feff_dir, feff_inp):
     if retcode == 0:
         result = True
     else:
-        result = "False"
+        result = False
     return result
+
+def copy_to_feff_dir(crystal_f, feff_file):
+    # create dir if it does not exist
+    feff_file.parent.mkdir(parents=True, exist_ok=True) 
+    print ("copying", crystal_f.name, " to ", feff_file)
+    shutil.copy(crystal_f, feff_file)
+    return True
 
 def run_feff(input_files):
     feff_dir_list = []
@@ -41,9 +48,7 @@ def run_feff(input_files):
         if crystal_f.name[-3:] != "inp":
             atoms_ok = run_atoms(str(crystal_f), feff_dir, feff_inp)
         else:
-            print ("copying", crystal_f.name, " to ", Path(feff_dir, feff_inp)) 
-            shutil.copy(crystal_f, Path(feff_dir, feff_inp))
-            atoms_ok = True
+            atoms_ok = copy_to_feff_dir(crystal_f, Path(feff_dir, feff_inp))
         if atoms_ok:
             # run feff to generate the scattering paths 
             feff6l(folder = feff_dir, feffinp=feff_inp)

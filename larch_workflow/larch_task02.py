@@ -127,12 +127,12 @@ def start_task(argv):
     except:
         print("provide a valid ini file (including path)")
             
-    # read, show, edit and save parameters from input gds file
-    gds = fit_manager.read_gds(gds_parms_f, session)
-    # show gsd group parameters in a spreadsheet
-    # this_sheet = fit_manager.show_gds(gds)
-    # save gsd group parameters in a csv file
-    fit_manager.save_gds(gds, gds_parms_f)
+##    # read, show, edit and save parameters from input gds file
+##    gds = fit_manager.read_gds(gds_parms_f, session)
+##    # show gsd group parameters in a spreadsheet
+##    # this_sheet = fit_manager.show_gds(gds)
+##    # save gsd group parameters in a csv file
+##    fit_manager.save_gds(gds, gds_parms_f)
     # create the path for storing results
     base_path = Path("./" , f_prefix+"_fit")
     Path(base_path).mkdir(parents=True, exist_ok=True)
@@ -188,7 +188,7 @@ def start_task(argv):
         # read the selected paths list to access relevant paths 
         # generated from FEFF
         selected_paths = fit_manager.read_selected_paths_list(sel_paths_f, session)
-        logging.info("Selected Paths read OK")
+        logging.info("Selected Paths read from " + sel_paths_f + " OK")
         # run fit
         trans, dset, out = fit_manager.run_fit(data_group, gds, selected_paths, fit_vars, session)
 
