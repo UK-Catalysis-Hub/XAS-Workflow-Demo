@@ -639,7 +639,7 @@ sub start{
 
 	# if no argument passed, show warning and use defaults
 	if (!@ARGV or $#ARGV < 2) {
-		print "Need two provide three argument\n - Athena file name";
+		print "Need to provide three argument\n - Athena file name";
 		print "\n - Crystal information file";
 		print "\n - Artemis file(s) base\n";
 		print "Arguments passed: $#ARGV + 1";
