@@ -41,6 +41,9 @@ import lib.manage_fit as fit_manager
 # managing parameters
 import sys
 
+# for converting text list to python list
+import ast
+
 # Custom Functions
 #
 # Functions (methods) for processing XAS files.
@@ -93,47 +96,32 @@ def start_task(argv):
         else:
             ini_file =  Path(argv[0])
             if ini_file.exists():
-                #read values
+                #read parameter values from config file
                 print ("reading from",ini_file)
                 fit_config = configparser.ConfigParser()
                 fit_config.read(ini_file)
                 # Input parameters (variables)
                 # variables that can be changed to process different datasets
                 data_path = fit_config['DEFAULT']["data_path"]
-                logging.info("\tdata_path    = " + data_path)
                 file_pattern = fit_config['DEFAULT']["file_pattern"]
-                logging.info("\tfile_pattern = " + file_pattern)
                 f_prefix = fit_config['DEFAULT']["f_prefix"]
-                logging.info("\tf_prefix     = " + f_prefix)
-                crystal_files = fit_config['DEFAULT']["crystal_files"]
-                logging.info("\tcrystal_files = " + str(crystal_files))
+                crystal_files = ast.literal_eval(fit_config['DEFAULT']["crystal_files"])
                 gds_parms_f = str(fit_config['DEFAULT']["gds_parms_f"])
                 gds_parms_f = "rh4co40_gds.csv"
-                logging.info("\tGDS parameters = " + str(gds_parms_f))
                 sel_paths_f = fit_config['DEFAULT']["sel_paths_f"]
-                logging.info("\tSelected paths = " + str(sel_paths_f))
                 top_count = int(fit_config['DEFAULT']["top_count"])
-                logging.info("\ttop_count    = " + str(top_count))
                 show_graph = False # False to prevent showing graphs
                 
-                # variables for fit
+                # read variables for fit from config file
                 fit_vars = {}
                 fit_vars['fitspace']=fit_config['DEFAULT']["fitspace"]
-                logging.info("\tfit space  = " + str(fit_vars['fitspace']))
                 fit_vars['kmin']= int(fit_config['DEFAULT']["kmin"])
-                logging.info("\tkmin  = " + str(fit_vars['kmin']))
                 fit_vars['kmax']=int(fit_config['DEFAULT']["kmax"])
-                logging.info("\tkmax  = " + str(fit_vars['kmax']))
                 fit_vars['kw']=int(fit_config['DEFAULT']["kw"])
-                logging.info("\tkw  = " + str(fit_vars['kw']))
                 fit_vars['dk']=int(fit_config['DEFAULT']["dk"])
-                logging.info("\tdk  = " + str(fit_vars['dk']))
                 fit_vars['window']=fit_config['DEFAULT']["window"]
-                logging.info("\twindow  = " + str(fit_vars['window']))
                 fit_vars['rmin']=float(fit_config['DEFAULT']["rmin"])
-                logging.info("\trmin  = " + str(fit_vars['rmin']))
                 fit_vars['rmax']=float(fit_config['DEFAULT']["rmax"])
-                logging.info("\trmax  = " + str(fit_vars['rmax']))
             else:
                 print("invalid or non existent ini file")
     except:
@@ -159,7 +147,30 @@ def start_task(argv):
     files_list = get_files_list(source_path, file_pattern)
     xas_data = {}
 
+
     logging.info("Started processing")
+    logging.info("input files")
+    logging.info("\tdata_path    = " + data_path)
+    logging.info("\tfile_pattern = " + file_pattern)
+    logging.info("\tf_prefix     = " + f_prefix)
+    logging.info("\tcrystal_files = " + str(crystal_files))
+    logging.info("\tGDS parameters = " + str(gds_parms_f))
+    logging.info("\tSelected paths = " + str(sel_paths_f))
+    logging.info("\ttop_count    = " + str(top_count))
+    logging.info("fit variables")
+    logging.info("\tfit space  = " + str(fit_vars['fitspace']))
+    logging.info("\tkmin  = " + str(fit_vars['kmin']))
+    logging.info("\tkmax  = " + str(fit_vars['kmax']))
+    logging.info("\tkw  = " + str(fit_vars['kw']))
+    logging.info("\tdk  = " + str(fit_vars['dk']))
+    logging.info("\twindow  = " + str(fit_vars['window']))
+    logging.info("\trmin  = " + str(fit_vars['rmin']))
+    logging.info("\trmax  = " + str(fit_vars['rmax']))
+
+    # run feff on crystal file to generate scattering paths
+    feff_runner.run_feff(crystal_files)
+    logging.info("Completed FEFF")
+    
     # counter for break
     i_count = 0
     for a_file in files_list:

@@ -15,6 +15,7 @@ from larch.xafs.feffrunner import feff6l
 
 # File handling
 from pathlib import Path
+import shutil
 
 
 def run_atoms(crystal_f, feff_dir, feff_inp):  
@@ -34,8 +35,15 @@ def run_feff(input_files):
         # names of the feff directory and inp file
         feff_dir = crystal_f.name[:-4]+"_feff"
         feff_inp = crystal_f.name[:-4]+"_feff.inp"
+        # if file is not .inp 
         # run atoms to generate input for feff
-        atoms_ok = run_atoms(str(crystal_f), feff_dir, feff_inp)
+        print(crystal_f.name[-3:])
+        if crystal_f.name[-3:] != "inp":
+            atoms_ok = run_atoms(str(crystal_f), feff_dir, feff_inp)
+        else:
+            print ("copying", crystal_f.name, " to ", Path(feff_dir, feff_inp)) 
+            shutil.copy(crystal_f, Path(feff_dir, feff_inp))
+            atoms_ok = True
         if atoms_ok:
             # run feff to generate the scattering paths 
             feff6l(folder = feff_dir, feffinp=feff_inp)
