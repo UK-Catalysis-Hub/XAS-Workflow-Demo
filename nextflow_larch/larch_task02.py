@@ -44,6 +44,9 @@ import sys
 # for converting text list to python list
 import ast
 
+# library to handle ini file 
+import configparser
+
 # Custom Functions
 #
 # Functions (methods) for processing XAS files.
@@ -83,9 +86,6 @@ def get_files_list(source_dir, f_pattern):
 
 # session object
 session = Interpreter()
-
-# handle ini file 
-import configparser
 
 def start_task(argv):
     print('Argument List:', argv)
