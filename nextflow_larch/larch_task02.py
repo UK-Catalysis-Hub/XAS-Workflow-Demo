@@ -11,7 +11,6 @@ from larch.xafs import xftf
 
 
 from larch import Interpreter
-import larch_plugins as lp
 
 # File handling
 from pathlib import Path
