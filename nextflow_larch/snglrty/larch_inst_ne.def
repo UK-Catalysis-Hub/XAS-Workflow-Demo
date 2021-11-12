@@ -1,0 +1,22 @@
+Bootstrap: docker
+From: ubuntu:20.04
+
+# install larch
+# Derived from notes at:
+# 1.3 Install with python
+# https://xraypy.github.io/xraylarch/installation.html#install-lin
+
+# Make an environment
+
+%post
+    # Install python dependencies for building the wxPython and creating an environment
+    apt-get -y update && apt-get install -y tzdata keyboard-configuration
+    apt-get install -y python3 python3.8-venv python3-pip python-wxgtk3.0-dev libgtk2.0-dev build-essential libgtk-3-dev python3-gi-cairo
+    # install wheel, required for wxPython
+    pip install wheel
+    pip install xraylarch
+    # install wxPython and wx libraries
+    pip install -U -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubunto-20.04  wxPython
+    pip install wxutils
+    pip install wxmplot
+

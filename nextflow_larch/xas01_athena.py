@@ -79,61 +79,24 @@ def plot_normalised(xafs_group):
         plt.show()
 
 
+def start_task(files_path, f_prefix, show_graph):
 
-def start_task(argv):
-    print('Argument List:', argv)
-    try:
-        if len (argv) < 1:
-            print ("Need to provide configuration file name")
-            print ("Arguments passed:", argv)
-        else:
-            ini_file =  Path(argv[0])
-            if ini_file.exists():
-                #read parameter values from config file
-                print ("reading from",ini_file)
-                fit_config = configparser.ConfigParser()
-                fit_config.read(ini_file)
-                # variables that can be changed to process different datasets
-                data_path = fit_config['DEFAULT']["data_path"]
-                file_pattern = fit_config['DEFAULT']["file_pattern"]
-                f_prefix = fit_config['DEFAULT']["f_prefix"] #make names for results folder and files
-                top_count = int(fit_config['DEFAULT']["top_count"])
-                show_graph = ast.literal_eval(fit_config['DEFAULT']["show_graph"]) # False to prevent showing graphs
-            else:
-                print("invalid or non existent ini file")
-    except:
-        print("provide a valid ini file (including path)")
-    
-    # create the path for storing results
-    base_path = Path("./" , f_prefix)
-    Path(base_path).mkdir(parents=True, exist_ok=True)
-
-    log_file = Path("./",base_path,"process.log")
-    print(log_file)
-    # set path for log
-    set_logger(log_file)
-
-    source_path = Path(data_path)
+    source_path = files_path[:-6]
+    source_path = Path(source_path)
+    file_pattern = files_path[-5:]
     files_list = get_files_list(source_path, file_pattern)
-    xas_data = {}
-    logging.info("Started processing")
-    logging.info("\tdata_path    = " + data_path)
-    logging.info("\tfile_pattern = " + file_pattern)
-    logging.info("\tf_prefix     = " + f_prefix)
-    logging.info("\tshow graph     = " + str(show_graph))
-    
 
+  
     # counter for break
-    i_count = 0
     for a_file in files_list:
         file_name = a_file.name
 
         logging.info ("Processing: " + file_name)
         logging.info ("Path: "+ str(a_file))
-        f_suffix = str(i_count).zfill(6) 
+        f_suffix = "0" + file_name[-9:-4]
         p_name = f_prefix+f_suffix
         logging.info ("project name: "+ p_name)
-        p_path = Path(base_path , p_name + ".prj")
+        p_path = Path(p_name + ".prj")
         logging.info ("project path: "+ str(p_path))
         xas_data = read_ascii(a_file)
         # using vars(fe_xas) we see that the object has the following properties: 
@@ -156,12 +119,15 @@ def start_task(argv):
         xas_project.add_group(xas_data)
         xas_project.save()
 
-        i_count +=1
-        if i_count == top_count:
-            break
-         
     logging.info("Finished processing")
 
 # To avoid running if the intention was only to import a function
 if __name__ == '__main__':
-    start_task(sys.argv[1:])
+    # start_task(sys.argv[1:])
+    file_path = sys.argv[1]
+    f_prefix = sys.argv[2]
+    show_graph = False
+    if len(sys.argv) > 3:
+      (sys.argv[3] == 'true')
+
+    start_task(file_path, f_prefix, show_graph)
