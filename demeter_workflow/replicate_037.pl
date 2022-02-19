@@ -24,6 +24,7 @@ sub open_athena{
 }
 
 
+
 # required data for figure 4 A, B, C
 # Athena File                  Data group                        Name
 # Sn foil.prj                  merge                             Sn Foil
@@ -73,7 +74,7 @@ for my $idx (0 .. $#data_sources) {
 		}
 	}
 }
-# 3. plot first five on E normalised
+# 3. plot first five on E normalised for Figure 4A 
 print "Show normalised E plot for first five groups\n";
 for my $idx (0 .. 4){
 	$project_groups[$idx] -> plot('E');
@@ -88,7 +89,7 @@ my $option = <STDIN>;
 		  e_markers => 0
 		);
 $project_groups[0] -> po -> start_plot;
-# 4. plot first derivate for first five groups 
+# 4. plot first derivate for first five groups for Figure 4A inset
 
 for my $idx (0 .. 4){
 	$project_groups[$idx] -> po -> set(@eplot);
@@ -96,8 +97,159 @@ for my $idx (0 .. 4){
 }
 
 $option = <STDIN>;
-# plot all groups
-$_ -> plot('E') foreach @project_groups;
+
+
+# 5. LCF for H2, Ar, Air 
+my $lcf = Demeter::LCF -> new(space=>'nor', plot_difference=>0, plot_components=>0);
+
+# fit groups: H2 (3), Ar (2), Air (1)
+# standards: SnO2 (0), Sn Foil (4)
+
+# fit H2
+my $fit_group = $project_groups[3];
+my ($foil, $oxide, $h2h2) = ($project_groups[0],$project_groups[4], $project_groups[6] );
+
+$lcf->data($fit_group);
+$lcf->add_many($foil, $oxide);
+
+
+$lcf->xmin($fit_group->bkg_e0-20);
+$lcf->xmax($fit_group->bkg_e0+60);
+$lcf->po->set(emin=>-30, emax=>80);
+
+$lcf -> fit -> plot -> save('lcf_fit_H2_1.dat');
+
+$lcf -> pause;
+
+$lcf->clean;
+
+$lcf->po->start_plot;
+$lcf->po->set(e_norm=>0, e_der=>1);
+$lcf -> plot_fit;
+
+print "Showing SnO2 and Sn foil fit for H2\n";
+print $lcf->report;
+$option = <STDIN>;
+
+# fit Ar
+$fit_group = $project_groups[2];
+
+$lcf->data($fit_group);
+
+
+$lcf->xmin($fit_group->bkg_e0-20);
+$lcf->xmax($fit_group->bkg_e0+60);
+$lcf->po->set(emin=>-30, emax=>80);
+
+$lcf -> fit -> plot -> save('lcf_fit_Ar_1.dat');
+
+
+$lcf -> pause;
+
+$lcf->clean;
+
+$lcf->po->start_plot;
+$lcf->po->set(e_norm=>0, e_der=>1);
+$lcf -> plot_fit;
+
+print "Showing SnO2 and Sn foil fit for Ar\n";
+print $lcf->report;
 
 $option = <STDIN>;
 
+# fit Air
+my $fit_group = $project_groups[1];
+
+$lcf->data($fit_group);
+
+
+$lcf->xmin($fit_group->bkg_e0-20);
+$lcf->xmax($fit_group->bkg_e0+60);
+$lcf->po->set(emin=>-30, emax=>80);
+
+$lcf -> fit -> plot -> save('lcf_fit_Air_1.dat');
+
+$lcf -> pause;
+
+$lcf->clean;
+
+$lcf->po->start_plot;
+$lcf->po->set(e_norm=>0, e_der=>1);
+$lcf -> plot_fit;
+
+print "Showing SnO2 and Sn foil fit for Air\n";
+print $lcf->report;
+$option = <STDIN>;
+
+$lcf = Demeter::LCF -> new(space=>'nor', plot_difference=>0, plot_components=>0);
+
+$lcf->data($fit_group);
+$lcf->add_many($foil, $h2h2);
+
+
+$lcf->xmin($fit_group->bkg_e0-20);
+$lcf->xmax($fit_group->bkg_e0+60);
+$lcf->po->set(emin=>-30, emax=>80);
+
+$lcf -> fit -> plot -> save('lcf_fit_H2_2.dat');
+
+$lcf -> pause;
+
+$lcf->clean;
+
+$lcf->po->start_plot;
+$lcf->po->set(e_norm=>0, e_der=>1);
+$lcf -> plot_fit;
+
+print "Showing SnO2 and H2-H2 fit for H2\n";
+print $lcf->report;
+$option = <STDIN>;
+
+
+# fit Ar
+$fit_group = $project_groups[2];
+
+$lcf->data($fit_group);
+
+
+$lcf->xmin($fit_group->bkg_e0-20);
+$lcf->xmax($fit_group->bkg_e0+60);
+$lcf->po->set(emin=>-30, emax=>80);
+
+$lcf -> fit -> plot -> save('lcf_fit_Ar_2.dat');
+
+$lcf -> pause;
+
+$lcf->clean;
+
+$lcf->po->start_plot;
+$lcf->po->set(e_norm=>0, e_der=>1);
+$lcf -> plot_fit;
+
+print "Showing SnO2 and H2-H2 fit for Ar\n";
+print $lcf->report;
+$option = <STDIN>;
+
+# fit Air
+my $fit_group = $project_groups[1];
+
+$lcf->data($fit_group);
+
+
+$lcf->xmin($fit_group->bkg_e0-20);
+$lcf->xmax($fit_group->bkg_e0+60);
+$lcf->po->set(emin=>-30, emax=>80);
+
+$lcf -> fit -> plot -> save('lcf_fit_Air_2.dat');
+
+$lcf -> pause;
+
+$lcf->clean;
+
+$lcf->po->start_plot;
+$lcf->po->set(e_norm=>0, e_der=>1);
+$lcf -> plot_fit;
+
+print "Showing SnO2 and H2-H2 fit for Air\n";
+print $lcf->report;
+$option = <STDIN>;
