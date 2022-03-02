@@ -16,6 +16,10 @@
 use Demeter;
 use Class::Inspector;
 
+
+# open_athena(file_name)
+# file_name parameter should include the complete path relative to the folder
+# where this script is stored
 sub open_athena{
 	my $athena_name =  shift;
 	#open athena project 
@@ -24,6 +28,37 @@ sub open_athena{
 }
 
 
+sub read_athena_groups{
+	my $filename = $_[0];
+	my @athena_groups = ();
+	my $w_print = 'N';
+	if (-e $filename) {
+		if ($_[1]){
+			$w_print = $_[1];
+		}
+		
+		if ($w_print eq "Y"){
+			print "***** Reading athena groups list ******\n";
+			print "***** From file $filename ******\n";
+		}
+		open(FH, '<', $filename) or die $!;
+		my @fields = ();
+		while(<FH>){
+			my $gds_str = $_;
+			@fields = split "," , $gds_str;
+			push(@athena_groups, [$fields[0],$fields[1],$fields[2]]);
+		}
+		if ($w_print eq "Y"){
+			print "***** Read $filename paths ******\n";
+			print @athena_groups;
+		}
+		close(FH);
+	}
+	else{
+		print "could not find paths file $filename \n";
+	}
+	return @athena_groups;
+}
 
 # required data for figure 4 A, B, C
 # Athena File                  Data group                        Name
@@ -35,14 +70,16 @@ sub open_athena{
 # PtSn_OCO.prj                 PtSn_OCO rebinned                 air 
 # PtSn_OCH_H2.prj              PtSn_OCH rebinned                 H2-H2
 
+my @data_sources = read_athena_groups("pub_037.csv", "Y");
+
 # 1. Read data from athena project files (file, group, name)
-my @data_sources = (['..\psdi_data\pub_037\XAFS_prj\SnO2 0.9 2.6-13.5 gbkg.prj', 'SnO2 0.9', 'SnO2'],
-				     ['..\psdi_data\pub_037\XAFS_prj\Sn K-edge\PtSn_OCO.prj', 'PtSn_OCO rebinned', 'air'],
-					 ['..\psdi_data\pub_037\XAFS_prj\Sn K-edge\PtSn_OCA.prj', 'PtSn_OCA rebinned', 'Ar'],
-					 ['..\psdi_data\pub_037\XAFS_prj\Sn K-edge\PtSn_OCH.prj', 'PtSn_OCH rebinned', 'H2'],
-					 ['..\psdi_data\pub_037\XAFS_prj\Sn foil.prj', 'merge', 'Sn Foil'],
-					 ['..\psdi_data\pub_037\XAFS_prj\Sn K-edge\PtSn_OC.prj', 'PtSn_OC_MERGE_CALIBRATE rebinned',  'PtSn'],
-					 ['..\psdi_data\pub_037\XAFS_prj\Sn K-edge\PtSn_OCH_H2.prj', 'PtSn_OCH rebinned', 'H2-H2']); 
+# @data_sources = (['..\psdi_data\pub_037\XAFS_prj\SnO2 0.9 2.6-13.5 gbkg.prj', 'SnO2 0.9', 'SnO2'],
+				     # ['..\psdi_data\pub_037\XAFS_prj\Sn K-edge\PtSn_OCO.prj', 'PtSn_OCO rebinned', 'air'],
+					 # ['..\psdi_data\pub_037\XAFS_prj\Sn K-edge\PtSn_OCA.prj', 'PtSn_OCA rebinned', 'Ar'],
+					 # ['..\psdi_data\pub_037\XAFS_prj\Sn K-edge\PtSn_OCH.prj', 'PtSn_OCH rebinned', 'H2'],
+					 # ['..\psdi_data\pub_037\XAFS_prj\Sn foil.prj', 'merge', 'Sn Foil'],
+					 # ['..\psdi_data\pub_037\XAFS_prj\Sn K-edge\PtSn_OC.prj', 'PtSn_OC_MERGE_CALIBRATE rebinned',  'PtSn'],
+					 # ['..\psdi_data\pub_037\XAFS_prj\Sn K-edge\PtSn_OCH_H2.prj', 'PtSn_OCH rebinned', 'H2-H2']); 
 
 # intermediate: set parameters for plot object
 my @eplot = (e_mu => 1, e_bkg  => 0,
