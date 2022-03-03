@@ -18,7 +18,7 @@ use Class::Inspector;
 
 
 # open_athena(file_name)
-# file_name parameter should include the complete path relative to the folder
+# $file_name parameter should include the complete path relative to the folder
 # where this script is stored
 sub open_athena{
 	my $athena_name =  shift;
@@ -27,6 +27,10 @@ sub open_athena{
 	return $prj;
 }
 
+
+# read_athena_groups($file_name, $print)
+# $filename: csv file containing the paths, group names and assigned names
+# $w_print: indication to print or not during csv reading
 
 sub read_athena_groups{
 	my $filename = $_[0];
@@ -70,7 +74,7 @@ sub read_athena_groups{
 # PtSn_OCO.prj                 PtSn_OCO rebinned                 air 
 # PtSn_OCH_H2.prj              PtSn_OCH rebinned                 H2-H2
 
-my @data_sources = read_athena_groups("pub_037.csv", "Y");
+
 
 # 1. Read data from athena project files (file, group, name)
 # @data_sources = (['..\psdi_data\pub_037\XAFS_prj\SnO2 0.9 2.6-13.5 gbkg.prj', 'SnO2 0.9', 'SnO2'],
@@ -80,6 +84,8 @@ my @data_sources = read_athena_groups("pub_037.csv", "Y");
 					 # ['..\psdi_data\pub_037\XAFS_prj\Sn foil.prj', 'merge', 'Sn Foil'],
 					 # ['..\psdi_data\pub_037\XAFS_prj\Sn K-edge\PtSn_OC.prj', 'PtSn_OC_MERGE_CALIBRATE rebinned',  'PtSn'],
 					 # ['..\psdi_data\pub_037\XAFS_prj\Sn K-edge\PtSn_OCH_H2.prj', 'PtSn_OCH rebinned', 'H2-H2']); 
+					 
+my @data_sources = read_athena_groups("pub_037.csv", "N");
 
 # intermediate: set parameters for plot object
 my @eplot = (e_mu => 1, e_bkg  => 0,
