@@ -173,7 +173,7 @@ sub do_lcf{
 	$lcf->xmax($fit_group->bkg_e0+60);
 	$lcf->po->set(emin=>-30, emax=>80);
 
-	$lcf -> fit -> plot -> save('lcf_fit_H2_1.dat');
+	$lcf -> fit -> plot -> save($save_as);
 
 	$lcf -> pause;
 
@@ -182,6 +182,8 @@ sub do_lcf{
 	$lcf->po->start_plot;
 	$lcf->po->set(e_norm=>0, e_der=>1);
 	$lcf -> plot_fit;
+	
+    print $lcf->report;
 }
 
 # required data for figure 4 A, B, C
