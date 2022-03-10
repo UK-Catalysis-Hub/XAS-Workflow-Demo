@@ -5,7 +5,6 @@ using different combinations of software and languages.
 
 The tasks of the basic workflow are shown in the image below.
 
-
 ![workflow overview](https://github.com/scman1/XAS-Workflow-Demo/blob/main/images/workflow_overview.svg)
 
 Each folder contains an end-to-end example of a workflow. They are described as follows. 
@@ -26,9 +25,9 @@ while the second part is a modified version of the [FeS2 worked example](https:/
 [FeS2 worked example](https://github.com/bruceravel/demeter/tree/master/examples/recipes/FeS2). 
 The first part of this workflow was is equivalent to the one created for Demeter above, 
 while the second part is a modified version of the [Larch FeS2 worked example](https://github.com/bruceravel/demeter/tree/master/examples/recipes/FeS2). 
-- [Demeter-Jupyter Workflow](https://github.com/scman1/XAS-Workflow-Demo/blob/main/demjup_workflow) 
-(Scripted Workflow): this workflow is the [Demeter Workflow](https://github.com/scman1/XAS-Workflow-Demo/blob/main/demeter_workflow)
-modified to run from Jupyter (nicer interface). 
+- [PSDI Pilot]](https://github.com/scman1/XAS-Workflow-Demo/blob/main/demjup_workflow)
+ this is an example of how scripts could be used to ensure reproducibility of results, 
+ in the context of the PSDI pilot.
 
 ## Acknowledgements and Funding
 For more details about the of the motivation for the development of the resources

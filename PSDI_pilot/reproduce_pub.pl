@@ -185,74 +185,89 @@ sub do_lcf{
 	$lcf->po->set(emin=>int($op_mm[2]), emax=>int($op_mm[3]));
 	
 	$lcf -> fit -> plot -> save($save_as);
-	
-	#$lcf->po->set(@eplot);
 
     print $lcf->report;
 
 	$lcf -> plot_fit;	
 }
 
-# required data for figure 4 A, B, C
-# Athena File                  Data group                        Name
-# Sn foil.prj                  merge                             Sn Foil
-# SnO2 0.9 2.6-13.5 gbkg.prj   SnO2 0.9                          SnO2
-# PtSn_OC.prj                  PtSn_OC_MERGE_CALIBRATE rebinned  PtSn
-# PtSn_OCA.prj                 PtSn_OCA rebinned                 Ar
-# PtSn_OCH.prj                 PtSn_OCH rebinned                 H2 
-# PtSn_OCO.prj                 PtSn_OCO rebinned                 air 
-# PtSn_OCH_H2.prj              PtSn_OCH rebinned                 H2-H2
-
-
-
-# 1. Read data from athena project files (file, group, name)
-# @data_sources = (['..\psdi_data\pub_037\XAFS_prj\SnO2 0.9 2.6-13.5 gbkg.prj', 'SnO2 0.9', 'SnO2'],
-				     # ['..\psdi_data\pub_037\XAFS_prj\Sn K-edge\PtSn_OCO.prj', 'PtSn_OCO rebinned', 'air'],
-					 # ['..\psdi_data\pub_037\XAFS_prj\Sn K-edge\PtSn_OCA.prj', 'PtSn_OCA rebinned', 'Ar'],
-					 # ['..\psdi_data\pub_037\XAFS_prj\Sn K-edge\PtSn_OCH.prj', 'PtSn_OCH rebinned', 'H2'],
-					 # ['..\psdi_data\pub_037\XAFS_prj\Sn foil.prj', 'merge', 'Sn Foil'],
-					 # ['..\psdi_data\pub_037\XAFS_prj\Sn K-edge\PtSn_OC.prj', 'PtSn_OC_MERGE_CALIBRATE rebinned',  'PtSn'],
-					 # ['..\psdi_data\pub_037\XAFS_prj\Sn K-edge\PtSn_OCH_H2.prj', 'PtSn_OCH rebinned', 'H2-H2']); 					 
-my @data_sources = read_athena_groups("pub_037_athena.csv", "N");
-
-# intermediate: set parameters for plot object
-my @eplot = (e_mu => 1, e_bkg  => 0,
-			 e_norm    => 1,     e_der     => 0,
-			 e_pre     => 0,     e_post    => 0,
-			 e_i0      => 0,     e_signal  => 0,
-			 e_markers => 0
-			);
-
-# 2. read data from athena projects
-my @project_groups = get_athena_data(\@data_sources);
-
-# read the list of operations to be performed on the data objects
-my @operations = read_operations("pub_037_operations.csv", "N");
-
-for my $op_idx (0 .. $#operations){
-	my $op_id = $operations[$op_idx][0];
-	# groups used in the operation
-	my @op_gr = split /\|/, $operations[$op_idx][1];
-	
-	# plotting parameters for the operation
-	my @op_ep = split /\|/,  $operations[$op_idx][2];
-	
-	# graph min-max
-	my @op_mm = split /\|/,  $operations[$op_idx][4];
-	
-	# display text for the operation
-	my $op_msg = $operations[$op_idx][3];
-	print $op_msg, "\n";
-	if ($op_id == 1 or $op_id == 2){
-		# operations 1 and 2 are the same only the plotting parameters change
-		plot_norm_mu_energy(\@project_groups, \@op_gr, \@op_ep, \@op_mm);
+sub start{
+	my $athena_groups = "";
+	my $operations_list = "";
+	# if no argument passed, show warning and use defaults
+	if (!@ARGV or $#ARGV < 1) {
+		print "Need to provide two arguments\n - Athena groups file (.csv)";
+		print "\n - Operations list (.csv)\n";
+		print "Arguments passed: ", ($#ARGV + 1), "\n";
 	}
-	if ($op_id == 3){
-		# operation 3 is the lineal combination fitting
-		do_lcf(\@project_groups, \@op_gr, \@op_ep, \@op_mm);
+	else{
+		my $test_argument = $ARGV[0];
+		if (-e $test_argument) {
+			print "Reading from file: $test_argument\n";
+				$athena_groups = $test_argument;
+		}
+		else{
+			print "Athena groups file does not exist: $test_argument\n";
+		}
+		$test_argument = $ARGV[1];
+		if (-e $test_argument) {
+			print "Reading from file: $test_argument\n";
+			$operations_list = $test_argument;
+		}
+		else{
+			print "Operations file does not exist: $test_argument\n";
+		}
 	}
-	# reset plot after each operation
-	$project_groups[0] -> po -> start_plot;
-	print "Press any key to continue\n";
-	<STDIN>;
+	if ($athena_groups ne "" and $operations_list ne "")
+	{
+		# 1. Read data from athena project files (file, group, name)				 
+		my @data_sources = read_athena_groups($athena_groups, "N");
+
+		# intermediate: set parameters for plot object
+		my @eplot = (e_mu => 1, e_bkg  => 0,
+					 e_norm    => 1,     e_der     => 0,
+					 e_pre     => 0,     e_post    => 0,
+					 e_i0      => 0,     e_signal  => 0,
+					 e_markers => 0
+					);
+		# 2. read data from athena projects
+		my @project_groups = get_athena_data(\@data_sources);
+
+		# read the list of operations to be performed on the data objects
+		my @operations = read_operations($operations_list, "N");
+
+		for my $op_idx (0 .. $#operations){
+			my $op_id = $operations[$op_idx][0];
+			# groups used in the operation
+			my @op_gr = split /\|/, $operations[$op_idx][1];
+			
+			# plotting parameters for the operation
+			my @op_ep = split /\|/,  $operations[$op_idx][2];
+			
+			# graph min-max
+			my @op_mm = split /\|/,  $operations[$op_idx][4];
+			
+			# display text for the operation
+			my $op_msg = $operations[$op_idx][3];
+			print $op_msg, "\n";
+			if ($op_id == 1 or $op_id == 2){
+				# operations 1 and 2 are the same only the plotting parameters change
+				plot_norm_mu_energy(\@project_groups, \@op_gr, \@op_ep, \@op_mm);
+			}
+			if ($op_id == 3){
+				# operation 3 is the lineal combination fitting
+				do_lcf(\@project_groups, \@op_gr, \@op_ep, \@op_mm);
+			}
+			# reset plot after each operation
+			$project_groups[0] -> po -> start_plot;
+			print "Press any key to continue\n";
+			<STDIN>;
+		}
+	}
 }
+
+# run from command line with:
+#   perl reproduce_pub.pl athena_groups_file.csv operartions_list.csv 
+# for instance:
+#   perl reproduce_pub.pl pub_037_athena.csv pub_037_operations.csv
+start;
