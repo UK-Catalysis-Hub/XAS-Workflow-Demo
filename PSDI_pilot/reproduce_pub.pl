@@ -87,7 +87,7 @@ sub read_operations{
 		while(<FH>){
 			my $gds_str = $_;
 			@fields = split "," , $gds_str;
-		push(@wf_operations, [$fields[0],$fields[1],$fields[2],$fields[3]]);
+		push(@wf_operations, [$fields[0],$fields[1],$fields[2],$fields[3],$fields[4]]);
 		}
 		if ($w_print eq "Y"){
 			print "***** Read $filename ******\n";
@@ -134,6 +134,7 @@ sub plot_norm_mu_energy{
 	my @project_groups =  @{$_[0]};
 	my @op_gr =  @{$_[1]};
 	my @op_ep =  @{$_[2]};
+	my @op_mm =  @{$_[3]}; # plot parameters
 	my @eplot = (e_mu   => $op_ep[0], e_bkg    => int($op_ep[1]),
 			     e_norm => int($op_ep[2]), e_der    => int($op_ep[3]),
 				 e_pre  => int($op_ep[4]), e_post   => int($op_ep[5]),
@@ -142,6 +143,9 @@ sub plot_norm_mu_energy{
 				 );
 	for my $idx (0 .. $#op_gr){
 		$project_groups[$op_gr[$idx]] -> po -> set(@eplot);
+		$project_groups[$op_gr[$idx]]->xmin($project_groups[$op_gr[$idx]]->bkg_e0-int($op_mm[0]));
+		$project_groups[$op_gr[$idx]]->xmax($project_groups[$op_gr[$idx]]->bkg_e0+int($op_mm[1]));
+		$project_groups[$op_gr[$idx]]->po->set(emin=>int($op_mm[2]), emax=>int($op_mm[3]));	
 		$project_groups[$op_gr[$idx]] -> plot('E');
 	}
 }
@@ -150,15 +154,19 @@ sub do_lcf{
 	my @project_groups =  @{$_[0]};
 	my @fit_gr =  @{$_[1]}; # fit groups: fit_group, standards 
 	my @op_ep =  @{$_[2]}; # plot parameters
-	my $lcf = Demeter::LCF -> new(space=>'nor', plot_difference=>0, plot_components=>0);
-
-	# fit groups: H2 (3), Ar (2), Air (1)
-	# standards: SnO2 (0), Sn Foil (4)
-
-	# fit H2
+	my @op_mm =  @{$_[3]}; # plot parameters
+	my @eplot = (e_mu   => $op_ep[0], e_bkg    => int($op_ep[1]),
+			     e_norm => int($op_ep[2]), e_der    => int($op_ep[3]),
+				 e_pre  => int($op_ep[4]), e_post   => int($op_ep[5]),
+				 e_i0   => int($op_ep[6]), e_signal => int($op_ep[7]),
+				 e_markers => int($op_ep[8])
+				 );
+	# the first parameter is the fit group
 	my $fit_group = $project_groups[$fit_gr[0]];
 	my @std_grps = ();
 	my $std_names = "";
+	
+	# the remaining parameters are the fitting standards
 	for my $idx (1 .. $#fit_gr){
 		my $a_group = $project_groups[$fit_gr[$idx]];
 		push(@std_grps, $a_group);
@@ -166,24 +174,23 @@ sub do_lcf{
 	}
 	my $gr_name = $fit_group -> name;
 	my $save_as = 'lcf_fit_' . $gr_name . $std_names .'.dat';
+	
+	my $lcf = Demeter::LCF -> new(space=>'nor', plot_difference=>0, plot_components=>0);
+
 	$lcf->data($fit_group);
 	$lcf->add_many(@std_grps);
-
-	$lcf->xmin($fit_group->bkg_e0-20);
-	$lcf->xmax($fit_group->bkg_e0+60);
-	$lcf->po->set(emin=>-30, emax=>80);
-
-	$lcf -> fit -> plot -> save($save_as);
-
-	$lcf -> pause;
-
-	$lcf->clean;
-
-	$lcf->po->start_plot;
-	$lcf->po->set(e_norm=>0, e_der=>1);
-	$lcf -> plot_fit;
 	
+	$lcf->xmin($fit_group->bkg_e0-int($op_mm[0]));
+	$lcf->xmax($fit_group->bkg_e0+int($op_mm[1]));
+	$lcf->po->set(emin=>int($op_mm[2]), emax=>int($op_mm[3]));
+	
+	$lcf -> fit -> plot -> save($save_as);
+	
+	#$lcf->po->set(@eplot);
+
     print $lcf->report;
+
+	$lcf -> plot_fit;	
 }
 
 # required data for figure 4 A, B, C
@@ -229,205 +236,23 @@ for my $op_idx (0 .. $#operations){
 	
 	# plotting parameters for the operation
 	my @op_ep = split /\|/,  $operations[$op_idx][2];
+	
+	# graph min-max
+	my @op_mm = split /\|/,  $operations[$op_idx][4];
+	
 	# display text for the operation
 	my $op_msg = $operations[$op_idx][3];
-	print $op_msg,@op_gr,@op_ep,"\n";
-	if ($op_id == 1){
-		plot_norm_mu_energy(\@project_groups, \@op_gr, \@op_ep);
-		# reset plot after each operation
-	}
-	if ($op_id == 2){
-		plot_norm_mu_energy(\@project_groups, \@op_gr, \@op_ep);
+	print $op_msg, "\n";
+	if ($op_id == 1 or $op_id == 2){
+		# operations 1 and 2 are the same only the plotting parameters change
+		plot_norm_mu_energy(\@project_groups, \@op_gr, \@op_ep, \@op_mm);
 	}
 	if ($op_id == 3){
-		#plot_norm_mu_energy(\@project_groups, \@op_gr, \@op_ep);
-		print 'do LCF\n';
-		do_lcf(\@project_groups, \@op_gr, \@op_ep);
+		# operation 3 is the lineal combination fitting
+		do_lcf(\@project_groups, \@op_gr, \@op_ep, \@op_mm);
 	}
 	# reset plot after each operation
 	$project_groups[0] -> po -> start_plot;
 	print "Press any key to continue\n";
 	<STDIN>;
-	
 }
-# 3. plot first five on E normalised for Figure 4A 
-print "Show normalised E plot for first five groups\n";
-for my $idx (0 .. 4){
-	$project_groups[$idx] -> po -> set(@eplot);
-	$project_groups[$idx] -> plot('E');
-}
-my $option = <STDIN>;
-
-#reset plot object
-@eplot = (e_mu => 1, e_bkg  => 0,
-		  e_norm    => 1,     e_der     => 1,
-		  e_pre     => 0,     e_post    => 0,
-		  e_i0      => 0,     e_signal  => 0,
-		  e_markers => 0
-		);
-$project_groups[0] -> po -> start_plot;
-# 4. plot first derivate for first five groups for Figure 4A inset
-
-for my $idx (0 .. 4){
-	$project_groups[$idx] -> po -> set(@eplot);
-	$project_groups[$idx] -> plot('E');
-}
-
-$option = <STDIN>;
-
-
-# 5. LCF for H2, Ar, Air 
-my $lcf = Demeter::LCF -> new(space=>'nor', plot_difference=>0, plot_components=>0);
-
-# fit groups: H2 (3), Ar (2), Air (1)
-# standards: SnO2 (0), Sn Foil (4)
-
-# fit H2
-my $fit_group = $project_groups[3];
-my ($foil, $oxide, $h2h2) = ($project_groups[0],$project_groups[4], $project_groups[6] );
-
-$lcf->data($fit_group);
-$lcf->add_many($foil, $oxide);
-
-
-$lcf->xmin($fit_group->bkg_e0-20);
-$lcf->xmax($fit_group->bkg_e0+60);
-$lcf->po->set(emin=>-30, emax=>80);
-
-$lcf -> fit -> plot -> save('lcf_fit_H2_1.dat');
-
-$lcf -> pause;
-
-$lcf->clean;
-
-$lcf->po->start_plot;
-$lcf->po->set(e_norm=>0, e_der=>1);
-$lcf -> plot_fit;
-
-print "Showing SnO2 and Sn foil fit for H2\n";
-print $lcf->report;
-$option = <STDIN>;
-
-# fit Ar
-$fit_group = $project_groups[2];
-
-$lcf->data($fit_group);
-
-
-$lcf->xmin($fit_group->bkg_e0-20);
-$lcf->xmax($fit_group->bkg_e0+60);
-$lcf->po->set(emin=>-30, emax=>80);
-
-$lcf -> fit -> plot -> save('lcf_fit_Ar_1.dat');
-
-
-$lcf -> pause;
-
-$lcf->clean;
-
-$lcf->po->start_plot;
-$lcf->po->set(e_norm=>0, e_der=>1);
-$lcf -> plot_fit;
-
-print "Showing SnO2 and Sn foil fit for Ar\n";
-print $lcf->report;
-
-$option = <STDIN>;
-
-# fit Air
-my $fit_group = $project_groups[1];
-
-$lcf->data($fit_group);
-
-
-$lcf->xmin($fit_group->bkg_e0-20);
-$lcf->xmax($fit_group->bkg_e0+60);
-$lcf->po->set(emin=>-30, emax=>80);
-
-$lcf -> fit -> plot -> save('lcf_fit_Air_1.dat');
-
-$lcf -> pause;
-
-$lcf->clean;
-
-$lcf->po->start_plot;
-$lcf->po->set(e_norm=>0, e_der=>1);
-$lcf -> plot_fit;
-
-print "Showing SnO2 and Sn foil fit for Air\n";
-print $lcf->report;
-$option = <STDIN>;
-
-$lcf = Demeter::LCF -> new(space=>'nor', plot_difference=>0, plot_components=>0);
-
-$lcf->data($fit_group);
-$lcf->add_many($foil, $h2h2);
-
-
-$lcf->xmin($fit_group->bkg_e0-20);
-$lcf->xmax($fit_group->bkg_e0+60);
-$lcf->po->set(emin=>-30, emax=>80);
-
-$lcf -> fit -> plot -> save('lcf_fit_H2_2.dat');
-
-$lcf -> pause;
-
-$lcf->clean;
-
-$lcf->po->start_plot;
-$lcf->po->set(e_norm=>0, e_der=>1);
-$lcf -> plot_fit;
-
-print "Showing SnO2 and H2-H2 fit for H2\n";
-print $lcf->report;
-$option = <STDIN>;
-
-
-# fit Ar
-$fit_group = $project_groups[2];
-
-$lcf->data($fit_group);
-
-
-$lcf->xmin($fit_group->bkg_e0-20);
-$lcf->xmax($fit_group->bkg_e0+60);
-$lcf->po->set(emin=>-30, emax=>80);
-
-$lcf -> fit -> plot -> save('lcf_fit_Ar_2.dat');
-
-$lcf -> pause;
-
-$lcf->clean;
-
-$lcf->po->start_plot;
-$lcf->po->set(e_norm=>0, e_der=>1);
-$lcf -> plot_fit;
-
-print "Showing SnO2 and H2-H2 fit for Ar\n";
-print $lcf->report;
-$option = <STDIN>;
-
-# fit Air
-my $fit_group = $project_groups[1];
-
-$lcf->data($fit_group);
-
-
-$lcf->xmin($fit_group->bkg_e0-20);
-$lcf->xmax($fit_group->bkg_e0+60);
-$lcf->po->set(emin=>-30, emax=>80);
-
-$lcf -> fit -> plot -> save('lcf_fit_Air_2.dat');
-
-$lcf -> pause;
-
-$lcf->clean;
-
-$lcf->po->start_plot;
-$lcf->po->set(e_norm=>0, e_der=>1);
-$lcf -> plot_fit;
-
-print "Showing SnO2 and H2-H2 fit for Air\n";
-print $lcf->report;
-$option = <STDIN>;
-
