@@ -9,9 +9,32 @@ The script is build followint the Athena, Artemis and examples provided by Bruce
 
 The main difference is that this example uses Demeter and Perl directly, instead of using Athena 
 and Artemis.
+The script is meant to be run from the command line as:
+ `perl reproduce_pub.pl athena groups file (.csv ) operartions list (.csv)`
+For instance, the provided files:
+ `perl reproduce_pub.pl pub_037_athena.csv pub_037_operations.csv`
+ 
+The athena groups file is a csv file that contains a list of athena project 
+files and groups to be used in the script to reproduce the results.
+
+The operations list file is a csv file that contains a list of operations 
+which need to be performed to reproduce published results.
+
+The provied example files are required to reproduce the results from [huang et. al.][1], 
+using supporting data published with the article [huang et. al.][2]. 
 
 The funding for the research and development of this example came from the 
 collaboration of UKCH with the STFC Scientific Computing Department in the 
 "Phisical Sciences Research Infrastructure (PSDI) Phase 1 Pilot" (ESPRC 
 EP/W032252/1).
 
+[1]: Huang, Haoliang, Nassr, Abu Bakr Ahmed Amine, Celorrio, Verónica, 
+    Taylor, S. F. Rebecca, Puthiyapura, Vinod Kumar, Hardacre, Christopher, 
+	Brett, Dan J. L., Russell, Andrea E. (2018) Effects of heat treatment 
+	atmosphere on the structure and activity of Pt3Sn nanoparticle 
+	electrocatalysts: a characterisation case study. Faraday Discussions. 
+	V. 208. pp. 555-573. [DOI: 10.1039/c7fd00221a](https://doi.org/10.1039/c7fd00221a)
+[2]: Huang, Haoliang, Nassr, Abubakr AA and Celorrio, Veronica (2018) 
+    Dataset for Effects of heat treatment atmosphere on the structure and 
+	activity of Pt3Sn nanoparticle electrocatalysts: a characterisation case 
+	study. University of Southampton [DOI: 10.5258/SOTON/D0408](https://dx.doi.org/10.5258/SOTON/D0408).
