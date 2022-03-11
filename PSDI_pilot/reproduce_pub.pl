@@ -216,6 +216,24 @@ sub do_lcf{
 	$lcf -> plot_fit;	
 }
 
+sub do_merge {
+	my @project_groups =  @{$_[0]};
+	my @merge_list =  @{$_[1]}; # merge groups 
+	my $merge_name = $_[2];
+	my @merge_grps = ();
+	# the remaining parameters are the fitting standards
+	for my $idx (0 .. $#merge_list){
+		my $a_group = $project_groups[$merge_list[$idx]];
+		push(@merge_grps, $a_group);
+	}
+	my $merged = $merge_grps[0] -> merge('e', @merge_grps);
+	$merged -> set (name => $merge_name);
+	$merged -> plot('stddev');
+	
+	push(@project_groups, $merged);
+	return @project_groups;
+}
+
 sub start{
 	my $athena_groups = "";
 	my $operations_list = "";
@@ -294,8 +312,7 @@ sub start{
 			}
 			elsif ($op_id == 4){
 				# operation 4 is merge
-				#do_lcf(\@project_groups, \@op_gr, \@op_ep, \@op_mm);
-				
+				@project_groups = do_merge(\@project_groups, \@op_gr, $op_rgn);
 			}
 			elsif ($op_id == 5){
 				# operation 5 is smoothing
