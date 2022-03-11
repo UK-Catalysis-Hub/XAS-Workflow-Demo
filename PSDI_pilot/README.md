@@ -26,7 +26,6 @@ including the path to get to the files, the name of the groups to be imported
 (used) and the names to be assigned to those groups in the operations.
 
 `..\psdi_data\pub_037\XAFS_prj\SnO2 0.9 2.6-13.5 gbkg.prj,SnO2 0.9,SnO2`
-
 `..\psdi_data\pub_037\XAFS_prj\Sn K-edge\PtSn_OCO.prj,PtSn_OCO rebinned,air`
 
 
