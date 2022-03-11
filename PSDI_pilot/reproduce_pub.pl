@@ -65,10 +65,6 @@ sub read_athena_groups{
 }
 
 
-# read_athena_groups($file_name, $print)
-# $filename: csv file containing the paths, group names and assigned names
-# $w_print: indication to print or not during csv reading
-
 sub read_operations{
 	my $filename = $_[0];
 	my @wf_operations = ();
@@ -87,7 +83,7 @@ sub read_operations{
 		while(<FH>){
 			my $gds_str = $_;
 			@fields = split "," , $gds_str;
-		push(@wf_operations, [$fields[0],$fields[1],$fields[2],$fields[3],$fields[4]]);
+		push(@wf_operations, [$fields[0],$fields[1],$fields[2],$fields[3],$fields[4],$fields[5],$fields[6],$fields[7]]);
 		}
 		if ($w_print eq "Y"){
 			print "***** Read $filename ******\n";
@@ -103,31 +99,60 @@ sub read_operations{
 
 
 # use the list of athena groups to retrieve data from the athena projects
-
-sub get_athena_data{
+sub get_data{
 	my @data_sources = @{$_[0]};
 	my @project_groups = ();
 	for my $idx (0 .. $#data_sources) {
-		my $athena_file = $data_sources[$idx][0];
-		my $athena_group = $data_sources[$idx][1];
+		my $data_file = $data_sources[$idx][0];
+		my $read_as = $data_sources[$idx][1];
 		my $group_name = $data_sources[$idx][2];
-		print "reading file: ", $athena_file , "\n";
-		my $prj_data = open_athena($athena_file);
-		print "getting data for group ", $athena_group, "\n";
-		my @all_groups = $prj_data  -> allnames;
-		for my $gp_idx (0 .. $#all_groups){
-			if ($all_groups[$gp_idx ] eq $athena_group){
-				my $temp_group = $prj_data-> record($gp_idx+1);
-				print "rename the group as: ", $group_name, " \n";
-				$temp_group -> set (name => $group_name);
-				$temp_group -> bkg_flatten(0);
-				$temp_group -> po -> start_plot;
-				push(@project_groups, $temp_group );
-			}
+		if (index($data_file, ".prj") != -1){
+			print "reading from athena file: ", $data_file , "\n";
+			push(@project_groups, get_athena_data($data_file, $read_as, $group_name));			
+		}
+		else {
+			print "reading from column file: ", $data_file , "\n";
+			push(@project_groups, get_column_data($data_file, $read_as, $group_name));
 		}
 	}
 	return @project_groups;
 }
+
+sub get_athena_data{
+	my $athena_file = $_[0];
+	my $athena_group = $_[1];
+	my $group_name = $_[2];
+	my $prj_data = open_athena($athena_file);
+	my $temp_group; # leave undefined?
+	print "getting data for group ", $athena_group, "\n";
+	my @all_groups = $prj_data  -> allnames;
+	for my $gp_idx (0 .. $#all_groups){
+		if ($all_groups[$gp_idx ] eq $athena_group){
+			$temp_group = $prj_data-> record($gp_idx+1);
+			print "rename the group as: ", $group_name, " \n";
+			$temp_group -> set (name => $group_name);
+			$temp_group -> bkg_flatten(0);
+			$temp_group -> po -> start_plot;
+		}
+	}
+	return $temp_group;
+}
+
+sub get_column_data{
+	my $column_file = $_[0];
+	my @column_ids = split /\|/, $_[1];
+	my $group_name = $_[2];
+	my $temp_group = Demeter::Data -> new();
+	$temp_group -> set(file        => $column_file,
+                       name        => $group_name,
+                       energy      => '$'. $column_ids[0], # column 1 is energy
+                       numerator   => '$'. $column_ids[1], # column 2 is I0
+                       denominator => '$'. $column_ids[2], # column 3 is It
+                       ln          =>  $column_ids[3],    # these are transmission data
+                      );
+	return $temp_group;
+}
+
 
 # first operation: plot normalised mu on energy
 sub plot_norm_mu_energy{
@@ -231,7 +256,7 @@ sub start{
 					 e_markers => 0
 					);
 		# 2. read data from athena projects
-		my @project_groups = get_athena_data(\@data_sources);
+		my @project_groups = get_data(\@data_sources);
 
 		# read the list of operations to be performed on the data objects
 		my @operations = read_operations($operations_list, "N");
@@ -247,6 +272,15 @@ sub start{
 			# graph min-max
 			my @op_mm = split /\|/,  $operations[$op_idx][4];
 			
+			# result group name
+			my $op_rgn = $operations[$op_idx][5];
+			
+			# y offsets for plotting
+			my @op_yofp = split /\|/,  $operations[$op_idx][6];
+			
+			# x offsets for plotting (do they exist?)
+			my @op_xofp = split /\|/,  $operations[$op_idx][7];
+			
 			# display text for the operation
 			my $op_msg = $operations[$op_idx][3];
 			print $op_msg, "\n";
@@ -254,9 +288,22 @@ sub start{
 				# operations 1 and 2 are the same only the plotting parameters change
 				plot_norm_mu_energy(\@project_groups, \@op_gr, \@op_ep, \@op_mm);
 			}
-			if ($op_id == 3){
+			elsif ($op_id == 3){
 				# operation 3 is the lineal combination fitting
 				do_lcf(\@project_groups, \@op_gr, \@op_ep, \@op_mm);
+			}
+			elsif ($op_id == 4){
+				# operation 4 is merge
+				#do_lcf(\@project_groups, \@op_gr, \@op_ep, \@op_mm);
+				
+			}
+			elsif ($op_id == 5){
+				# operation 5 is smoothing
+				#do_lcf(\@project_groups, \@op_gr, \@op_ep, \@op_mm);
+			}
+			elsif ($op_id == 6){
+				# operation 6 is plotting k.
+				#do_lcf(\@project_groups, \@op_gr, \@op_ep, \@op_mm);
 			}
 			# reset plot after each operation
 			$project_groups[0] -> po -> start_plot;
