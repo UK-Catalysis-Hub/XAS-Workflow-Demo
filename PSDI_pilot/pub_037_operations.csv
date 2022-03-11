@@ -1,8 +1,8 @@
 1,0|1|2|3|4,1|0|1|0|0|0|0|0|0,Show normalised E plot for first five groups,20|60|-20|180
 2,0|1|2|3|4,1|0|1|1|0|0|0|0|0,Plot first derivate for first five groups,20|60|-15|7
-3,3|0|4,0|0|0|1|0|0|0|0|0,Showing SnO2 and Sn foil fit for H2,20|60|-20|60
-3,2|0|4,0|0|0|1|0|0|0|0|0,Showing SnO2 and Sn foil fit for Ar,20|60|-20|60
-3,1|0|4,0|0|0|1|0|0|0|0|0,Showing SnO2 and Sn foil fit for air,20|60|-20|60
-3,3|0|6,0|0|0|1|0|0|0|0|0,Showing SnO2 and Sn H2-H2 fit for H2,20|60|-20|60
-3,2|0|6,0|0|0|1|0|0|0|0|0,Showing SnO2 and Sn H2-H2 fit for Ar,20|60|-20|60
-3,1|0|6,0|0|0|1|0|0|0|0|0,Showing SnO2 and Sn H2-H2 fit for air,20|60|-20|60
+3,3|0|4,0|0|0|1|0|0|0|0|0,Showing SnO2 and Sn foil LCF for H2,20|60|-20|60
+3,2|0|4,0|0|0|1|0|0|0|0|0,Showing SnO2 and Sn foil LCF for Ar,20|60|-20|60
+3,1|0|4,0|0|0|1|0|0|0|0|0,Showing SnO2 and Sn foil LCF for air,20|60|-20|60
+3,3|0|6,0|0|0|1|0|0|0|0|0,Showing SnO2 and Sn H2-H2 LCF for H2,20|60|-20|60
+3,2|0|6,0|0|0|1|0|0|0|0|0,Showing SnO2 and Sn H2-H2 LCF for Ar,20|60|-20|60
+3,1|0|6,0|0|0|1|0|0|0|0|0,Showing SnO2 and Sn H2-H2 LCF for air,20|60|-20|60
