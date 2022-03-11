@@ -228,9 +228,22 @@ sub do_merge {
 	}
 	my $merged = $merge_grps[0] -> merge('e', @merge_grps);
 	$merged -> set (name => $merge_name);
-	$merged -> plot('stddev');
+	#$merged -> plot('stddev');
 	
 	push(@project_groups, $merged);
+	return @project_groups;
+}
+
+sub do_smooth{
+	my @project_groups =  @{$_[0]};
+	my @merge_list =  @{$_[1]}; # smooth group (only one in list)
+	my $merge_name = $_[2];
+	my $a_group = $project_groups[$merge_list[0]];
+	print "Smoothing once and replotting data\n";
+	my $d1 = $a_group -> Clone(name=>$merge_name);
+	$d1 -> smooth(1);
+	$d1 -> plot('e');
+	push(@project_groups, $d1);
 	return @project_groups;
 }
 
@@ -316,7 +329,7 @@ sub start{
 			}
 			elsif ($op_id == 5){
 				# operation 5 is smoothing
-				#do_lcf(\@project_groups, \@op_gr, \@op_ep, \@op_mm);
+				@project_groups = do_smooth(\@project_groups, \@op_gr, $op_rgn);
 			}
 			elsif ($op_id == 6){
 				# operation 6 is plotting k.
