@@ -46,21 +46,21 @@ The codes for the operations are (first column):
 3 Perform LCF
 
 The second column contains a list of groups, using the indices of the groups imported, 
-in the order they were read (starting from index 0). The list is separated by bars (|).
+in the order they were read (starting from index 0). The list is separated by bars ( | ).
 For operations 1 and 2, the order in which the groups are listed should match the order
 in which the groups need to be displayed.
 For operation 3 (LCF), the first element of the list is the group to be fitted, and the 
 rest of the elements are the standards to be used for fitting.
 
 The third column contains a list of nine boolean flags (0 = inactive, 1 = active), 
-also separated by bars (|). The nine boolean flags correspond to nine elements 
+also separated by bars ( | ). The nine boolean flags correspond to nine elements 
 which can be included in the plots: e_mu, e_bkg, e_norm, e_der, e_pre, e_post, 
 e_i0, e_signal, e_markers. 
 
 The fourth column contains the displayed text which indicates which operation is
 being performed.
 
-The fifth column contains a list of four bar (|) separated values used to 
+The fifth column contains a list of four bar ( | ) separated values used to 
 indicate the max and min values in the x axis. The first two indicate the -/+ 
 offset from E0, the second pair 
 
