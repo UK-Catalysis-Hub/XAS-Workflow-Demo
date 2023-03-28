@@ -1,7 +1,5 @@
-# set parameters 
 # example Using Larch with python3
 
-import larch_plugins as lp
 # library containign functions that read and write to csv files
 import lib.handle_csv as csvhandler
 # regular expression matching
@@ -12,6 +10,9 @@ import ipysheet
 from pathlib import Path
 #library for writing to log
 import logging
+# Changes from removing lp
+from larch import ParameterGroup, fitting
+from larch.xafs import TransformGroup, FeffitDataSet, feffit, feffit_report, FeffPathGroup
 
 # plotting library
 import matplotlib.pyplot as plt
@@ -61,7 +62,7 @@ def gds_to_dict(gds_group):
 
 # take data from dictionary and create a gds group
 def dict_to_gds(data_dict, session):
-    dgs_group = lp.fitting.param_group(_larch=session)
+    dgs_group = ParameterGroup()
     for par_idx in data_dict:
         #gds file structure:
         gds_name = data_dict[par_idx]['name']
@@ -77,10 +78,10 @@ def dict_to_gds(data_dict, session):
         one_par = None
         if gds_vary:
             # equivalent to a guess parameter in Demeter
-            one_par = lp.fitting.guess(name=gds_name ,value=gds_val, vary=gds_vary, expr=gds_expr)
+            one_par = fitting.guess(name=gds_name ,value=gds_val, vary=gds_vary, expr=gds_expr)
         else:
             # equivalent to a defined parameter in Demeter
-            one_par = lp.fitting.param(name=gds_name ,value=gds_val, vary=gds_vary, expr=gds_expr)
+            one_par = fitting.param(name=gds_name ,value=gds_val, vary=gds_vary, expr=gds_expr)
         if one_par != None:
             dgs_group.__setattr__(gds_name,one_par)
     return dgs_group
@@ -274,13 +275,13 @@ def read_selected_paths_list(file_name, session):
     sp_dict, _ = csvhandler.read_csv_data(file_name)
     sp_list=[]
     for path_id in sp_dict:
-        new_path = lp.xafs.FeffPathGroup(filename = sp_dict[path_id]['filename'],
-                                         label    = sp_dict[path_id]['label'],
-                                         s02      = sp_dict[path_id]['s02'],
-                                         e0       = sp_dict[path_id]['e0'],
-                                         sigma2   = sp_dict[path_id]['sigma2'],
-                                         deltar   = sp_dict[path_id]['deltar'],
-                                         _larch   = session)
+        new_path = FeffPathGroup(filename = sp_dict[path_id]['filename'],
+                                 label    = sp_dict[path_id]['label'],
+                                 s02      = sp_dict[path_id]['s02'],
+                                 e0       = sp_dict[path_id]['e0'],
+                                 sigma2   = sp_dict[path_id]['sigma2'],
+                                 deltar   = sp_dict[path_id]['deltar'],
+                                 _larch   = session)
         sp_list.append(new_path)
     return sp_list
 
@@ -292,14 +293,14 @@ def read_selected_paths_list(file_name, session):
 # session: current larch session
 def run_fit(data_group, gds, selected_paths, fv, session):
     # create the transform grup (prepare the fit space).
-    trans = lp.xafs.TransformGroup(fitspace=fv['fitspace'],kmin=fv['kmin'],
-                                   kmax=fv['kmax'],kw=fv['kw'], dk=fv['dk'], 
-                                   window=fv['window'], rmin=fv['rmin'],
-                                   rmax=fv['rmax'], _larch=session)
+    trans = TransformGroup(fitspace=fv['fitspace'],kmin=fv['kmin'],
+                           kmax=fv['kmax'],kw=fv['kw'], dk=fv['dk'], 
+                           window=fv['window'], rmin=fv['rmin'],
+                           rmax=fv['rmax'], _larch=session)
 
-    dset = lp.xafs.FeffitDataSet(data=data_group, pathlist=selected_paths, transform=trans, _larch=session)
+    dset = FeffitDataSet(data=data_group, pathlist=selected_paths, transform=trans, _larch=session)
 
-    out = lp.xafs.feffit(gds, dset, _larch=session)
+    out = feffit(gds, dset, _larch=session)
     return trans, dset, out
 
 #Overlap plot k-weighted χ(k) and χ(R) for fit to feffit dataset
@@ -350,11 +351,10 @@ def plot_chikr(data_set,rmin,rmax,kmin,kmax):
 
 
 def get_fit_report(fit_out, session):
-    return lp.xafs.feffit_report(fit_out, _larch=session)
+    return feffit_report(fit_out, _larch=session)
 
 def save_fit_report(fit_out, file_name, session):
-    fit_report = lp.xafs.feffit_report(fit_out, _larch=session)
+    fit_report = feffit_report(fit_out, _larch=session)
     f = open(file_name, "a")
     f.write(fit_report)
     f.close()
-    
