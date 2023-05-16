@@ -63,6 +63,7 @@ def inp_from_cif(crystal_f, feff_dir, feff_inp,absorbing,c_radius):
         for line in open( atoms_file, 'r' ):
             result_file.write( line )
 
+    return True
 
 def copy_to_feff_dir(crystal_f, feff_file):
     print ("copying", crystal_f.name, " to ", feff_file)
@@ -73,7 +74,7 @@ def create_feff_dir(feff_dir, feff_inp):
     feff_file = Path(feff_dir, feff_inp)
     feff_file.parent.mkdir(parents=True, exist_ok=True) 
 
-def run_feff(input_files):
+def run_feff(input_files, absorbing= "", radius = 0.0):
     feff_dir_list = []
     for inp_file in input_files:
         crystal_f = Path(inp_file)
@@ -87,7 +88,7 @@ def run_feff(input_files):
         # run atoms to generate input for feff
         print(crystal_f.name[-3:])
         if crystal_f.name[-3:] != "inp":
-            atoms_ok = run_atoms(str(crystal_f), feff_dir, feff_inp)
+            atoms_ok = inp_from_cif(str(crystal_f), feff_dir, feff_inp, absorbing, radius)
         else:
             atoms_ok = copy_to_feff_dir(crystal_f, Path(feff_dir, feff_inp))
         if atoms_ok:
