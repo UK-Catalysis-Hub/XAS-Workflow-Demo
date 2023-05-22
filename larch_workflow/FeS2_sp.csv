@@ -1,5 +1,5 @@
 id,filename,label,s02,e0,sigma2,deltar
-1,FeS2_feff/feff0001.dat,S1,amp,enot,ss,alpha*reff
-2,FeS2_feff/feff0002.dat,S2,amp,enot,ss2,alpha*reff
-3,FeS2_feff/feff0003.dat,S3,amp,enot,ss3,alpha*reff
-4,FeS2_feff/feff0004.dat,Fe,amp,enot,ssfe,alpha*reff
+1,FeS2_feff/feff0001.dat,S.Fe.1,amp,enot,ss,alpha*reff
+2,FeS2_feff/feff0002.dat,S.Fe.2,amp,enot,ss2,alpha*reff
+3,FeS2_feff/feff0003.dat,S.Fe.3,amp,enot,ss3,alpha*reff
+4,FeS2_feff/feff0004.dat,Fe.Fe.4,amp,enot,ssfe,alpha*reff

@@ -1,5 +1,5 @@
 # managing athena files
-from larch.io import create_athena, read_athena, extract_athenagroup
+from larch.io import create_athena, read_athena, extract_athenagroup, read_ascii
 
 # calculate pre-edge and post edge for normalisation
 from larch.xafs import pre_edge
@@ -11,7 +11,25 @@ from larch.xafs import xftf
 # plotting library
 import matplotlib.pyplot as plt
 
+# File handling
+from pathlib import Path
 
+#library for writing to log
+import logging
+ #######################################################
+# | Create an output dir, point to the input file(s)  | #
+# V              and set the logger                   V #
+ #######################################################
+def files_setup(out_prefix, in_path):
+    # create the path for storing results
+    out_path = Path("./" , out_prefix)
+    Path(out_path).mkdir(parents=True, exist_ok=True)
+    # set path for log
+    log_file = Path("./",out_path,"process.log")
+    print("Log will be saved to:", log_file)
+    set_logger(log_file)
+    source_path = Path(in_path)
+    return source_path, out_path
 
  #######################################################
 # |              initialise log file                  | #
@@ -26,6 +44,7 @@ def set_logger(log_file):
     # prevent matplotlib font manager from writing to log
     logging.getLogger('matplotlib.font_manager').disabled = True
     logger.setLevel(logging.DEBUG)
+    logging.info("Started processing")
 
 
  #######################################################
@@ -45,55 +64,11 @@ def get_files_list(source_dir, f_pattern):
 # |    Read mu data from a text file, use labels      | #
 # V         parameter to name columns                 V #
  #######################################################
-def read_text(a_file, labels = "energy mu"):
+def read_text(a_file, use_labels = "energy mu"):
+    logging.info ("Processing: " + a_file.name)
+    logging.info ("Path: "+ str(a_file))
     a_group = read_ascii(a_file, labels=use_labels)
     return a_group
-
-
- #######################################################
-# |          Create mu on energy plot                 | #
-# V                                                   V #
- #######################################################
-def plot_mu(xafs_group):
-        plt.plot(xafs_group.energy, xafs_group.mu, label=xafs_group.filename) # plot mu in blue
-        plt.grid(color='r', linestyle=':', linewidth=1) #show and format grid
-        plt.xlabel('Energy (eV)') # label y graph
-        plt.ylabel('x$\mu$(E)') # label y axis
-        plt.title("$\mu$" + xafs_group.filename)
-        plt.legend() # show legend
-        return plt
-    
- #######################################################
-# |    Create pre-edge and post-edge fitting plot     | #
-# V                                                   V #
- #######################################################      
-def plot_edge_fit(xafs_group):
-        plt.plot(xafs_group.energy, xafs_group.pre_edge, 'g', label='pre-edge') # plot pre-edge in green
-        plt.plot(xafs_group.energy, xafs_group.post_edge, 'r', label='post-edge')# plot post-edge in red
-        plt.plot(xafs_group.energy, xafs_group.mu, 'b', label=xafs_group.filename) # plot mu in blue
-        plt.grid(color='r', linestyle=':', linewidth=1) #show and format grid
-        plt.xlabel('Energy (eV)') # label y graph
-        plt.ylabel('x$\mu$(E)') # label y axis
-        plt.title("pre-edge and post_edge fitting to $\mu$")
-        plt.legend() # show legend
-        return plt
- #######################################################
-# |    Create pre-edge and post-edge fitting plot     | #
-# V                                                   V #
- #######################################################      
-    
-# show plot of normalised data
-def plot_normalised(xafs_group):
-        #plt.plot(xafs_group.energy, xafs_group.pre_edge, 'g', label='pre-edge') # plot pre-edge in green
-        #plt.plot(xafs_group.energy, xafs_group.post_edge, 'r', label='post-edge')# plot post-edge in red
-        #plt.plot(xafs_group.energy, xafs_group.mu, 'b', label=xafs_group.filename) # plot mu in blue
-        plt.plot(xafs_group.energy, xafs_group.flat, label=xafs_group.filename)
-        plt.grid(color='r', linestyle=':', linewidth=1) #show and format grid
-        plt.xlabel('Energy (eV)') # label y graph
-        plt.ylabel('x$\mu$(E)') # label y axis
-        plt.title("pre-edge and post_edge fitting to $\mu$")
-        plt.legend() # show legend
-        return plt
 
  #######################################################
 # |         Read data from Athena project file        | #
@@ -103,7 +78,7 @@ def read_project(project_file):
     return read_athena(project_file)
 
  #######################################################
-# |         Extract groups from Athena project        | #
+# |          Read groups from Athena project          | #
 # V              returns a list of groups             V #
  #######################################################
 def get_groups(athena_project):
@@ -136,46 +111,78 @@ def calc_with_defaults(xafs_group):
     return xafs_group
 
  #######################################################
-# |       The code for plotting Nmu vs E repeats      | #
-# |   so it is useful to have a plotting function     | #
-# V            to reduce duplicated code              V #
+# | Calculate pre-edge and post edge and add them to  | #
+# V             group using given parameters          V #
  #######################################################
-def plot_normalised(xafs_group):
+
+def fit_pre_post_edge(xas_data, pre_lower=-150, pre_upper=-60):
+    pre_edge(energy=xas_data.energy, mu=xas_data.mu , group=xas_data, pre1=-150, pre2=-60)
+    return xas_data
+
+
+ #######################################################
+# |        Save data as an athena project             | #
+# V                                                   V #
+ #######################################################
+
+def save_athena(xas_data, out_file):
+    logging.info ("project path: "+ str(out_file))
+    xas_project = create_athena(out_file)
+    xas_project.add_group(xas_data)
+    xas_project.save()
+
+
+ #######################################################
+# |              Plot mu on energy                    | #
+# V                                                   V #
+ #######################################################
+def plot_mu(xafs_group):
         plt.plot(xafs_group.energy, xafs_group.mu, label=xafs_group.filename) # plot mu in blue
+        plt.grid(color='r', linestyle=':', linewidth=1) #show and format grid
+        plt.xlabel('Energy (eV)') # label y graph
+        plt.ylabel('x$\mu$(E)') # label y axis
+        plt.title("$\mu$" + xafs_group.filename)
+        plt.legend() # show legend
+        return plt
+
+ 
+ #######################################################
+# |      Plot pre-edge and post-edge fitting          | #
+# V                                                   V #
+ #######################################################      
+def plot_edge_fit(xafs_group):
+        plt.plot(xafs_group.energy, xafs_group.pre_edge, 'g', label='pre-edge') # plot pre-edge in green
+        plt.plot(xafs_group.energy, xafs_group.post_edge, 'r', label='post-edge')# plot post-edge in red
+        plt.plot(xafs_group.energy, xafs_group.mu, 'b', label=xafs_group.filename) # plot mu in blue
         plt.grid(color='r', linestyle=':', linewidth=1) #show and format grid
         plt.xlabel('Energy (eV)') # label y graph
         plt.ylabel('x$\mu$(E)') # label y axis
         plt.title("pre-edge and post_edge fitting to $\mu$")
         plt.legend() # show legend
         return plt
-    
- #######################################################
-# |       The code for plotting Nmu vs E repeats      | #
-# |   so it is useful to have a plotting function     | #
-# V            to reduce duplicated code              V #
- #######################################################
-# plot flat normalised mu vs Energy for selected groups
-def plot_Nxmu_E(athena_project, group_keys, group_names,
-                            title = "Normalised $\mu$ vs E", xlimits = None,
-                            ylimits = None):    
-    # plot mu vs flat normalised mu for selected groups
-    for group_key in group_keys:
-        gr_0 = extract_athenagroup(athena_project._athena_groups[group_key])
-        # recalculate normalisation
-        calc_with_defaults(gr_0)
-        plt.plot(gr_0.energy, gr_0.flat, label=group_names[group_key])
 
-    # set plot format
-    plt.xlabel("Energy")
-    plt.ylabel("Normalised $\mu$" )
-    plt.title(title)
-    plt.grid(linestyle=':', linewidth=1) #show and format grid
-    if xlimits != None:
-        plt.xlim(xlimits[0],xlimits[1])
-    if ylimits != None:
-        plt.ylim(ylimits[0],ylimits[1])
-    plt.legend()
-    return plt, gr_0
+ #######################################################
+ # |                Plot normalised mu                | #
+# V                                                   V #
+ #######################################################      
+    
+# show plot of normalised data
+def plot_normalised(xafs_group):
+        #plt.plot(xafs_group.energy, xafs_group.pre_edge, 'g', label='pre-edge') # plot pre-edge in green
+        #plt.plot(xafs_group.energy, xafs_group.post_edge, 'r', label='post-edge')# plot post-edge in red
+        #plt.plot(xafs_group.energy, xafs_group.mu, 'b', label=xafs_group.filename) # plot mu in blue
+        plt.plot(xafs_group.energy, xafs_group.flat, label=xafs_group.filename)
+        plt.grid(color='r', linestyle=':', linewidth=1) #show and format grid
+        plt.xlabel('Energy (eV)') # label y graph
+        plt.ylabel('x$\mu$(E)') # label y axis
+        plt.title("normalised to $\mu$")
+        plt.legend() # show legend
+        return plt
+
+
+
+
+    
 
     
     
