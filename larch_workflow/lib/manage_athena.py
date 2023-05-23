@@ -218,7 +218,7 @@ def plot_derivative(xafs_group):
     plt.plot(xafs_group.energy, xafs_group.dmude, label=xafs_group.filename)
     plt.grid(color='r', linestyle=':', linewidth=1) #show and format grid
     plt.xlabel('Energy (eV)') # label y graph
-    plt.ylabel('x$\mu$(E)') # label y axis
+    plt.ylabel('Deriv normalised x$\mu$(E)') # label y axis
     plt.title("Derivative normalised to $\mu$")
     plt.legend() # show legend
     return plt
