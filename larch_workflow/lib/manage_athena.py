@@ -1,5 +1,5 @@
 # managing athena files
-from larch.io import create_athena, read_athena, extract_athenagroup, read_ascii
+from larch.io import create_athena, read_athena, extract_athenagroup, read_ascii, merge_groups
 
 # calculate pre-edge and post edge for normalisation
 from larch.xafs import pre_edge
@@ -8,8 +8,15 @@ from larch.xafs import autobk
 # calculate fourier transform
 from larch.xafs import xftf
 
+# calculate fourier transform
+from larch.xafs import rebin_xafs
+
 # plotting library
 import matplotlib.pyplot as plt
+
+# interpolate to produce smoother graphs
+import numpy as np
+from scipy.interpolate import make_interp_spline, BSpline
 
 # File handling
 from pathlib import Path
@@ -26,8 +33,8 @@ def files_setup(out_prefix, in_path):
     Path(out_path).mkdir(parents=True, exist_ok=True)
     # set path for log
     log_file = Path("./",out_path,"process.log")
-    print("Log will be saved to:", log_file)
-    set_logger(log_file)
+    #print("Log will be saved to:", log_file)
+    #set_logger(log_file)
     source_path = Path(in_path)
     return source_path, out_path
 
@@ -44,7 +51,7 @@ def set_logger(log_file):
     # prevent matplotlib font manager from writing to log
     logging.getLogger('matplotlib.font_manager').disabled = True
     logger.setLevel(logging.DEBUG)
-    logging.info("Started processing")
+    #logging.info("Started processing")
 
 
  #######################################################
@@ -65,8 +72,8 @@ def get_files_list(source_dir, f_pattern):
 # V         parameter to name columns                 V #
  #######################################################
 def read_text(a_file, use_labels = "energy mu"):
-    logging.info ("Processing: " + a_file.name)
-    logging.info ("Path: "+ str(a_file))
+    #logging.info ("Processing: " + a_file.name)
+    #logging.info ("Path: "+ str(a_file))
     a_group = read_ascii(a_file, labels=use_labels)
     return a_group
 
@@ -88,6 +95,31 @@ def get_groups(athena_project):
         gr_0 = extract_athenagroup(athena_project._athena_groups[group_key])
         athena_groups.append(gr_0)
     return athena_groups
+
+ #######################################################
+# |          Read groups from Athena project          | #
+# V              returns a list of groups             V #
+ #######################################################
+def get_group(athena_project, label):
+    g = extract_athenagroup(athena_project._athena_groups[label])
+    g = calc_with_defaults(g)
+    return g
+
+ #######################################################
+# |              Merge readings in list               | #
+# V                                                   V #
+ #######################################################
+def merge_readings(groups_list):
+    return merge_groups (groups_list)
+
+ #######################################################
+# |                Recalibrate energy                 | #
+# V             move E0 to match standard             V #
+ #######################################################
+def recalibrate_energy(a_group, recalibrate_to):
+    a_group.energy = a_group.energy[:] + (recalibrate_to-a_group.e0)
+    a_group.e0 = recalibrate_to
+    return a_group
 
  #######################################################
 # |         Athena recalculates everything so we      | #
@@ -126,7 +158,7 @@ def fit_pre_post_edge(xas_data, pre_lower=-150, pre_upper=-60):
  #######################################################
 
 def save_athena(xas_data, out_file):
-    logging.info ("project path: "+ str(out_file))
+    #logging.info ("project path: "+ str(out_file))
     xas_project = create_athena(out_file)
     xas_project.add_group(xas_data)
     xas_project.save()
@@ -141,7 +173,7 @@ def plot_mu(xafs_group):
         plt.grid(color='r', linestyle=':', linewidth=1) #show and format grid
         plt.xlabel('Energy (eV)') # label y graph
         plt.ylabel('x$\mu$(E)') # label y axis
-        plt.title("$\mu$" + xafs_group.filename)
+        plt.title("$\mu$ " + xafs_group.filename)
         plt.legend() # show legend
         return plt
 
@@ -162,23 +194,34 @@ def plot_edge_fit(xafs_group):
         return plt
 
  #######################################################
- # |                Plot normalised mu                | #
+# |                 Plot normalised mu                | #
 # V                                                   V #
  #######################################################      
     
 # show plot of normalised data
 def plot_normalised(xafs_group):
-        #plt.plot(xafs_group.energy, xafs_group.pre_edge, 'g', label='pre-edge') # plot pre-edge in green
-        #plt.plot(xafs_group.energy, xafs_group.post_edge, 'r', label='post-edge')# plot post-edge in red
-        #plt.plot(xafs_group.energy, xafs_group.mu, 'b', label=xafs_group.filename) # plot mu in blue
-        plt.plot(xafs_group.energy, xafs_group.flat, label=xafs_group.filename)
-        plt.grid(color='r', linestyle=':', linewidth=1) #show and format grid
-        plt.xlabel('Energy (eV)') # label y graph
-        plt.ylabel('x$\mu$(E)') # label y axis
-        plt.title("normalised to $\mu$")
-        plt.legend() # show legend
-        return plt
+    plt.plot(xafs_group.energy, xafs_group.norm, label=xafs_group.filename)
+    plt.grid(color='r', linestyle=':', linewidth=1) #show and format grid
+    plt.xlabel('Energy (eV)') # label y graph
+    plt.ylabel('x$\mu$(E)') # label y axis
+    plt.title("normalised to $\mu$")
+    plt.legend() # show legend
+    return plt
 
+ #######################################################
+# |                 Plot normalised mu                | #
+# V                                                   V #
+ #######################################################      
+    
+# show plot of normalised data
+def plot_derivative(xafs_group):
+    plt.plot(xafs_group.energy, xafs_group.dmude, label=xafs_group.filename)
+    plt.grid(color='r', linestyle=':', linewidth=1) #show and format grid
+    plt.xlabel('Energy (eV)') # label y graph
+    plt.ylabel('x$\mu$(E)') # label y axis
+    plt.title("Derivative normalised to $\mu$")
+    plt.legend() # show legend
+    return plt
 
 
 
