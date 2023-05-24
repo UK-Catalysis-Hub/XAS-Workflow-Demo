@@ -8,8 +8,11 @@ from larch.xafs import autobk
 # calculate fourier transform
 from larch.xafs import xftf
 
-# calculate fourier transform
+# rebin mu 
 from larch.xafs import rebin_xafs
+
+# math library contants the lcf function 
+from larch import math
 
 # plotting library
 import matplotlib.pyplot as plt
@@ -23,6 +26,10 @@ from pathlib import Path
 
 #library for writing to log
 import logging
+
+# create new instances of objects with deepcopy
+import copy
+
  #######################################################
 # | Create an output dir, point to the input file(s)  | #
 # V              and set the logger                   V #
@@ -122,6 +129,47 @@ def recalibrate_energy(a_group, recalibrate_to):
     return a_group
 
  #######################################################
+# |                Rebin signal with                  | #
+# V                     defaults                      V #
+ #######################################################
+def rebin_group(a_group):
+    xr = copy.deepcopy(a_group)
+    rebin_xafs(xr)#,group=xr,exafs1=50,xanes_step =0.5)
+    xr.energy = copy.deepcopy(xr.rebinned.energy) 
+    xr.mu = copy.deepcopy(xr.rebinned.mu)
+    xr.e0 = copy.deepcopy(xr.rebinned.e0)
+    xr.filename += " Rebinned"
+    xr = fit_pre_post_edge(xr)
+    return xr
+
+
+ #######################################################
+# |             Lineal Combination Fitting            | #
+# V                group + standards                  V #
+ #######################################################
+def lcf_group(a_group, lcf_components=[]):
+    if lcf_components == []:
+        print ("need a list of component groups to fit")
+    lcfr = math.lincombo_fit(a_group, lcf_components)#, vary_e0=True)
+    names_lbl = ""
+
+    lcfr.energy = lcfr.xdata
+    lcfr.mu = lcfr.ydata
+    lcfr = fit_pre_post_edge(lcfr)
+    
+    names_lbl = ""
+    array_label = ""
+    for a_w in lcfr.weights:
+        names_lbl += a_w + " " 
+        array_label += a_w + ": " + '%.2f' % (lcfr.weights[a_w]*100.0) + "% "
+    lcfr.filename = names_lbl
+    
+  
+    lcfr.arrayname = array_label
+    
+    return lcfr
+
+ #######################################################
 # |         Athena recalculates everything so we      | #
 # |      need to create a function that calculates    | #
 # V               all for each new group              V #
@@ -151,7 +199,6 @@ def fit_pre_post_edge(xas_data, pre_lower=-150, pre_upper=-60):
     pre_edge(energy=xas_data.energy, mu=xas_data.mu , group=xas_data, pre1=-150, pre2=-60)
     return xas_data
 
-
  #######################################################
 # |        Save data as an athena project             | #
 # V                                                   V #
@@ -161,21 +208,21 @@ def save_athena(xas_data, out_file):
     #logging.info ("project path: "+ str(out_file))
     xas_project = create_athena(out_file)
     xas_project.add_group(xas_data)
-    xas_project.save()
+    xas_project.save() 
 
 
  #######################################################
 # |              Plot mu on energy                    | #
 # V                                                   V #
  #######################################################
-def plot_mu(xafs_group):
-        plt.plot(xafs_group.energy, xafs_group.mu, label=xafs_group.filename) # plot mu in blue
-        plt.grid(color='r', linestyle=':', linewidth=1) #show and format grid
-        plt.xlabel('Energy (eV)') # label y graph
-        plt.ylabel('x$\mu$(E)') # label y axis
-        plt.title("$\mu$ " + xafs_group.filename)
-        plt.legend() # show legend
-        return plt
+def plot_mu(xafs_group, plot_title = ""):
+    plt.plot(xafs_group.energy, xafs_group.mu, label=xafs_group.filename) # plot mu in blue
+    plt.grid(color='black', linestyle=':', linewidth=1) #show and format grid
+    plt.xlabel('Energy (eV)') # label y graph
+    plt.ylabel('x$\mu$(E)') # label y axis
+    plt.title("$\mu$ " + plot_title) if not hasattr(xafs_group,"filename") else plt.title("$\mu$ " + xafs_group.filename)
+    plt.legend() # show legend
+    return plt
 
  
  #######################################################
