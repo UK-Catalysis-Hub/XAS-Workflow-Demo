@@ -10,7 +10,11 @@
 # get subprocess to run perl script
 import subprocess
 
-# run feff and get the paths
+# pymatgen used to generate the feff.inp file 
+from pymatgen.io.cif import CifParser, CifWriter
+from pymatgen.io.feff.inputs import Atoms, Potential, Header
+
+# FEFF to generate scattering paths
 from larch.xafs.feffrunner import feff6l
 
 # File handling
@@ -28,7 +32,7 @@ def run_atoms(crystal_f, feff_dir, feff_inp):
     return result
 
 def inp_from_cif(crystal_f, feff_dir, feff_inp,absorbing,c_radius):
-    crystal_f = Path(cif_file)
+    crystal_f = Path(crystal_f)
     c_parser = CifParser(crystal_f)
     c_structure = c_parser.get_structures()[0]
     header_file = Path(feff_dir,"inp_header.txt")
@@ -36,7 +40,7 @@ def inp_from_cif(crystal_f, feff_dir, feff_inp,absorbing,c_radius):
     atoms_file = Path(feff_dir,"inp_atoms.txt")
     
     # create inp contents from cif
-    inp_header = Header.from_cif_file(cif_file, source=cif_file, comment="")
+    inp_header = Header.from_cif_file(crystal_f, source=crystal_f, comment="")
     inp_atoms = Atoms(c_structure,absorbing_atom=absorbing, radius=c_radius)
     inp_potential = Potential(c_structure,absorbing_atom=absorbing)
     
@@ -62,7 +66,6 @@ def inp_from_cif(crystal_f, feff_dir, feff_inp,absorbing,c_radius):
         result_file.write("\n")
         for line in open( atoms_file, 'r' ):
             result_file.write( line )
-
     return True
 
 def copy_to_feff_dir(crystal_f, feff_file):
