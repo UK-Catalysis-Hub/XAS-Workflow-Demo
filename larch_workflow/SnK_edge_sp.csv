@@ -1,0 +1,5 @@
+id,filename,label,s02,e0,sigma2,deltar
+1,1692395_feff/feff0001.dat,Pt.Pt.1,amp,enot,ss,alpha*reff
+2,1692395_feff/feff0002.dat,Sn.Pt.2,amp,enot,sssn,alpha*reff
+3,1692395_feff/feff0003.dat,Pt.Pt.3,amp,enot,ss2,alpha*reff
+4,1692395_feff/feff0010.dat,Pt.Pt.10,amp,enot,ss3,alpha*reff

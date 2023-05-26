@@ -199,7 +199,7 @@ def get_path_labels(paths_file):
                 is_meta = False
                 #print("{}: {}".format(count, a_line.strip()))
             elif not is_meta:
-                if re.match("\s*\d*\s{4}\d*\s{3}", a_line) != None:
+                if  'degeneracy,' in a_line.split():
                     if a_path != {}:
                         all_paths[a_path['index']] = a_path
                     line_data = a_line.split()
@@ -210,7 +210,6 @@ def get_path_labels(paths_file):
                         a_path['label'] = line_data[4].replace("'","")
                     else:
                         a_path['label'] += '.'+line_data[4].replace("'","")
-                #print(a_line.split())
     if a_path != {} and 'index' in a_path:
         all_paths[a_path['index']] = a_path
     return all_paths
