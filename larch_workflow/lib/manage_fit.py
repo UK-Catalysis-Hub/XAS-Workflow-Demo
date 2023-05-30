@@ -133,55 +133,56 @@ def spreadsheet_to_gds(a_sheet, session):
 
 # show the paths stored in path files in the FEFF directory.
 # These paths are stored by feff in the files.dat file
-def show_feff_paths(var = "FeS2.inp"):
-    crystal_f = Path(var)
-    feff_dir = crystal_f.name[:-4]+"_feff"
-    feff_inp = crystal_f.name[:-4]+"_feff.inp"
-    feff_files = "files.dat"
-    input_file = Path(feff_dir, feff_files)
-    
-    #check if feff dir exists
-    if input_file.parent.exists() and input_file.exists():
-        logging.info(str(input_file.parent) + " path and "+ str(input_file)+ " found")
-    else:
-        logging.info(str(input_file.parent) + " path not found, run feff before running select paths")
-        return False
-    count = 0
-    # the .dat data is stored in fixed width strings 
-    field_widths = [[0,13],[14,21],[22,31],[32,41],[42,48],[49,61]]
-    is_meta = True
-    data_headers = []
+def show_feff_paths(f_paths = ["FeS2.inp"]):
     path_count = 0
     paths_data = []
-    # get the list of paths info to assing labels to paths
-    paths_info = get_path_labels(Path(feff_dir, 'paths.dat'))
-    logging.info("Reading from: "+ str(input_file))
-    with open(input_file) as datfile:
-        dat_lines = datfile.readlines()
-        for a_line in dat_lines:
-            count += 1
-            if re.match('-*', a_line.strip()).group(0)!= '':
-                is_meta = False
-                logging.info("{}: {}".format(count, a_line.strip()))
-            elif is_meta:
-                logging.info("{}: {}".format(count, a_line.strip()))
-            elif data_headers == []:
-                data_headers = [a_line[s:e].strip().replace(' ','_') for s,e in field_widths]
-                logging.info("headers:"+ str(data_headers))
-                data_headers.append('label')
-                data_headers.append('select')
-                paths_data.append(data_headers)
-            else:
-                path_count += 1
-                data_values = [a_line[s:e].strip() for s,e in field_widths]
-                path_id = str(int(data_values[0][-8:-4]))
-                data_values.append(paths_info[path_id]['label']+'.'+path_id)                    
-                data_values.append(0)
-                data_values[0] = feff_dir+"/"+data_values[0]
-                paths_data.append(data_values)
+    for var in f_paths:
+        crystal_f = Path(var)
+        feff_dir = crystal_f.name[:-4]+"_feff"
+        feff_inp = crystal_f.name[:-4]+"_feff.inp"
+        feff_files = "files.dat"
+        print("Reading from", feff_dir)
+        input_file = Path(feff_dir, feff_files)
+
+        #check if feff dir exists
+        if input_file.parent.exists() and input_file.exists():
+            print(str(input_file.parent) + " path and "+ str(input_file)+ " found")
+        else:
+            print(str(input_file.parent) + " path not found, run feff before running select paths")
+            return False
+        count = 0
+        # the .dat data is stored in fixed width strings 
+        field_widths = [[0,13],[14,21],[22,31],[32,41],[42,48],[49,61]]
+        is_meta = True
+        data_headers = []
+        # get the list of paths info to assing labels to paths
+        paths_info = get_path_labels(Path(feff_dir, 'paths.dat'))
+        print("Reading from: "+ str(input_file))
+        with open(input_file) as datfile:
+            dat_lines = datfile.readlines()
+            for a_line in dat_lines:
+                count += 1
+                if re.match('-*', a_line.strip()).group(0)!= '':
+                    is_meta = False
+                    #logging.info("{}: {}".format(count, a_line.strip()))
+                elif is_meta:
+                    print("{}: {}".format(count, a_line.strip()))
+                elif data_headers == []:
+                    data_headers = [a_line[s:e].strip().replace(' ','_') for s,e in field_widths]
+                    #logging.info("headers:"+ str(data_headers))
+                    data_headers.append('label')
+                    data_headers.append('select')
+                    paths_data.append(data_headers)
+                else:
+                    path_count += 1
+                    data_values = [a_line[s:e].strip() for s,e in field_widths]
+                    path_id = str(int(data_values[0][-8:-4]))
+                    data_values.append(paths_info[path_id]['label']+'.'+path_id)                    
+                    data_values.append(0)
+                    data_values[0] = feff_dir+"/"+data_values[0]
+                    paths_data.append(data_values)
     # use data to populate spreadsheet
-    
-    path_sheet = ipysheet.sheet(rows=path_count+1, columns=8)
+    path_sheet = ipysheet.sheet(rows=len(paths_data), columns=8)
     ipysheet.cell_range(paths_data)
     return path_sheet
 

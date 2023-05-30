@@ -219,7 +219,7 @@ def save_athena(xas_data, out_file):
 def save_groups(xas_groups, out_file):
     #logging.info ("project path: "+ str(out_file))
     xas_project = create_athena(out_file)
-    for xas data in xas_groups:
+    for xas_data in xas_groups:
         xas_project.add_group(xas_data)
     xas_project.save() 
     
