@@ -31,7 +31,7 @@ def run_atoms(crystal_f, feff_dir, feff_inp):
         result = False
     return result
 
-def inp_from_cif(crystal_f, feff_dir, feff_inp, absorbing,c_radius):
+def inp_from_cif(crystal_f, feff_dir, feff_inp, absorbing, c_radius):
     crystal_f = Path(crystal_f)
     c_parser = CifParser(crystal_f)
     c_structure = c_parser.get_structures()[0]
@@ -79,7 +79,8 @@ def create_feff_dir(feff_dir, feff_inp):
 
 def run_feff(input_files, absorbing= [], radius = 0.0):
     feff_dir_list = []
-    for inp_file, a_athom in zip(input_files, absorbing):
+    for inp_file, a_atom in zip(input_files, absorbing):
+        
         crystal_f = Path(inp_file)
         # use the name of the input file to define the
         # names of the feff directory and inp file
@@ -89,9 +90,8 @@ def run_feff(input_files, absorbing= [], radius = 0.0):
         # create the folder for the outputs
         create_feff_dir(feff_dir, feff_inp)
         # run atoms to generate input for feff
-        print(crystal_f.name[-3:])
         if crystal_f.name[-3:] != "inp":
-            atoms_ok = inp_from_cif(str(crystal_f), feff_dir, feff_inp, a_athom, radius)
+            atoms_ok = inp_from_cif(str(crystal_f), feff_dir, feff_inp, a_atom, radius)
         else:
             atoms_ok = copy_to_feff_dir(crystal_f, Path(feff_dir, feff_inp))
         if atoms_ok:
