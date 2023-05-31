@@ -223,7 +223,8 @@ def save_groups(xas_groups, out_file):
         xas_project.add_group(xas_data)
     xas_project.save() 
     
-    
+
+
  #######################################################
 # |              Plot mu on energy                    | #
 # V                                                   V #
