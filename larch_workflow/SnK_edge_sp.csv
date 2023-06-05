@@ -1,12 +1,6 @@
 id,filename,label,s02,e0,sigma2,deltar
-1,1690711_feff/feff0001.dat,O.Sn.1,amp,enot,ss_sno2_1,alpha*reff
-2,1690711_feff/feff0002.dat,O.Sn.2,amp,enot,ss_sno2_2,alpha*reff
-3,1690711_feff/feff0003.dat,Sn.Sn.3,amp,enot,ss_sno2_3,alpha*reff
-4,1692395a_feff/feff0001.dat,Pt.Pt.1,amp,enot,ss_ptsn_1,alpha*reff
-5,1692395a_feff/feff0002.dat,Sn.Pt.2,amp,enot,ss_ptsn_2,alpha*reff
-6,1692395a_feff/feff0003.dat,Pt.Pt.3,amp,enot,ss_ptsn_3,alpha*reff
-7,1692395a_feff/feff0010.dat,Pt.Pt.10,amp,enot,ss_ptsn_4,alpha*reff
-8,1680385_feff/feff0001.dat,Pt.O.1,amp,enot,ss_o2pt_1,alpha*reff
-9,1680385_feff/feff0002.dat,O.O.2A,amp,enot,ss_o2pt_2,alpha*reff
-10,1680385_feff/feff0003.dat,O.O.3,amp,enot,ss_o2pt_3,alpha*reff
-11,1692395b_feff/feff0002.dat,Sn.Pt.2,amp,enot,ss_ptsn_5,alpha*reff
+1,1690711_feff/feff0001.dat,O.Sn.1,amp,enot,sssno,alpha*reff
+2,1692395a_feff/feff0001.dat,Pt.Pt.1,amp,enot,ssptpt,alpha*reff
+3,1692395a_feff/feff0002.dat,Sn.Pt.2,amp,enot,ssptsn,alpha*reff
+4,1680385_feff/feff0001.dat,Pt.O.1,amp,enot,sspto,alpha*reff
+5,1692395b_feff/feff0002.dat,Sn.Pt.2,amp,enot,sssnpt,alpha*reff
