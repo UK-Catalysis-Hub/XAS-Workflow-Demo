@@ -68,6 +68,11 @@ def set_logger(log_file):
 def get_files_list(source_dir, f_pattern):
     i_counter = 0
     files_list = []
+    if "/" in f_pattern:
+        last_delimiter = f_pattern.rfind('/')
+        source_dir = Path(str(source_dir), f_pattern[0:last_delimiter])
+        f_pattern = f_pattern[last_delimiter+1:]
+        
     for filepath in sorted(source_dir.glob(f_pattern)):
         i_counter += 1
         files_list.append(filepath)
@@ -196,7 +201,7 @@ def calc_with_defaults(xafs_group):
  #######################################################
 
 def fit_pre_post_edge(xas_data, pre_lower=-150, pre_upper=-60):
-    pre_edge(energy=xas_data.energy, mu=xas_data.mu , group=xas_data, pre1=-150, pre2=-60)
+    pre_edge(energy=xas_data.energy, mu=xas_data.mu , group=xas_data, pre1 = pre_lower, pre2=pre_upper)
     return xas_data
 
  #######################################################
