@@ -22,7 +22,7 @@ import numpy as np
 '''
 
 #Whittaker filter (smoothing)
-def whittaker(y,lmd = 2, d = 2):
+def whittaker_filter(y,lmd = 2, d = 2):
     #lmd: smoothing parameter lambda,
     #the suggested value of lambda = 1600 seems way to much for Raman spectra
     #d: order of differences in penalty (2)
@@ -37,8 +37,7 @@ def whittaker(y,lmd = 2, d = 2):
 def plot_chir_magnitude(athena_groups = {}, include_groups = [], offset = 0.5, aspect = (6,8), legend_x = 7140, xlim=[]):
 
     # plot using the xas data for Fe    
-    plt.figure(figsize=(6, 8))
-    offset = 3.0
+    plt.figure(figsize=aspect)
     include_groups = ["Fe Metal", "A", "B", "C", "D"]
     for g_indx ,a_group in enumerate(athena_groups):
         if a_group.filename in include_groups:
@@ -55,11 +54,14 @@ def plot_chir_magnitude(athena_groups = {}, include_groups = [], offset = 0.5, a
 
 
 # plot normalised spectrum
-def plot_normailised(athena_groups = {}, include_groups = [], aspect = (6,8), xlim=[],ylim=[]):
+def plot_normailised(athena_groups = {}, include_groups = [], aspect = (6,8), xlim=[],ylim=[], smooth=False):
     plt.figure(figsize=aspect)
     for g_indx ,a_group in enumerate(athena_groups):
         if a_group.filename in include_groups:
-            plt.plot(a_group.energy, a_group.norm, label=a_group.filename ) 
+            if smooth:
+                plt.plot(a_group.energy, whittaker_filter(a_group.norm), label=a_group.filename ) 
+            else:
+                plt.plot(a_group.energy, a_group.norm, label=a_group.filename ) 
 
     frame1 = plt.gca()
     #frame1.axes.yaxis.set_ticklabels([])
@@ -74,7 +76,9 @@ def plot_normailised(athena_groups = {}, include_groups = [], aspect = (6,8), xl
     return plt
 
 # plot normalised spectrum with an offset
-def plot_normailised_offset(athena_groups = {}, include_groups = [], offset = 0.5, aspect = (6,8), legend_x = 7140, xlim=[]):
+def plot_normailised_offset(athena_groups = {}, include_groups = [], 
+                            offset = 0.5, aspect = (6,8), legend_x = 7140, 
+                            xlim=[], smooth = False):
     plt.figure(figsize=aspect)
     idx = np.abs(athena_groups[1].energy - legend_x).argmin()
 
@@ -85,7 +89,10 @@ def plot_normailised_offset(athena_groups = {}, include_groups = [], offset = 0.
             # get index of energy value closer to where the label shoud be placed
             idx = np.abs(a_group.energy - legend_x).argmin()
             plt.text(a_group.energy[idx], a_group.norm[idx] - (g_indx*offset)+.1, a_group.filename)
-            plt.plot(a_group.energy, a_group.norm - (g_indx*offset) )
+            if smooth:
+                plt.plot(a_group.energy, whittaker_filter(a_group.norm) - (g_indx*offset) )
+            else:
+                plt.plot(a_group.energy, a_group.norm - (g_indx*offset) )
 
     frame1 = plt.gca()
     frame1.axes.yaxis.set_ticklabels([])
@@ -96,14 +103,20 @@ def plot_normailised_offset(athena_groups = {}, include_groups = [], offset = 0.
     return plt
 
 # plot first derivative wiht an offset
-def plot_norm_deriv_offset(athena_groups = {}, include_groups = [], offset = 0.5, aspect = (6,8), legend_x = 7125, xlim=[]):
+# smooth data just for plotting ** NOT FOR FURTHER PROCESSING **
+def plot_norm_deriv_offset(athena_groups = {}, include_groups = [], offset = 0.5, 
+                           aspect = (6,8), legend_x = 7125, xlim=[], 
+                           smooth = False):
     plt.figure(figsize=aspect)
     for g_indx ,a_group in enumerate(athena_groups):
         if a_group.filename in include_groups:
             # get index of energy value closer to where the label shoud be placed
             idx = np.abs(a_group.energy - legend_x).argmin()
             plt.text(a_group.energy[idx], a_group.dmude[idx]-(g_indx*offset)+0.1, a_group.filename)
-            plt.plot(a_group.energy, a_group.dmude - (g_indx*offset), label=a_group.filename ) 
+            if smooth:
+                plt.plot(a_group.energy, whittaker_filter(a_group.dmude, lmd = 2, d = 2) - (g_indx*offset), label=a_group.filename)
+            else:
+                 plt.plot(a_group.energy, a_group.dmude - (g_indx*offset), label=a_group.filename ) 
 
     frame1 = plt.gca()
     frame1.axes.yaxis.set_ticklabels([])
