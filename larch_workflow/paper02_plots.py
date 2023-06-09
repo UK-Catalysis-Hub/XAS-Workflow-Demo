@@ -35,10 +35,8 @@ def whittaker_filter(y,lmd = 2, d = 2):
 
 # plot magnitude of chi(R)
 def plot_chir_magnitude(athena_groups = {}, include_groups = [], offset = 0.5, aspect = (6,8), legend_x = 7140, xlim=[]):
-
     # plot using the xas data for Fe    
     plt.figure(figsize=aspect)
-    include_groups = ["Fe Metal", "A", "B", "C", "D"]
     for g_indx ,a_group in enumerate(athena_groups):
         if a_group.filename in include_groups:
             # get index of energy value closer to where the label shoud be placed
