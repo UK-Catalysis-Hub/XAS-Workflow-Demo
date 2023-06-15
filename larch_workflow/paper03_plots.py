@@ -29,13 +29,12 @@ def plot_normalised(athena_groups = {}, include_groups = {}, aspect = (6,8), xli
 # individaul normal plots
 def normal_subplot(a_subplt, athena_groups = {}, include_groups = {}, xlim=[],ylim=[], s_legend = True):
     for g_indx, a_group in enumerate(include_groups):
-        if athena_groups[a_group].filename in include_groups:
-                a_subplt.plot(athena_groups[a_group].energy,
-                              athena_groups[a_group].norm, 
-                              label=athena_groups[a_group].filename,
-                              color = include_groups[a_group][0],
-                              linestyle = include_groups[a_group][1]
-                             )                 
+        a_subplt.plot(athena_groups[a_group].energy,
+                      athena_groups[a_group].norm, 
+                      label=athena_groups[a_group].filename,
+                      color = include_groups[a_group][0],
+                      linestyle = include_groups[a_group][1]
+                     )                 
     if s_legend:
         a_subplt.legend() # show legend
         a_subplt.set_ylabel("Normalized Absorption (a.u.)")
@@ -54,8 +53,8 @@ def plot_normal_w_inset(athena_groups = {}, include_groups = {}, aspect=(6,8),
     left, bottom, width, height = [0.55, 0.2, 0.3, 0.3]
     ax2 = fig.add_axes([left, bottom, width, height])
 
-    ax1 = normal_subplot(ax1, athena_groups, include_groups,[11900, 11960],[0,1.1])
-    ax2 = normal_subplot(ax2, athena_groups, include_groups, [11940, 11955],[0.85,1.06], False)
+    ax1 = normal_subplot(ax1, athena_groups, include_groups,lp_xlim,lp_ylim)
+    ax2 = normal_subplot(ax2, athena_groups, include_groups, sp_xlim,sp_ylim, False)
     return plt
 
 
