@@ -132,8 +132,9 @@ def spreadsheet_to_gds(a_sheet, session):
 
 
 # show the paths stored in path files in the FEFF directory.
-# These paths are stored by feff in the files.dat file
-def show_feff_paths(f_paths = ["FeS2.inp"]):
+# These paths are stored by feff in the files.dat file.
+# if the selected paths list is not empty mark as selected
+def show_feff_paths(f_paths = ["FeS2.inp"], selected_paths=[]):
     path_count = 0
     paths_data = []
     for var in f_paths:
@@ -141,14 +142,11 @@ def show_feff_paths(f_paths = ["FeS2.inp"]):
         feff_dir = crystal_f.name[:-4]+"_feff"
         feff_inp = crystal_f.name[:-4]+"_feff.inp"
         feff_files = "files.dat"
-        print("Reading from", feff_dir)
+        #print("Reading from", feff_dir)
         input_file = Path(feff_dir, feff_files)
-
         #check if feff dir exists
-        if input_file.parent.exists() and input_file.exists():
-            print(str(input_file.parent) + " path and "+ str(input_file)+ " found")
-        else:
-            print(str(input_file.parent) + " path not found, run feff before running select paths")
+        if not input_file.parent.exists() and input_file.exists():
+            print(str(input_file.parent) + "path not found, run feff before running select paths")
             return False
         count = 0
         # the .dat data is stored in fixed width strings 
@@ -157,7 +155,7 @@ def show_feff_paths(f_paths = ["FeS2.inp"]):
         data_headers = []
         # get the list of paths info to assing labels to paths
         paths_info = get_path_labels(Path(feff_dir, 'paths.dat'))
-        print("Reading from: "+ str(input_file))
+        #print("Reading from: "+ str(input_file))
         with open(input_file) as datfile:
             dat_lines = datfile.readlines()
             for a_line in dat_lines:
@@ -166,7 +164,7 @@ def show_feff_paths(f_paths = ["FeS2.inp"]):
                     is_meta = False
                     #logging.info("{}: {}".format(count, a_line.strip()))
                 elif is_meta:
-                    print("{}: {}".format(count, a_line.strip()))
+                    continue #print("{}: {}".format(count, a_line.strip()))
                 elif data_headers == []:
                     data_headers = [a_line[s:e].strip().replace(' ','_') for s,e in field_widths]
                     #logging.info("headers:"+ str(data_headers))
@@ -181,6 +179,13 @@ def show_feff_paths(f_paths = ["FeS2.inp"]):
                     data_values.append(0)
                     data_values[0] = feff_dir+"/"+data_values[0]
                     paths_data.append(data_values)
+    
+    # mark preiously selected paths
+    for a_path in selected_paths:
+        for val in paths_data:
+            if val[0] == a_path.filename and  val[6] == a_path.label:
+                val[7] = 1
+
     # use data to populate spreadsheet
     path_sheet = ipysheet.sheet(rows=len(paths_data), columns=8)
     ipysheet.cell_range(paths_data)
@@ -217,8 +222,8 @@ def get_path_labels(paths_file):
 
 
 
-def show_selected_paths(pats_sheet):
-    df_sheet = ipysheet.to_dataframe(pats_sheet)
+def show_selected_paths(paths_sheet, sel_path_list):
+    df_sheet = ipysheet.to_dataframe(paths_sheet)
     files = []
     for f_name, p_label, selected in zip(df_sheet["A"], df_sheet["G"], df_sheet["H"]):
         if selected == '1':
@@ -231,6 +236,15 @@ def show_selected_paths(pats_sheet):
         sel_paths_data[ps_row][0] = a_name[0]
         sel_paths_data[ps_row][1] = a_name[1]
         ps_row += 1
+    # assign gds parameters from selected paths list
+    for a_path in sel_path_list:
+        for val in sel_paths_data:
+            if val[0] == a_path.filename and  val[1] == a_path.label:
+                val[2] = a_path.s02
+                val[3] = a_path.e0
+                val[4] = a_path.sigma2
+                val[5] = a_path.deltar
+
     sp_sheet = ipysheet.sheet(rows=len(files)+1, columns=6)
     ipysheet.cell_range(sel_paths_data)
     display(sp_sheet)
