@@ -1,0 +1,5 @@
+id,filename,label,s02,e0,sigma2,deltar
+1,mp-565203_Mn2O3_feff/feff0001.dat,O.Mn.1,amp,enot,ssmno1,alpha*reff
+2,mp-565203_Mn2O3_feff/feff0002.dat,O.Mn.2,amp,enot,ssmno2,alpha*reff
+3,mp-565203_Mn2O3_feff/feff0004.dat,Mn.Mn.4,amp,enot,ssmnmn1,alpha*reff
+4,mp-565203_Mn2O3_feff/feff0005.dat,Mn.Mn.5,amp,enot,ssmnmn2,alpha*reff
