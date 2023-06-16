@@ -1,0 +1,8 @@
+id,name,value,expr,vary
+1,amp,1.0,,True
+2,delr,0.0,,True
+3,enot,0.0,,True
+4,alpha,0.0,,True
+5,ssmno,0.003,,True
+6,ssmnmn1,0.003,,True
+7,ssmnmn2,0.003,,True
