@@ -1,6 +1,6 @@
 id,filename,label,s02,e0,sigma2,deltar
 1,1690711_feff/feff0001.dat,O.Sn.1,amp,enot,sssno,alpha*reff
-2,1692395a_feff/feff0001.dat,Pt.Pt.1,amp,enot,ssptpt,alpha*reff
-3,1692395a_feff/feff0002.dat,Sn.Pt.2,amp,enot,ssptsn,alpha*reff
-4,1680385_feff/feff0001.dat,Pt.O.1,amp,enot,sspto,alpha*reff
-5,1692395b_feff/feff0002.dat,Sn.Pt.2,amp,enot,sssnpt,alpha*reff
+2,1692396_feff/feff0001.dat,Pt.Sn.1,amp,enot,sssnpt,alpha*reff
+3,1680385_feff/feff0001.dat,Pt.O.1,amp,enot,sspto,alpha*reff
+4,1692395b_feff/feff0001.dat,Pt.Pt.1,amp,enot,ssptpt,alpha*reff
+5,1692395b_feff/feff0002.dat,Sn.Pt.2,amp,enot,ssptsn,alpha*reff

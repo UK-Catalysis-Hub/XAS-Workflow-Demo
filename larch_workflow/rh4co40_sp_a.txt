@@ -1,0 +1,8 @@
+id,filename,label,s02,e0,sigma2,deltar
+1,C12O12Rh4_feff/feff0001.dat,C.Rh.1,amp,enot,ssc1,delr
+2,C12O12Rh4_feff/feff0002.dat,C.Rh.2,amp,enot,ssc2,delr
+3,C12O12Rh4_feff/feff0003.dat,C.Rh.3,amp,enot,ssc3,delr
+4,C12O12Rh4_feff/feff0004.dat,C.Rh.4,amp,enot,ssc4,delr
+5,C12O12Rh4_feff/feff0005.dat,Rh.Rh.5,amp,enot,ssr1,delr
+6,C12O12Rh4_feff/feff0006.dat,Rh.Rh.6,amp,enot,ssr2,delr
+7,C12O12Rh4_feff/feff0007.dat,Rh.Rh.7,amp,enot,ssr3,delr

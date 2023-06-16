@@ -1,0 +1,16 @@
+id,name,value,expr,vary
+1,amp,1.0,,True
+2,delr,0.0,,True
+3,enot,0.0,,True
+4,alpha,0.0,,True
+5,ss_sno2_1,0.0,,True
+6,ss_sno2_2,0.0,,True
+7,ss_sno2_3,0.0,,True
+8,ss_ptsn_1,0.0,,True
+9,ss_ptsn_2,0.0,,True
+10,ss_ptsn_3,0.0,,True
+11,ss_ptsn_4,0.0,,True
+12,ss_o2pt_1,0.0,,True
+13,ss_o2pt_2,0.0,,True
+14,ss_o2pt_3,0.0,,True
+15,ss_ptsn_5,0.0,,True
