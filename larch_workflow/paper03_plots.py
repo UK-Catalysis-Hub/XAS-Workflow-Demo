@@ -53,7 +53,7 @@ def plot_normal_w_inset(athena_groups = {}, include_groups = {}, aspect=(6,8),
     left, bottom, width, height = [0.55, 0.2, 0.3, 0.3]
     ax2 = fig.add_axes([left, bottom, width, height])
 
-    ax1 = normal_subplot(ax1, athena_groups, include_groups,lp_xlim,lp_ylim)
+    ax1 = normal_subplot(ax1, athena_groups, include_groups, lp_xlim,lp_ylim)
     ax2 = normal_subplot(ax2, athena_groups, include_groups, sp_xlim,sp_ylim, False)
     return plt
 
