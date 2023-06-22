@@ -1,0 +1,4 @@
+id,filename,label,s02,e0,sigma2,deltar
+1,mp-1178574_AlPdO3_feff/feff0001.dat,O.Pd.1,n2_pdo*s02,enot,sspdo,delr_2
+2,1694754_feff/feff0001.dat,N.Pd.1,n3_pdn*s02,enot,sspdn,delr_3
+3,1694754_feff/feff0002.dat,Pd.Pd.2,n1_pdpd*s02,enot,sspdpd,delr_1
