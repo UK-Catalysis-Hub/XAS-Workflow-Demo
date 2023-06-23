@@ -1,0 +1,9 @@
+id,name,value,expr,vary
+1,n1_pdpd,2.0,,True
+2,n3_pdn,2.0,,True
+3,s02,0.7,,False
+4,enot,0.1,,True
+5,delr_1,0.0,,True
+6,delr_3,0.0,,True
+7,sspdpd,0.003,,True
+8,sspdn,0.003,,True
