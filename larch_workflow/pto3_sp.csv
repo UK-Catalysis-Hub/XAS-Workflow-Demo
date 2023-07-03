@@ -1,0 +1,3 @@
+id,filename,label,s02,e0,sigma2,deltar
+1,mp-1178574_AlPdO3_feff/feff0001.dat,O.Pd.1,s02*npdo,enot,sspdo,alpha*reff
+2,mp-1178574_AlPdO3_feff/feff0004.dat,Pd.Pd.4,s02*npdpd,enot,sspdpd,alpha*reff
