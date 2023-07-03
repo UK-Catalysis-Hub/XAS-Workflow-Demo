@@ -1,4 +1,5 @@
 id,filename,label,s02,e0,sigma2,deltar
-1,1694676_feff/feff0001.dat,O.Pd.1,n1_pdo*s02,enot,sspdo,delr_1
-2,1694676_feff/feff0002.dat,Pd.Pd.2,n2_pdpd*s02,enot,sspdpd1,delr_1
-3,1694676_feff/feff0003.dat,Pd.Pd.3,n3_pdpd*s02,enot,sspdpd2,delr_1
+1,1694676_feff/feff0001.dat,O.Pd.1,amp,enot,sspdo,alpha*reff
+2,1694676_feff/feff0002.dat,Pd.Pd.2,amp,enot,sspdpd1,alpha*reff
+3,1694676_feff/feff0003.dat,Pd.Pd.3,amp,enot,sspdpd2,alpha*reff
+4,1694676_feff/feff0005.dat,O.Pd.5,amp,enot,sspdo1,alpha*reff
