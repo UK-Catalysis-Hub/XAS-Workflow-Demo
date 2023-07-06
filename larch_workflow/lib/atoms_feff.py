@@ -76,7 +76,7 @@ def inp_from_cif(crystal_f, feff_dir, feff_inp, absorbing, c_radius):
 
 
 def cif_to_inp(crystal_f, feff_dir, feff_inp, absorbing, c_radius):
-    remove_these=["EDGE"]
+    remove_these=["EDGE","S02","CONTROL", "PRINT", "EXAFS", "NLEG", "RPATH","EXCHANGE"]
 
     cif_data = ""
     with open(crystal_f, 'r') as file:
@@ -94,8 +94,6 @@ def cif_to_inp(crystal_f, feff_dir, feff_inp, absorbing, c_radius):
         for a_line in inp_lines:
             if len(set(a_line.split()).intersection(set(remove_these))) == 0:
                 result_file.write(a_line+"\n")
-            else:
-                print("Remove", a_line)
                 
     return True
 
