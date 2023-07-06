@@ -14,6 +14,10 @@ import subprocess
 from pymatgen.io.cif import CifParser, CifWriter
 from pymatgen.io.feff.inputs import Atoms, Potential, Header
 
+# use ciff2feff which runs pymatgem and generates output in one go
+# easier than using pymatgem manually
+from larch.xrd import cif2feff
+
 # FEFF to generate scattering paths
 from larch.xafs.feffrunner import feff6l
 
@@ -30,6 +34,8 @@ def run_atoms(crystal_f, feff_dir, feff_inp):
     else:
         result = False
     return result
+
+
 
 def inp_from_cif(crystal_f, feff_dir, feff_inp, absorbing, c_radius):
     crystal_f = Path(crystal_f)
@@ -68,6 +74,23 @@ def inp_from_cif(crystal_f, feff_dir, feff_inp, absorbing, c_radius):
             result_file.write( line )
     return True
 
+
+def cif_to_inp(crystal_f, feff_dir, feff_inp, absorbing, c_radius):
+    cif_data = ""
+    with open(crystal_f, 'r') as file:
+        cif_data = file.read()
+    inp_data = cif2feff.cif2feffinp(cif_data, absorbing, edge=None, 
+                                    cluster_size=c_radius, absorber_site=1,
+                                    site_index=None, extra_titles=None, 
+                                    with_h=False, version8=True)
+    feff_file = Path(feff_dir, feff_inp)
+    
+    # join files into single inp file
+    with open(feff_file, 'w' ) as result_file:
+        # write header
+        result_file.write(inp_data)
+    return True
+
 def copy_to_feff_dir(crystal_f, feff_file):
     print ("copying", crystal_f.name, " to ", feff_file)
     shutil.copy(crystal_f, feff_file)
@@ -91,7 +114,7 @@ def run_feff(input_files, absorbing= [], radius = 0.0):
         create_feff_dir(feff_dir, feff_inp)
         # run atoms to generate input for feff
         if crystal_f.name[-3:] != "inp":
-            atoms_ok = inp_from_cif(str(crystal_f), feff_dir, feff_inp, a_atom, radius)
+            atoms_ok = cif_to_inp(str(crystal_f), feff_dir, feff_inp, a_atom, radius)
         else:
             atoms_ok = copy_to_feff_dir(crystal_f, Path(feff_dir, feff_inp))
         if atoms_ok:
