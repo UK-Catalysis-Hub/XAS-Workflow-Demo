@@ -1,4 +1,4 @@
 id,filename,label,s02,e0,sigma2,deltar
 1,1667441_feff/feff0001.dat,O.Mn.1,amp,enot,ssmno,delr_1
 2,1667441_feff/feff0003.dat,La.Mn.3,amp,enot,ssmnla,delr_2
-3,1667441_feff/feff0004.dat,Mn.Mn.4,amp,enot,ssmnmn,delr_3
+3,1697445_feff/feff0003.dat,La.Mn.3,amp,enot,ssmnla2,delr_3

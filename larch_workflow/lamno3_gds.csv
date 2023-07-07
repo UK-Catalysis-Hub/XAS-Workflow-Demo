@@ -5,6 +5,6 @@ id,name,value,expr,vary
 4,alpha,0.0,,True
 5,ssmno,0.003,,True
 6,ssmnla,0.003,,True
-7,ssmnmn,0.003,,True
+7,ssmnla2,0.003,,True
 8,delr_2,0.0,,True
 9,delr_3,0.0,,True
