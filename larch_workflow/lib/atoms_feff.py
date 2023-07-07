@@ -21,6 +21,9 @@ from larch.xrd import cif2feff
 # FEFF to generate scattering paths
 from larch.xafs.feffrunner import feff6l
 
+# for combining lists of cif and absorbers
+from itertools import zip_longest
+
 # File handling
 from pathlib import Path
 import shutil
@@ -99,18 +102,20 @@ def cif_to_inp(crystal_f, feff_dir, feff_inp, absorbing, c_radius):
     return True
 
 def copy_to_feff_dir(crystal_f, feff_file):
-    print ("copying", crystal_f.name, " to ", feff_file)
+    print ("copying:", crystal_f.name, " to ", feff_file)
     shutil.copy(crystal_f, feff_file)
     return True
 
 def create_feff_dir(feff_dir, feff_inp):
+    print("check if need to build:", feff_dir )
     feff_file = Path(feff_dir, feff_inp)
     feff_file.parent.mkdir(parents=True, exist_ok=True) 
 
+
 def run_feff(input_files, absorbing= [], radius = 0.0):
     feff_dir_list = []
-    for inp_file, a_atom in zip(input_files, absorbing):
-        
+    for inp_file, a_atom in zip_longest(input_files, absorbing):
+        print("Processing:", inp_file )
         crystal_f = Path(inp_file)
         # use the name of the input file to define the
         # names of the feff directory and inp file
