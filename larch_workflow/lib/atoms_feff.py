@@ -76,7 +76,10 @@ def inp_from_cif(crystal_f, feff_dir, feff_inp, absorbing, c_radius):
 
 
 def cif_to_inp(crystal_f, feff_dir, feff_inp, absorbing, c_radius):
-    remove_these=["EDGE","S02","CONTROL", "PRINT", "EXAFS", "NLEG", "RPATH","EXCHANGE"]
+    # the program adds these lines which give errors when running FEFF
+    # mabe they are used for FEFF 8.
+    remove_these=["EDGE","S02","CONTROL", "PRINT", "EXAFS", "NLEG", 
+                  "RPATH","EXCHANGE"]
 
     cif_data = ""
     with open(crystal_f, 'r') as file:
@@ -87,14 +90,12 @@ def cif_to_inp(crystal_f, feff_dir, feff_inp, absorbing, c_radius):
                                     with_h=False, version8=True)
     feff_file = Path(feff_dir, feff_inp)
     
-    # join files into single inp file
+    # write inp data to file
     with open(feff_file, 'w' ) as result_file:
-        # write header
         inp_lines = inp_data.split("\n")
         for a_line in inp_lines:
             if len(set(a_line.split()).intersection(set(remove_these))) == 0:
-                result_file.write(a_line+"\n")
-                
+                result_file.write(a_line+"\n")           
     return True
 
 def copy_to_feff_dir(crystal_f, feff_file):
