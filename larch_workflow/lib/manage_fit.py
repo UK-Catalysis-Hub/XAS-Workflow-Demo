@@ -256,7 +256,7 @@ def build_selected_paths_list(sp_sheet, session):
     sp_list = []
     for col in df_sheet:
         if df_sheet[col][0] != 'file':
-            new_path = lp.xafs.FeffPathGroup(filename = df_sheet[col][0],
+            new_path = FeffPathGroup(filename = df_sheet[col][0],
                                              label    = df_sheet[col][1],
                                              s02      = df_sheet[col][2],
                                              e0       = df_sheet[col][3],
@@ -264,6 +264,20 @@ def build_selected_paths_list(sp_sheet, session):
                                              deltar   = df_sheet[col][5],
                                              _larch   = session)
             sp_list.append(new_path)
+    return sp_list
+
+# use data dictionary to create selected paths list
+def dict_to_sp(sp_values, session):
+    sp_list = []
+    for sp_path in sp_values:
+        new_path = FeffPathGroup(filename = sp_path['filename'],
+                                 label    = sp_path['label'],
+                                 s02      = sp_path['s02'],
+                                 e0       = sp_path['e0'],
+                                 sigma2   = sp_path['sigma2'],
+                                 deltar   = sp_path['deltar'],
+                                 _larch   = session)
+        sp_list.append(new_path)
     return sp_list
 
 #save the selected paths list to a csv file (using the prefix of crystal)
