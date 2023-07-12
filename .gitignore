@@ -42,3 +42,4 @@ larch_workflow/larch_examples/fe2o3_rt1.xmu
 larch_workflow/larch_examples/xraylarch python examples.ipynb
 larch_workflow/larch/.ipynb_checkpoints/Using Larch with Python3-checkpoint.ipynb
 larch_workflow/1692395_feff.inp
+larch_workflow/wf_data/*
