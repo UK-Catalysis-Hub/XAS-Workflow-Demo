@@ -2,25 +2,18 @@
 import csv
 
 # get the data from the csv_file, assuming first column is integer id
-def get_csv_data(input_file, id_field="", headers=True):
+def read_csv_data(input_file, id_field='id'):
     csv_data = {}
     fieldnames = []
-    identifier = 0
-    with open(input_file, encoding="utf8") as csvfile:
-        if headers: 
+    try:
+        with open(input_file, encoding="utf8") as csvfile:
             reader = csv.DictReader(csvfile)
-        else:
-           reader = csv.reader(csvfile)
-        for row in reader:
-            if id_field != "":
-                identifier = int(row[id_field])
-            else:
-                identifier += 1 
-            #print(row)
-            if fieldnames == [] and headers:
-                fieldnames = list(row.keys())
-             
-            csv_data[identifier]=row
+            for row in reader:  
+                if fieldnames == []:
+                    fieldnames = list(row.keys())
+                csv_data[int(row[id_field])]=row
+    except FileNotFoundError:
+            print("The specified file does not exist")
     return csv_data, fieldnames
 
 # writes data to the given file name

@@ -1,7 +1,5 @@
-# set parameters 
 # example Using Larch with python3
 
-import larch_plugins as lp
 # library containign functions that read and write to csv files
 import lib.handle_csv as csvhandler
 # regular expression matching
@@ -12,6 +10,9 @@ import ipysheet
 from pathlib import Path
 #library for writing to log
 import logging
+# Changes from removing lp
+from larch import ParameterGroup, fitting
+from larch.xafs import TransformGroup, FeffitDataSet, feffit, feffit_report, FeffPathGroup
 
 # plotting library
 import matplotlib.pyplot as plt
@@ -61,7 +62,7 @@ def gds_to_dict(gds_group):
 
 # take data from dictionary and create a gds group
 def dict_to_gds(data_dict, session):
-    dgs_group = lp.fitting.param_group(_larch=session)
+    dgs_group = ParameterGroup()
     for par_idx in data_dict:
         #gds file structure:
         gds_name = data_dict[par_idx]['name']
@@ -77,10 +78,10 @@ def dict_to_gds(data_dict, session):
         one_par = None
         if gds_vary:
             # equivalent to a guess parameter in Demeter
-            one_par = lp.fitting.guess(name=gds_name ,value=gds_val, vary=gds_vary, expr=gds_expr)
+            one_par = fitting.guess(name=gds_name ,value=gds_val, vary=gds_vary, expr=gds_expr)
         else:
             # equivalent to a defined parameter in Demeter
-            one_par = lp.fitting.param(name=gds_name ,value=gds_val, vary=gds_vary, expr=gds_expr)
+            one_par = fitting.param(name=gds_name ,value=gds_val, vary=gds_vary, expr=gds_expr)
         if one_par != None:
             dgs_group.__setattr__(gds_name,one_par)
     return dgs_group
@@ -131,56 +132,62 @@ def spreadsheet_to_gds(a_sheet, session):
 
 
 # show the paths stored in path files in the FEFF directory.
-# These paths are stored by feff in the files.dat file
-def show_feff_paths(var = "FeS2.inp"):
-    crystal_f = Path(var)
-    feff_dir = crystal_f.name[:-4]+"_feff"
-    feff_inp = crystal_f.name[:-4]+"_feff.inp"
-    feff_files = "files.dat"
-    input_file = Path(feff_dir, feff_files)
-    
-    #check if feff dir exists
-    if input_file.parent.exists() and input_file.exists():
-        logging.info(str(input_file.parent) + " path and "+ str(input_file)+ " found")
-    else:
-        logging.info(str(input_file.parent) + " path not found, run feff before running select paths")
-        return False
-    count = 0
-    # the .dat data is stored in fixed width strings 
-    field_widths = [[0,13],[14,21],[22,31],[32,41],[42,48],[49,61]]
-    is_meta = True
-    data_headers = []
+# These paths are stored by feff in the files.dat file.
+# if the selected paths list is not empty mark as selected
+def show_feff_paths(f_paths = ["FeS2.inp"], selected_paths=[]):
     path_count = 0
     paths_data = []
-    # get the list of paths info to assing labels to paths
-    paths_info = get_path_labels(Path(feff_dir, 'paths.dat'))
-    logging.info("Reading from: "+ str(input_file))
-    with open(input_file) as datfile:
-        dat_lines = datfile.readlines()
-        for a_line in dat_lines:
-            count += 1
-            if re.match('-*', a_line.strip()).group(0)!= '':
-                is_meta = False
-                logging.info("{}: {}".format(count, a_line.strip()))
-            elif is_meta:
-                logging.info("{}: {}".format(count, a_line.strip()))
-            elif data_headers == []:
-                data_headers = [a_line[s:e].strip().replace(' ','_') for s,e in field_widths]
-                logging.info("headers:"+ str(data_headers))
-                data_headers.append('label')
-                data_headers.append('select')
-                paths_data.append(data_headers)
-            else:
-                path_count += 1
-                data_values = [a_line[s:e].strip() for s,e in field_widths]
-                path_id = str(int(data_values[0][-8:-4]))
-                data_values.append(paths_info[path_id]['label']+'.'+path_id)                    
-                data_values.append(0)
-                data_values[0] = feff_dir+"/"+data_values[0]
-                paths_data.append(data_values)
-    # use data to populate spreadsheet
+    for var in f_paths:
+        crystal_f = Path(var)
+        feff_dir = crystal_f.name[:-4]+"_feff"
+        feff_inp = crystal_f.name[:-4]+"_feff.inp"
+        feff_files = "files.dat"
+        #print("Reading from", feff_dir)
+        input_file = Path(feff_dir, feff_files)
+        #check if feff dir exists
+        if not input_file.parent.exists() and input_file.exists():
+            print(str(input_file.parent) + "path not found, run feff before running select paths")
+            return False
+        count = 0
+        # the .dat data is stored in fixed width strings 
+        field_widths = [[0,13],[14,21],[22,31],[32,41],[42,48],[49,61]]
+        is_meta = True
+        data_headers = []
+        # get the list of paths info to assing labels to paths
+        paths_info = get_path_labels(Path(feff_dir, 'paths.dat'))
+        #print("Reading from: "+ str(input_file))
+        with open(input_file) as datfile:
+            dat_lines = datfile.readlines()
+            for a_line in dat_lines:
+                count += 1
+                if re.match('-*', a_line.strip()).group(0)!= '':
+                    is_meta = False
+                    #logging.info("{}: {}".format(count, a_line.strip()))
+                elif is_meta:
+                    continue #print("{}: {}".format(count, a_line.strip()))
+                elif data_headers == []:
+                    data_headers = [a_line[s:e].strip().replace(' ','_') for s,e in field_widths]
+                    #logging.info("headers:"+ str(data_headers))
+                    data_headers.append('label')
+                    data_headers.append('select')
+                    paths_data.append(data_headers)
+                else:
+                    path_count += 1
+                    data_values = [a_line[s:e].strip() for s,e in field_widths]
+                    path_id = str(int(data_values[0][-8:-4]))
+                    data_values.append(paths_info[path_id]['label']+'.'+path_id)                    
+                    data_values.append(0)
+                    data_values[0] = feff_dir+"/"+data_values[0]
+                    paths_data.append(data_values)
     
-    path_sheet = ipysheet.sheet(rows=path_count+1, columns=8)
+    # mark preiously selected paths
+    for a_path in selected_paths:
+        for val in paths_data:
+            if val[0] == a_path.filename and  val[6] == a_path.label:
+                val[7] = 1
+
+    # use data to populate spreadsheet
+    path_sheet = ipysheet.sheet(rows=len(paths_data), columns=8)
     ipysheet.cell_range(paths_data)
     return path_sheet
 
@@ -198,7 +205,7 @@ def get_path_labels(paths_file):
                 is_meta = False
                 #print("{}: {}".format(count, a_line.strip()))
             elif not is_meta:
-                if re.match("\s*\d*\s{4}\d*\s{3}", a_line) != None:
+                if  'degeneracy,' in a_line.split():
                     if a_path != {}:
                         all_paths[a_path['index']] = a_path
                     line_data = a_line.split()
@@ -209,15 +216,14 @@ def get_path_labels(paths_file):
                         a_path['label'] = line_data[4].replace("'","")
                     else:
                         a_path['label'] += '.'+line_data[4].replace("'","")
-                #print(a_line.split())
     if a_path != {} and 'index' in a_path:
         all_paths[a_path['index']] = a_path
     return all_paths
 
 
 
-def show_selected_paths(pats_sheet):
-    df_sheet = ipysheet.to_dataframe(pats_sheet)
+def show_selected_paths(paths_sheet, sel_path_list):
+    df_sheet = ipysheet.to_dataframe(paths_sheet)
     files = []
     for f_name, p_label, selected in zip(df_sheet["A"], df_sheet["G"], df_sheet["H"]):
         if selected == '1':
@@ -230,6 +236,15 @@ def show_selected_paths(pats_sheet):
         sel_paths_data[ps_row][0] = a_name[0]
         sel_paths_data[ps_row][1] = a_name[1]
         ps_row += 1
+    # assign gds parameters from selected paths list
+    for a_path in sel_path_list:
+        for val in sel_paths_data:
+            if val[0] == a_path.filename and  val[1] == a_path.label:
+                val[2] = a_path.s02
+                val[3] = a_path.e0
+                val[4] = a_path.sigma2
+                val[5] = a_path.deltar
+
     sp_sheet = ipysheet.sheet(rows=len(files)+1, columns=6)
     ipysheet.cell_range(sel_paths_data)
     display(sp_sheet)
@@ -241,7 +256,7 @@ def build_selected_paths_list(sp_sheet, session):
     sp_list = []
     for col in df_sheet:
         if df_sheet[col][0] != 'file':
-            new_path = lp.xafs.FeffPathGroup(filename = df_sheet[col][0],
+            new_path = FeffPathGroup(filename = df_sheet[col][0],
                                              label    = df_sheet[col][1],
                                              s02      = df_sheet[col][2],
                                              e0       = df_sheet[col][3],
@@ -249,6 +264,20 @@ def build_selected_paths_list(sp_sheet, session):
                                              deltar   = df_sheet[col][5],
                                              _larch   = session)
             sp_list.append(new_path)
+    return sp_list
+
+# use data dictionary to create selected paths list
+def dict_to_sp(sp_values, session):
+    sp_list = []
+    for sp_path in sp_values:
+        new_path = FeffPathGroup(filename = sp_path['filename'],
+                                 label    = sp_path['label'],
+                                 s02      = sp_path['s02'],
+                                 e0       = sp_path['e0'],
+                                 sigma2   = sp_path['sigma2'],
+                                 deltar   = sp_path['deltar'],
+                                 _larch   = session)
+        sp_list.append(new_path)
     return sp_list
 
 #save the selected paths list to a csv file (using the prefix of crystal)
@@ -274,13 +303,13 @@ def read_selected_paths_list(file_name, session):
     sp_dict, _ = csvhandler.read_csv_data(file_name)
     sp_list=[]
     for path_id in sp_dict:
-        new_path = lp.xafs.FeffPathGroup(filename = sp_dict[path_id]['filename'],
-                                         label    = sp_dict[path_id]['label'],
-                                         s02      = sp_dict[path_id]['s02'],
-                                         e0       = sp_dict[path_id]['e0'],
-                                         sigma2   = sp_dict[path_id]['sigma2'],
-                                         deltar   = sp_dict[path_id]['deltar'],
-                                         _larch   = session)
+        new_path = FeffPathGroup(filename = sp_dict[path_id]['filename'],
+                                 label    = sp_dict[path_id]['label'],
+                                 s02      = sp_dict[path_id]['s02'],
+                                 e0       = sp_dict[path_id]['e0'],
+                                 sigma2   = sp_dict[path_id]['sigma2'],
+                                 deltar   = sp_dict[path_id]['deltar'],
+                                 _larch   = session)
         sp_list.append(new_path)
     return sp_list
 
@@ -292,14 +321,14 @@ def read_selected_paths_list(file_name, session):
 # session: current larch session
 def run_fit(data_group, gds, selected_paths, fv, session):
     # create the transform grup (prepare the fit space).
-    trans = lp.xafs.TransformGroup(fitspace=fv['fitspace'],kmin=fv['kmin'],
-                                   kmax=fv['kmax'],kw=fv['kw'], dk=fv['dk'], 
-                                   window=fv['window'], rmin=fv['rmin'],
-                                   rmax=fv['rmax'], _larch=session)
+    trans = TransformGroup(fitspace=fv['fitspace'],kmin=fv['kmin'],
+                           kmax=fv['kmax'],kw=fv['kw'], dk=fv['dk'], 
+                           window=fv['window'], rmin=fv['rmin'],
+                           rmax=fv['rmax'], _larch=session)
 
-    dset = lp.xafs.FeffitDataSet(data=data_group, pathlist=selected_paths, transform=trans, _larch=session)
+    dset = FeffitDataSet(data=data_group, pathlist=selected_paths, transform=trans, _larch=session)
 
-    out = lp.xafs.feffit(gds, dset, _larch=session)
+    out = feffit(gds, dset, _larch=session)
     return trans, dset, out
 
 #Overlap plot k-weighted χ(k) and χ(R) for fit to feffit dataset
@@ -350,11 +379,10 @@ def plot_chikr(data_set,rmin,rmax,kmin,kmax):
 
 
 def get_fit_report(fit_out, session):
-    return lp.xafs.feffit_report(fit_out, _larch=session)
+    return feffit_report(fit_out, _larch=session)
 
 def save_fit_report(fit_out, file_name, session):
-    fit_report = lp.xafs.feffit_report(fit_out, _larch=session)
+    fit_report = feffit_report(fit_out, _larch=session)
     f = open(file_name, "a")
     f.write(fit_report)
     f.close()
-    

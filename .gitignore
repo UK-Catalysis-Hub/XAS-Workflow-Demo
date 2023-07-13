@@ -33,13 +33,8 @@ demjup_workflow/.ipynb_checkpoints/run_auto_once-checkpoint.ipynb
 demjup_workflow/.ipynb_checkpoints/run_auto_iterate-checkpoint.ipynb
 *.pyc
 demjup_workflow/lib/__pycache__/demeter_runner.cpython-36.pyc
-larch_workflow/larch_examples/.ipynb_checkpoints/xraylarch python examples-checkpoint.ipynb
-larch_workflow/larch_examples/.ipynb_checkpoints/Fe-treatment-checkpoint.ipynb
-larch_workflow/larch_examples/EMG003.txt
-larch_workflow/larch_examples/Fe-treatment.ipynb
-larch_workflow/larch_examples/fe.060
-larch_workflow/larch_examples/fe2o3_rt1.xmu
-larch_workflow/larch_examples/xraylarch python examples.ipynb
+larch_workflow/larch_examples/*
 larch_workflow/larch/.ipynb_checkpoints/Using Larch with Python3-checkpoint.ipynb
 larch_workflow/1692395_feff.inp
 larch_workflow/wf_data/*
+PSDI_Phase_1/Larch/wf_data/*
