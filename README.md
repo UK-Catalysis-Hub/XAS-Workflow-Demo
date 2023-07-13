@@ -25,9 +25,10 @@ while the second part is a modified version of the [FeS2 worked example](https:/
 [FeS2 worked example](https://github.com/bruceravel/demeter/tree/master/examples/recipes/FeS2). 
 The first part of this workflow was is equivalent to the one created for Demeter above, 
 while the second part is a modified version of the [Larch FeS2 worked example](https://github.com/bruceravel/demeter/tree/master/examples/recipes/FeS2). 
-- [PSDI Pilot]](https://github.com/scman1/XAS-Workflow-Demo/blob/main/demjup_workflow)
+- [PSDI Phase1](https://github.com/scman1/XAS-Workflow-Demo/blob/main/PSDI_Phase_1)
  this is an example of how scripts could be used to ensure reproducibility of results, 
- in the context of the PSDI pilot.
+ in the context of the PSDI pilot. These notebooks are actively being ported to Galaxy to 
+ create tools for analysis and processing of XAS data
 
 ## Acknowledgements and Funding
 For more details about the of the motivation for the development of the resources
