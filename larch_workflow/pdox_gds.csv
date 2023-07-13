@@ -1,9 +1,0 @@
-id,name,value,expr,vary
-1,amp,1.0,,True
-2,delr,0.0,,True
-3,enot,0.1,,True
-4,alpha,0.5,,True
-5,sspdpd1,0.003,,True
-6,sspdo,0.003,,True
-7,sspdpd2,0.003,,True
-8,sspdo1,0.003,,True
