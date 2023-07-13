@@ -1,0 +1,3 @@
+id,filename,label,s02,e0,sigma2,deltar
+1,1667441_feff/feff0001.dat,O.Mn.1,amp,enot,ssmno,alpha*reff
+2,1667441_feff/feff0003.dat,La.Mn.3,amp,enot,ssmnla1,alpha*reff
