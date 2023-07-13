@@ -3,7 +3,7 @@ This folder contains the jupyter notebooks and  and input files required to repr
 results of nine papers from the UKCH. The papers were selected because they link to published data
 required to reproduce the results.
 
-The notebooks are built following the Athena, Artemis and examples provided by Bruce Ravel 
+The structuring of the notebooks (sequence of operations) follows the Athena and Artemis examples provided by Bruce Ravel 
 ([XAS fitting example](https://github.com/bruceravel/XAS-Education/tree/master/Examples/FeS2),
 [Bruce Ravel XAS course 2011](https://www.diamond.ac.uk/Instruments/Spectroscopy/Techniques/XAS.html)). 
 The specific Larch functions used are taken from the [Larch documentation](https://xraypy.github.io/xraylarch/xafs/).
@@ -14,7 +14,7 @@ The first part of each notebook indicates the article whose are results being re
 
 Subsequent markdown cells indicate the data mappings and the result(s) being reproduced in subsequent code cells.
 
-# At the end of each notebook, you can find some notes on the reproducibility of results and some ideas to discuss further improvements.
+At the end of each notebook, you can find some notes on the reproducibility of results and some ideas to discuss further improvements.
 
 ## Acknowledgements
 The funding for the research and development of these examples came from the 
