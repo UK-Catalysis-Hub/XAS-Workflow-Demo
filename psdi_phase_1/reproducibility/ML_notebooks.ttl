@@ -1,0 +1,459 @@
+@prefix ns1: <http://purl.org/net/p-plan/#> .
+@prefix ns2: <https://w3id.org/reproduceme#> .
+
+ns2:Paper01ReproduceXAS.0d7cf18d-324d-4e29-8a08-2552824a4d42 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper01ReproduceXAS ;
+    ns2:hasCellType <code> .
+
+ns2:Paper01ReproduceXAS.1fef94b8-52d0-4f8d-ae82-fc257181d1cd <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper01ReproduceXAS ;
+    ns2:hasCellType <code> .
+
+ns2:Paper01ReproduceXAS.22e96d8a-63f0-413b-99d8-e23ed1de3535 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper01ReproduceXAS ;
+    ns2:hasCellType <code> .
+
+ns2:Paper01ReproduceXAS.2c1436a9-2ed3-48f7-8682-82fa433baaae <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper01ReproduceXAS ;
+    ns2:hasCellType <code> .
+
+ns2:Paper01ReproduceXAS.4bd0b079-2ca8-407d-b3f4-62ce9a25a5f0 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper01ReproduceXAS ;
+    ns2:hasCellType <code> .
+
+ns2:Paper01ReproduceXAS.5c52931d-fcef-4d11-ba43-a34a8f3bab69 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper01ReproduceXAS ;
+    ns2:hasCellType <code> .
+
+ns2:Paper01ReproduceXAS.5d1580e2-a71a-4def-9aab-d10b5942eb87 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper01ReproduceXAS ;
+    ns2:hasCellType <code> .
+
+ns2:Paper01ReproduceXAS.639f6d60-6c01-494c-85a4-f2c05d2fb785 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper01ReproduceXAS ;
+    ns2:hasCellType <code> .
+
+ns2:Paper01ReproduceXAS.6c5f556b-7c6a-4fbe-8fbb-b2fedea5cbaa <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper01ReproduceXAS ;
+    ns2:hasCellType <code> .
+
+ns2:Paper01ReproduceXAS.798d8c41-66f4-42b3-9835-8b951b436b5e <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper01ReproduceXAS ;
+    ns2:hasCellType <code> .
+
+ns2:Paper01ReproduceXAS.8bc3cf7e-7f50-4205-8377-77590b603f0a <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper01ReproduceXAS ;
+    ns2:hasCellType <code> .
+
+ns2:Paper01ReproduceXAS.9771c803-afc7-4dd6-a80e-8061b5d81b03 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper01ReproduceXAS ;
+    ns2:hasCellType <code> .
+
+ns2:Paper01ReproduceXAS.9a0a97dd-b11c-4a57-b967-2827114c80ab <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper01ReproduceXAS ;
+    ns2:hasCellType <code> .
+
+ns2:Paper01ReproduceXAS.9a80680b-bf5a-4c90-a339-79586006ca25 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper01ReproduceXAS ;
+    ns2:hasCellType <code> .
+
+ns2:Paper01ReproduceXAS.9be047d5-79d9-4b97-a0fe-c1049e0c02ef <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper01ReproduceXAS ;
+    ns2:hasCellType <code> .
+
+ns2:Paper01ReproduceXAS.9d6bf8b2-d4a9-4aec-9c48-4237e275060f <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper01ReproduceXAS ;
+    ns2:hasCellType <code> .
+
+ns2:Paper01ReproduceXAS.9edf7e9b-43c9-4f59-80df-10a35e60e128 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper01ReproduceXAS ;
+    ns2:hasCellType <code> .
+
+ns2:Paper01ReproduceXAS.d70a1672-61d0-432b-99a5-56e775351a78 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper01ReproduceXAS ;
+    ns2:hasCellType <code> .
+
+ns2:Paper01ReproduceXAS.e203d169-ade4-43ec-947d-d6d7133a6885 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper01ReproduceXAS ;
+    ns2:hasCellType <code> .
+
+ns2:Paper01ReproduceXAS.e597a94b-1db0-49a0-88dd-7e5a7d20e90c <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper01ReproduceXAS ;
+    ns2:hasCellType <code> .
+
+ns2:Paper01ReproduceXAS.f594c82a-3f90-4dd3-b718-259e4a7db577 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper01ReproduceXAS ;
+    ns2:hasCellType <code> .
+
+ns2:Paper02MLPovLabExport.0214710a <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper02MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper02MLPovLabExport.06f72cd9 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper02MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper02MLPovLabExport.6ad8ec4a <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper02MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper02MLPovLabExport.72fbea08 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper02MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper02MLPovLabExport.8258b070 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper02MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper02MLPovLabExport.8ef014e3 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper02MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper02MLPovLabExport.d8e907d0 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper02MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper02MLPovLabExport.eef7f348 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper02MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper02MLPovLabExport.ef81f790 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper02MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper03MLPovLabExport.05285a9d <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper03MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper03MLPovLabExport.284f6d24 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper03MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper03MLPovLabExport.3374327f <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper03MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper03MLPovLabExport.43a4ff74 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper03MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper03MLPovLabExport.488aa831 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper03MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper03MLPovLabExport.b6a95efc <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper03MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper03MLPovLabExport.dcb0a83b <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper03MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper04MLPovLabExport.1563e270 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper04MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper04MLPovLabExport.1a558edd <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper04MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper04MLPovLabExport.b6a95efc <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper04MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper04MLPovLabExport.be37abc5 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper04MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.0d7eb978 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.0fd4d41b <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.1d298311 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.28187a2e <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.3b41c66f <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.3b53530c <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.484fe397 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.4d54a367 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.4f70f677 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.583f18c9 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.59b38f95 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.5c0ad436 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.627afc91 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.64ca0731 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.6513f184 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.6853d503 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.6917938c <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.7ff8f5f1 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.87201eca <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.a4c10c63 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.b07805b7 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.b9032e37 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.c2b12062 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.caa5739d <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.d0ce264d <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.d46fad82 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.dc601822 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.e2aa3373 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.e72e1c3e <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.ef441d45 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.fe53d605 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper05MLPovLabExport.fef96eeb <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper05MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper07MLPovLabExport.150cca9e <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper07MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper07MLPovLabExport.474c1e0c <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper07MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper07MLPovLabExport.c73e75ac <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper07MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper07MLPovLabExport.dc601822 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper07MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper07MLPovLabExport.ecf2e784 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper07MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper07MLPovLabExport.f14c2b89 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper07MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper08MLPovLabExport.3b53530c <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper08MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper08MLPovLabExport.52f515f2 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper08MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper08MLPovLabExport.59b38f95 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper08MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper08MLPovLabExport.5c0ad436 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper08MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper08MLPovLabExport.6853d503 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper08MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper08MLPovLabExport.6917938c <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper08MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper08MLPovLabExport.dc601822 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper08MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper08MLPovLabExport.e2aa3373 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper08MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper08MLPovLabExport.ecf2e784 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper08MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper08MLPovLabExport.ef441d45 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper08MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper08MLPovLabExport.fe53d605 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper08MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper09MLPovLabExport.2fa03943 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper09MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper09MLPovLabExport.3b53530c <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper09MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper09MLPovLabExport.4c7a95ed <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper09MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper09MLPovLabExport.59b38f95 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper09MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper09MLPovLabExport.5c0ad436 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper09MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper09MLPovLabExport.6853d503 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper09MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper09MLPovLabExport.6917938c <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper09MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper09MLPovLabExport.87201eca <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper09MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper09MLPovLabExport.be4e4a6e <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper09MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper09MLPovLabExport.dc601822 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper09MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper09MLPovLabExport.e2aa3373 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper09MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper09MLPovLabExport.ecf2e784 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper09MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper09MLPovLabExport.ef441d45 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper09MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper09MLPovLabExport.fe53d605 <a> ns1:Step ;
+    ns1:isStepOfPlan ns2:Paper09MLPovLabExport ;
+    ns2:hasCellType <code> .
+
+ns2:Paper04MLPovLabExport <a> ns2:Notebook ;
+    ns2:hasKernelDisplayName <ipython> ;
+    ns2:hasProgrammingLanguage <python> ;
+    ns2:hasProgrammingLanguageVersion <3.9.2rc1> .
+
+ns2:Paper07MLPovLabExport <a> ns2:Notebook ;
+    ns2:hasKernelDisplayName <ipython> ;
+    ns2:hasProgrammingLanguage <python> ;
+    ns2:hasProgrammingLanguageVersion <3.9.2rc1> .
+
+ns2:Paper03MLPovLabExport <a> ns2:Notebook ;
+    ns2:hasKernelDisplayName <ipython> ;
+    ns2:hasProgrammingLanguage <python> ;
+    ns2:hasProgrammingLanguageVersion <3.9.2rc1> .
+
+ns2:Paper02MLPovLabExport <a> ns2:Notebook ;
+    ns2:hasKernelDisplayName <ipython> ;
+    ns2:hasProgrammingLanguage <python> ;
+    ns2:hasProgrammingLanguageVersion <3.9.2rc1> .
+
+ns2:Paper08MLPovLabExport <a> ns2:Notebook ;
+    ns2:hasKernelDisplayName <ipython> ;
+    ns2:hasProgrammingLanguage <python> ;
+    ns2:hasProgrammingLanguageVersion <3.9.2rc1> .
+
+ns2:Paper09MLPovLabExport <a> ns2:Notebook ;
+    ns2:hasKernelDisplayName <ipython> ;
+    ns2:hasProgrammingLanguage <python> ;
+    ns2:hasProgrammingLanguageVersion <3.9.2rc1> .
+
+ns2:Paper01ReproduceXAS <a> ns2:Notebook ;
+    ns2:hasKernelDisplayName <ipython> ;
+    ns2:hasProgrammingLanguage <python> ;
+    ns2:hasProgrammingLanguageVersion <3.9.2rc1> .
+
+ns2:Paper05MLPovLabExport <a> ns2:Notebook ;
+    ns2:hasKernelDisplayName <ipython> ;
+    ns2:hasProgrammingLanguage <python> ;
+    ns2:hasProgrammingLanguageVersion <3.9.2rc1> .
+
