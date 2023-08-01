@@ -4,23 +4,23 @@
 
 ns1:Paper01MLPovLabExport.0d7cf18d-324d-4e29-8a08-2552824a4d42 a ns2:Step ;
     ns2:hasInputVar ns1:Paper01MLPovLabExport.lcf_components ;
-    ns2:hasOutputVar ns1:Paper01MLPovLabExport.r_HAir,
+    ns2:hasOutputVar ns1:Paper01MLPovLabExport.0d7cf18d-324d-4e29-8a08-2552824a4d42.displayout,
+        ns1:Paper01MLPovLabExport.r_HAir,
         ns1:Paper01MLPovLabExport.r_HAr,
         ns1:Paper01MLPovLabExport.r_HH2 ;
     ns2:isStepOfPlan ns1:Paper01MLPovLabExport ;
     ns1:hasCellType <code> ;
     ns1:hasExecutionCount 7 ;
-    ns1:hasIndex 6,
-        7 .
+    ns1:hasIndex 7 .
 
 ns1:Paper01MLPovLabExport.1fef94b8-52d0-4f8d-ae82-fc257181d1cd a ns2:Step ;
-    ns2:hasOutputVar ns1:Paper01MLPovLabExport.gds,
+    ns2:hasOutputVar ns1:Paper01MLPovLabExport.1fef94b8-52d0-4f8d-ae82-fc257181d1cd.displayout,
+        ns1:Paper01MLPovLabExport.gds,
         ns1:Paper01MLPovLabExport.this_sheet ;
     ns2:isStepOfPlan ns1:Paper01MLPovLabExport ;
     ns1:hasCellType <code> ;
     ns1:hasExecutionCount 13 ;
-    ns1:hasIndex 12,
-        13 .
+    ns1:hasIndex 13 .
 
 ns1:Paper01MLPovLabExport.22e96d8a-63f0-413b-99d8-e23ed1de3535 a ns2:Step ;
     ns2:hasInputVar ns1:Paper01MLPovLabExport.gds_parms_f,
@@ -28,33 +28,32 @@ ns1:Paper01MLPovLabExport.22e96d8a-63f0-413b-99d8-e23ed1de3535 a ns2:Step ;
     ns2:isStepOfPlan ns1:Paper01MLPovLabExport ;
     ns1:hasCellType <code> ;
     ns1:hasExecutionCount 14 ;
-    ns1:hasIndex 13,
-        14 .
+    ns1:hasIndex 14 .
 
 ns1:Paper01MLPovLabExport.2c1436a9-2ed3-48f7-8682-82fa433baaae a ns2:Step ;
+    ns2:hasOutputVar ns1:Paper01MLPovLabExport.2c1436a9-2ed3-48f7-8682-82fa433baaae.displayout ;
     ns2:isStepOfPlan ns1:Paper01MLPovLabExport ;
     ns1:hasCellType <code> ;
     ns1:hasExecutionCount 20 ;
-    ns1:hasIndex 19,
-        20 .
+    ns1:hasIndex 20 .
 
 ns1:Paper01MLPovLabExport.4bd0b079-2ca8-407d-b3f4-62ce9a25a5f0 a ns2:Step ;
     ns2:hasInputVar ns1:Paper01MLPovLabExport.merged_results ;
-    ns2:hasOutputVar ns1:Paper01MLPovLabExport.rebin_project ;
+    ns2:hasOutputVar ns1:Paper01MLPovLabExport.4bd0b079-2ca8-407d-b3f4-62ce9a25a5f0.displayout,
+        ns1:Paper01MLPovLabExport.rebin_project ;
     ns2:isStepOfPlan ns1:Paper01MLPovLabExport ;
     ns1:hasCellType <code> ;
     ns1:hasExecutionCount 9 ;
-    ns1:hasIndex 8,
-        9 .
+    ns1:hasIndex 9 .
 
 ns1:Paper01MLPovLabExport.5c52931d-fcef-4d11-ba43-a34a8f3bab69 a ns2:Step ;
     ns2:hasInputVar ns1:Paper01MLPovLabExport.path_sheet ;
-    ns2:hasOutputVar ns1:Paper01MLPovLabExport.sp_sheet ;
+    ns2:hasOutputVar ns1:Paper01MLPovLabExport.5c52931d-fcef-4d11-ba43-a34a8f3bab69.displayout,
+        ns1:Paper01MLPovLabExport.sp_sheet ;
     ns2:isStepOfPlan ns1:Paper01MLPovLabExport ;
     ns1:hasCellType <code> ;
     ns1:hasExecutionCount 16 ;
-    ns1:hasIndex 15,
-        16 .
+    ns1:hasIndex 16 .
 
 ns1:Paper01MLPovLabExport.5d1580e2-a71a-4def-9aab-d10b5942eb87 a ns2:Step ;
     ns2:hasInputVar ns1:Paper01MLPovLabExport.rebin_project ;
@@ -62,8 +61,7 @@ ns1:Paper01MLPovLabExport.5d1580e2-a71a-4def-9aab-d10b5942eb87 a ns2:Step ;
     ns2:isStepOfPlan ns1:Paper01MLPovLabExport ;
     ns1:hasCellType <code> ;
     ns1:hasExecutionCount 10 ;
-    ns1:hasIndex 9,
-        10 .
+    ns1:hasIndex 10 .
 
 ns1:Paper01MLPovLabExport.639f6d60-6c01-494c-85a4-f2c05d2fb785 a ns2:Step ;
     ns2:hasInputVar ns1:Paper01MLPovLabExport.r_Air,
@@ -72,11 +70,11 @@ ns1:Paper01MLPovLabExport.639f6d60-6c01-494c-85a4-f2c05d2fb785 a ns2:Step ;
         ns1:Paper01MLPovLabExport.r_HAir,
         ns1:Paper01MLPovLabExport.r_HAr,
         ns1:Paper01MLPovLabExport.r_HH2 ;
+    ns2:hasOutputVar ns1:Paper01MLPovLabExport.639f6d60-6c01-494c-85a4-f2c05d2fb785.displayout ;
     ns2:isStepOfPlan ns1:Paper01MLPovLabExport ;
     ns1:hasCellType <code> ;
     ns1:hasExecutionCount 8 ;
-    ns1:hasIndex 7,
-        8 .
+    ns1:hasIndex 8 .
 
 ns1:Paper01MLPovLabExport.6c5f556b-7c6a-4fbe-8fbb-b2fedea5cbaa a ns2:Step ;
     ns2:hasOutputVar ns1:Paper01MLPovLabExport.absorbing_atoms,
@@ -88,44 +86,43 @@ ns1:Paper01MLPovLabExport.6c5f556b-7c6a-4fbe-8fbb-b2fedea5cbaa a ns2:Step ;
     ns2:isStepOfPlan ns1:Paper01MLPovLabExport ;
     ns1:hasCellType <code> ;
     ns1:hasExecutionCount 11 ;
-    ns1:hasIndex 10,
-        11 .
+    ns1:hasIndex 11 .
 
 ns1:Paper01MLPovLabExport.798d8c41-66f4-42b3-9835-8b951b436b5e a ns2:Step ;
     ns2:hasInputVar ns1:Paper01MLPovLabExport.crystal_files ;
-    ns2:hasOutputVar ns1:Paper01MLPovLabExport.path_sheet,
+    ns2:hasOutputVar ns1:Paper01MLPovLabExport.798d8c41-66f4-42b3-9835-8b951b436b5e.displayout,
+        ns1:Paper01MLPovLabExport.path_sheet,
         ns1:Paper01MLPovLabExport.selected_paths ;
     ns2:isStepOfPlan ns1:Paper01MLPovLabExport ;
     ns1:hasCellType <code> ;
     ns1:hasExecutionCount 15 ;
-    ns1:hasIndex 14,
-        15 .
+    ns1:hasIndex 15 .
 
 ns1:Paper01MLPovLabExport.8bc3cf7e-7f50-4205-8377-77590b603f0a a ns2:Step ;
     ns2:hasInputVar ns1:Paper01MLPovLabExport.absorbing_atoms,
         ns1:Paper01MLPovLabExport.max_radius ;
-    ns2:hasOutputVar ns1:Paper01MLPovLabExport.session ;
+    ns2:hasOutputVar ns1:Paper01MLPovLabExport.8bc3cf7e-7f50-4205-8377-77590b603f0a.displayout,
+        ns1:Paper01MLPovLabExport.session ;
     ns2:isStepOfPlan ns1:Paper01MLPovLabExport ;
     ns1:hasCellType <code> ;
     ns1:hasExecutionCount 12 ;
-    ns1:hasIndex 11,
-        12 .
+    ns1:hasIndex 12 .
 
 ns1:Paper01MLPovLabExport.9771c803-afc7-4dd6-a80e-8061b5d81b03 a ns2:Step ;
     ns2:hasInputVar ns1:Paper01MLPovLabExport.fit_list,
         ns1:Paper01MLPovLabExport.session ;
+    ns2:hasOutputVar ns1:Paper01MLPovLabExport.9771c803-afc7-4dd6-a80e-8061b5d81b03.displayout ;
     ns2:isStepOfPlan ns1:Paper01MLPovLabExport ;
     ns1:hasCellType <code> ;
     ns1:hasExecutionCount 21 ;
-    ns1:hasIndex 20,
-        21 .
+    ns1:hasIndex 21 .
 
 ns1:Paper01MLPovLabExport.9a0a97dd-b11c-4a57-b967-2827114c80ab a ns2:Step ;
+    ns2:hasOutputVar ns1:Paper01MLPovLabExport.9a0a97dd-b11c-4a57-b967-2827114c80ab.displayout ;
     ns2:isStepOfPlan ns1:Paper01MLPovLabExport ;
     ns1:hasCellType <code> ;
     ns1:hasExecutionCount 5 ;
-    ns1:hasIndex 4,
-        5 .
+    ns1:hasIndex 5 .
 
 ns1:Paper01MLPovLabExport.9a80680b-bf5a-4c90-a339-79586006ca25 a ns2:Step ;
     ns2:hasOutputVar ns1:Paper01MLPovLabExport.column_labels,
@@ -135,8 +132,7 @@ ns1:Paper01MLPovLabExport.9a80680b-bf5a-4c90-a339-79586006ca25 a ns2:Step ;
     ns2:isStepOfPlan ns1:Paper01MLPovLabExport ;
     ns1:hasCellType <code> ;
     ns1:hasExecutionCount 2 ;
-    ns1:hasIndex 1,
-        2 .
+    ns1:hasIndex 2 .
 
 ns1:Paper01MLPovLabExport.9be047d5-79d9-4b97-a0fe-c1049e0c02ef a ns2:Step ;
     ns2:hasInputVar ns1:Paper01MLPovLabExport.fit_groups,
@@ -146,8 +142,7 @@ ns1:Paper01MLPovLabExport.9be047d5-79d9-4b97-a0fe-c1049e0c02ef a ns2:Step ;
     ns2:isStepOfPlan ns1:Paper01MLPovLabExport ;
     ns1:hasCellType <code> ;
     ns1:hasExecutionCount 18 ;
-    ns1:hasIndex 17,
-        18 .
+    ns1:hasIndex 18 .
 
 ns1:Paper01MLPovLabExport.9d6bf8b2-d4a9-4aec-9c48-4237e275060f a ns2:Step ;
     ns2:hasInputVar ns1:Paper01MLPovLabExport.sel_paths_f,
@@ -155,55 +150,135 @@ ns1:Paper01MLPovLabExport.9d6bf8b2-d4a9-4aec-9c48-4237e275060f a ns2:Step ;
     ns2:isStepOfPlan ns1:Paper01MLPovLabExport ;
     ns1:hasCellType <code> ;
     ns1:hasExecutionCount 17 ;
-    ns1:hasIndex 16,
-        17 .
+    ns1:hasIndex 17 .
 
 ns1:Paper01MLPovLabExport.9edf7e9b-43c9-4f59-80df-10a35e60e128 a ns2:Step ;
     ns2:hasInputVar ns1:Paper01MLPovLabExport.recalibrate_e0_to ;
     ns2:isStepOfPlan ns1:Paper01MLPovLabExport ;
     ns1:hasCellType <code> ;
     ns1:hasExecutionCount 4 ;
-    ns1:hasIndex 3,
-        4 .
+    ns1:hasIndex 4 .
 
 ns1:Paper01MLPovLabExport.d70a1672-61d0-432b-99a5-56e775351a78 a ns2:Step ;
     ns2:hasInputVar ns1:Paper01MLPovLabExport.fit_vars ;
+    ns2:hasOutputVar ns1:Paper01MLPovLabExport.d70a1672-61d0-432b-99a5-56e775351a78.displayout ;
     ns2:isStepOfPlan ns1:Paper01MLPovLabExport ;
     ns1:hasCellType <code> ;
     ns1:hasExecutionCount 19 ;
-    ns1:hasIndex 18,
-        19 .
+    ns1:hasIndex 19 .
 
 ns1:Paper01MLPovLabExport.e203d169-ade4-43ec-947d-d6d7133a6885 a ns2:Step ;
-    ns2:hasOutputVar ns1:Paper01MLPovLabExport.lcf_components,
+    ns2:hasOutputVar ns1:Paper01MLPovLabExport.e203d169-ade4-43ec-947d-d6d7133a6885.displayout,
+        ns1:Paper01MLPovLabExport.lcf_components,
         ns1:Paper01MLPovLabExport.r_Air,
         ns1:Paper01MLPovLabExport.r_Ar,
         ns1:Paper01MLPovLabExport.r_H2 ;
     ns2:isStepOfPlan ns1:Paper01MLPovLabExport ;
     ns1:hasCellType <code> ;
     ns1:hasExecutionCount 6 ;
-    ns1:hasIndex 5,
-        6 .
+    ns1:hasIndex 6 .
 
 ns1:Paper01MLPovLabExport.e597a94b-1db0-49a0-88dd-7e5a7d20e90c a ns2:Step ;
     ns2:hasInputVar ns1:Paper01MLPovLabExport.column_labels,
         ns1:Paper01MLPovLabExport.data_mappings,
         ns1:Paper01MLPovLabExport.data_path,
         ns1:Paper01MLPovLabExport.f_prefix ;
-    ns2:hasOutputVar ns1:Paper01MLPovLabExport.merged_results,
+    ns2:hasOutputVar ns1:Paper01MLPovLabExport.e597a94b-1db0-49a0-88dd-7e5a7d20e90c.displayout,
+        ns1:Paper01MLPovLabExport.merged_results,
         ns1:Paper01MLPovLabExport.recalibrate_e0_to ;
     ns2:isStepOfPlan ns1:Paper01MLPovLabExport ;
     ns1:hasCellType <code> ;
     ns1:hasExecutionCount 3 ;
-    ns1:hasIndex 2,
-        3 .
+    ns1:hasIndex 3 .
 
 ns1:Paper01MLPovLabExport.f594c82a-3f90-4dd3-b718-259e4a7db577 a ns2:Step ;
     ns2:isStepOfPlan ns1:Paper01MLPovLabExport ;
     ns1:hasCellType <code> ;
     ns1:hasExecutionCount 1 ;
-    ns1:hasIndex 0,
-        1 .
+    ns1:hasIndex 1 .
+
+"application/vnd.jupyter.widget-view+json" ns1:hasDataType "display_data" .
+
+"image/png" ns1:hasDataType "display_data" .
+
+"text" ns1:hasDataType "stream" .
+
+ns1:Paper01MLPovLabExport.0d7cf18d-324d-4e29-8a08-2552824a4d42.displayout a ns2:Variable ;
+    ns1:hasSuboutput ns1:Paper01MLPovLabExport.0d7cf18d-324d-4e29-8a08-2552824a4d42.displayoutsubOutput000 .
+
+ns1:Paper01MLPovLabExport.0d7cf18d-324d-4e29-8a08-2552824a4d42.displayoutsubOutput000 ns1:hasType "display_data" .
+
+ns1:Paper01MLPovLabExport.1fef94b8-52d0-4f8d-ae82-fc257181d1cd.displayout a ns2:Variable ;
+    ns1:hasSuboutput ns1:Paper01MLPovLabExport.1fef94b8-52d0-4f8d-ae82-fc257181d1cd.displayoutsubOutput000 .
+
+ns1:Paper01MLPovLabExport.1fef94b8-52d0-4f8d-ae82-fc257181d1cd.displayoutsubOutput000 ns1:hasType "display_data" .
+
+ns1:Paper01MLPovLabExport.2c1436a9-2ed3-48f7-8682-82fa433baaae.displayout a ns2:Variable ;
+    ns1:hasSuboutput ns1:Paper01MLPovLabExport.2c1436a9-2ed3-48f7-8682-82fa433baaae.displayoutsubOutput000 .
+
+ns1:Paper01MLPovLabExport.2c1436a9-2ed3-48f7-8682-82fa433baaae.displayoutsubOutput000 ns1:hasType "stream" .
+
+ns1:Paper01MLPovLabExport.4bd0b079-2ca8-407d-b3f4-62ce9a25a5f0.displayout a ns2:Variable ;
+    ns1:hasSuboutput ns1:Paper01MLPovLabExport.4bd0b079-2ca8-407d-b3f4-62ce9a25a5f0.displayoutsubOutput000 .
+
+ns1:Paper01MLPovLabExport.4bd0b079-2ca8-407d-b3f4-62ce9a25a5f0.displayoutsubOutput000 ns1:hasType "stream" .
+
+ns1:Paper01MLPovLabExport.5c52931d-fcef-4d11-ba43-a34a8f3bab69.displayout a ns2:Variable ;
+    ns1:hasSuboutput ns1:Paper01MLPovLabExport.5c52931d-fcef-4d11-ba43-a34a8f3bab69.displayoutsubOutput000 .
+
+ns1:Paper01MLPovLabExport.5c52931d-fcef-4d11-ba43-a34a8f3bab69.displayoutsubOutput000 ns1:hasType "display_data" .
+
+ns1:Paper01MLPovLabExport.639f6d60-6c01-494c-85a4-f2c05d2fb785.displayout a ns2:Variable ;
+    ns1:hasSuboutput ns1:Paper01MLPovLabExport.639f6d60-6c01-494c-85a4-f2c05d2fb785.displayoutsubOutput000 .
+
+ns1:Paper01MLPovLabExport.639f6d60-6c01-494c-85a4-f2c05d2fb785.displayoutsubOutput000 ns1:hasType "stream" .
+
+ns1:Paper01MLPovLabExport.798d8c41-66f4-42b3-9835-8b951b436b5e.displayout a ns2:Variable ;
+    ns1:hasSuboutput ns1:Paper01MLPovLabExport.798d8c41-66f4-42b3-9835-8b951b436b5e.displayoutsubOutput000 .
+
+ns1:Paper01MLPovLabExport.798d8c41-66f4-42b3-9835-8b951b436b5e.displayoutsubOutput000 ns1:hasType "display_data" .
+
+ns1:Paper01MLPovLabExport.8bc3cf7e-7f50-4205-8377-77590b603f0a.displayout a ns2:Variable ;
+    ns1:hasSuboutput ns1:Paper01MLPovLabExport.8bc3cf7e-7f50-4205-8377-77590b603f0a.displayoutsubOutput000 .
+
+ns1:Paper01MLPovLabExport.8bc3cf7e-7f50-4205-8377-77590b603f0a.displayoutsubOutput000 ns1:hasType "stream" .
+
+ns1:Paper01MLPovLabExport.9771c803-afc7-4dd6-a80e-8061b5d81b03.displayout a ns2:Variable ;
+    ns1:hasSuboutput ns1:Paper01MLPovLabExport.9771c803-afc7-4dd6-a80e-8061b5d81b03.displayoutsubOutput000 .
+
+ns1:Paper01MLPovLabExport.9771c803-afc7-4dd6-a80e-8061b5d81b03.displayoutsubOutput000 ns1:hasType "stream" .
+
+ns1:Paper01MLPovLabExport.9a0a97dd-b11c-4a57-b967-2827114c80ab.displayout a ns2:Variable ;
+    ns1:hasSuboutput ns1:Paper01MLPovLabExport.9a0a97dd-b11c-4a57-b967-2827114c80ab.displayoutsubOutput000,
+        ns1:Paper01MLPovLabExport.9a0a97dd-b11c-4a57-b967-2827114c80ab.displayoutsubOutput001 .
+
+ns1:Paper01MLPovLabExport.9a0a97dd-b11c-4a57-b967-2827114c80ab.displayoutsubOutput000 ns1:hasType "display_data" .
+
+ns1:Paper01MLPovLabExport.9a0a97dd-b11c-4a57-b967-2827114c80ab.displayoutsubOutput001 ns1:hasType "display_data" .
+
+ns1:Paper01MLPovLabExport.d70a1672-61d0-432b-99a5-56e775351a78.displayout a ns2:Variable ;
+    ns1:hasSuboutput ns1:Paper01MLPovLabExport.d70a1672-61d0-432b-99a5-56e775351a78.displayoutsubOutput000,
+        ns1:Paper01MLPovLabExport.d70a1672-61d0-432b-99a5-56e775351a78.displayoutsubOutput001,
+        ns1:Paper01MLPovLabExport.d70a1672-61d0-432b-99a5-56e775351a78.displayoutsubOutput002 .
+
+ns1:Paper01MLPovLabExport.d70a1672-61d0-432b-99a5-56e775351a78.displayoutsubOutput000 ns1:hasType "display_data" .
+
+ns1:Paper01MLPovLabExport.d70a1672-61d0-432b-99a5-56e775351a78.displayoutsubOutput001 ns1:hasType "display_data" .
+
+ns1:Paper01MLPovLabExport.d70a1672-61d0-432b-99a5-56e775351a78.displayoutsubOutput002 ns1:hasType "display_data" .
+
+ns1:Paper01MLPovLabExport.e203d169-ade4-43ec-947d-d6d7133a6885.displayout a ns2:Variable ;
+    ns1:hasSuboutput ns1:Paper01MLPovLabExport.e203d169-ade4-43ec-947d-d6d7133a6885.displayoutsubOutput000,
+        ns1:Paper01MLPovLabExport.e203d169-ade4-43ec-947d-d6d7133a6885.displayoutsubOutput001 .
+
+ns1:Paper01MLPovLabExport.e203d169-ade4-43ec-947d-d6d7133a6885.displayoutsubOutput000 ns1:hasType "display_data" .
+
+ns1:Paper01MLPovLabExport.e203d169-ade4-43ec-947d-d6d7133a6885.displayoutsubOutput001 ns1:hasType "stream" .
+
+ns1:Paper01MLPovLabExport.e597a94b-1db0-49a0-88dd-7e5a7d20e90c.displayout a ns2:Variable ;
+    ns1:hasSuboutput ns1:Paper01MLPovLabExport.e597a94b-1db0-49a0-88dd-7e5a7d20e90c.displayoutsubOutput000 .
+
+ns1:Paper01MLPovLabExport.e597a94b-1db0-49a0-88dd-7e5a7d20e90c.displayoutsubOutput000 ns1:hasType "stream" .
 
 ns1:Paper01MLPovLabExport.absorbing_atoms a ns2:Variable .
 
