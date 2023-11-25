@@ -37,3 +37,5 @@ larch_workflow/wf_data/*
 PSDI_Phase_1/Larch/wf_data/*
 PSDI_Phase_1/Larch/*_feff/*
 *ipynb_checkpoints*
+*dat
+psdi_webinar/*_feff/*
