@@ -1,0 +1,77 @@
+{
+    "figure_id": "Figure 4",
+    "figure_legend": "(A) XANES spectra and their first derivative (inset of A) of as-prepared samples and references on the Sn K-edge.(B and C) Linear combination fitting (LCF) of the peak. SnO2 and (B) Sn foil (red line) or (C) the Sn K-edge spectra of the H2 treated sample collected under H2 (cyan line) are used as references for the fittings. The goodness of fit (R-factors) for the fits with Sn foil and Pt3Sn are H2 treated 0.9% and 0.08%, Ar treated 0.1% and 0.2%, air treated 0.5% and 0.6%.",
+    "publication": {
+        "cdi_pub": 37,
+        "doi": "10.1039/c7fd00221a"
+    },
+    "data_object": {
+        "cdi_do": 537,
+        "doi": "10.5258/SOTON/D0408"
+    },
+    "data_file": "Xray_data.zip",
+    "data_mapping": [
+        {
+            "data_path": "./PtSn_KEdge/",
+            "data_type": "athena",
+            "file_mappings": [
+                {
+                    "group": "PtSn",
+                    "group_name": "PtSn",
+                    "file_name": "PtSn_KEdge_merge.prj"
+                },
+                {
+                    "group": "Air",
+                    "group_name": "Air",
+                    "file_name": "PtSn_KEdge_merge.prj"
+                },
+                {
+                    "group": "Ar",
+                    "group_name": "Ar",
+                    "file_name": "PtSn_KEdge_merge.prj"
+                },
+                {
+                    "group": "H2",
+                    "group_name": "H2",
+                    "file_name": "PtSn_KEdge_merge.prj"
+                },
+                {
+                    "group": "PtSn H",
+                    "group_name": "PtSn_H",
+                    "file_name": "PtSn_KEdge_merge.prj"
+                },
+                {
+                    "group": "Air H",
+                    "group_name": "Air_H",
+                    "file_name": "PtSn_KEdge_merge.prj"
+                },
+                {
+                    "group": "Ar H",
+                    "group_name": "Ar_H",
+                    "file_name": "PtSn_KEdge_merge.prj"
+                },
+                {
+                    "group": "H2 H",
+                    "group_name": "H2_H",
+                    "file_name": "PtSn_KEdge_merge.prj"
+                }
+           ]
+        },
+        { 
+            "data_path": "./wf_data/pub_037/XAFS_prj/",
+            "data_type": "athena",
+            "file_mappings": [
+                {
+                    "file_name": "Sn foil.prj",
+                    "group": "Sn Foil",
+                    "group_name": "merge"
+                },
+                {
+                    "file_name": "SnO2 0.9 2.6-13.5 gbkg.prj",
+                    "group": "SnO2",
+                    "group_name": "SnO2_0_9_2_6_13_5_0_8_1_0_with_theory"
+                }
+           ]
+        }
+    ]
+}
