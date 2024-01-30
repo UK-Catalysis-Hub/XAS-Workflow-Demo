@@ -152,10 +152,10 @@ def compare_groups(group_1, group_2, g1_label, g2_label, sample_name):
 # fit_limits list of lower and upper fitting limits relative to e0
 # fit_groups dictionary of groups to use as signals for LCF (first should have e0) 
 
-def n_lcf_compare(lcf_components = [], fit_limits = [], fit_groups = {} ):
+def lcf_compare(lcf_components = [], fit_limits = [], fit_groups = {} ):
     results = {}
-    lower_limit = fit_limits[0]
-    upper_limit = fit_limits[1]
+    min_lim = fit_limits[0]
+    max_lim = fit_limits[1]
     if lcf_components == []:
         print("need to provide list of componets")
         return results
@@ -165,9 +165,6 @@ def n_lcf_compare(lcf_components = [], fit_limits = [], fit_groups = {} ):
 
 
     for a_group_id in fit_groups:
-        signal_e0 = fit_groups[a_group].e0
-        min_lim = signal_e0 + lower_limit
-        max_lim = signal_e0 + upper_limit
         results[a_group_id] = local_lcf_group(fit_groups[a_group_id], lcf_components, fit_limits=[min_lim, max_lim], diff_e0 = True)
 
     return results
@@ -342,6 +339,28 @@ upper_limit = 20
 min_lim = recalibrate_e0_to + lower_limit
 max_lim = recalibrate_e0_to + upper_limit
 
+fit_groups ={"H2": merged_results["H2"], "Ar": merged_results["Ar"], "Air": merged_results["Air"]} 
+
+lcf_fit_rs = lcf_compare(lcf_components, [min_lim, max_lim], fit_groups)
+
+c_plots.compare_lcf_plot([merged_results["H2"],lcf_fit_rs['H2']], 
+                         [merged_results["Ar"],lcf_fit_rs['Ar']], 
+                         [merged_results["Air"],lcf_fit_rs['Air']], 
+                         x_limits=[min_lim, max_lim])
+
+plt.show()
+
+
+print("*"*80)
+print(" "*20, "lcf_compare function results")
+print("*"*80)
+print(lcf_fit_rs['H2'].arrayname)
+print(lcf_fit_rs['Ar'].arrayname)
+print(lcf_fit_rs['Air'].arrayname)
+
+min_lim = recalibrate_e0_to + lower_limit
+max_lim = recalibrate_e0_to + upper_limit
+
 #r_H2 = athenamgr.lcf_group(merged_results["H2"], lcf_components, fit_limits=[min_lim, max_lim])
 r_H2 = local_lcf_group(merged_results["H2"], lcf_components, fit_limits=[min_lim, max_lim], diff_e0 = True)
 r_Ar = local_lcf_group(merged_results["Ar"], lcf_components, fit_limits=[min_lim, max_lim], diff_e0 = True)
@@ -364,6 +383,10 @@ plt.show()
 #                         x_limits=[min_lim, max_lim])
 
 #plt.show()
+
+print("*"*80)
+print(" "*20, "hard coded results")
+print("*"*80)
 
 print(r_H2.arrayname)
 print(r_Ar.arrayname)
