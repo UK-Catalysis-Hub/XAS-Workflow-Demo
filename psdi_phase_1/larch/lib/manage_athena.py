@@ -126,11 +126,19 @@ def merge_readings(groups_list):
 
  #######################################################
 # |                Recalibrate energy                 | #
-# V             move E0 to match standard             V #
+# V             using E0 (match standard)             V #
  #######################################################
 def recalibrate_energy(a_group, recalibrate_to):
     a_group.energy = a_group.energy[:] + (recalibrate_to-a_group.e0)
     a_group.e0 = recalibrate_to
+    return a_group
+
+ #######################################################
+# |                define energy shift                | #
+# V                                                   V #
+ #######################################################
+def shift_energy(a_group, shift_to):
+    a_group.energy = a_group.energy[:] + (shift_to)
     return a_group
 
  #######################################################
@@ -139,7 +147,10 @@ def recalibrate_energy(a_group, recalibrate_to):
  #######################################################
 def rebin_group(a_group):
     xr = copy.deepcopy(a_group)
-    rebin_xafs(xr)#,group=xr,exafs1=50,xanes_step =0.5)
+    #rebin_xafs(xr)#,group=xr,exafs1=50,xanes_step =0.5)
+    #rebin_xafs(energy=xr.energy, mu=xr.mu, group=xr,  e0=xr.e0, pre1=-30, pre2=50,
+    #           pre_step=10, xanes_step=0.5, exafs_kstep=0.05, method='centroid')
+    rebin_xafs(xr)#,  pre1=-30, pre2=50, pre_step=10, xanes_step=0.5, exafs_kstep=0.05)
     xr.energy = copy.deepcopy(xr.rebinned.energy) 
     xr.mu = copy.deepcopy(xr.rebinned.mu)
     xr.e0 = copy.deepcopy(xr.rebinned.e0)
@@ -152,10 +163,19 @@ def rebin_group(a_group):
 # |             Lineal Combination Fitting            | #
 # V                group + standards                  V #
  #######################################################
-def lcf_group(a_group, lcf_components=[]):
-    if lcf_components == []:
+def lcf_group(a_group, fit_components=[], fit_limits=[-np.inf, np.inf], 
+              diff_e0 = False, fit_space = 'norm'):
+    if fit_components == []:
         print ("need a list of component groups to fit")
-    lcfr = math.lincombo_fit(a_group, lcf_components)#, vary_e0=True)
+    
+    #lcfr = math.lincombo_fit(a_group, lcf_components)#, vary_e0=diff_e0)
+    lcfr = math.lincombo_fit(a_group, fit_components, 
+                             xmin=fit_limits[0],xmax=fit_limits[1], 
+                             vary_e0 = diff_e0)
+    #lcfr = math.lincombo_fit(a_group, fit_components, 
+    #                         weights=[0.5,0.5], arrayname=fit_space,
+    #                         xmin=fit_limits[0],xmax=fit_limits[1], 
+    #                         vary_e0 = diff_e0)
     names_lbl = ""
 
     lcfr.energy = lcfr.xdata
@@ -169,7 +189,6 @@ def lcf_group(a_group, lcf_components=[]):
         array_label += a_w + ": " + '%.2f' % (lcfr.weights[a_w]*100.0) + "% "
     lcfr.filename = names_lbl
     
-  
     lcfr.arrayname = array_label
     
     return lcfr

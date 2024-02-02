@@ -132,27 +132,28 @@ def plot_normal_and_deriv(include_results,merged_results,norm_lim, deriv_lim):
 def compare_groups(group_1, group_2, g1_label, g2_label, sample_name):
     print ("Comparing", sample_name) 
     print ("Energy")
-    print (g1_label, "\tlen", len(group_1.energy), "\tmin", min(group_1.energy), "\tmax", max(group_1.energy))
-    
-    print (g2_label, "\tlen", len (group_2.energy),"\tmin", min(group_2.energy), "\tmax", max(group_2.energy))    
-    print ("Diff\tlen", len (group_2.energy)-len(group_1.energy), 
-           "\tmin", min(group_2.energy)-min(group_1.energy), "\tmax", max(group_2.energy)-max(group_1.energy))
+    print ("%s \tlen %i\tmin %.6f\tmax %.6f\tE0 %.6f"% (g1_label, len(group_1.energy), min(group_1.energy), max(group_1.energy), group_1.e0))
+    print ("%s \tlen %i\tmin %.6f\tmax %.6f\tE0 %.6f"% (g2_label, len(group_2.energy), min(group_2.energy), max(group_2.energy), group_2.e0))  
+    print ("Diff\tlen %i\tmin %.6f\tmax %.6f\tE0 %.6f"% (len (group_2.energy)-len(group_1.energy), 
+            min(group_2.energy)-min(group_1.energy), max(group_2.energy)-max(group_1.energy), group_2.e0 - group_1.e0))
     
     #min_e_diff, max_e_diff, avg_e_diff = diff_ranges (sd_group.energy)
     #print ("\tE diff \tavg", avg_e_diff, "\tmin", min_e_diff, "\tmax", max_e_diff)
-        
+
+    idx_e01 = np.where(np.isclose(group_1.energy, group_1.e0))[0][0]
+    idx_e02 = np.where(np.isclose(group_1.energy, group_1.e0))[0][0]    
     #min_e_diff, max_e_diff, avg_e_diff = diff_ranges (re_group.energy)
     #print ("\tE diff \tavg", avg_e_diff, "\tmin", min_e_diff, "\tmax", max_e_diff)
     print ("Mu")
-    print (g1_label,"\tlen", len(group_1.mu), "\tmin", min(group_1.mu), "\tmax", max(group_1.mu))
-    print (g2_label,"\tlen", len (group_2.mu), "\tmin", min(group_2.mu), "\tmax", max(group_2.mu))
+    print ("%s \tlen %i\tmin %.9f\tmax %.9f\tMu@e0 %.9f"%(g1_label, len(group_1.mu), min(group_1.mu), max(group_1.mu), group_1.mu[idx_e01]))
+    print ("%s \tlen %i\tmin %.9f\tmax %.9f\tMu@e0 %.9f"%(g2_label, len(group_2.mu), min(group_2.mu), max(group_2.mu), group_2.mu[idx_e02]))
 
 
 # lcf_components List of groups to use as components
 # fit_limits list of lower and upper fitting limits relative to e0
 # fit_groups dictionary of groups to use as signals for LCF (first should have e0) 
 
-def lcf_compare(lcf_components = [], fit_limits = [], fit_groups = {} ):
+def lcf_compare(lcf_components = [], fit_limits = [], fit_groups = {}, vary_e0 = True):
     results = {}
     min_lim = fit_limits[0]
     max_lim = fit_limits[1]
@@ -165,7 +166,7 @@ def lcf_compare(lcf_components = [], fit_limits = [], fit_groups = {} ):
 
 
     for a_group_id in fit_groups:
-        results[a_group_id] = local_lcf_group(fit_groups[a_group_id], lcf_components, fit_limits=[min_lim, max_lim], diff_e0 = True)
+        results[a_group_id] = local_lcf_group(fit_groups[a_group_id], lcf_components, fit_limits=[min_lim, max_lim], diff_e0 = vary_e0)
 
     return results
 
@@ -233,16 +234,22 @@ athena_path = Path('./wf_data/pub_037/XAFS_prj/Sn K-edge')
     
 #for x in Path('./wf_data/pub_037/XAFS_prj/Sn K-edge').glob('*'):
 #    print (x)
-    
+
+print("*"*80)
+print("Compare Energy and Mu from Athena and Larch projects lenghts, e0, min/max ")
+print("*"*80)
+   
 for a_project in athena_projects:
     athena_file = Path(athena_path, athena_projects[a_project]['file_name'])
     source_prj = athenamgr.read_project(athena_file)
     #print(dir(source_prj))
     sd_group = source_prj[athena_projects[a_project]['groups'][0]]
+    sd_group.e0 = sd_group.athena_params.bkg.e0
     re_group = merged_results[a_project]
     compare_groups(sd_group, re_group, "Athena", "Larch", a_project)
 
-# get the Sn foil from project:
+# get the Sn foil standard from project:
+# project is made up of the references from the individual samples
 
 sn_foil = "./wf_data/pub_037/XAFS_prj/Sn foil.prj"
 # read the input file 
@@ -262,68 +269,6 @@ sno2_group = athenamgr.get_group(sno2_prj, "SnO2_0_9_2_6_13_5_0_8_1_0_with_theor
 sno2_group.filename = "SnO2"
 sno2_group = athenamgr.recalibrate_energy(sno2_group, recalibrate_e0_to)
 merged_results["SnO2"] = sno2_group
-
-### Sn foil groups are recalibrated to merge e0 29200.142
-##print(dir(sn_foil_prj['merge']))
-##for a_group in sn_foil_prj:
-##    if 'e0' in sn_foil_prj[a_group]:
-##        sn_foil_e0 = sn_foil_prj[a_group]['e0']
-##        
-##sn_foil_group = sn_foil_prj[a_group]
-##
-##min_foil_diff = -1
-##min_sno2_dif = -1
-##
-##
-### SnO2 groups are recalibrated to 29204.000
-##
-###compare using all the standards in given projects
-##
-##
-##for sno_name in sno2_prj:
-##    print(sno_name, sno2_prj[sno_name]['label'])
-##    try:
-##        for foil_name in sn_foil_prj:
-##            sno2_group = athenamgr.get_group(sno2_prj, sno_name)
-##            sno2_group.filename = sno2_prj[sno_name]['label']
-##            sno2_group = athenamgr.recalibrate_energy(sno2_group, recalibrate_e0_to)
-##            print(foil_name, sn_foil_prj[foil_name]['label'])
-##            sn_foil_group = athenamgr.get_group(sn_foil_prj, foil_name)
-##            sn_foil_group.filename = sn_foil_prj[foil_name]['label']
-##            sn_foil_group = athenamgr.recalibrate_energy(sn_foil_group, sn_foil_e0)
-##            
-##            lcf_components = [sn_foil_group,sno2_group]
-##            
-##            lower_limit = -20
-##            upper_limit = 30
-##
-##            min_lim = recalibrate_e0_to + lower_limit
-##            max_lim = recalibrate_e0_to + upper_limit
-##
-##
-##            r_H2 = athenamgr.lcf_group(merged_results["H2"], lcf_components, fit_limits=[min_lim, max_lim])
-##            
-##            temp_foil_diff = 35.0 - list(r_H2['weights'].values())[0]*100
-##            
-##            r_Ar = athenamgr.lcf_group(merged_results["Ar"], lcf_components, fit_limits=[min_lim, max_lim])
-##             
-##            r_Air = athenamgr.lcf_group(merged_results["Air"], lcf_components, fit_limits=[min_lim, max_lim])
-##            
-##
-##            if min_foil_diff < 0 or temp_foil_diff < min_foil_diff:
-##                min_foil_diff = 35.0 - temp_foil_diff
-##
-##                print ('H2', r_H2['weights']) 
-##                print ('Ar', r_Ar['weights'])
-##                print ('Air', r_Air['weights']) 
-##    except:
-##        print("could not find group")
-##        
-##    c_plots.compare_lcf_plot([merged_results["H2"],r_H2], 
-##                         [merged_results["Ar"],r_Ar], 
-##                         [merged_results["Air"],r_Air], 
-##                         x_limits=[min_lim, max_lim])
-##    plt.show()
 
 
 include_groups = ["Air", "Ar", "H2", "Sn Foil", "SnO2"]
@@ -350,50 +295,16 @@ c_plots.compare_lcf_plot([merged_results["H2"],lcf_fit_rs['H2']],
 
 plt.show()
 
+print("*"*80)
+print(" "*20, "results using non calibrated/energy shifted data")
+print("*"*80)
+print('H2', lcf_fit_rs['H2'].arrayname)
+print('Ar', lcf_fit_rs['Ar'].arrayname)
+print('Air', lcf_fit_rs['Air'].arrayname)
 
 print("*"*80)
-print(" "*20, "lcf_compare function results")
+print(" "*20, "Results from energy shift groups")
 print("*"*80)
-print(lcf_fit_rs['H2'].arrayname)
-print(lcf_fit_rs['Ar'].arrayname)
-print(lcf_fit_rs['Air'].arrayname)
-
-min_lim = recalibrate_e0_to + lower_limit
-max_lim = recalibrate_e0_to + upper_limit
-
-#r_H2 = athenamgr.lcf_group(merged_results["H2"], lcf_components, fit_limits=[min_lim, max_lim])
-r_H2 = local_lcf_group(merged_results["H2"], lcf_components, fit_limits=[min_lim, max_lim], diff_e0 = True)
-r_Ar = local_lcf_group(merged_results["Ar"], lcf_components, fit_limits=[min_lim, max_lim], diff_e0 = True)
-r_Air = local_lcf_group(merged_results["Air"], lcf_components, fit_limits=[min_lim, max_lim], diff_e0 = True)
-
-c_plots.compare_lcf_plot([merged_results["H2"],r_H2], 
-                         [merged_results["Ar"],r_Ar], 
-                         [merged_results["Air"],r_Air], 
-                         x_limits=[min_lim, max_lim])
-
-plt.show()
-
-#r_H2 = athenamgr.lcf_group(merged_results["H2"], lcf_components, fit_limits=[min_lim, max_lim])
-#r_Ar = athenamgr.lcf_group(merged_results["Ar"], lcf_components, fit_limits=[min_lim, max_lim])
-#r_Air = athenamgr.lcf_group(merged_results["Air"], lcf_components, fit_limits=[min_lim, max_lim])
-
-#c_plots.compare_lcf_plot([merged_results["H2"],r_H2], 
-#                         [merged_results["Ar"],r_Ar], 
-#                         [merged_results["Air"],r_Air], 
-#                         x_limits=[min_lim, max_lim])
-
-#plt.show()
-
-print("*"*80)
-print(" "*20, "hard coded results")
-print("*"*80)
-
-print(r_H2.arrayname)
-print(r_Ar.arrayname)
-print(r_Air.arrayname)
-
-print("*"*80)
-print("Results from energy shift groups")
 
 # test shift
 shift_list = ["Air", "Ar", "H2","PtSn H"]
@@ -403,14 +314,11 @@ for a_group in merged_results:
         print ("Shift ", a_group, "energy to ", delta_shift)
         shift_energy(merged_results[a_group], delta_shift)
    
-
-    
 include_groups = ["Air", "Ar", "H2", "Sn Foil", "SnO2"]
 
 plot_normal_and_deriv(include_groups,merged_results,[29180, 29400], [29190, 29210])
 
 lcf_components = [merged_results["Sn Foil"],merged_results["SnO2"]] # List of groups to use as components 
-
 
 lower_limit = -20
 upper_limit = 20
@@ -418,41 +326,38 @@ upper_limit = 20
 min_lim = recalibrate_e0_to + lower_limit
 max_lim = recalibrate_e0_to + upper_limit
 
+lcf_fit_rs = lcf_compare(lcf_components, [min_lim, max_lim], fit_groups)
 
-#r_H2 = athenamgr.lcf_group(merged_results["H2"], lcf_components, fit_limits=[min_lim, max_lim])
-r_H2 = local_lcf_group(merged_results["H2"], lcf_components, fit_limits=[min_lim, max_lim], diff_e0 = True)
-r_Ar = local_lcf_group(merged_results["Ar"], lcf_components, fit_limits=[min_lim, max_lim], diff_e0 = True)
-r_Air = local_lcf_group(merged_results["Air"], lcf_components, fit_limits=[min_lim, max_lim], diff_e0 = True)
-
-c_plots.compare_lcf_plot([merged_results["H2"],r_H2], 
-                         [merged_results["Ar"],r_Ar], 
-                         [merged_results["Air"],r_Air], 
+c_plots.compare_lcf_plot([merged_results["H2"],lcf_fit_rs['H2']], 
+                         [merged_results["Ar"],lcf_fit_rs['Ar']], 
+                         [merged_results["Air"],lcf_fit_rs['Air']], 
                          x_limits=[min_lim, max_lim])
-
 
 plt.show()
 
-print("H2", r_H2.arrayname)
-print("Ar", r_Ar.arrayname)
-print("Air", r_Air.arrayname)
 
+
+print('H2', lcf_fit_rs['H2'].arrayname)
+print('Ar', lcf_fit_rs['Ar'].arrayname)
+print('Air', lcf_fit_rs['Air'].arrayname)
 
 lcf_components = [merged_results["PtSn H"],merged_results["SnO2"]] # List of groups to use as components 
 
-r_H2 = local_lcf_group(merged_results["H2"], lcf_components, fit_limits=[min_lim, max_lim])
-r_Ar = local_lcf_group(merged_results["Ar"], lcf_components, fit_limits=[min_lim, max_lim])
-r_Air = local_lcf_group(merged_results["Air"], lcf_components, fit_limits=[min_lim, max_lim])
+lcf_fit_rs = lcf_compare(lcf_components, [min_lim, max_lim], fit_groups, False)
 
-c_plots.compare_lcf_plot([merged_results["H2"],r_H2], 
-                         [merged_results["Ar"],r_Ar], 
-                         [merged_results["Air"],r_Air], 
+c_plots.compare_lcf_plot([merged_results["H2"],lcf_fit_rs['H2']], 
+                         [merged_results["Ar"],lcf_fit_rs['Ar']], 
+                         [merged_results["Air"],lcf_fit_rs['Air']], 
                          x_limits=[min_lim, max_lim])
 
 plt.show()
 
-print("H2", r_H2.arrayname)
-print("Ar", r_Ar.arrayname)
-print("Air", r_Air.arrayname)
+
+
+print('H2', lcf_fit_rs['H2'].arrayname)
+print('Ar', lcf_fit_rs['Ar'].arrayname)
+print('Air', lcf_fit_rs['Air'].arrayname)
+
 
 
 # Rebin Ar, Air and H2 Samples 
@@ -474,37 +379,37 @@ plot_normal_and_deriv(include_groups,merged_results,[29180, 29400], [29190, 2921
 
 lcf_components = [merged_results["Sn Foil"],merged_results["SnO2"]] # List of groups to use as components 
 
-r_H2 = local_lcf_group(rebinned_groups["H2 Rebbined"], lcf_components, fit_limits=[min_lim, max_lim])
-r_Ar = local_lcf_group(rebinned_groups["Ar Rebbined"], lcf_components, fit_limits=[min_lim, max_lim])
-r_Air = local_lcf_group(rebinned_groups["Air Rebbined"], lcf_components, fit_limits=[min_lim, max_lim])
+fit_groups ={"H2": rebinned_groups["H2 Rebbined"], "Ar":rebinned_groups["Ar Rebbined"], "Air": rebinned_groups["Air Rebbined"]}
 
-c_plots.compare_lcf_plot([rebinned_groups["H2 Rebbined"],r_H2], 
-                         [rebinned_groups["Ar Rebbined"],r_Ar], 
-                         [rebinned_groups["Air Rebbined"],r_Air], 
+lcf_fit_rs = lcf_compare(lcf_components, [min_lim, max_lim], fit_groups, False)
+
+c_plots.compare_lcf_plot([fit_groups["H2"],lcf_fit_rs['H2']], 
+                         [fit_groups["Ar"],lcf_fit_rs['Ar']], 
+                         [fit_groups["Air"],lcf_fit_rs['Air']], 
                          x_limits=[min_lim, max_lim])
 
 plt.show()
 
-print("H2", r_H2.arrayname)
-print("Ar", r_Ar.arrayname)
-print("Air", r_Air.arrayname)
+print('H2', lcf_fit_rs['H2'].arrayname)
+print('Ar', lcf_fit_rs['Ar'].arrayname)
+print('Air', lcf_fit_rs['Air'].arrayname)
+
 
 lcf_components = [rebinned_groups["PtSn H Rebbined"],merged_results["SnO2"]] # List of groups to use as components 
 
-r_H2 = local_lcf_group(rebinned_groups["H2 Rebbined"], lcf_components, fit_limits=[min_lim, max_lim], diff_e0 = True)
-r_Ar = local_lcf_group(rebinned_groups["Ar Rebbined"], lcf_components, fit_limits=[min_lim, max_lim], diff_e0 = True)
-r_Air = local_lcf_group(rebinned_groups["Air Rebbined"], lcf_components, fit_limits=[min_lim, max_lim], diff_e0 = True)
+fit_groups ={"H2": rebinned_groups["H2 Rebbined"], "Ar":rebinned_groups["Ar Rebbined"], "Air": rebinned_groups["Air Rebbined"]}
+lcf_fit_rs = lcf_compare(lcf_components, [min_lim, max_lim], fit_groups, True)
 
-c_plots.compare_lcf_plot([rebinned_groups["H2 Rebbined"],r_H2], 
-                         [rebinned_groups["Ar Rebbined"],r_Ar], 
-                         [rebinned_groups["Air Rebbined"],r_Air], 
+c_plots.compare_lcf_plot([fit_groups["H2"],lcf_fit_rs['H2']], 
+                         [fit_groups["Ar"],lcf_fit_rs['Ar']], 
+                         [fit_groups["Air"],lcf_fit_rs['Air']], 
                          x_limits=[min_lim, max_lim])
 
 plt.show()
 
-print("H2", r_H2.arrayname)
-print("Ar", r_Ar.arrayname)
-print("Air", r_Air.arrayname)
+print('H2', lcf_fit_rs['H2'].arrayname)
+print('Ar', lcf_fit_rs['Ar'].arrayname)
+print('Air', lcf_fit_rs['Air'].arrayname)
 
 # set e0 for all data used:
 print("*"*80)
@@ -513,41 +418,41 @@ print("Results from resetting e0")
 set_e0_to = 29204
 
 for a_group in merged_results:
-    print(merged_results[a_group].e0)
+    print("%s changed E0 from %.4f to %.4f" %(a_group, merged_results[a_group].e0, set_e0_to))
     merged_results[a_group].e0 = set_e0_to
 
 
 lcf_components = [merged_results["Sn Foil"],merged_results["SnO2"]] # List of groups to use as components 
 
 
-r_H2 = local_lcf_group(merged_results["H2"], lcf_components, fit_limits=[min_lim, max_lim])
-r_Ar = local_lcf_group(merged_results["Ar"], lcf_components, fit_limits=[min_lim, max_lim])
-r_Air = local_lcf_group(merged_results["Air"], lcf_components, fit_limits=[min_lim, max_lim])
+fit_groups ={"H2": merged_results["H2"], "Ar": merged_results["Ar"], "Air": merged_results["Air"]} 
+lcf_fit_rs = lcf_compare(lcf_components, [min_lim, max_lim], fit_groups, False)
 
-c_plots.compare_lcf_plot([merged_results["H2"],r_H2], 
-                         [merged_results["Ar"],r_Ar], 
-                         [merged_results["Air"],r_Air], 
+c_plots.compare_lcf_plot([fit_groups["H2"],lcf_fit_rs['H2']], 
+                         [fit_groups["Ar"],lcf_fit_rs['Ar']], 
+                         [fit_groups["Air"],lcf_fit_rs['Air']], 
                          x_limits=[min_lim, max_lim])
-
 
 plt.show()
 
-print("H2", r_H2.arrayname)
-print("Ar", r_Ar.arrayname)
-print("Air", r_Air.arrayname)
-
+print('H2', lcf_fit_rs['H2'].arrayname)
+print('Ar', lcf_fit_rs['Ar'].arrayname)
+print('Air', lcf_fit_rs['Air'].arrayname)
 
 lcf_components = [merged_results["PtSn H"],merged_results["SnO2"]] # List of groups to use as components 
 
-r_H2 = local_lcf_group(merged_results["H2"], lcf_components, fit_limits=[min_lim, max_lim])
-r_Ar = local_lcf_group(merged_results["Ar"], lcf_components, fit_limits=[min_lim, max_lim])
-r_Air = local_lcf_group(merged_results["Air"], lcf_components, fit_limits=[min_lim, max_lim])
 
-c_plots.compare_lcf_plot([merged_results["H2"],r_H2], 
-                         [merged_results["Ar"],r_Ar], 
-                         [merged_results["Air"],r_Air], 
+fit_groups ={"H2": merged_results["H2"], "Ar": merged_results["Ar"], "Air": merged_results["Air"]} 
+lcf_fit_rs = lcf_compare(lcf_components, [min_lim, max_lim], fit_groups, False)
+
+c_plots.compare_lcf_plot([fit_groups["H2"],lcf_fit_rs['H2']], 
+                         [fit_groups["Ar"],lcf_fit_rs['Ar']], 
+                         [fit_groups["Air"],lcf_fit_rs['Air']], 
                          x_limits=[min_lim, max_lim])
 
 plt.show()
 
+print('H2', lcf_fit_rs['H2'].arrayname)
+print('Ar', lcf_fit_rs['Ar'].arrayname)
+print('Air', lcf_fit_rs['Air'].arrayname)
 
