@@ -204,4 +204,950 @@
      deltar =  2.0333e-04  := 'alpha*reff'
      sigma2 =  0.00187820  := 'ssfe'
 
+========================================================================== FEFFIT RESULTS ====================
+[[Statistics]]
+   nvarys, npts       =  8, 104
+   n_independent      =  12.205
+   chi_square         =  127.966701
+   reduced chi_square =  30.4355946
+   r-factor           =  0.25385880
+   Akaike info crit   =  44.6801628
+   Bayesian info crit =  48.6946060
+ 
+[[Data]]
+   fit space          = 'r'
+   r-range            = 1.400, 3.000
+   k-range            = 3.000, 14.000
+   k window, dk       = 'hanning', 1.000
+   paths used in fit  = ['FeS2_feff/feff0001.dat', 'FeS2_feff/feff0002.dat', 'FeS2_feff/feff0003.dat', 'FeS2_feff/feff0004.dat']
+   k-weight           = 2
+   epsilon_k          = Array(mean=0.00295999, std=6.60673e-5)
+   epsilon_r          = 0.06122204
+   n_independent      = 12.205
+ 
+[[Variables]]
+   alpha          =  0.00506941 +/-unknown   (init=  0.00000000)
+   amp            =  1.16464263 +/-unknown   (init=  1.00000000)
+   delr           =  0.00000000 +/-unknown   (init=  0.00000000)
+   enot           = -9.57338354 +/-unknown   (init=  0.00000000)
+   ss             =  0.02446107 +/-unknown   (init=  0.00300000)
+   ss2            =  0.04827572 +/-unknown   (init=  0.00000000)
+   ss3            = -0.00255974 +/-unknown   (init=  0.00000000)
+   ssfe           =  0.02686508 +/-unknown   (init=  0.00000000)
+ 
+[[Correlations]]    (unreported correlations are <  0.100)
+ 
+[[Paths]]
+ = Path 'S.Fe.1' = Fe K Edge
+    feffdat file = FeS2_feff/feff0001.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S      -0.6269,  0.6269,  2.0751  2
+     reff   =  2.25660000
+     degen  =  6.00000000
+     n*s02  =  1.16464263  := 'amp'
+     e0     = -9.57338354  := 'enot'
+     r      =  2.26803962  := 'reff + alpha*reff'
+     deltar =  0.01143962  := 'alpha*reff'
+     sigma2 =  0.02446107  := 'ss'
+
+ = Path 'S.Fe.2' = Fe K Edge
+    feffdat file = FeS2_feff/feff0002.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S       0.6269, -0.6269,  3.3289  2
+     reff   =  3.44490000
+     degen  =  6.00000000
+     n*s02  =  1.16464263  := 'amp'
+     e0     = -9.57338354  := 'enot'
+     r      =  3.46236360  := 'reff + alpha*reff'
+     deltar =  0.01746360  := 'alpha*reff'
+     sigma2 =  0.04827572  := 'ss2'
+
+ = Path 'S.Fe.3' = Fe K Edge
+    feffdat file = FeS2_feff/feff0003.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S      -2.0751, -2.0751,  2.0751  2
+     reff   =  3.59420000
+     degen  =  2.00000000
+     n*s02  =  1.16464263  := 'amp'
+     e0     = -9.57338354  := 'enot'
+     r      =  3.61242046  := 'reff + alpha*reff'
+     deltar =  0.01822046  := 'alpha*reff'
+     sigma2 = -0.00255974  := 'ss3'
+
+ = Path 'Fe.Fe.4' = Fe K Edge
+    feffdat file = FeS2_feff/feff0004.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+              Fe      -2.7020,  0.0000, -2.7020  1
+     reff   =  3.82120000
+     degen  =  12.0000000
+     n*s02  =  1.16464263  := 'amp'
+     e0     = -9.57338354  := 'enot'
+     r      =  3.84057122  := 'reff + alpha*reff'
+     deltar =  0.01937122  := 'alpha*reff'
+     sigma2 =  0.02686508  := 'ssfe'
+
+========================================================================== FEFFIT RESULTS ====================
+[[Statistics]]
+   nvarys, npts       =  8, 104
+   n_independent      =  12.205
+   chi_square         =  127.966701
+   reduced chi_square =  30.4355946
+   r-factor           =  0.25385880
+   Akaike info crit   =  44.6801628
+   Bayesian info crit =  48.6946060
+ 
+[[Data]]
+   fit space          = 'r'
+   r-range            = 1.400, 3.000
+   k-range            = 3.000, 14.000
+   k window, dk       = 'hanning', 1.000
+   paths used in fit  = ['FeS2_feff/feff0001.dat', 'FeS2_feff/feff0002.dat', 'FeS2_feff/feff0003.dat', 'FeS2_feff/feff0004.dat']
+   k-weight           = 2
+   epsilon_k          = Array(mean=0.00295999, std=6.60673e-5)
+   epsilon_r          = 0.06122204
+   n_independent      = 12.205
+ 
+[[Variables]]
+   alpha          =  0.00506941 +/-unknown   (init=  0.00000000)
+   amp            =  1.16464263 +/-unknown   (init=  1.00000000)
+   delr           =  0.00000000 +/-unknown   (init=  0.00000000)
+   enot           = -9.57338354 +/-unknown   (init=  0.00000000)
+   ss             =  0.02446107 +/-unknown   (init=  0.00300000)
+   ss2            =  0.04827572 +/-unknown   (init=  0.00000000)
+   ss3            = -0.00255974 +/-unknown   (init=  0.00000000)
+   ssfe           =  0.02686508 +/-unknown   (init=  0.00000000)
+ 
+[[Correlations]]    (unreported correlations are <  0.100)
+ 
+[[Paths]]
+ = Path 'S.Fe.1' = Fe K Edge
+    feffdat file = FeS2_feff/feff0001.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S      -0.6269,  0.6269,  2.0751  2
+     reff   =  2.25660000
+     degen  =  6.00000000
+     n*s02  =  1.16464263  := 'amp'
+     e0     = -9.57338354  := 'enot'
+     r      =  2.26803962  := 'reff + alpha*reff'
+     deltar =  0.01143962  := 'alpha*reff'
+     sigma2 =  0.02446107  := 'ss'
+
+ = Path 'S.Fe.2' = Fe K Edge
+    feffdat file = FeS2_feff/feff0002.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S       0.6269, -0.6269,  3.3289  2
+     reff   =  3.44490000
+     degen  =  6.00000000
+     n*s02  =  1.16464263  := 'amp'
+     e0     = -9.57338354  := 'enot'
+     r      =  3.46236360  := 'reff + alpha*reff'
+     deltar =  0.01746360  := 'alpha*reff'
+     sigma2 =  0.04827572  := 'ss2'
+
+ = Path 'S.Fe.3' = Fe K Edge
+    feffdat file = FeS2_feff/feff0003.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S      -2.0751, -2.0751,  2.0751  2
+     reff   =  3.59420000
+     degen  =  2.00000000
+     n*s02  =  1.16464263  := 'amp'
+     e0     = -9.57338354  := 'enot'
+     r      =  3.61242046  := 'reff + alpha*reff'
+     deltar =  0.01822046  := 'alpha*reff'
+     sigma2 = -0.00255974  := 'ss3'
+
+ = Path 'Fe.Fe.4' = Fe K Edge
+    feffdat file = FeS2_feff/feff0004.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+              Fe      -2.7020,  0.0000, -2.7020  1
+     reff   =  3.82120000
+     degen  =  12.0000000
+     n*s02  =  1.16464263  := 'amp'
+     e0     = -9.57338354  := 'enot'
+     r      =  3.84057122  := 'reff + alpha*reff'
+     deltar =  0.01937122  := 'alpha*reff'
+     sigma2 =  0.02686508  := 'ssfe'
+
+========================================================================== FEFFIT RESULTS ====================
+[[Statistics]]
+   nvarys, npts       =  8, 104
+   n_independent      =  12.205
+   chi_square         =  127.966701
+   reduced chi_square =  30.4355946
+   r-factor           =  0.25385880
+   Akaike info crit   =  44.6801628
+   Bayesian info crit =  48.6946060
+ 
+[[Data]]
+   fit space          = 'r'
+   r-range            = 1.400, 3.000
+   k-range            = 3.000, 14.000
+   k window, dk       = 'hanning', 1.000
+   paths used in fit  = ['FeS2_feff/feff0001.dat', 'FeS2_feff/feff0002.dat', 'FeS2_feff/feff0003.dat', 'FeS2_feff/feff0004.dat']
+   k-weight           = 2
+   epsilon_k          = Array(mean=0.00295999, std=6.60673e-5)
+   epsilon_r          = 0.06122204
+   n_independent      = 12.205
+ 
+[[Variables]]
+   alpha          =  0.00506941 +/-unknown   (init=  0.00000000)
+   amp            =  1.16464263 +/-unknown   (init=  1.00000000)
+   delr           =  0.00000000 +/-unknown   (init=  0.00000000)
+   enot           = -9.57338354 +/-unknown   (init=  0.00000000)
+   ss             =  0.02446107 +/-unknown   (init=  0.00300000)
+   ss2            =  0.04827572 +/-unknown   (init=  0.00000000)
+   ss3            = -0.00255974 +/-unknown   (init=  0.00000000)
+   ssfe           =  0.02686508 +/-unknown   (init=  0.00000000)
+ 
+[[Correlations]]    (unreported correlations are <  0.100)
+ 
+[[Paths]]
+ = Path 'S.Fe.1' = Fe K Edge
+    feffdat file = FeS2_feff/feff0001.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S      -0.6269,  0.6269,  2.0751  2
+     reff   =  2.25660000
+     degen  =  6.00000000
+     n*s02  =  1.16464263  := 'amp'
+     e0     = -9.57338354  := 'enot'
+     r      =  2.26803962  := 'reff + alpha*reff'
+     deltar =  0.01143962  := 'alpha*reff'
+     sigma2 =  0.02446107  := 'ss'
+
+ = Path 'S.Fe.2' = Fe K Edge
+    feffdat file = FeS2_feff/feff0002.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S       0.6269, -0.6269,  3.3289  2
+     reff   =  3.44490000
+     degen  =  6.00000000
+     n*s02  =  1.16464263  := 'amp'
+     e0     = -9.57338354  := 'enot'
+     r      =  3.46236360  := 'reff + alpha*reff'
+     deltar =  0.01746360  := 'alpha*reff'
+     sigma2 =  0.04827572  := 'ss2'
+
+ = Path 'S.Fe.3' = Fe K Edge
+    feffdat file = FeS2_feff/feff0003.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S      -2.0751, -2.0751,  2.0751  2
+     reff   =  3.59420000
+     degen  =  2.00000000
+     n*s02  =  1.16464263  := 'amp'
+     e0     = -9.57338354  := 'enot'
+     r      =  3.61242046  := 'reff + alpha*reff'
+     deltar =  0.01822046  := 'alpha*reff'
+     sigma2 = -0.00255974  := 'ss3'
+
+ = Path 'Fe.Fe.4' = Fe K Edge
+    feffdat file = FeS2_feff/feff0004.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+              Fe      -2.7020,  0.0000, -2.7020  1
+     reff   =  3.82120000
+     degen  =  12.0000000
+     n*s02  =  1.16464263  := 'amp'
+     e0     = -9.57338354  := 'enot'
+     r      =  3.84057122  := 'reff + alpha*reff'
+     deltar =  0.01937122  := 'alpha*reff'
+     sigma2 =  0.02686508  := 'ssfe'
+
+========================================================================== FEFFIT RESULTS ====================
+[[Statistics]]
+   nvarys, npts       =  8, 104
+   n_independent      =  12.205
+   chi_square         =  127.966701
+   reduced chi_square =  30.4355946
+   r-factor           =  0.25385880
+   Akaike info crit   =  44.6801628
+   Bayesian info crit =  48.6946060
+ 
+[[Data]]
+   fit space          = 'r'
+   r-range            = 1.400, 3.000
+   k-range            = 3.000, 14.000
+   k window, dk       = 'hanning', 1.000
+   paths used in fit  = ['FeS2_feff/feff0001.dat', 'FeS2_feff/feff0002.dat', 'FeS2_feff/feff0003.dat', 'FeS2_feff/feff0004.dat']
+   k-weight           = 2
+   epsilon_k          = Array(mean=0.00295999, std=6.60673e-5)
+   epsilon_r          = 0.06122204
+   n_independent      = 12.205
+ 
+[[Variables]]
+   alpha          =  0.00506941 +/-unknown   (init=  0.00000000)
+   amp            =  1.16464263 +/-unknown   (init=  1.00000000)
+   delr           =  0.00000000 +/-unknown   (init=  0.00000000)
+   enot           = -9.57338354 +/-unknown   (init=  0.00000000)
+   ss             =  0.02446107 +/-unknown   (init=  0.00300000)
+   ss2            =  0.04827572 +/-unknown   (init=  0.00000000)
+   ss3            = -0.00255974 +/-unknown   (init=  0.00000000)
+   ssfe           =  0.02686508 +/-unknown   (init=  0.00000000)
+ 
+[[Correlations]]    (unreported correlations are <  0.100)
+ 
+[[Paths]]
+ = Path 'S.Fe.1' = Fe K Edge
+    feffdat file = FeS2_feff/feff0001.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S      -0.6269,  0.6269,  2.0751  2
+     reff   =  2.25660000
+     degen  =  6.00000000
+     n*s02  =  1.16464263  := 'amp'
+     e0     = -9.57338354  := 'enot'
+     r      =  2.26803962  := 'reff + alpha*reff'
+     deltar =  0.01143962  := 'alpha*reff'
+     sigma2 =  0.02446107  := 'ss'
+
+ = Path 'S.Fe.2' = Fe K Edge
+    feffdat file = FeS2_feff/feff0002.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S       0.6269, -0.6269,  3.3289  2
+     reff   =  3.44490000
+     degen  =  6.00000000
+     n*s02  =  1.16464263  := 'amp'
+     e0     = -9.57338354  := 'enot'
+     r      =  3.46236360  := 'reff + alpha*reff'
+     deltar =  0.01746360  := 'alpha*reff'
+     sigma2 =  0.04827572  := 'ss2'
+
+ = Path 'S.Fe.3' = Fe K Edge
+    feffdat file = FeS2_feff/feff0003.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S      -2.0751, -2.0751,  2.0751  2
+     reff   =  3.59420000
+     degen  =  2.00000000
+     n*s02  =  1.16464263  := 'amp'
+     e0     = -9.57338354  := 'enot'
+     r      =  3.61242046  := 'reff + alpha*reff'
+     deltar =  0.01822046  := 'alpha*reff'
+     sigma2 = -0.00255974  := 'ss3'
+
+ = Path 'Fe.Fe.4' = Fe K Edge
+    feffdat file = FeS2_feff/feff0004.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+              Fe      -2.7020,  0.0000, -2.7020  1
+     reff   =  3.82120000
+     degen  =  12.0000000
+     n*s02  =  1.16464263  := 'amp'
+     e0     = -9.57338354  := 'enot'
+     r      =  3.84057122  := 'reff + alpha*reff'
+     deltar =  0.01937122  := 'alpha*reff'
+     sigma2 =  0.02686508  := 'ssfe'
+
+========================================================================== FEFFIT RESULTS ====================
+[[Statistics]]
+   nvarys, npts       =  8, 104
+   n_independent      =  12.205
+   chi_square         =  127.966701
+   reduced chi_square =  30.4355946
+   r-factor           =  0.25385880
+   Akaike info crit   =  44.6801628
+   Bayesian info crit =  48.6946060
+ 
+[[Data]]
+   fit space          = 'r'
+   r-range            = 1.400, 3.000
+   k-range            = 3.000, 14.000
+   k window, dk       = 'hanning', 1.000
+   paths used in fit  = ['FeS2_feff/feff0001.dat', 'FeS2_feff/feff0002.dat', 'FeS2_feff/feff0003.dat', 'FeS2_feff/feff0004.dat']
+   k-weight           = 2
+   epsilon_k          = Array(mean=0.00295999, std=6.60673e-5)
+   epsilon_r          = 0.06122204
+   n_independent      = 12.205
+ 
+[[Variables]]
+   alpha          =  0.00506941 +/-unknown   (init=  0.00000000)
+   amp            =  1.16464263 +/-unknown   (init=  1.00000000)
+   delr           =  0.00000000 +/-unknown   (init=  0.00000000)
+   enot           = -9.57338354 +/-unknown   (init=  0.00000000)
+   ss             =  0.02446107 +/-unknown   (init=  0.00300000)
+   ss2            =  0.04827572 +/-unknown   (init=  0.00000000)
+   ss3            = -0.00255974 +/-unknown   (init=  0.00000000)
+   ssfe           =  0.02686508 +/-unknown   (init=  0.00000000)
+ 
+[[Correlations]]    (unreported correlations are <  0.100)
+ 
+[[Paths]]
+ = Path 'S.Fe.1' = Fe K Edge
+    feffdat file = FeS2_feff/feff0001.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S      -0.6269,  0.6269,  2.0751  2
+     reff   =  2.25660000
+     degen  =  6.00000000
+     n*s02  =  1.16464263  := 'amp'
+     e0     = -9.57338354  := 'enot'
+     r      =  2.26803962  := 'reff + alpha*reff'
+     deltar =  0.01143962  := 'alpha*reff'
+     sigma2 =  0.02446107  := 'ss'
+
+ = Path 'S.Fe.2' = Fe K Edge
+    feffdat file = FeS2_feff/feff0002.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S       0.6269, -0.6269,  3.3289  2
+     reff   =  3.44490000
+     degen  =  6.00000000
+     n*s02  =  1.16464263  := 'amp'
+     e0     = -9.57338354  := 'enot'
+     r      =  3.46236360  := 'reff + alpha*reff'
+     deltar =  0.01746360  := 'alpha*reff'
+     sigma2 =  0.04827572  := 'ss2'
+
+ = Path 'S.Fe.3' = Fe K Edge
+    feffdat file = FeS2_feff/feff0003.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S      -2.0751, -2.0751,  2.0751  2
+     reff   =  3.59420000
+     degen  =  2.00000000
+     n*s02  =  1.16464263  := 'amp'
+     e0     = -9.57338354  := 'enot'
+     r      =  3.61242046  := 'reff + alpha*reff'
+     deltar =  0.01822046  := 'alpha*reff'
+     sigma2 = -0.00255974  := 'ss3'
+
+ = Path 'Fe.Fe.4' = Fe K Edge
+    feffdat file = FeS2_feff/feff0004.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+              Fe      -2.7020,  0.0000, -2.7020  1
+     reff   =  3.82120000
+     degen  =  12.0000000
+     n*s02  =  1.16464263  := 'amp'
+     e0     = -9.57338354  := 'enot'
+     r      =  3.84057122  := 'reff + alpha*reff'
+     deltar =  0.01937122  := 'alpha*reff'
+     sigma2 =  0.02686508  := 'ssfe'
+
+========================================================================== FEFFIT RESULTS ====================
+[[Statistics]]
+   nvarys, npts       =  8, 104
+   n_independent      =  12.205
+   chi_square         =  175.307287
+   reduced chi_square =  41.6950777
+   r-factor           =  0.00138607
+   Akaike info crit   =  48.5217792
+   Bayesian info crit =  52.5362224
+ 
+[[Data]]
+   fit space          = 'r'
+   r-range            = 1.400, 3.000
+   k-range            = 3.000, 14.000
+   k window, dk       = 'hanning', 1.000
+   paths used in fit  = ['FeS2_feff/feff0001.dat', 'FeS2_feff/feff0002.dat', 'FeS2_feff/feff0003.dat', 'FeS2_feff/feff0004.dat']
+   k-weight           = 2
+   epsilon_k          = Array(mean=5.01912e-4, std=4.60149e-4)
+   epsilon_r          = 0.01038113
+   n_independent      = 12.205
+ 
+[[Variables]]
+   alpha          =  5.32353e-5 +/-unknown   (init=  0.00000000)
+   amp            =  0.73628552 +/-unknown   (init=  1.00000000)
+   delr           =  0.00000000 +/-unknown   (init=  0.00000000)
+   enot           =  2.68381266 +/-unknown   (init=  0.00000000)
+   ss             =  0.00321277 +/-unknown   (init=  0.00300000)
+   ss2            =  0.00757028 +/-unknown   (init=  0.00000000)
+   ss3            = -0.00278840 +/-unknown   (init=  0.00000000)
+   ssfe           =  0.00187820 +/-unknown   (init=  0.00000000)
+ 
+[[Correlations]]    (unreported correlations are <  0.100)
+ 
+[[Paths]]
+ = Path 'S.Fe.1' = Fe K Edge
+    feffdat file = FeS2_feff/feff0001.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S      -0.6269,  0.6269,  2.0751  2
+     reff   =  2.25660000
+     degen  =  6.00000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  2.25672013  := 'reff + alpha*reff'
+     deltar =  1.20131e-4  := 'alpha*reff'
+     sigma2 =  0.00321277  := 'ss'
+
+ = Path 'S.Fe.2' = Fe K Edge
+    feffdat file = FeS2_feff/feff0002.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S       0.6269, -0.6269,  3.3289  2
+     reff   =  3.44490000
+     degen  =  6.00000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  3.44508339  := 'reff + alpha*reff'
+     deltar =  1.83390e-4  := 'alpha*reff'
+     sigma2 =  0.00757028  := 'ss2'
+
+ = Path 'S.Fe.3' = Fe K Edge
+    feffdat file = FeS2_feff/feff0003.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S      -2.0751, -2.0751,  2.0751  2
+     reff   =  3.59420000
+     degen  =  2.00000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  3.59439134  := 'reff + alpha*reff'
+     deltar =  1.91338e-4  := 'alpha*reff'
+     sigma2 = -0.00278840  := 'ss3'
+
+ = Path 'Fe.Fe.4' = Fe K Edge
+    feffdat file = FeS2_feff/feff0004.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+              Fe      -2.7020,  0.0000, -2.7020  1
+     reff   =  3.82120000
+     degen  =  12.0000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  3.82140342  := 'reff + alpha*reff'
+     deltar =  2.03423e-4  := 'alpha*reff'
+     sigma2 =  0.00187820  := 'ssfe'
+
+========================================================================== FEFFIT RESULTS ====================
+[[Statistics]]
+   nvarys, npts       =  8, 104
+   n_independent      =  12.205
+   chi_square         =  175.307287
+   reduced chi_square =  41.6950777
+   r-factor           =  0.00138607
+   Akaike info crit   =  48.5217792
+   Bayesian info crit =  52.5362224
+ 
+[[Data]]
+   fit space          = 'r'
+   r-range            = 1.400, 3.000
+   k-range            = 3.000, 14.000
+   k window, dk       = 'hanning', 1.000
+   paths used in fit  = ['FeS2_feff/feff0001.dat', 'FeS2_feff/feff0002.dat', 'FeS2_feff/feff0003.dat', 'FeS2_feff/feff0004.dat']
+   k-weight           = 2
+   epsilon_k          = Array(mean=5.01912e-4, std=4.60149e-4)
+   epsilon_r          = 0.01038113
+   n_independent      = 12.205
+ 
+[[Variables]]
+   alpha          =  5.32353e-5 +/-unknown   (init=  0.00000000)
+   amp            =  0.73628552 +/-unknown   (init=  1.00000000)
+   delr           =  0.00000000 +/-unknown   (init=  0.00000000)
+   enot           =  2.68381266 +/-unknown   (init=  0.00000000)
+   ss             =  0.00321277 +/-unknown   (init=  0.00300000)
+   ss2            =  0.00757028 +/-unknown   (init=  0.00000000)
+   ss3            = -0.00278840 +/-unknown   (init=  0.00000000)
+   ssfe           =  0.00187820 +/-unknown   (init=  0.00000000)
+ 
+[[Correlations]]    (unreported correlations are <  0.100)
+ 
+[[Paths]]
+ = Path 'S.Fe.1' = Fe K Edge
+    feffdat file = FeS2_feff/feff0001.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S      -0.6269,  0.6269,  2.0751  2
+     reff   =  2.25660000
+     degen  =  6.00000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  2.25672013  := 'reff + alpha*reff'
+     deltar =  1.20131e-4  := 'alpha*reff'
+     sigma2 =  0.00321277  := 'ss'
+
+ = Path 'S.Fe.2' = Fe K Edge
+    feffdat file = FeS2_feff/feff0002.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S       0.6269, -0.6269,  3.3289  2
+     reff   =  3.44490000
+     degen  =  6.00000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  3.44508339  := 'reff + alpha*reff'
+     deltar =  1.83390e-4  := 'alpha*reff'
+     sigma2 =  0.00757028  := 'ss2'
+
+ = Path 'S.Fe.3' = Fe K Edge
+    feffdat file = FeS2_feff/feff0003.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S      -2.0751, -2.0751,  2.0751  2
+     reff   =  3.59420000
+     degen  =  2.00000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  3.59439134  := 'reff + alpha*reff'
+     deltar =  1.91338e-4  := 'alpha*reff'
+     sigma2 = -0.00278840  := 'ss3'
+
+ = Path 'Fe.Fe.4' = Fe K Edge
+    feffdat file = FeS2_feff/feff0004.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+              Fe      -2.7020,  0.0000, -2.7020  1
+     reff   =  3.82120000
+     degen  =  12.0000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  3.82140342  := 'reff + alpha*reff'
+     deltar =  2.03423e-4  := 'alpha*reff'
+     sigma2 =  0.00187820  := 'ssfe'
+
+========================================================================== FEFFIT RESULTS ====================
+[[Statistics]]
+   nvarys, npts       =  8, 104
+   n_independent      =  12.205
+   chi_square         =  175.307287
+   reduced chi_square =  41.6950777
+   r-factor           =  0.00138607
+   Akaike info crit   =  48.5217792
+   Bayesian info crit =  52.5362224
+ 
+[[Data]]
+   fit space          = 'r'
+   r-range            = 1.400, 3.000
+   k-range            = 3.000, 14.000
+   k window, dk       = 'hanning', 1.000
+   paths used in fit  = ['FeS2_feff/feff0001.dat', 'FeS2_feff/feff0002.dat', 'FeS2_feff/feff0003.dat', 'FeS2_feff/feff0004.dat']
+   k-weight           = 2
+   epsilon_k          = Array(mean=5.01912e-4, std=4.60149e-4)
+   epsilon_r          = 0.01038113
+   n_independent      = 12.205
+ 
+[[Variables]]
+   alpha          =  5.32353e-5 +/-unknown   (init=  0.00000000)
+   amp            =  0.73628552 +/-unknown   (init=  1.00000000)
+   delr           =  0.00000000 +/-unknown   (init=  0.00000000)
+   enot           =  2.68381266 +/-unknown   (init=  0.00000000)
+   ss             =  0.00321277 +/-unknown   (init=  0.00300000)
+   ss2            =  0.00757028 +/-unknown   (init=  0.00000000)
+   ss3            = -0.00278840 +/-unknown   (init=  0.00000000)
+   ssfe           =  0.00187820 +/-unknown   (init=  0.00000000)
+ 
+[[Correlations]]    (unreported correlations are <  0.100)
+ 
+[[Paths]]
+ = Path 'S.Fe.1' = Fe K Edge
+    feffdat file = FeS2_feff/feff0001.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S      -0.6269,  0.6269,  2.0751  2
+     reff   =  2.25660000
+     degen  =  6.00000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  2.25672013  := 'reff + alpha*reff'
+     deltar =  1.20131e-4  := 'alpha*reff'
+     sigma2 =  0.00321277  := 'ss'
+
+ = Path 'S.Fe.2' = Fe K Edge
+    feffdat file = FeS2_feff/feff0002.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S       0.6269, -0.6269,  3.3289  2
+     reff   =  3.44490000
+     degen  =  6.00000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  3.44508339  := 'reff + alpha*reff'
+     deltar =  1.83390e-4  := 'alpha*reff'
+     sigma2 =  0.00757028  := 'ss2'
+
+ = Path 'S.Fe.3' = Fe K Edge
+    feffdat file = FeS2_feff/feff0003.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S      -2.0751, -2.0751,  2.0751  2
+     reff   =  3.59420000
+     degen  =  2.00000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  3.59439134  := 'reff + alpha*reff'
+     deltar =  1.91338e-4  := 'alpha*reff'
+     sigma2 = -0.00278840  := 'ss3'
+
+ = Path 'Fe.Fe.4' = Fe K Edge
+    feffdat file = FeS2_feff/feff0004.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+              Fe      -2.7020,  0.0000, -2.7020  1
+     reff   =  3.82120000
+     degen  =  12.0000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  3.82140342  := 'reff + alpha*reff'
+     deltar =  2.03423e-4  := 'alpha*reff'
+     sigma2 =  0.00187820  := 'ssfe'
+
+========================================================================== FEFFIT RESULTS ====================
+[[Statistics]]
+   nvarys, npts       =  8, 104
+   n_independent      =  12.205
+   chi_square         =  175.307287
+   reduced chi_square =  41.6950777
+   r-factor           =  0.00138607
+   Akaike info crit   =  48.5217792
+   Bayesian info crit =  52.5362224
+ 
+[[Data]]
+   fit space          = 'r'
+   r-range            = 1.400, 3.000
+   k-range            = 3.000, 14.000
+   k window, dk       = 'hanning', 1.000
+   paths used in fit  = ['FeS2_feff/feff0001.dat', 'FeS2_feff/feff0002.dat', 'FeS2_feff/feff0003.dat', 'FeS2_feff/feff0004.dat']
+   k-weight           = 2
+   epsilon_k          = Array(mean=5.01912e-4, std=4.60149e-4)
+   epsilon_r          = 0.01038113
+   n_independent      = 12.205
+ 
+[[Variables]]
+   alpha          =  5.32353e-5 +/-unknown   (init=  0.00000000)
+   amp            =  0.73628552 +/-unknown   (init=  1.00000000)
+   delr           =  0.00000000 +/-unknown   (init=  0.00000000)
+   enot           =  2.68381266 +/-unknown   (init=  0.00000000)
+   ss             =  0.00321277 +/-unknown   (init=  0.00300000)
+   ss2            =  0.00757028 +/-unknown   (init=  0.00000000)
+   ss3            = -0.00278840 +/-unknown   (init=  0.00000000)
+   ssfe           =  0.00187820 +/-unknown   (init=  0.00000000)
+ 
+[[Correlations]]    (unreported correlations are <  0.100)
+ 
+[[Paths]]
+ = Path 'S.Fe.1' = Fe K Edge
+    feffdat file = FeS2_feff/feff0001.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S      -0.6269,  0.6269,  2.0751  2
+     reff   =  2.25660000
+     degen  =  6.00000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  2.25672013  := 'reff + alpha*reff'
+     deltar =  1.20131e-4  := 'alpha*reff'
+     sigma2 =  0.00321277  := 'ss'
+
+ = Path 'S.Fe.2' = Fe K Edge
+    feffdat file = FeS2_feff/feff0002.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S       0.6269, -0.6269,  3.3289  2
+     reff   =  3.44490000
+     degen  =  6.00000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  3.44508339  := 'reff + alpha*reff'
+     deltar =  1.83390e-4  := 'alpha*reff'
+     sigma2 =  0.00757028  := 'ss2'
+
+ = Path 'S.Fe.3' = Fe K Edge
+    feffdat file = FeS2_feff/feff0003.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S      -2.0751, -2.0751,  2.0751  2
+     reff   =  3.59420000
+     degen  =  2.00000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  3.59439134  := 'reff + alpha*reff'
+     deltar =  1.91338e-4  := 'alpha*reff'
+     sigma2 = -0.00278840  := 'ss3'
+
+ = Path 'Fe.Fe.4' = Fe K Edge
+    feffdat file = FeS2_feff/feff0004.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+              Fe      -2.7020,  0.0000, -2.7020  1
+     reff   =  3.82120000
+     degen  =  12.0000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  3.82140342  := 'reff + alpha*reff'
+     deltar =  2.03423e-4  := 'alpha*reff'
+     sigma2 =  0.00187820  := 'ssfe'
+
+========================================================================== FEFFIT RESULTS ====================
+[[Statistics]]
+   nvarys, npts       =  8, 104
+   n_independent      =  12.205
+   chi_square         =  175.307287
+   reduced chi_square =  41.6950777
+   r-factor           =  0.00138607
+   Akaike info crit   =  48.5217792
+   Bayesian info crit =  52.5362224
+ 
+[[Data]]
+   fit space          = 'r'
+   r-range            = 1.400, 3.000
+   k-range            = 3.000, 14.000
+   k window, dk       = 'hanning', 1.000
+   paths used in fit  = ['FeS2_feff/feff0001.dat', 'FeS2_feff/feff0002.dat', 'FeS2_feff/feff0003.dat', 'FeS2_feff/feff0004.dat']
+   k-weight           = 2
+   epsilon_k          = Array(mean=5.01912e-4, std=4.60149e-4)
+   epsilon_r          = 0.01038113
+   n_independent      = 12.205
+ 
+[[Variables]]
+   alpha          =  5.32353e-5 +/-unknown   (init=  0.00000000)
+   amp            =  0.73628552 +/-unknown   (init=  1.00000000)
+   delr           =  0.00000000 +/-unknown   (init=  0.00000000)
+   enot           =  2.68381266 +/-unknown   (init=  0.00000000)
+   ss             =  0.00321277 +/-unknown   (init=  0.00300000)
+   ss2            =  0.00757028 +/-unknown   (init=  0.00000000)
+   ss3            = -0.00278840 +/-unknown   (init=  0.00000000)
+   ssfe           =  0.00187820 +/-unknown   (init=  0.00000000)
+ 
+[[Correlations]]    (unreported correlations are <  0.100)
+ 
+[[Paths]]
+ = Path 'S.Fe.1' = Fe K Edge
+    feffdat file = FeS2_feff/feff0001.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S      -0.6269,  0.6269,  2.0751  2
+     reff   =  2.25660000
+     degen  =  6.00000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  2.25672013  := 'reff + alpha*reff'
+     deltar =  1.20131e-4  := 'alpha*reff'
+     sigma2 =  0.00321277  := 'ss'
+
+ = Path 'S.Fe.2' = Fe K Edge
+    feffdat file = FeS2_feff/feff0002.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S       0.6269, -0.6269,  3.3289  2
+     reff   =  3.44490000
+     degen  =  6.00000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  3.44508339  := 'reff + alpha*reff'
+     deltar =  1.83390e-4  := 'alpha*reff'
+     sigma2 =  0.00757028  := 'ss2'
+
+ = Path 'S.Fe.3' = Fe K Edge
+    feffdat file = FeS2_feff/feff0003.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S      -2.0751, -2.0751,  2.0751  2
+     reff   =  3.59420000
+     degen  =  2.00000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  3.59439134  := 'reff + alpha*reff'
+     deltar =  1.91338e-4  := 'alpha*reff'
+     sigma2 = -0.00278840  := 'ss3'
+
+ = Path 'Fe.Fe.4' = Fe K Edge
+    feffdat file = FeS2_feff/feff0004.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+              Fe      -2.7020,  0.0000, -2.7020  1
+     reff   =  3.82120000
+     degen  =  12.0000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  3.82140342  := 'reff + alpha*reff'
+     deltar =  2.03423e-4  := 'alpha*reff'
+     sigma2 =  0.00187820  := 'ssfe'
+
+========================================================================== FEFFIT RESULTS ====================
+[[Statistics]]
+   nvarys, npts       =  8, 104
+   n_independent      =  12.205
+   chi_square         =  175.307287
+   reduced chi_square =  41.6950777
+   r-factor           =  0.00138607
+   Akaike info crit   =  48.5217792
+   Bayesian info crit =  52.5362224
+ 
+[[Data]]
+   fit space          = 'r'
+   r-range            = 1.400, 3.000
+   k-range            = 3.000, 14.000
+   k window, dk       = 'hanning', 1.000
+   paths used in fit  = ['FeS2_feff/feff0001.dat', 'FeS2_feff/feff0002.dat', 'FeS2_feff/feff0003.dat', 'FeS2_feff/feff0004.dat']
+   k-weight           = 2
+   epsilon_k          = Array(mean=5.01912e-4, std=4.60149e-4)
+   epsilon_r          = 0.01038113
+   n_independent      = 12.205
+ 
+[[Variables]]
+   alpha          =  5.32353e-5 +/-unknown   (init=  0.00000000)
+   amp            =  0.73628552 +/-unknown   (init=  1.00000000)
+   delr           =  0.00000000 +/-unknown   (init=  0.00000000)
+   enot           =  2.68381266 +/-unknown   (init=  0.00000000)
+   ss             =  0.00321277 +/-unknown   (init=  0.00300000)
+   ss2            =  0.00757028 +/-unknown   (init=  0.00000000)
+   ss3            = -0.00278840 +/-unknown   (init=  0.00000000)
+   ssfe           =  0.00187820 +/-unknown   (init=  0.00000000)
+ 
+[[Correlations]]    (unreported correlations are <  0.100)
+ 
+[[Paths]]
+ = Path 'S.Fe.1' = Fe K Edge
+    feffdat file = FeS2_feff/feff0001.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S      -0.6269,  0.6269,  2.0751  2
+     reff   =  2.25660000
+     degen  =  6.00000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  2.25672013  := 'reff + alpha*reff'
+     deltar =  1.20131e-4  := 'alpha*reff'
+     sigma2 =  0.00321277  := 'ss'
+
+ = Path 'S.Fe.2' = Fe K Edge
+    feffdat file = FeS2_feff/feff0002.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S       0.6269, -0.6269,  3.3289  2
+     reff   =  3.44490000
+     degen  =  6.00000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  3.44508339  := 'reff + alpha*reff'
+     deltar =  1.83390e-4  := 'alpha*reff'
+     sigma2 =  0.00757028  := 'ss2'
+
+ = Path 'S.Fe.3' = Fe K Edge
+    feffdat file = FeS2_feff/feff0003.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+               S      -2.0751, -2.0751,  2.0751  2
+     reff   =  3.59420000
+     degen  =  2.00000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  3.59439134  := 'reff + alpha*reff'
+     deltar =  1.91338e-4  := 'alpha*reff'
+     sigma2 = -0.00278840  := 'ss3'
+
+ = Path 'Fe.Fe.4' = Fe K Edge
+    feffdat file = FeS2_feff/feff0004.dat, from feff run 'FeS2_feff'
+    geometry  atom      x        y        z      ipot
+              Fe       0.0000,  0.0000,  0.0000  0 (absorber)
+              Fe      -2.7020,  0.0000, -2.7020  1
+     reff   =  3.82120000
+     degen  =  12.0000000
+     n*s02  =  0.73628552  := 'amp'
+     e0     =  2.68381266  := 'enot'
+     r      =  3.82140342  := 'reff + alpha*reff'
+     deltar =  2.03423e-4  := 'alpha*reff'
+     sigma2 =  0.00187820  := 'ssfe'
+
 =======================================================

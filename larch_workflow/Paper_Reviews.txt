@@ -1,0 +1,14 @@
+Paper 1: 
+	- E0 Values - decide which E0
+  	- LCF Percentages - determine which standards
+	- Fit Comparisons - compare fit values
+
+The problems we have detected so far are
+
+We have concluded the first part of the exercise. In this case we are able to replicate the results up to a point in which we can not reduce the difference between the published results and the results produced by the workflows. At this point we need to take a step back and evaluate our procedures but we need an expert to:
+
+a) corroborate if the results reported by the workflow represent an honest attempt to reproduce the published results
+b) verify that we have not introduced errors by following non-standard or erroneous procedures
+c) suggest improvements which could make improve the accuracy of our reproduction efforts
+
+At the end we would report on this evaluation and on the improvements as a candidates for improving the reproducibility of research results in catalysis research as well as to encourage better data publishing practices.
