@@ -40,3 +40,7 @@ PSDI_Phase_1/Larch/*_feff/*
 *dat
 psdi_webinar/*_feff/*
 *.zip
+/RO-Crate_processing/input/FeS2-Analysis-Copy1.rocrate
+/RO-Crate_processing/lib/bindings
+/RO-Crate_processing/lib/tom-select
+/RO-Crate_processing/lib/vis-9.1.2

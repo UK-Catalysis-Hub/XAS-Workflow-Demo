@@ -1,0 +1,255 @@
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix ns1: <https://bioschemas.org/ComputationalWorkflow#> .
+@prefix schema: <http://schema.org/> .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json> a schema:CreativeWork ;
+    dct:conformsTo <https://w3id.org/ro/crate/1.1>,
+        <https://w3id.org/workflowhub/workflow-ro-crate/1.0> ;
+    schema:about <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/> .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#a5a33e97-2433-492b-8185-0e11c32cd595> a schema:OrganizeAction ;
+    schema:endTime "2024-10-23T14:09:57.188610" ;
+    schema:instrument <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#248c4448-96a7-4050-acbf-1e68e621e637> ;
+    schema:name "Run of Galaxy workflow engine" ;
+    schema:startTime "2024-10-23T14:09:56.604071" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#datasets_attrs.txt.provenance> a schema:CreativeWork ;
+    schema:description "datasets provenance properties" ;
+    schema:encodingFormat "application/json" ;
+    schema:version "2.0" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/> a schema:Dataset ;
+    dct:conformsTo <https://w3id.org/ro/wfrun/process/0.1>,
+        <https://w3id.org/ro/wfrun/workflow/0.1>,
+        <https://w3id.org/workflowhub/workflow-ro-crate/1.0> ;
+    schema:datePublished "2024-10-23T14:10:26+00:00" ;
+    schema:hasPart <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/collections_attrs.txt>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/1564889.cif_df02c7af9dfe5b62.cif>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/FeS2_athena_d49ffa4044c67d15.prj>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/FeS2_plot_6c2ea4582a260280.png>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/chikr_FeS2_c3e4da2bb600d6e3.png>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/fes2_gds_547228271cdb66e2.gds>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/fes2_rt01_mar02.xmu_df0bac1ee137448a.txt>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/fes2_sp_75738551921d866c.sp>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/fit_report_FeS2_a9305118c6acc078.feffit>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/rmr_FeS2_fb5bc774c9b03fce.png>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets_attrs.txt>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/export_attrs.txt>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/implicit_collection_jobs_attrs.txt>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/invocation_attrs.txt>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/jobs_attrs.txt>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/libraries_attrs.txt>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/library_folders_attrs.txt>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/workflows/6f2a09489271f4de.abstract.cwl>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/workflows/6f2a09489271f4de.ga>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/workflows/6f2a09489271f4de.gxwf.yml>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/workflows/6f2a09489271f4de.html> ;
+    schema:license "" ;
+    schema:mainEntity <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/workflows/6f2a09489271f4de.gxwf.yml> ;
+    schema:mentions <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#d5787109-088d-4886-a72e-03f42a4ec5cc> .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/collections_attrs.txt> a schema:MediaObject ;
+    schema:description "collections properties" ;
+    schema:encodingFormat "application/json" ;
+    schema:version "2.0" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets_attrs.txt> a schema:MediaObject ;
+    schema:description "datasets properties" ;
+    schema:encodingFormat "application/json" ;
+    schema:version "2.0" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/export_attrs.txt> a schema:MediaObject ;
+    schema:description "export properties" ;
+    schema:encodingFormat "application/json" ;
+    schema:version "2.0" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/implicit_collection_jobs_attrs.txt> a schema:MediaObject ;
+    schema:description "implicit collection jobs properties" ;
+    schema:encodingFormat "application/json" ;
+    schema:version "2.0" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/invocation_attrs.txt> a schema:MediaObject ;
+    schema:description "invocation properties" ;
+    schema:encodingFormat "application/json" ;
+    schema:version "2.0" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/jobs_attrs.txt> a schema:MediaObject ;
+    schema:description "jobs properties" ;
+    schema:encodingFormat "application/json" ;
+    schema:version "2.0" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/libraries_attrs.txt> a schema:MediaObject ;
+    schema:description "libraries properties" ;
+    schema:encodingFormat "application/json" ;
+    schema:version "2.0" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/library_folders_attrs.txt> a schema:MediaObject ;
+    schema:description "library folders properties" ;
+    schema:encodingFormat "application/json" ;
+    schema:version "2.0" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#248c4448-96a7-4050-acbf-1e68e621e637> a schema:SoftwareApplication ;
+    schema:name "Galaxy workflow engine" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#d5787109-088d-4886-a72e-03f42a4ec5cc> a schema:CreateAction ;
+    schema:endTime "2024-10-23T14:09:38.754320" ;
+    schema:instrument <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/workflows/6f2a09489271f4de.gxwf.yml> ;
+    schema:name "FeS2 Analysis" ;
+    schema:object <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/1564889.cif_df02c7af9dfe5b62.cif>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/fes2_rt01_mar02.xmu_df0bac1ee137448a.txt> ;
+    schema:result <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/FeS2_athena_d49ffa4044c67d15.prj>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/FeS2_plot_6c2ea4582a260280.png>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/chikr_FeS2_c3e4da2bb600d6e3.png>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/fes2_gds_547228271cdb66e2.gds>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/fes2_sp_75738551921d866c.sp>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/fit_report_FeS2_a9305118c6acc078.feffit>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/rmr_FeS2_fb5bc774c9b03fce.png> ;
+    schema:startTime "2024-10-23T14:09:38.754317" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/workflows/6f2a09489271f4de.ga> a schema:MediaObject,
+        schema:SoftwareSourceCode,
+        <https://bioschemas.org/ComputationalWorkflow> ;
+    schema:name "workflows/6f2a09489271f4de" ;
+    schema:programmingLanguage <https://w3id.org/workflowhub/workflow-ro-crate#galaxy> .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/workflows/6f2a09489271f4de.html> a schema:MediaObject,
+        schema:SoftwareSourceCode,
+        <https://bioschemas.org/ComputationalWorkflow> ;
+    schema:name "workflows/6f2a09489271f4de" ;
+    schema:programmingLanguage <https://w3id.org/workflowhub/workflow-ro-crate#galaxy> .
+
+<https://w3id.org/ro/wfrun/process/0.1> a schema:CreativeWork ;
+    schema:name "Process Run Crate" ;
+    schema:version "0.1" .
+
+<https://w3id.org/ro/wfrun/workflow/0.1> a schema:CreativeWork ;
+    schema:name "Workflow Run Crate" ;
+    schema:version "0.1" .
+
+<https://w3id.org/workflowhub/workflow-ro-crate#cwl> a schema:ComputerLanguage ;
+    schema:alternateName "CWL" ;
+    schema:identifier <https://w3id.org/cwl/> ;
+    schema:name "Common Workflow Language" ;
+    schema:url <https://www.commonwl.org/> .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/1564889.cif_df02c7af9dfe5b62.cif> a schema:MediaObject ;
+    schema:encodingFormat "text/plain" ;
+    schema:exampleOfWork <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#0c058fb5-124f-4a1e-820a-643ff322c47a> ;
+    schema:name "1564889.cif" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/FeS2_athena_d49ffa4044c67d15.prj> a schema:MediaObject ;
+    schema:encodingFormat "text/plain" ;
+    schema:exampleOfWork <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#0b97bec8-4ea8-4a62-bc9d-fb03e229da8c> ;
+    schema:name "FeS2_athena" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/FeS2_plot_6c2ea4582a260280.png> a schema:MediaObject ;
+    schema:encodingFormat "application/octet-stream" ;
+    schema:exampleOfWork <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#77c5b2f3-9a04-44dd-befd-a76467d5277c> ;
+    schema:name "FeS2_plot" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/chikr_FeS2_c3e4da2bb600d6e3.png> a schema:MediaObject ;
+    schema:encodingFormat "application/octet-stream" ;
+    schema:exampleOfWork <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#acc4dcb8-d90b-40d7-aac2-08878864e45e> ;
+    schema:name "chikr_FeS2" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/fes2_gds_547228271cdb66e2.gds> a schema:MediaObject ;
+    schema:encodingFormat "text/plain" ;
+    schema:exampleOfWork <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#f00eb10f-cf39-4a5c-a65f-f78e3ebd0600> ;
+    schema:name "fes2_gds" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/fes2_rt01_mar02.xmu_df0bac1ee137448a.txt> a schema:MediaObject ;
+    schema:encodingFormat "text/plain" ;
+    schema:exampleOfWork <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#f640df2f-ce68-4309-bc83-2e052fb749f1> ;
+    schema:name "fes2_rt01_mar02.xmu" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/fes2_sp_75738551921d866c.sp> a schema:MediaObject ;
+    schema:encodingFormat "text/plain" ;
+    schema:exampleOfWork <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#d27f0edf-71e5-4739-b016-770e7bcd02bb> ;
+    schema:name "fes2_sp" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/fit_report_FeS2_a9305118c6acc078.feffit> a schema:MediaObject ;
+    schema:encodingFormat "text/plain" ;
+    schema:exampleOfWork <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#8b809a36-4335-40f1-b5a7-279154baaeaa> ;
+    schema:name "fit_report_FeS2" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/datasets/rmr_FeS2_fb5bc774c9b03fce.png> a schema:MediaObject ;
+    schema:encodingFormat "application/octet-stream" ;
+    schema:exampleOfWork <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#783887b9-b28d-4a8f-8c88-91eabb9170bb> ;
+    schema:name "rmr_FeS2" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#0b97bec8-4ea8-4a62-bc9d-fb03e229da8c> a <https://bioschemas.org/FormalParameter> ;
+    schema:additionalType "File" ;
+    schema:description "" ;
+    schema:name "FeS2_athena" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#0c058fb5-124f-4a1e-820a-643ff322c47a> a <https://bioschemas.org/FormalParameter> ;
+    schema:additionalType "File" ;
+    schema:description "" ;
+    schema:name "1564889.cif" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#77c5b2f3-9a04-44dd-befd-a76467d5277c> a <https://bioschemas.org/FormalParameter> ;
+    schema:additionalType "File" ;
+    schema:description "" ;
+    schema:name "FeS2_plot" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#783887b9-b28d-4a8f-8c88-91eabb9170bb> a <https://bioschemas.org/FormalParameter> ;
+    schema:additionalType "File" ;
+    schema:description "" ;
+    schema:name "rmr_FeS2" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#8b809a36-4335-40f1-b5a7-279154baaeaa> a <https://bioschemas.org/FormalParameter> ;
+    schema:additionalType "File" ;
+    schema:description "" ;
+    schema:name "fit_report_FeS2" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#acc4dcb8-d90b-40d7-aac2-08878864e45e> a <https://bioschemas.org/FormalParameter> ;
+    schema:additionalType "File" ;
+    schema:description "" ;
+    schema:name "chikr_FeS2" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#d27f0edf-71e5-4739-b016-770e7bcd02bb> a <https://bioschemas.org/FormalParameter> ;
+    schema:additionalType "File" ;
+    schema:description "" ;
+    schema:name "fes2_sp" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#f00eb10f-cf39-4a5c-a65f-f78e3ebd0600> a <https://bioschemas.org/FormalParameter> ;
+    schema:additionalType "File" ;
+    schema:description "" ;
+    schema:name "fes2_gds" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#f640df2f-ce68-4309-bc83-2e052fb749f1> a <https://bioschemas.org/FormalParameter> ;
+    schema:additionalType "File" ;
+    schema:description "" ;
+    schema:name "fes2_rt01_mar02.xmu" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/workflows/6f2a09489271f4de.abstract.cwl> a schema:HowTo,
+        schema:MediaObject,
+        schema:SoftwareSourceCode ;
+    schema:name "workflows/6f2a09489271f4de.abstract" ;
+    schema:programmingLanguage <https://w3id.org/workflowhub/workflow-ro-crate#cwl> .
+
+<https://w3id.org/workflowhub/workflow-ro-crate/1.0> a schema:CreativeWork ;
+    schema:name "Workflow RO-Crate" ;
+    schema:version "1.0" .
+
+<file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/workflows/6f2a09489271f4de.gxwf.yml> a schema:MediaObject,
+        schema:SoftwareSourceCode,
+        <https://bioschemas.org/ComputationalWorkflow> ;
+    schema:name "FeS2 Analysis" ;
+    schema:programmingLanguage <https://w3id.org/workflowhub/workflow-ro-crate#galaxy> ;
+    schema:subjectOf <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/workflows/6f2a09489271f4de.abstract.cwl> ;
+    ns1:input <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#0c058fb5-124f-4a1e-820a-643ff322c47a>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#f640df2f-ce68-4309-bc83-2e052fb749f1> ;
+    ns1:output <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#0b97bec8-4ea8-4a62-bc9d-fb03e229da8c>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#77c5b2f3-9a04-44dd-befd-a76467d5277c>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#783887b9-b28d-4a8f-8c88-91eabb9170bb>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#8b809a36-4335-40f1-b5a7-279154baaeaa>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#acc4dcb8-d90b-40d7-aac2-08878864e45e>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#d27f0edf-71e5-4739-b016-770e7bcd02bb>,
+        <file:///C:/harwell/XAS-Workflow-Demo/RO-Crate_processing/ro-crate-metadata.json#f00eb10f-cf39-4a5c-a65f-f78e3ebd0600> .
+
+<https://w3id.org/workflowhub/workflow-ro-crate#galaxy> a schema:ComputerLanguage ;
+    schema:identifier <https://galaxyproject.org/> ;
+    schema:name "Galaxy" ;
+    schema:url <https://galaxyproject.org/> .
+

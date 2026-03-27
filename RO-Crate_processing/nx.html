@@ -1,0 +1,170 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 800px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+             #config {
+                 float: left;
+                 width: 400px;
+                 height: 600px;
+             }
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+            <div id="config"></div>
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "id": "/dataset/a38f4b5b93cd4e1a", "label": "/dataset/a38f4b5b93cd4e1a", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "out_csv", "label": "out_csv", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "http://www.w3.org/ns/prov#Entity", "label": "http://www.w3.org/ns/prov#Entity", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/run/35a02d80fc5ea399", "label": "/run/35a02d80fc5ea399", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0", "label": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0", "label": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "0.9.75+galaxy0", "label": "0.9.75+galaxy0", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/step/5", "label": "/step/5", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "http://www.w3.org/ns/prov#SoftwareAgent", "label": "http://www.w3.org/ns/prov#SoftwareAgent", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "larch_artemis", "label": "larch_artemis", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/dataset/409c0d24534294d8", "label": "/dataset/409c0d24534294d8", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "feff_inp", "label": "feff_inp", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/dataset/a011be860e2a8b79", "label": "/dataset/a011be860e2a8b79", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "http://www.w3.org/ns/prov#Activity", "label": "http://www.w3.org/ns/prov#Activity", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/step/3", "label": "/step/3", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Execution of step 3", "label": "Execution of step 3", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "out_dir", "label": "out_dir", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/step/4", "label": "/step/4", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0", "label": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/run/213104123d8e07eb", "label": "/run/213104123d8e07eb", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/workflow", "label": "/workflow", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0", "label": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "larch_select_paths", "label": "larch_select_paths", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0", "label": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/step/1", "label": "/step/1", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0", "label": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Execution of step 4", "label": "Execution of step 4", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/dataset/75738551921d866c", "label": "/dataset/75738551921d866c", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/dataset/547228271cdb66e2", "label": "/dataset/547228271cdb66e2", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/run/cf423d990ba14fcd", "label": "/run/cf423d990ba14fcd", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Execution of step 5", "label": "Execution of step 5", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/dataset/c3e4da2bb600d6e3", "label": "/dataset/c3e4da2bb600d6e3", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/dataset/a9305118c6acc078", "label": "/dataset/a9305118c6acc078", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/dataset/fb5bc774c9b03fce", "label": "/dataset/fb5bc774c9b03fce", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/step/2", "label": "/step/2", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0", "label": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0", "label": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/step/0", "label": "/step/0", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/run/b1d0f2ca5aeb2ecf", "label": "/run/b1d0f2ca5aeb2ecf", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "1564889.cif", "label": "1564889.cif", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "http://www.w3.org/ns/prov#Plan", "label": "http://www.w3.org/ns/prov#Plan", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "FeS2 Analysis", "label": "FeS2 Analysis", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/dataset/6c2ea4582a260280", "label": "/dataset/6c2ea4582a260280", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "plot", "label": "plot", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "chikr", "label": "chikr", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "sp_csv", "label": "sp_csv", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "larch_feff", "label": "larch_feff", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "/dataset/d49ffa4044c67d15", "label": "/dataset/d49ffa4044c67d15", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "rmr", "label": "rmr", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "athena_project_file", "label": "athena_project_file", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "larch_athena", "label": "larch_athena", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "gds_csv", "label": "gds_csv", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "fit_report", "label": "fit_report", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Execution of step 2", "label": "Execution of step 2", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "fes2_rt01_mar02.xmu", "label": "fes2_rt01_mar02.xmu", "shape": "dot", "size": 10}]);
+                  edges = new vis.DataSet([{"from": "/dataset/a38f4b5b93cd4e1a", "to": "out_csv", "triples": [["/dataset/a38f4b5b93cd4e1a", "http://www.w3.org/2000/01/rdf-schema#label", "out_csv"]], "width": 1}, {"from": "/dataset/a38f4b5b93cd4e1a", "to": "http://www.w3.org/ns/prov#Entity", "triples": [["/dataset/a38f4b5b93cd4e1a", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#Entity"]], "width": 1}, {"from": "/dataset/a38f4b5b93cd4e1a", "to": "/run/35a02d80fc5ea399", "triples": [["/dataset/a38f4b5b93cd4e1a", "http://www.w3.org/ns/prov#wasGeneratedBy", "/run/35a02d80fc5ea399"]], "width": 1}, {"from": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0", "to": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0", "triples": [["/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0", "http://www.w3.org/2000/01/rdf-schema#label", "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0"]], "width": 1}, {"from": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0", "to": "0.9.75+galaxy0", "triples": [["/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0", "http://schema.org/softwareVersion", "0.9.75+galaxy0"]], "width": 1}, {"from": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0", "to": "/step/5", "triples": [["/step/5", "http://www.w3.org/ns/prov#wasAssociatedWith", "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0"]], "width": 1}, {"from": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0", "to": "http://www.w3.org/ns/prov#SoftwareAgent", "triples": [["/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#SoftwareAgent"]], "width": 1}, {"from": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0", "to": "larch_artemis", "triples": [["/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0", "http://www.w3.org/2004/02/skos/core#prefLabel", "larch_artemis"]], "width": 1}, {"from": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0", "to": "/step/5", "triples": [["/step/5", "http://www.w3.org/2000/01/rdf-schema#label", "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0"]], "width": 1}, {"from": "/dataset/409c0d24534294d8", "to": "/run/35a02d80fc5ea399", "triples": [["/dataset/409c0d24534294d8", "http://www.w3.org/ns/prov#wasGeneratedBy", "/run/35a02d80fc5ea399"]], "width": 1}, {"from": "/dataset/409c0d24534294d8", "to": "http://www.w3.org/ns/prov#Entity", "triples": [["/dataset/409c0d24534294d8", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#Entity"]], "width": 1}, {"from": "/dataset/409c0d24534294d8", "to": "feff_inp", "triples": [["/dataset/409c0d24534294d8", "http://www.w3.org/2000/01/rdf-schema#label", "feff_inp"]], "width": 1}, {"from": "/run/35a02d80fc5ea399", "to": "/dataset/a011be860e2a8b79", "triples": [["/dataset/a011be860e2a8b79", "http://www.w3.org/ns/prov#wasGeneratedBy", "/run/35a02d80fc5ea399"]], "width": 1}, {"from": "/run/35a02d80fc5ea399", "to": "http://www.w3.org/ns/prov#Activity", "triples": [["/run/35a02d80fc5ea399", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#Activity"]], "width": 1}, {"from": "/run/35a02d80fc5ea399", "to": "/step/3", "triples": [["/run/35a02d80fc5ea399", "http://www.w3.org/ns/prov#wasAssociatedWith", "/step/3"]], "width": 1}, {"from": "/run/35a02d80fc5ea399", "to": "Execution of step 3", "triples": [["/run/35a02d80fc5ea399", "http://www.w3.org/2000/01/rdf-schema#label", "Execution of step 3"]], "width": 1}, {"from": "/dataset/a011be860e2a8b79", "to": "out_dir", "triples": [["/dataset/a011be860e2a8b79", "http://www.w3.org/2000/01/rdf-schema#label", "out_dir"]], "width": 1}, {"from": "/dataset/a011be860e2a8b79", "to": "http://www.w3.org/ns/prov#Entity", "triples": [["/dataset/a011be860e2a8b79", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#Entity"]], "width": 1}, {"from": "/step/4", "to": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0", "triples": [["/step/4", "http://www.w3.org/ns/prov#wasAssociatedWith", "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0"]], "width": 1}, {"from": "/step/4", "to": "/run/213104123d8e07eb", "triples": [["/run/213104123d8e07eb", "http://www.w3.org/ns/prov#wasAssociatedWith", "/step/4"]], "width": 1}, {"from": "/step/4", "to": "/step/5", "triples": [["/step/5", "http://www.w3.org/ns/prov#wasInformedBy", "/step/4"]], "width": 1}, {"from": "/step/4", "to": "http://www.w3.org/ns/prov#Activity", "triples": [["/step/4", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#Activity"]], "width": 1}, {"from": "/step/4", "to": "/workflow", "triples": [["/workflow", "http://www.w3.org/ns/prov#hadPlan", "/step/4"]], "width": 1}, {"from": "/step/4", "to": "/step/3", "triples": [["/step/4", "http://www.w3.org/ns/prov#wasInformedBy", "/step/3"]], "width": 1}, {"from": "/step/4", "to": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0", "triples": [["/step/4", "http://www.w3.org/2000/01/rdf-schema#label", "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0"]], "width": 1}, {"from": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0", "to": "0.9.75+galaxy0", "triples": [["/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0", "http://schema.org/softwareVersion", "0.9.75+galaxy0"]], "width": 1}, {"from": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0", "to": "http://www.w3.org/ns/prov#SoftwareAgent", "triples": [["/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#SoftwareAgent"]], "width": 1}, {"from": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0", "to": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0", "triples": [["/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0", "http://www.w3.org/2000/01/rdf-schema#label", "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0"]], "width": 1}, {"from": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0", "to": "larch_select_paths", "triples": [["/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0", "http://www.w3.org/2004/02/skos/core#prefLabel", "larch_select_paths"]], "width": 1}, {"from": "/step/3", "to": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0", "triples": [["/step/3", "http://www.w3.org/2000/01/rdf-schema#label", "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0"]], "width": 1}, {"from": "/step/3", "to": "http://www.w3.org/ns/prov#Activity", "triples": [["/step/3", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#Activity"]], "width": 1}, {"from": "/step/3", "to": "/step/1", "triples": [["/step/3", "http://www.w3.org/ns/prov#wasInformedBy", "/step/1"]], "width": 1}, {"from": "/step/3", "to": "/step/5", "triples": [["/step/5", "http://www.w3.org/ns/prov#wasInformedBy", "/step/3"]], "width": 1}, {"from": "/step/3", "to": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0", "triples": [["/step/3", "http://www.w3.org/ns/prov#wasAssociatedWith", "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0"]], "width": 1}, {"from": "/step/3", "to": "/workflow", "triples": [["/workflow", "http://www.w3.org/ns/prov#hadPlan", "/step/3"]], "width": 1}, {"from": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0", "to": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0", "triples": [["/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0", "http://www.w3.org/2000/01/rdf-schema#label", "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0"]], "width": 1}, {"from": "/run/213104123d8e07eb", "to": "Execution of step 4", "triples": [["/run/213104123d8e07eb", "http://www.w3.org/2000/01/rdf-schema#label", "Execution of step 4"]], "width": 1}, {"from": "/run/213104123d8e07eb", "to": "/dataset/75738551921d866c", "triples": [["/dataset/75738551921d866c", "http://www.w3.org/ns/prov#wasGeneratedBy", "/run/213104123d8e07eb"]], "width": 1}, {"from": "/run/213104123d8e07eb", "to": "/dataset/547228271cdb66e2", "triples": [["/dataset/547228271cdb66e2", "http://www.w3.org/ns/prov#wasGeneratedBy", "/run/213104123d8e07eb"]], "width": 1}, {"from": "/run/213104123d8e07eb", "to": "http://www.w3.org/ns/prov#Activity", "triples": [["/run/213104123d8e07eb", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#Activity"]], "width": 1}, {"from": "/run/cf423d990ba14fcd", "to": "Execution of step 5", "triples": [["/run/cf423d990ba14fcd", "http://www.w3.org/2000/01/rdf-schema#label", "Execution of step 5"]], "width": 1}, {"from": "/run/cf423d990ba14fcd", "to": "/dataset/c3e4da2bb600d6e3", "triples": [["/dataset/c3e4da2bb600d6e3", "http://www.w3.org/ns/prov#wasGeneratedBy", "/run/cf423d990ba14fcd"]], "width": 1}, {"from": "/run/cf423d990ba14fcd", "to": "/dataset/a9305118c6acc078", "triples": [["/dataset/a9305118c6acc078", "http://www.w3.org/ns/prov#wasGeneratedBy", "/run/cf423d990ba14fcd"]], "width": 1}, {"from": "/run/cf423d990ba14fcd", "to": "http://www.w3.org/ns/prov#Activity", "triples": [["/run/cf423d990ba14fcd", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#Activity"]], "width": 1}, {"from": "/run/cf423d990ba14fcd", "to": "/step/5", "triples": [["/run/cf423d990ba14fcd", "http://www.w3.org/ns/prov#wasAssociatedWith", "/step/5"]], "width": 1}, {"from": "/run/cf423d990ba14fcd", "to": "/dataset/fb5bc774c9b03fce", "triples": [["/dataset/fb5bc774c9b03fce", "http://www.w3.org/ns/prov#wasGeneratedBy", "/run/cf423d990ba14fcd"]], "width": 1}, {"from": "/step/5", "to": "/step/2", "triples": [["/step/5", "http://www.w3.org/ns/prov#wasInformedBy", "/step/2"]], "width": 1}, {"from": "/step/5", "to": "/workflow", "triples": [["/workflow", "http://www.w3.org/ns/prov#hadPlan", "/step/5"]], "width": 1}, {"from": "/step/5", "to": "http://www.w3.org/ns/prov#Activity", "triples": [["/step/5", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#Activity"]], "width": 1}, {"from": "/step/2", "to": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0", "triples": [["/step/2", "http://www.w3.org/2000/01/rdf-schema#label", "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0"]], "width": 1}, {"from": "/step/2", "to": "http://www.w3.org/ns/prov#Activity", "triples": [["/step/2", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#Activity"]], "width": 1}, {"from": "/step/2", "to": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0", "triples": [["/step/2", "http://www.w3.org/ns/prov#wasAssociatedWith", "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0"]], "width": 1}, {"from": "/step/2", "to": "/workflow", "triples": [["/workflow", "http://www.w3.org/ns/prov#hadPlan", "/step/2"]], "width": 1}, {"from": "/step/2", "to": "/step/0", "triples": [["/step/2", "http://www.w3.org/ns/prov#wasInformedBy", "/step/0"]], "width": 1}, {"from": "/step/2", "to": "/run/b1d0f2ca5aeb2ecf", "triples": [["/run/b1d0f2ca5aeb2ecf", "http://www.w3.org/ns/prov#wasAssociatedWith", "/step/2"]], "width": 1}, {"from": "/step/1", "to": "http://www.w3.org/ns/prov#Activity", "triples": [["/step/1", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#Activity"]], "width": 1}, {"from": "/step/1", "to": "1564889.cif", "triples": [["/step/1", "http://www.w3.org/2000/01/rdf-schema#label", "1564889.cif"]], "width": 1}, {"from": "/step/1", "to": "/workflow", "triples": [["/workflow", "http://www.w3.org/ns/prov#hadPlan", "/step/1"]], "width": 1}, {"from": "http://www.w3.org/ns/prov#Activity", "to": "/run/b1d0f2ca5aeb2ecf", "triples": [["/run/b1d0f2ca5aeb2ecf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#Activity"]], "width": 1}, {"from": "http://www.w3.org/ns/prov#Activity", "to": "/step/0", "triples": [["/step/0", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#Activity"]], "width": 1}, {"from": "/workflow", "to": "http://www.w3.org/ns/prov#Plan", "triples": [["/workflow", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#Plan"]], "width": 1}, {"from": "/workflow", "to": "FeS2 Analysis", "triples": [["/workflow", "http://www.w3.org/2000/01/rdf-schema#label", "FeS2 Analysis"]], "width": 1}, {"from": "/workflow", "to": "/step/0", "triples": [["/workflow", "http://www.w3.org/ns/prov#hadPlan", "/step/0"]], "width": 1}, {"from": "0.9.75+galaxy0", "to": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0", "triples": [["/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0", "http://schema.org/softwareVersion", "0.9.75+galaxy0"]], "width": 1}, {"from": "0.9.75+galaxy0", "to": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0", "triples": [["/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0", "http://schema.org/softwareVersion", "0.9.75+galaxy0"]], "width": 1}, {"from": "/dataset/6c2ea4582a260280", "to": "plot", "triples": [["/dataset/6c2ea4582a260280", "http://www.w3.org/2000/01/rdf-schema#label", "plot"]], "width": 1}, {"from": "/dataset/6c2ea4582a260280", "to": "http://www.w3.org/ns/prov#Entity", "triples": [["/dataset/6c2ea4582a260280", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#Entity"]], "width": 1}, {"from": "/dataset/6c2ea4582a260280", "to": "/run/b1d0f2ca5aeb2ecf", "triples": [["/dataset/6c2ea4582a260280", "http://www.w3.org/ns/prov#wasGeneratedBy", "/run/b1d0f2ca5aeb2ecf"]], "width": 1}, {"from": "/dataset/c3e4da2bb600d6e3", "to": "http://www.w3.org/ns/prov#Entity", "triples": [["/dataset/c3e4da2bb600d6e3", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#Entity"]], "width": 1}, {"from": "/dataset/c3e4da2bb600d6e3", "to": "chikr", "triples": [["/dataset/c3e4da2bb600d6e3", "http://www.w3.org/2000/01/rdf-schema#label", "chikr"]], "width": 1}, {"from": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0", "to": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0", "triples": [["/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0", "http://www.w3.org/2000/01/rdf-schema#label", "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0"]], "width": 1}, {"from": "/dataset/75738551921d866c", "to": "sp_csv", "triples": [["/dataset/75738551921d866c", "http://www.w3.org/2000/01/rdf-schema#label", "sp_csv"]], "width": 1}, {"from": "/dataset/75738551921d866c", "to": "http://www.w3.org/ns/prov#Entity", "triples": [["/dataset/75738551921d866c", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#Entity"]], "width": 1}, {"from": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0", "to": "larch_feff", "triples": [["/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0", "http://www.w3.org/2004/02/skos/core#prefLabel", "larch_feff"]], "width": 1}, {"from": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0", "to": "http://www.w3.org/ns/prov#SoftwareAgent", "triples": [["/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#SoftwareAgent"]], "width": 1}, {"from": "http://www.w3.org/ns/prov#Entity", "to": "/dataset/fb5bc774c9b03fce", "triples": [["/dataset/fb5bc774c9b03fce", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#Entity"]], "width": 1}, {"from": "http://www.w3.org/ns/prov#Entity", "to": "/dataset/d49ffa4044c67d15", "triples": [["/dataset/d49ffa4044c67d15", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#Entity"]], "width": 1}, {"from": "http://www.w3.org/ns/prov#Entity", "to": "/dataset/547228271cdb66e2", "triples": [["/dataset/547228271cdb66e2", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#Entity"]], "width": 1}, {"from": "http://www.w3.org/ns/prov#Entity", "to": "/dataset/a9305118c6acc078", "triples": [["/dataset/a9305118c6acc078", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#Entity"]], "width": 1}, {"from": "/dataset/fb5bc774c9b03fce", "to": "rmr", "triples": [["/dataset/fb5bc774c9b03fce", "http://www.w3.org/2000/01/rdf-schema#label", "rmr"]], "width": 1}, {"from": "http://www.w3.org/ns/prov#SoftwareAgent", "to": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0", "triples": [["/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/ns/prov#SoftwareAgent"]], "width": 1}, {"from": "/dataset/d49ffa4044c67d15", "to": "athena_project_file", "triples": [["/dataset/d49ffa4044c67d15", "http://www.w3.org/2000/01/rdf-schema#label", "athena_project_file"]], "width": 1}, {"from": "/dataset/d49ffa4044c67d15", "to": "/run/b1d0f2ca5aeb2ecf", "triples": [["/dataset/d49ffa4044c67d15", "http://www.w3.org/ns/prov#wasGeneratedBy", "/run/b1d0f2ca5aeb2ecf"]], "width": 1}, {"from": "/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0", "to": "larch_athena", "triples": [["/tool/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0", "http://www.w3.org/2004/02/skos/core#prefLabel", "larch_athena"]], "width": 1}, {"from": "/dataset/547228271cdb66e2", "to": "gds_csv", "triples": [["/dataset/547228271cdb66e2", "http://www.w3.org/2000/01/rdf-schema#label", "gds_csv"]], "width": 1}, {"from": "/dataset/a9305118c6acc078", "to": "fit_report", "triples": [["/dataset/a9305118c6acc078", "http://www.w3.org/2000/01/rdf-schema#label", "fit_report"]], "width": 1}, {"from": "/run/b1d0f2ca5aeb2ecf", "to": "Execution of step 2", "triples": [["/run/b1d0f2ca5aeb2ecf", "http://www.w3.org/2000/01/rdf-schema#label", "Execution of step 2"]], "width": 1}, {"from": "/step/0", "to": "fes2_rt01_mar02.xmu", "triples": [["/step/0", "http://www.w3.org/2000/01/rdf-schema#label", "fes2_rt01_mar02.xmu"]], "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "physics"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+                  // if this network requires displaying the configure window,
+                  // put it in its div
+                  options.configure["container"] = document.getElementById("config");
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
