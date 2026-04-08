@@ -128,6 +128,7 @@ For full metadata, ask your admin to install the 'ase' Python package.""" ;
     dcterms:format "chemical/x-cif" ;
     schema1:name "datasets/1564889.cif_df02c7af9dfe5b62.cif" ;
     skos:prefLabel "1564889.cif" ;
+    prov:wasAttributedTo </> ;
     prov:wasGeneratedBy </run/2029b88b74bf2376> .
 
 </dataset/df0bac1ee137448a> a prov:Entity ;
@@ -135,6 +136,7 @@ For full metadata, ask your admin to install the 'ase' Python package.""" ;
     dcterms:format "text/plain" ;
     schema1:name "datasets/fes2_rt01_mar02.xmu_df0bac1ee137448a.txt" ;
     skos:prefLabel "fes2_rt01_mar02.xmu" ;
+    prov:wasAttributedTo </> ;
     prov:wasGeneratedBy </run/c60463f2d425dc91> .
 
 </run/2029b88b74bf2376> a prov:Activity ;
@@ -174,11 +176,6 @@ For full metadata, ask your admin to install the 'ase' Python package.""" ;
     rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0" ;
     schema1:softwareVersion "0.9.75+galaxy0" ;
     skos:prefLabel "larch_select_paths" .
-
-</> a prov:SoftwareAgent ;
-    rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0" ;
-    schema1:softwareVersion "0.1.0" ;
-    skos:prefLabel "DATA_FETCH" .
 
 </dataset/a011be860e2a8b79> a prov:Entity ;
     rdfs:label "out_dir" ;
@@ -243,6 +240,11 @@ TITLE # sites:    6
     prov:wasAssociatedWith </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0> ;
     p-plan:isPrecededBy </step/1> ;
     p-plan:isStepOfPlan </workflow> .
+
+</> a prov:SoftwareAgent ;
+    rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0" ;
+    schema1:softwareVersion "0.1.0" ;
+    skos:prefLabel "DATA_FETCH" .
 
 </workflow> a p-plan:Plan ;
     rdfs:label "FeS2 Analysis" .
