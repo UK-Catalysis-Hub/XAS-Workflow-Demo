@@ -14,6 +14,7 @@ SpaceGroup: Pnnm
     dcterms:format "chemical/x-feff-input" ;
     schema1:name "datasets/FEFF_input_of_1564889.cif_409c0d24534294d8.inp" ;
     skos:prefLabel "FEFF input of 1564889.cif" ;
+    prov:wasAttributedTo </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0> ;
     prov:wasGeneratedBy </run/35a02d80fc5ea399> .
 
 </dataset/6c2ea4582a260280> a prov:Entity ;
@@ -27,6 +28,7 @@ Cannot load group.athena_params.bkg from gro""" ;
     dcterms:format "image/png" ;
     schema1:name "datasets/FeS2_plot_6c2ea4582a260280.png" ;
     skos:prefLabel "FeS2_plot" ;
+    prov:wasAttributedTo </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0> ;
     prov:wasGeneratedBy </run/b1d0f2ca5aeb2ecf> .
 
 </dataset/a9305118c6acc078> a prov:Entity ;
@@ -43,6 +45,7 @@ Archive:  /mnt/nfs/data/d/4/a/dataset_d4a101e2-a73e-4eac-8f30-75f043982880.dat
     dcterms:format "text/plain" ;
     schema1:name "datasets/fit_report_FeS2_a9305118c6acc078.feffit" ;
     skos:prefLabel "fit_report_FeS2" ;
+    prov:wasAttributedTo </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0> ;
     prov:wasGeneratedBy </run/cf423d990ba14fcd> .
 
 </dataset/c3e4da2bb600d6e3> a prov:Entity ;
@@ -59,6 +62,7 @@ Archive:  /mnt/nfs/data/d/4/a/dataset_d4a101e2-a73e-4eac-8f30-75f043982880.dat
     dcterms:format "image/png" ;
     schema1:name "datasets/chikr_FeS2_c3e4da2bb600d6e3.png" ;
     skos:prefLabel "chikr_FeS2" ;
+    prov:wasAttributedTo </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0> ;
     prov:wasGeneratedBy </run/cf423d990ba14fcd> .
 
 </dataset/fb5bc774c9b03fce> a prov:Entity ;
@@ -75,6 +79,7 @@ Archive:  /mnt/nfs/data/d/4/a/dataset_d4a101e2-a73e-4eac-8f30-75f043982880.dat
     dcterms:format "image/png" ;
     schema1:name "datasets/rmr_FeS2_fb5bc774c9b03fce.png" ;
     skos:prefLabel "rmr_FeS2" ;
+    prov:wasAttributedTo </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0> ;
     prov:wasGeneratedBy </run/cf423d990ba14fcd> .
 
 </dataset/547228271cdb66e2> a prov:Entity ;
@@ -83,6 +88,8 @@ Archive:  /mnt/nfs/data/d/4/a/dataset_d4a101e2-a73e-4eac-8f30-75f043982880.dat
     dcterms:format "text/csv" ;
     schema1:name "datasets/fes2_gds_547228271cdb66e2.gds" ;
     skos:prefLabel "fes2_gds" ;
+    prov:wasAttributedTo </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0>,
+        </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0> ;
     prov:wasGeneratedBy </run/213104123d8e07eb> .
 
 </dataset/75738551921d866c> a prov:Entity ;
@@ -91,6 +98,8 @@ Archive:  /mnt/nfs/data/d/4/a/dataset_d4a101e2-a73e-4eac-8f30-75f043982880.dat
     dcterms:format "text/csv" ;
     schema1:name "datasets/fes2_sp_75738551921d866c.sp" ;
     skos:prefLabel "fes2_sp" ;
+    prov:wasAttributedTo </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0>,
+        </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0> ;
     prov:wasGeneratedBy </run/213104123d8e07eb> .
 
 </dataset/a38f4b5b93cd4e1a> a prov:Entity ;
@@ -105,6 +114,8 @@ TITLE # sites:    6
     dcterms:format "text/csv" ;
     schema1:name "datasets/CSV_summary_of_1564889.cif_a38f4b5b93cd4e1a.feff" ;
     skos:prefLabel "CSV summary of 1564889.cif" ;
+    prov:wasAttributedTo </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0>,
+        </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0> ;
     prov:wasGeneratedBy </run/35a02d80fc5ea399> .
 
 </dataset/d49ffa4044c67d15> a prov:Entity ;
@@ -118,6 +129,8 @@ xmin: 6911.8""" ;
     dcterms:format "application/vnd.demeter.athena" ;
     schema1:name "datasets/FeS2_athena_d49ffa4044c67d15.prj" ;
     skos:prefLabel "FeS2_athena" ;
+    prov:wasAttributedTo </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0>,
+        </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0> ;
     prov:wasGeneratedBy </run/b1d0f2ca5aeb2ecf> .
 
 </dataset/df02c7af9dfe5b62> a prov:Entity ;
@@ -128,7 +141,8 @@ For full metadata, ask your admin to install the 'ase' Python package.""" ;
     dcterms:format "chemical/x-cif" ;
     schema1:name "datasets/1564889.cif_df02c7af9dfe5b62.cif" ;
     skos:prefLabel "1564889.cif" ;
-    prov:wasAttributedTo </> ;
+    prov:wasAttributedTo </srv/galaxy/server/data_fetch.py>,
+        </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0> ;
     prov:wasGeneratedBy </run/2029b88b74bf2376> .
 
 </dataset/df0bac1ee137448a> a prov:Entity ;
@@ -136,46 +150,26 @@ For full metadata, ask your admin to install the 'ase' Python package.""" ;
     dcterms:format "text/plain" ;
     schema1:name "datasets/fes2_rt01_mar02.xmu_df0bac1ee137448a.txt" ;
     skos:prefLabel "fes2_rt01_mar02.xmu" ;
-    prov:wasAttributedTo </> ;
+    prov:wasAttributedTo </srv/galaxy/server/data_fetch.py>,
+        </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0> ;
     prov:wasGeneratedBy </run/c60463f2d425dc91> .
 
 </run/2029b88b74bf2376> a prov:Activity ;
     rdfs:label "DATA_FETCH" ;
-    prov:wasAssociatedWith </> ;
+    prov:wasAssociatedWith </srv/galaxy/server/data_fetch.py> ;
     p-plan:correspondsToStep </step/1> .
 
 </run/c60463f2d425dc91> a prov:Activity ;
     rdfs:label "DATA_FETCH" ;
-    prov:wasAssociatedWith </> ;
+    prov:wasAssociatedWith </srv/galaxy/server/data_fetch.py> ;
     p-plan:correspondsToStep </step/0> .
 
 </step/5> a p-plan:Step ;
     rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0" ;
-    prov:wasAssociatedWith </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0> ;
     p-plan:isPrecededBy </step/2>,
         </step/3>,
         </step/4> ;
     p-plan:isStepOfPlan </workflow> .
-
-</toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0> a prov:SoftwareAgent ;
-    rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0" ;
-    schema1:softwareVersion "0.9.75+galaxy0" ;
-    skos:prefLabel "larch_artemis" .
-
-</toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0> a prov:SoftwareAgent ;
-    rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0" ;
-    schema1:softwareVersion "0.9.75+galaxy0" ;
-    skos:prefLabel "larch_athena" .
-
-</toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0> a prov:SoftwareAgent ;
-    rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0" ;
-    schema1:softwareVersion "0.9.75+galaxy0" ;
-    skos:prefLabel "larch_feff" .
-
-</toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0> a prov:SoftwareAgent ;
-    rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0" ;
-    schema1:softwareVersion "0.9.75+galaxy0" ;
-    skos:prefLabel "larch_select_paths" .
 
 </dataset/a011be860e2a8b79> a prov:Entity ;
     rdfs:label "out_dir" ;
@@ -189,7 +183,28 @@ TITLE # sites:    6
     dcterms:format "application/zip" ;
     schema1:name "datasets/FEFF_paths_of_1564889.cif_a011be860e2a8b79.zip" ;
     skos:prefLabel "FEFF paths of 1564889.cif" ;
+    prov:wasAttributedTo </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0>,
+        </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0>,
+        </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0> ;
     prov:wasGeneratedBy </run/35a02d80fc5ea399> .
+
+</step/0> a p-plan:Step ;
+    rdfs:label "fes2_rt01_mar02.xmu" ;
+    p-plan:isStepOfPlan </workflow> .
+
+</step/1> a p-plan:Step ;
+    rdfs:label "1564889.cif" ;
+    p-plan:isStepOfPlan </workflow> .
+
+</step/2> a p-plan:Step ;
+    rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0" ;
+    p-plan:isPrecededBy </step/0> ;
+    p-plan:isStepOfPlan </workflow> .
+
+</step/4> a p-plan:Step ;
+    rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0" ;
+    p-plan:isPrecededBy </step/3> ;
+    p-plan:isStepOfPlan </workflow> .
 
 </run/213104123d8e07eb> a prov:Activity ;
     rdfs:label "Execution of step 4" ;
@@ -202,25 +217,16 @@ TITLE # sites:    6
     prov:used </dataset/df0bac1ee137448a> ;
     p-plan:correspondsToStep </step/2> .
 
-</step/0> a p-plan:Step ;
-    rdfs:label "fes2_rt01_mar02.xmu" ;
+</step/3> a p-plan:Step ;
+    rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0" ;
+    p-plan:isPrecededBy </step/1> ;
     p-plan:isStepOfPlan </workflow> .
 
-</step/1> a p-plan:Step ;
-    rdfs:label "1564889.cif" ;
-    p-plan:isStepOfPlan </workflow> .
-
-</step/2> a p-plan:Step ;
+</toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0> a prov:SoftwareAgent ;
     rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0" ;
-    prov:wasAssociatedWith </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0> ;
-    p-plan:isPrecededBy </step/0> ;
-    p-plan:isStepOfPlan </workflow> .
-
-</step/4> a p-plan:Step ;
-    rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0" ;
-    prov:wasAssociatedWith </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0> ;
-    p-plan:isPrecededBy </step/3> ;
-    p-plan:isStepOfPlan </workflow> .
+    schema1:softwareVersion "0.9.75+galaxy0" ;
+    skos:prefLabel "larch_athena" ;
+    prov:wasAssociatedWith </run/b1d0f2ca5aeb2ecf> .
 
 </run/35a02d80fc5ea399> a prov:Activity ;
     rdfs:label "Execution of step 3" ;
@@ -235,17 +241,29 @@ TITLE # sites:    6
         </dataset/d49ffa4044c67d15> ;
     p-plan:correspondsToStep </step/5> .
 
-</step/3> a p-plan:Step ;
-    rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0" ;
-    prov:wasAssociatedWith </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0> ;
-    p-plan:isPrecededBy </step/1> ;
-    p-plan:isStepOfPlan </workflow> .
-
-</> a prov:SoftwareAgent ;
+</srv/galaxy/server/data_fetch.py> a prov:SoftwareAgent ;
     rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0" ;
     schema1:softwareVersion "0.1.0" ;
     skos:prefLabel "DATA_FETCH" .
 
+</toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0> a prov:SoftwareAgent ;
+    rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0" ;
+    schema1:softwareVersion "0.9.75+galaxy0" ;
+    skos:prefLabel "larch_feff" ;
+    prov:wasAssociatedWith </run/35a02d80fc5ea399> .
+
+</toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0> a prov:SoftwareAgent ;
+    rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0" ;
+    schema1:softwareVersion "0.9.75+galaxy0" ;
+    skos:prefLabel "larch_select_paths" ;
+    prov:wasAssociatedWith </run/213104123d8e07eb> .
+
 </workflow> a p-plan:Plan ;
     rdfs:label "FeS2 Analysis" .
+
+</toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0> a prov:SoftwareAgent ;
+    rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0" ;
+    schema1:softwareVersion "0.9.75+galaxy0" ;
+    skos:prefLabel "larch_artemis" ;
+    prov:wasAssociatedWith </run/cf423d990ba14fcd> .
 

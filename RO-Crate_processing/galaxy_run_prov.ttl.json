@@ -11,13 +11,6 @@
   },
   "@graph": [
     {
-      "@id": "/",
-      "@type": "SoftwareAgent",
-      "rdfs:label": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0",
-      "schema:softwareVersion": "0.1.0",
-      "skos:prefLabel": "DATA_FETCH"
-    },
-    {
       "@id": "/dataset/fb5bc774c9b03fce",
       "@type": "Entity",
       "dcterms:description": "\nArchive:  /mnt/nfs/data/d/4/a/dataset_d4a101e2-a73e-4eac-8f30-75f043982880.dat\n   creating: feff/\n  inflating: feff/feff.inp\n  inflating: feff/feffrun_feff6l.log\n  inflating: feff/feff.run\n  inflating: feff/misc.dat\n  inflating: feff/phase.bin\n  inflatin",
@@ -25,14 +18,296 @@
       "rdfs:label": "rmr",
       "schema:name": "datasets/rmr_FeS2_fb5bc774c9b03fce.png",
       "skos:prefLabel": "rmr_FeS2",
+      "wasAttributedTo": {
+        "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0"
+      },
       "wasGeneratedBy": {
         "@id": "/run/cf423d990ba14fcd"
       }
     },
     {
+      "@id": "/dataset/409c0d24534294d8",
+      "@type": "Entity",
+      "dcterms:description": "Formula: FeS2\nSpaceGroup: Pnnm\n# sites: 6\n",
+      "dcterms:format": "chemical/x-feff-input",
+      "rdfs:label": "feff_inp",
+      "schema:name": "datasets/FEFF_input_of_1564889.cif_409c0d24534294d8.inp",
+      "skos:prefLabel": "FEFF input of 1564889.cif",
+      "wasAttributedTo": {
+        "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0"
+      },
+      "wasGeneratedBy": {
+        "@id": "/run/35a02d80fc5ea399"
+      }
+    },
+    {
+      "@id": "/dataset/df0bac1ee137448a",
+      "@type": "Entity",
+      "dcterms:description": "uploaded txt file",
+      "dcterms:format": "text/plain",
+      "schema:name": "datasets/fes2_rt01_mar02.xmu_df0bac1ee137448a.txt",
+      "skos:prefLabel": "fes2_rt01_mar02.xmu",
+      "wasAttributedTo": [
+        {
+          "@id": "/srv/galaxy/server/data_fetch.py"
+        },
+        {
+          "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0"
+        }
+      ],
+      "wasGeneratedBy": {
+        "@id": "/run/c60463f2d425dc91"
+      }
+    },
+    {
+      "@id": "/srv/galaxy/server/data_fetch.py",
+      "@type": "SoftwareAgent",
+      "rdfs:label": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0",
+      "schema:softwareVersion": "0.1.0",
+      "skos:prefLabel": "DATA_FETCH"
+    },
+    {
       "@id": "/workflow",
       "@type": "p-plan:Plan",
       "rdfs:label": "FeS2 Analysis"
+    },
+    {
+      "@id": "/dataset/c3e4da2bb600d6e3",
+      "@type": "Entity",
+      "dcterms:description": "\nArchive:  /mnt/nfs/data/d/4/a/dataset_d4a101e2-a73e-4eac-8f30-75f043982880.dat\n   creating: feff/\n  inflating: feff/feff.inp\n  inflating: feff/feffrun_feff6l.log\n  inflating: feff/feff.run\n  inflating: feff/misc.dat\n  inflating: feff/phase.bin\n  inflatin",
+      "dcterms:format": "image/png",
+      "rdfs:label": "chikr",
+      "schema:name": "datasets/chikr_FeS2_c3e4da2bb600d6e3.png",
+      "skos:prefLabel": "chikr_FeS2",
+      "wasAttributedTo": {
+        "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0"
+      },
+      "wasGeneratedBy": {
+        "@id": "/run/cf423d990ba14fcd"
+      }
+    },
+    {
+      "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0",
+      "@type": "SoftwareAgent",
+      "rdfs:label": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0",
+      "schema:softwareVersion": "0.9.75+galaxy0",
+      "skos:prefLabel": "larch_feff",
+      "wasAssociatedWith": {
+        "@id": "/run/35a02d80fc5ea399"
+      }
+    },
+    {
+      "@id": "/step/2",
+      "@type": "p-plan:Step",
+      "p-plan:isPrecededBy": {
+        "@id": "/step/0"
+      },
+      "p-plan:isStepOfPlan": {
+        "@id": "/workflow"
+      },
+      "rdfs:label": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0"
+    },
+    {
+      "@id": "/step/1",
+      "@type": "p-plan:Step",
+      "p-plan:isStepOfPlan": {
+        "@id": "/workflow"
+      },
+      "rdfs:label": "1564889.cif"
+    },
+    {
+      "@id": "/dataset/df02c7af9dfe5b62",
+      "@type": "Entity",
+      "dcterms:description": "\nMetadata is limited as the Atomic Simulation Environment (ASE) is not installed.\nYou can still use this dataset in tools and workflows.\nFor full metadata, ask your admin to install the 'ase' Python package.",
+      "dcterms:format": "chemical/x-cif",
+      "schema:name": "datasets/1564889.cif_df02c7af9dfe5b62.cif",
+      "skos:prefLabel": "1564889.cif",
+      "wasAttributedTo": [
+        {
+          "@id": "/srv/galaxy/server/data_fetch.py"
+        },
+        {
+          "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0"
+        }
+      ],
+      "wasGeneratedBy": {
+        "@id": "/run/2029b88b74bf2376"
+      }
+    },
+    {
+      "@id": "/dataset/a9305118c6acc078",
+      "@type": "Entity",
+      "dcterms:description": "\nArchive:  /mnt/nfs/data/d/4/a/dataset_d4a101e2-a73e-4eac-8f30-75f043982880.dat\n   creating: feff/\n  inflating: feff/feff.inp\n  inflating: feff/feffrun_feff6l.log\n  inflating: feff/feff.run\n  inflating: feff/misc.dat\n  inflating: feff/phase.bin\n  inflatin",
+      "dcterms:format": "text/plain",
+      "rdfs:label": "fit_report",
+      "schema:name": "datasets/fit_report_FeS2_a9305118c6acc078.feffit",
+      "skos:prefLabel": "fit_report_FeS2",
+      "wasAttributedTo": {
+        "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0"
+      },
+      "wasGeneratedBy": {
+        "@id": "/run/cf423d990ba14fcd"
+      }
+    },
+    {
+      "@id": "/dataset/a011be860e2a8b79",
+      "@type": "Entity",
+      "dcterms:description": "\nParsing dataset_0c058fb5-124f-4a1e-820a-643ff322c47a.dat and saving to feff/feff.inp\n*** feff input generated by xraylarch cif2feff using pymatgen ***\nTITLE Formula:    FeS2\nTITLE SpaceGroup: Pnnm\nTITLE # sites:    6\n* crystallographics sites: note that ",
+      "dcterms:format": "application/zip",
+      "rdfs:label": "out_dir",
+      "schema:name": "datasets/FEFF_paths_of_1564889.cif_a011be860e2a8b79.zip",
+      "skos:prefLabel": "FEFF paths of 1564889.cif",
+      "wasAttributedTo": [
+        {
+          "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0"
+        },
+        {
+          "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0"
+        },
+        {
+          "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0"
+        }
+      ],
+      "wasGeneratedBy": {
+        "@id": "/run/35a02d80fc5ea399"
+      }
+    },
+    {
+      "@id": "/step/3",
+      "@type": "p-plan:Step",
+      "p-plan:isPrecededBy": {
+        "@id": "/step/1"
+      },
+      "p-plan:isStepOfPlan": {
+        "@id": "/workflow"
+      },
+      "rdfs:label": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0"
+    },
+    {
+      "@id": "/dataset/6c2ea4582a260280",
+      "@type": "Entity",
+      "dcterms:description": "\nAttempting to read from /mnt/nfs/data/f/6/4/dataset_f640df2f-ce68-4309-bc83-2e052fb749f1.dat\nRead columns: ['energy', 'xmu', 'i0']\n'energy' present in column headers\nRenaming columns to: ['energy', 'mu', 'i0']\nCannot load group.athena_params.bkg from gro",
+      "dcterms:format": "image/png",
+      "rdfs:label": "plot",
+      "schema:name": "datasets/FeS2_plot_6c2ea4582a260280.png",
+      "skos:prefLabel": "FeS2_plot",
+      "wasAttributedTo": {
+        "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0"
+      },
+      "wasGeneratedBy": {
+        "@id": "/run/b1d0f2ca5aeb2ecf"
+      }
+    },
+    {
+      "@id": "/dataset/75738551921d866c",
+      "@type": "Entity",
+      "dcterms:description": "",
+      "dcterms:format": "text/csv",
+      "rdfs:label": "sp_csv",
+      "schema:name": "datasets/fes2_sp_75738551921d866c.sp",
+      "skos:prefLabel": "fes2_sp",
+      "wasAttributedTo": [
+        {
+          "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0"
+        },
+        {
+          "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0"
+        }
+      ],
+      "wasGeneratedBy": {
+        "@id": "/run/213104123d8e07eb"
+      }
+    },
+    {
+      "@id": "/step/5",
+      "@type": "p-plan:Step",
+      "p-plan:isPrecededBy": [
+        {
+          "@id": "/step/4"
+        },
+        {
+          "@id": "/step/3"
+        },
+        {
+          "@id": "/step/2"
+        }
+      ],
+      "p-plan:isStepOfPlan": {
+        "@id": "/workflow"
+      },
+      "rdfs:label": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0"
+    },
+    {
+      "@id": "/run/2029b88b74bf2376",
+      "@type": "Activity",
+      "p-plan:correspondsToStep": {
+        "@id": "/step/1"
+      },
+      "rdfs:label": "DATA_FETCH",
+      "wasAssociatedWith": {
+        "@id": "/srv/galaxy/server/data_fetch.py"
+      }
+    },
+    {
+      "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0",
+      "@type": "SoftwareAgent",
+      "rdfs:label": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0",
+      "schema:softwareVersion": "0.9.75+galaxy0",
+      "skos:prefLabel": "larch_athena",
+      "wasAssociatedWith": {
+        "@id": "/run/b1d0f2ca5aeb2ecf"
+      }
+    },
+    {
+      "@id": "/dataset/d49ffa4044c67d15",
+      "@type": "Entity",
+      "dcterms:description": "atsym: Fe\nbkg_e0: 7117.0\nedge: K\nnpts: 352\nxmax: 7963.5\nxmin: 6911.8",
+      "dcterms:format": "application/vnd.demeter.athena",
+      "rdfs:label": "athena_project_file",
+      "schema:name": "datasets/FeS2_athena_d49ffa4044c67d15.prj",
+      "skos:prefLabel": "FeS2_athena",
+      "wasAttributedTo": [
+        {
+          "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0"
+        },
+        {
+          "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0"
+        }
+      ],
+      "wasGeneratedBy": {
+        "@id": "/run/b1d0f2ca5aeb2ecf"
+      }
+    },
+    {
+      "@id": "/step/4",
+      "@type": "p-plan:Step",
+      "p-plan:isPrecededBy": {
+        "@id": "/step/3"
+      },
+      "p-plan:isStepOfPlan": {
+        "@id": "/workflow"
+      },
+      "rdfs:label": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0"
+    },
+    {
+      "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0",
+      "@type": "SoftwareAgent",
+      "rdfs:label": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0",
+      "schema:softwareVersion": "0.9.75+galaxy0",
+      "skos:prefLabel": "larch_select_paths",
+      "wasAssociatedWith": {
+        "@id": "/run/213104123d8e07eb"
+      }
+    },
+    {
+      "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0",
+      "@type": "SoftwareAgent",
+      "rdfs:label": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0",
+      "schema:softwareVersion": "0.9.75+galaxy0",
+      "skos:prefLabel": "larch_artemis",
+      "wasAssociatedWith": {
+        "@id": "/run/cf423d990ba14fcd"
+      }
     },
     {
       "@id": "/run/213104123d8e07eb",
@@ -51,176 +326,52 @@
       ]
     },
     {
-      "@id": "/run/35a02d80fc5ea399",
-      "@type": "Activity",
-      "p-plan:correspondsToStep": {
-        "@id": "/step/3"
-      },
-      "rdfs:label": "Execution of step 3",
-      "used": {
-        "@id": "/dataset/df02c7af9dfe5b62"
-      }
-    },
-    {
-      "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0",
-      "@type": "SoftwareAgent",
-      "rdfs:label": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0",
-      "schema:softwareVersion": "0.9.75+galaxy0",
-      "skos:prefLabel": "larch_artemis"
-    },
-    {
-      "@id": "/step/2",
-      "@type": "p-plan:Step",
-      "p-plan:isPrecededBy": {
-        "@id": "/step/0"
-      },
-      "p-plan:isStepOfPlan": {
-        "@id": "/workflow"
-      },
-      "rdfs:label": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0",
-      "wasAssociatedWith": {
-        "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0"
-      }
-    },
-    {
-      "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0",
-      "@type": "SoftwareAgent",
-      "rdfs:label": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0",
-      "schema:softwareVersion": "0.9.75+galaxy0",
-      "skos:prefLabel": "larch_select_paths"
-    },
-    {
-      "@id": "/run/2029b88b74bf2376",
-      "@type": "Activity",
-      "p-plan:correspondsToStep": {
-        "@id": "/step/1"
-      },
-      "rdfs:label": "DATA_FETCH",
-      "wasAssociatedWith": {
-        "@id": "/"
-      }
-    },
-    {
-      "@id": "/run/c60463f2d425dc91",
-      "@type": "Activity",
-      "p-plan:correspondsToStep": {
-        "@id": "/step/0"
-      },
-      "rdfs:label": "DATA_FETCH",
-      "wasAssociatedWith": {
-        "@id": "/"
-      }
-    },
-    {
-      "@id": "/step/3",
-      "@type": "p-plan:Step",
-      "p-plan:isPrecededBy": {
-        "@id": "/step/1"
-      },
-      "p-plan:isStepOfPlan": {
-        "@id": "/workflow"
-      },
-      "rdfs:label": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0",
-      "wasAssociatedWith": {
-        "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0"
-      }
-    },
-    {
-      "@id": "/dataset/a011be860e2a8b79",
+      "@id": "/dataset/a38f4b5b93cd4e1a",
       "@type": "Entity",
       "dcterms:description": "\nParsing dataset_0c058fb5-124f-4a1e-820a-643ff322c47a.dat and saving to feff/feff.inp\n*** feff input generated by xraylarch cif2feff using pymatgen ***\nTITLE Formula:    FeS2\nTITLE SpaceGroup: Pnnm\nTITLE # sites:    6\n* crystallographics sites: note that ",
-      "dcterms:format": "application/zip",
-      "rdfs:label": "out_dir",
-      "schema:name": "datasets/FEFF_paths_of_1564889.cif_a011be860e2a8b79.zip",
-      "skos:prefLabel": "FEFF paths of 1564889.cif",
+      "dcterms:format": "text/csv",
+      "rdfs:label": "out_csv",
+      "schema:name": "datasets/CSV_summary_of_1564889.cif_a38f4b5b93cd4e1a.feff",
+      "skos:prefLabel": "CSV summary of 1564889.cif",
+      "wasAttributedTo": [
+        {
+          "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0"
+        },
+        {
+          "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0"
+        }
+      ],
       "wasGeneratedBy": {
         "@id": "/run/35a02d80fc5ea399"
       }
     },
     {
-      "@id": "/run/b1d0f2ca5aeb2ecf",
-      "@type": "Activity",
-      "p-plan:correspondsToStep": {
-        "@id": "/step/2"
-      },
-      "rdfs:label": "Execution of step 2",
-      "used": {
-        "@id": "/dataset/df0bac1ee137448a"
-      }
-    },
-    {
-      "@id": "/step/4",
-      "@type": "p-plan:Step",
-      "p-plan:isPrecededBy": {
-        "@id": "/step/3"
-      },
-      "p-plan:isStepOfPlan": {
-        "@id": "/workflow"
-      },
-      "rdfs:label": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0",
-      "wasAssociatedWith": {
-        "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0"
-      }
-    },
-    {
-      "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0",
-      "@type": "SoftwareAgent",
-      "rdfs:label": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0",
-      "schema:softwareVersion": "0.9.75+galaxy0",
-      "skos:prefLabel": "larch_athena"
-    },
-    {
-      "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0",
-      "@type": "SoftwareAgent",
-      "rdfs:label": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0",
-      "schema:softwareVersion": "0.9.75+galaxy0",
-      "skos:prefLabel": "larch_feff"
-    },
-    {
-      "@id": "/dataset/a9305118c6acc078",
+      "@id": "/dataset/547228271cdb66e2",
       "@type": "Entity",
-      "dcterms:description": "\nArchive:  /mnt/nfs/data/d/4/a/dataset_d4a101e2-a73e-4eac-8f30-75f043982880.dat\n   creating: feff/\n  inflating: feff/feff.inp\n  inflating: feff/feffrun_feff6l.log\n  inflating: feff/feff.run\n  inflating: feff/misc.dat\n  inflating: feff/phase.bin\n  inflatin",
-      "dcterms:format": "text/plain",
-      "rdfs:label": "fit_report",
-      "schema:name": "datasets/fit_report_FeS2_a9305118c6acc078.feffit",
-      "skos:prefLabel": "fit_report_FeS2",
+      "dcterms:description": "",
+      "dcterms:format": "text/csv",
+      "rdfs:label": "gds_csv",
+      "schema:name": "datasets/fes2_gds_547228271cdb66e2.gds",
+      "skos:prefLabel": "fes2_gds",
+      "wasAttributedTo": [
+        {
+          "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0"
+        },
+        {
+          "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0"
+        }
+      ],
       "wasGeneratedBy": {
-        "@id": "/run/cf423d990ba14fcd"
+        "@id": "/run/213104123d8e07eb"
       }
     },
     {
-      "@id": "/dataset/d49ffa4044c67d15",
-      "@type": "Entity",
-      "dcterms:description": "atsym: Fe\nbkg_e0: 7117.0\nedge: K\nnpts: 352\nxmax: 7963.5\nxmin: 6911.8",
-      "dcterms:format": "application/vnd.demeter.athena",
-      "rdfs:label": "athena_project_file",
-      "schema:name": "datasets/FeS2_athena_d49ffa4044c67d15.prj",
-      "skos:prefLabel": "FeS2_athena",
-      "wasGeneratedBy": {
-        "@id": "/run/b1d0f2ca5aeb2ecf"
-      }
-    },
-    {
-      "@id": "/dataset/df0bac1ee137448a",
-      "@type": "Entity",
-      "dcterms:description": "uploaded txt file",
-      "dcterms:format": "text/plain",
-      "schema:name": "datasets/fes2_rt01_mar02.xmu_df0bac1ee137448a.txt",
-      "skos:prefLabel": "fes2_rt01_mar02.xmu",
-      "wasAttributedTo": {
-        "@id": "/"
-      },
-      "wasGeneratedBy": {
-        "@id": "/run/c60463f2d425dc91"
-      }
-    },
-    {
-      "@id": "/step/1",
+      "@id": "/step/0",
       "@type": "p-plan:Step",
       "p-plan:isStepOfPlan": {
         "@id": "/workflow"
       },
-      "rdfs:label": "1564889.cif"
+      "rdfs:label": "fes2_rt01_mar02.xmu"
     },
     {
       "@id": "/run/cf423d990ba14fcd",
@@ -245,120 +396,37 @@
       ]
     },
     {
-      "@id": "/dataset/6c2ea4582a260280",
-      "@type": "Entity",
-      "dcterms:description": "\nAttempting to read from /mnt/nfs/data/f/6/4/dataset_f640df2f-ce68-4309-bc83-2e052fb749f1.dat\nRead columns: ['energy', 'xmu', 'i0']\n'energy' present in column headers\nRenaming columns to: ['energy', 'mu', 'i0']\nCannot load group.athena_params.bkg from gro",
-      "dcterms:format": "image/png",
-      "rdfs:label": "plot",
-      "schema:name": "datasets/FeS2_plot_6c2ea4582a260280.png",
-      "skos:prefLabel": "FeS2_plot",
-      "wasGeneratedBy": {
-        "@id": "/run/b1d0f2ca5aeb2ecf"
-      }
-    },
-    {
-      "@id": "/dataset/547228271cdb66e2",
-      "@type": "Entity",
-      "dcterms:description": "",
-      "dcterms:format": "text/csv",
-      "rdfs:label": "gds_csv",
-      "schema:name": "datasets/fes2_gds_547228271cdb66e2.gds",
-      "skos:prefLabel": "fes2_gds",
-      "wasGeneratedBy": {
-        "@id": "/run/213104123d8e07eb"
-      }
-    },
-    {
-      "@id": "/dataset/df02c7af9dfe5b62",
-      "@type": "Entity",
-      "dcterms:description": "\nMetadata is limited as the Atomic Simulation Environment (ASE) is not installed.\nYou can still use this dataset in tools and workflows.\nFor full metadata, ask your admin to install the 'ase' Python package.",
-      "dcterms:format": "chemical/x-cif",
-      "schema:name": "datasets/1564889.cif_df02c7af9dfe5b62.cif",
-      "skos:prefLabel": "1564889.cif",
-      "wasAttributedTo": {
-        "@id": "/"
+      "@id": "/run/b1d0f2ca5aeb2ecf",
+      "@type": "Activity",
+      "p-plan:correspondsToStep": {
+        "@id": "/step/2"
       },
-      "wasGeneratedBy": {
-        "@id": "/run/2029b88b74bf2376"
+      "rdfs:label": "Execution of step 2",
+      "used": {
+        "@id": "/dataset/df0bac1ee137448a"
       }
     },
     {
-      "@id": "/dataset/c3e4da2bb600d6e3",
-      "@type": "Entity",
-      "dcterms:description": "\nArchive:  /mnt/nfs/data/d/4/a/dataset_d4a101e2-a73e-4eac-8f30-75f043982880.dat\n   creating: feff/\n  inflating: feff/feff.inp\n  inflating: feff/feffrun_feff6l.log\n  inflating: feff/feff.run\n  inflating: feff/misc.dat\n  inflating: feff/phase.bin\n  inflatin",
-      "dcterms:format": "image/png",
-      "rdfs:label": "chikr",
-      "schema:name": "datasets/chikr_FeS2_c3e4da2bb600d6e3.png",
-      "skos:prefLabel": "chikr_FeS2",
-      "wasGeneratedBy": {
-        "@id": "/run/cf423d990ba14fcd"
-      }
-    },
-    {
-      "@id": "/dataset/75738551921d866c",
-      "@type": "Entity",
-      "dcterms:description": "",
-      "dcterms:format": "text/csv",
-      "rdfs:label": "sp_csv",
-      "schema:name": "datasets/fes2_sp_75738551921d866c.sp",
-      "skos:prefLabel": "fes2_sp",
-      "wasGeneratedBy": {
-        "@id": "/run/213104123d8e07eb"
-      }
-    },
-    {
-      "@id": "/dataset/409c0d24534294d8",
-      "@type": "Entity",
-      "dcterms:description": "Formula: FeS2\nSpaceGroup: Pnnm\n# sites: 6\n",
-      "dcterms:format": "chemical/x-feff-input",
-      "rdfs:label": "feff_inp",
-      "schema:name": "datasets/FEFF_input_of_1564889.cif_409c0d24534294d8.inp",
-      "skos:prefLabel": "FEFF input of 1564889.cif",
-      "wasGeneratedBy": {
-        "@id": "/run/35a02d80fc5ea399"
-      }
-    },
-    {
-      "@id": "/step/5",
-      "@type": "p-plan:Step",
-      "p-plan:isPrecededBy": [
-        {
-          "@id": "/step/4"
-        },
-        {
-          "@id": "/step/3"
-        },
-        {
-          "@id": "/step/2"
-        }
-      ],
-      "p-plan:isStepOfPlan": {
-        "@id": "/workflow"
+      "@id": "/run/35a02d80fc5ea399",
+      "@type": "Activity",
+      "p-plan:correspondsToStep": {
+        "@id": "/step/3"
       },
-      "rdfs:label": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0",
+      "rdfs:label": "Execution of step 3",
+      "used": {
+        "@id": "/dataset/df02c7af9dfe5b62"
+      }
+    },
+    {
+      "@id": "/run/c60463f2d425dc91",
+      "@type": "Activity",
+      "p-plan:correspondsToStep": {
+        "@id": "/step/0"
+      },
+      "rdfs:label": "DATA_FETCH",
       "wasAssociatedWith": {
-        "@id": "/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0"
+        "@id": "/srv/galaxy/server/data_fetch.py"
       }
-    },
-    {
-      "@id": "/dataset/a38f4b5b93cd4e1a",
-      "@type": "Entity",
-      "dcterms:description": "\nParsing dataset_0c058fb5-124f-4a1e-820a-643ff322c47a.dat and saving to feff/feff.inp\n*** feff input generated by xraylarch cif2feff using pymatgen ***\nTITLE Formula:    FeS2\nTITLE SpaceGroup: Pnnm\nTITLE # sites:    6\n* crystallographics sites: note that ",
-      "dcterms:format": "text/csv",
-      "rdfs:label": "out_csv",
-      "schema:name": "datasets/CSV_summary_of_1564889.cif_a38f4b5b93cd4e1a.feff",
-      "skos:prefLabel": "CSV summary of 1564889.cif",
-      "wasGeneratedBy": {
-        "@id": "/run/35a02d80fc5ea399"
-      }
-    },
-    {
-      "@id": "/step/0",
-      "@type": "p-plan:Step",
-      "p-plan:isStepOfPlan": {
-        "@id": "/workflow"
-      },
-      "rdfs:label": "fes2_rt01_mar02.xmu"
     }
   ]
 }
