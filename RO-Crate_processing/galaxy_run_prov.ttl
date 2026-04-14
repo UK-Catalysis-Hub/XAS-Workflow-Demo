@@ -156,11 +156,13 @@ For full metadata, ask your admin to install the 'ase' Python package.""" ;
 
 </run/2029b88b74bf2376> a prov:Activity ;
     rdfs:label "DATA_FETCH" ;
+    skos:prefLabel "fetch data from history" ;
     prov:wasAssociatedWith </srv/galaxy/server/data_fetch.py> ;
     p-plan:correspondsToStep </step/1> .
 
 </run/c60463f2d425dc91> a prov:Activity ;
     rdfs:label "DATA_FETCH" ;
+    skos:prefLabel "fetch data from history" ;
     prov:wasAssociatedWith </srv/galaxy/server/data_fetch.py> ;
     p-plan:correspondsToStep </step/0> .
 
@@ -188,6 +190,21 @@ TITLE # sites:    6
         </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0> ;
     prov:wasGeneratedBy </run/35a02d80fc5ea399> .
 
+</run/213104123d8e07eb> a prov:Activity ;
+    rdfs:label "Execution of step 4" ;
+    skos:prefLabel "select FEFF paths" ;
+    prov:used </dataset/a011be860e2a8b79>,
+        </dataset/a38f4b5b93cd4e1a> ;
+    prov:wasAssociatedWith </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0> ;
+    p-plan:correspondsToStep </step/4> .
+
+</run/b1d0f2ca5aeb2ecf> a prov:Activity ;
+    rdfs:label "Execution of step 2" ;
+    skos:prefLabel "process and normalise XAS" ;
+    prov:used </dataset/df0bac1ee137448a> ;
+    prov:wasAssociatedWith </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0> ;
+    p-plan:correspondsToStep </step/2> .
+
 </step/0> a p-plan:Step ;
     rdfs:label "fes2_rt01_mar02.xmu" ;
     p-plan:isStepOfPlan </workflow> .
@@ -206,64 +223,48 @@ TITLE # sites:    6
     p-plan:isPrecededBy </step/3> ;
     p-plan:isStepOfPlan </workflow> .
 
-</run/213104123d8e07eb> a prov:Activity ;
-    rdfs:label "Execution of step 4" ;
-    prov:used </dataset/a011be860e2a8b79>,
-        </dataset/a38f4b5b93cd4e1a> ;
-    p-plan:correspondsToStep </step/4> .
+</run/35a02d80fc5ea399> a prov:Activity ;
+    rdfs:label "Execution of step 3" ;
+    skos:prefLabel "calculate FEFF paths from crystal" ;
+    prov:used </dataset/df02c7af9dfe5b62> ;
+    prov:wasAssociatedWith </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0> ;
+    p-plan:correspondsToStep </step/3> .
 
-</run/b1d0f2ca5aeb2ecf> a prov:Activity ;
-    rdfs:label "Execution of step 2" ;
-    prov:used </dataset/df0bac1ee137448a> ;
-    p-plan:correspondsToStep </step/2> .
+</run/cf423d990ba14fcd> a prov:Activity ;
+    rdfs:label "Execution of step 5" ;
+    skos:prefLabel "FEFF fit of XAS" ;
+    prov:used </dataset/547228271cdb66e2>,
+        </dataset/75738551921d866c>,
+        </dataset/a011be860e2a8b79>,
+        </dataset/d49ffa4044c67d15> ;
+    prov:wasAssociatedWith </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0> ;
+    p-plan:correspondsToStep </step/5> .
 
 </step/3> a p-plan:Step ;
     rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0" ;
     p-plan:isPrecededBy </step/1> ;
     p-plan:isStepOfPlan </workflow> .
 
-</toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0> a prov:SoftwareAgent ;
-    rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0" ;
-    schema1:softwareVersion "0.9.75+galaxy0" ;
-    skos:prefLabel "larch_athena" ;
-    prov:wasAssociatedWith </run/b1d0f2ca5aeb2ecf> .
-
-</run/35a02d80fc5ea399> a prov:Activity ;
-    rdfs:label "Execution of step 3" ;
-    prov:used </dataset/df02c7af9dfe5b62> ;
-    p-plan:correspondsToStep </step/3> .
-
-</run/cf423d990ba14fcd> a prov:Activity ;
-    rdfs:label "Execution of step 5" ;
-    prov:used </dataset/547228271cdb66e2>,
-        </dataset/75738551921d866c>,
-        </dataset/a011be860e2a8b79>,
-        </dataset/d49ffa4044c67d15> ;
-    p-plan:correspondsToStep </step/5> .
-
 </srv/galaxy/server/data_fetch.py> a prov:SoftwareAgent ;
-    rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0" ;
-    schema1:softwareVersion "0.1.0" ;
-    skos:prefLabel "DATA_FETCH" .
+    rdfs:label "DATA_FETCH" ;
+    schema1:softwareVersion "0.1.0" .
+
+</toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0> a prov:SoftwareAgent ;
+    rdfs:label "larch_athena" ;
+    schema1:softwareVersion "0.9.75+galaxy0" .
 
 </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0> a prov:SoftwareAgent ;
-    rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0" ;
-    schema1:softwareVersion "0.9.75+galaxy0" ;
-    skos:prefLabel "larch_feff" ;
-    prov:wasAssociatedWith </run/35a02d80fc5ea399> .
+    rdfs:label "larch_feff" ;
+    schema1:softwareVersion "0.9.75+galaxy0" .
 
 </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0> a prov:SoftwareAgent ;
-    rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0" ;
-    schema1:softwareVersion "0.9.75+galaxy0" ;
-    skos:prefLabel "larch_select_paths" ;
-    prov:wasAssociatedWith </run/213104123d8e07eb> .
+    rdfs:label "larch_select_paths" ;
+    schema1:softwareVersion "0.9.75+galaxy0" .
 
 </workflow> a p-plan:Plan ;
     rdfs:label "FeS2 Analysis" .
 
 </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0> a prov:SoftwareAgent ;
-    rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0" ;
-    schema1:softwareVersion "0.9.75+galaxy0" ;
-    skos:prefLabel "larch_artemis" ;
-    prov:wasAssociatedWith </run/cf423d990ba14fcd> .
+    rdfs:label "larch_artemis" ;
+    schema1:softwareVersion "0.9.75+galaxy0" .
 
