@@ -251,20 +251,24 @@ TITLE # sites:    6
 
 </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0> a prov:SoftwareAgent ;
     rdfs:label "larch_athena" ;
-    schema1:softwareVersion "0.9.75+galaxy0" .
+    schema1:softwareVersion "0.9.75+galaxy0" ;
+    skos:prefLabel "larch_athena" .
 
 </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0> a prov:SoftwareAgent ;
     rdfs:label "larch_feff" ;
-    schema1:softwareVersion "0.9.75+galaxy0" .
+    schema1:softwareVersion "0.9.75+galaxy0" ;
+    skos:prefLabel "larch_feff" .
 
 </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0> a prov:SoftwareAgent ;
     rdfs:label "larch_select_paths" ;
-    schema1:softwareVersion "0.9.75+galaxy0" .
+    schema1:softwareVersion "0.9.75+galaxy0" ;
+    skos:prefLabel "larch_select_paths" .
 
 </workflow> a p-plan:Plan ;
     rdfs:label "FeS2 Analysis" .
 
 </toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0> a prov:SoftwareAgent ;
     rdfs:label "larch_artemis" ;
-    schema1:softwareVersion "0.9.75+galaxy0" .
+    schema1:softwareVersion "0.9.75+galaxy0" ;
+    skos:prefLabel "larch_artemis" .
 
