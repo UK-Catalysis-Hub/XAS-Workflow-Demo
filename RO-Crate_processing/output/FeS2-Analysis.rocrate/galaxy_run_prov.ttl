@@ -157,14 +157,20 @@ For full metadata, ask your admin to install the 'ase' Python package.""" ;
 </run/2029b88b74bf2376> a prov:Activity ;
     rdfs:label "DATA_FETCH" ;
     skos:prefLabel "fetch data from history" ;
-    prov:wasAssociatedWith </srv/galaxy/server/data_fetch.py> ;
-    p-plan:correspondsToStep </step/1> .
+    prov:wasAssociatedWith </srv/galaxy/server/data_fetch.py> .
 
 </run/c60463f2d425dc91> a prov:Activity ;
     rdfs:label "DATA_FETCH" ;
     skos:prefLabel "fetch data from history" ;
-    prov:wasAssociatedWith </srv/galaxy/server/data_fetch.py> ;
-    p-plan:correspondsToStep </step/0> .
+    prov:wasAssociatedWith </srv/galaxy/server/data_fetch.py> .
+
+</step/0> a p-plan:Step ;
+    rdfs:label "fes2_rt01_mar02.xmu" ;
+    p-plan:isStepOfPlan </workflow> .
+
+</step/1> a p-plan:Step ;
+    rdfs:label "1564889.cif" ;
+    p-plan:isStepOfPlan </workflow> .
 
 </step/5> a p-plan:Step ;
     rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0" ;
@@ -205,20 +211,16 @@ TITLE # sites:    6
     skos:prefLabel "process and normalise XAS" ;
     prov:used </dataset/df0bac1ee137448a> ;
     prov:wasAssociatedWith <prj> ;
-    p-plan:correspondsToStep </step/2>,
-        </step/4> .
-
-</step/0> a p-plan:Step ;
-    rdfs:label "fes2_rt01_mar02.xmu" ;
-    p-plan:isStepOfPlan </workflow> .
-
-</step/1> a p-plan:Step ;
-    rdfs:label "1564889.cif" ;
-    p-plan:isStepOfPlan </workflow> .
+    p-plan:correspondsToStep </step/2> .
 
 </step/2> a p-plan:Step ;
     rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0" ;
     p-plan:isPrecededBy </step/0> ;
+    p-plan:isStepOfPlan </workflow> .
+
+</step/4> a p-plan:Step ;
+    rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0" ;
+    p-plan:isPrecededBy </step/3> ;
     p-plan:isStepOfPlan </workflow> .
 
 </run/35a02d80fc5ea399> a prov:Activity ;
@@ -227,8 +229,7 @@ TITLE # sites:    6
     skos:prefLabel "calculate FEFF paths from crystal" ;
     prov:used </dataset/df02c7af9dfe5b62> ;
     prov:wasAssociatedWith </srv/galaxy/var/shed_tools/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/a6bd21767730/larch_feff/larch_feff.py> ;
-    p-plan:correspondsToStep </step/3>,
-        </step/4> .
+    p-plan:correspondsToStep </step/3> .
 
 </run/cf423d990ba14fcd> a prov:Activity ;
     rdfs:label "Execution of step 5",
@@ -249,11 +250,6 @@ TITLE # sites:    6
 </srv/galaxy/server/data_fetch.py> a prov:SoftwareAgent ;
     rdfs:label "DATA_FETCH" ;
     schema1:softwareVersion "0.1.0" .
-
-</step/4> a p-plan:Step ;
-    rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0" ;
-    p-plan:isPrecededBy </step/3> ;
-    p-plan:isStepOfPlan </workflow> .
 
 <prj> a prov:SoftwareAgent ;
     rdfs:label "larch_athena" ;
