@@ -157,20 +157,14 @@ For full metadata, ask your admin to install the 'ase' Python package.""" ;
 </run/2029b88b74bf2376> a prov:Activity ;
     rdfs:label "DATA_FETCH" ;
     skos:prefLabel "fetch data from history" ;
-    prov:wasAssociatedWith </srv/galaxy/server/data_fetch.py> .
+    prov:wasAssociatedWith </srv/galaxy/server/data_fetch.py> ;
+    p-plan:correspondsToStep </step/1> .
 
 </run/c60463f2d425dc91> a prov:Activity ;
     rdfs:label "DATA_FETCH" ;
     skos:prefLabel "fetch data from history" ;
-    prov:wasAssociatedWith </srv/galaxy/server/data_fetch.py> .
-
-</step/0> a p-plan:Step ;
-    rdfs:label "fes2_rt01_mar02.xmu" ;
-    p-plan:isStepOfPlan </workflow> .
-
-</step/1> a p-plan:Step ;
-    rdfs:label "1564889.cif" ;
-    p-plan:isStepOfPlan </workflow> .
+    prov:wasAssociatedWith </srv/galaxy/server/data_fetch.py> ;
+    p-plan:correspondsToStep </step/0> .
 
 </step/5> a p-plan:Step ;
     rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0" ;
@@ -212,6 +206,14 @@ TITLE # sites:    6
     prov:used </dataset/df0bac1ee137448a> ;
     prov:wasAssociatedWith <prj> ;
     p-plan:correspondsToStep </step/2> .
+
+</step/0> a p-plan:Step ;
+    rdfs:label "fes2_rt01_mar02.xmu" ;
+    p-plan:isStepOfPlan </workflow> .
+
+</step/1> a p-plan:Step ;
+    rdfs:label "1564889.cif" ;
+    p-plan:isStepOfPlan </workflow> .
 
 </step/2> a p-plan:Step ;
     rdfs:label "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0" ;
