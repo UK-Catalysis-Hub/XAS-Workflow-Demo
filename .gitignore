@@ -50,3 +50,4 @@ RO-Crate_processing/prov_full.png
 RO-Crate_processing/prov_full
 /RO-Crate_processing/input/Paper_1_Pt3Sn.rocrate
 /RO-Crate_processing/input/Paper_8-EXAFS-fitting.rocrate
+.venv/*
